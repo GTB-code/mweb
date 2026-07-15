@@ -26,11 +26,11 @@ body{ font-family:var(--font); background:var(--white); color:var(--ink);
 /* ===== top app bar ===== */
 .mtop{ position:fixed; top:0; left:50%; transform:translateX(-50%); width:100%; max-width:480px; z-index:60;
   display:flex; align-items:center; justify-content:space-between;
-  padding:calc(10px + env(safe-area-inset-top)) 18px 10px; background:var(--white);
+  padding:calc(12px + env(safe-area-inset-top)) 18px 14px; background:var(--white);
   transition:opacity .26s var(--push-ease); }
 body.pushed .mtop{ opacity:0; pointer-events:none; }
 .mtop .brand{ display:flex; align-items:center; }
-.mtop .brand svg{ display:block; height:28px; width:auto; }
+.mtop .brand svg{ display:block; height:32px; width:auto; }
 .mtop .mright{ display:flex; align-items:center; gap:10px; }
 .mtop .mico{ width:42px; height:42px; border-radius:999px; display:flex; align-items:center; justify-content:center;
   color:#6E7480; background:var(--white); border:1px solid var(--hairline); }
@@ -39,7 +39,7 @@ body.pushed .mtop{ opacity:0; pointer-events:none; }
   border:1px solid var(--hairline); display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:600; }
 
 /* ===== root panel (Today) ===== */
-.mroot{ padding:calc(66px + env(safe-area-inset-top)) 18px calc(120px + env(safe-area-inset-bottom));
+.mroot{ padding:calc(82px + env(safe-area-inset-top)) 18px calc(120px + env(safe-area-inset-bottom));
   transition:transform .36s var(--push-ease), opacity .36s var(--push-ease); }
 body.pushed .mroot{ transform:translateX(-24%); opacity:.5; pointer-events:none; }
 
@@ -666,7 +666,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
 
 <div class="mtab" id="tabOptimize" hidden>
   <div class="mgreet meye">Optimize</div>
-  <h1 class="mhl"><em class="mhl-em">Between</em> the lines: <em class="mhl-gold">$412,000</em>.</h1>
+  <h1 class="mhl"><em class="mhl-gold">$412,000</em> is <em class="mhl-em">still on the table.</em></h1>
   <p class="msubhead msubhead-opt">The same life, funded better.</p>
   <div class="mop-cards" id="mopCards">
     <button class="mop-card" type="button" data-op="ss">
