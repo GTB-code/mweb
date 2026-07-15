@@ -514,13 +514,11 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
 
 /* the fade behind the nav: content scrolls away beneath it */
 .mnav-fade{ position:fixed; left:50%; transform:translateX(-50%); bottom:0; width:100%; max-width:480px;
-  height:200px; z-index:68; pointer-events:none;
-  background:linear-gradient(to top, #FFFFFF 0%, #FFFFFF 72%, rgba(255,255,255,0.94) 86%, rgba(255,255,255,0) 100%); }
-/* solid-white base pinned to the very bottom of the SMALL viewport via svh,
-   extending far below so an expanding iOS toolbar never reveals a gap under the nav */
-.mnav-fade::after{ content:''; position:fixed; left:50%; transform:translateX(-50%); width:100%; max-width:480px;
-  bottom:0; height:120px; background:#FFFFFF; z-index:67; pointer-events:none;
-  box-shadow:0 120px 0 120px #FFFFFF; }
+  height:112px; z-index:68; pointer-events:none;
+  background:linear-gradient(to top, #FFFFFF 0%, #FFFFFF 78%, rgba(255,255,255,0) 100%); }
+/* solid-white foot spilling below the viewport so an iOS toolbar shift never opens a gap under the nav */
+.mnav-fade::after{ content:''; position:absolute; left:0; right:0; bottom:0; height:40px; background:#FFFFFF;
+  box-shadow:0 200px 0 200px #FFFFFF; }
 /* a light "coming next" toast for the other tabs */
 .mtoast{ position:fixed; left:50%; transform:translateX(-50%) translateY(8px); bottom:calc(92px + env(safe-area-inset-bottom));
   background:var(--ink); color:#FFFFFF; font-size:15.5px; font-weight:500; border-radius:999px; padding:9px 16px;
