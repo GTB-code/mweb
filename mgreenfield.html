@@ -496,7 +496,7 @@ body.pushed .msub{ transform:translateX(0); }
 .medit-kebab{ width:34px; height:34px; flex:none; border-radius:999px; background:none; border:0; color:var(--text-secondary);
   display:flex; align-items:center; justify-content:center; cursor:pointer; }
 .medit-kebab:active{ background:#EFEFEA; }
-.medit-menu{ position:absolute; top:calc(100% + 6px); right:0; z-index:20; min-width:150px;
+.medit-menu{ position:absolute; top:calc(100% + 6px); right:0; z-index:20; min-width:210px; white-space:nowrap;
   background:var(--white); border:1px solid var(--hairline); border-radius:12px; padding:6px; overflow:hidden; }
 .medit-menu[hidden]{ display:none; }
 .medit-menu-item{ display:flex; align-items:center; gap:10px; width:100%; background:none; border:0;
@@ -510,6 +510,10 @@ body.pushed .msub{ transform:translateX(0); }
 .mf label{ position:absolute; top:-8px; left:12px; padding:0 6px; background:var(--white); border-radius:4px;
   font-size:14px; color:var(--text-secondary); line-height:1; }
 .mf input{ width:100%; border:0; background:none; outline:none; font-family:var(--font); font-size:18px; font-weight:500; color:var(--ink); }
+.mf-sel{ position:relative; }
+.mf-excl{ width:100%; border:0; background:none; outline:none; font-family:var(--font); font-size:18px; font-weight:500; color:var(--ink);
+  -webkit-appearance:none; appearance:none; padding-right:24px; cursor:pointer; }
+.mf-car{ position:absolute; right:12px; top:50%; transform:translateY(-40%); pointer-events:none; color:var(--text-tertiary); font-size:14px; }
 .mf-toggle{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:22px; padding:2px 2px; }
 .mf-toggle-t{ font-size:16px; font-weight:500; color:var(--ink); line-height:1.35; max-width:74%; }
 .mf-switch{ position:relative; flex:none; width:52px; height:31px; border-radius:999px; background:#D6D9DE; border:0;
@@ -1971,24 +1975,29 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
   (function(){
     var body=document.getElementById('msubBody');
     var EASE='cubic-bezier(0.4,0,0.2,1)';
-    function buildEditor(nm, ty, amt){
+    function buildEditor(nm, ty, amt, full, linked){
       var w=document.createElement('div'); w.className='medit';
+      var disconnectItem = linked ? (
+        '<button class="medit-menu-item medit-menu-disconnect" type="button" role="menuitem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12H4M15 6l3-3a3.5 3.5 0 0 1 5 5l-3 3M9 18l-3 3a3.5 3.5 0 0 1-5-5l3-3"/></svg>Disconnect account</button>'
+      ) : '';
+      var planFields = full ? (
+        '<div class="mf"><label>Rate of return</label><input class="mf-ror" type="text" inputmode="decimal" value="6.0%"></div>'+
+        '<div class="mf"><label>Average rate</label><input class="mf-avg" type="text" inputmode="decimal" value="5.4%"></div>'+
+        '<div class="mf mf-sel"><label>Exclude from your withdrawal strategies</label><select class="mf-excl"><option value="no">No</option><option value="yes">Yes</option></select><span class="mf-car">&#9662;</span></div>'
+      ) : '';
       w.innerHTML='<div class="medit-card">'+
         '<div class="medit-head"><div class="medit-t">'+nm+'</div>'+
         '<div class="medit-actions">'+
           '<div class="medit-kebab-wrap">'+
             '<button class="medit-kebab" type="button" aria-label="More options" aria-haspopup="true" aria-expanded="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg></button>'+
-            '<div class="medit-menu" role="menu" hidden><button class="medit-menu-item medit-menu-delete" type="button" role="menuitem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>Delete</button></div>'+
+            '<div class="medit-menu" role="menu" hidden>'+disconnectItem+'<button class="medit-menu-item medit-menu-delete" type="button" role="menuitem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>Delete</button></div>'+
           '</div>'+
           '<button class="medit-x" type="button" aria-label="Close"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>'+
         '</div></div>'+
         '<div class="mf"><label>Name</label><input class="mf-nm" type="text" value="'+nm.replace(/"/g,'&quot;')+'"></div>'+
         '<div class="mf"><label>Account type</label><input class="mf-ty" type="text" value="'+ty+'"></div>'+
         '<div class="mf"><label>Balance</label><input class="mf-amt" type="text" inputmode="decimal" value="'+amt+'"></div>'+
-        '<div class="mf"><label>Rate of return</label><input class="mf-ror" type="text" inputmode="decimal" value="6.0%"></div>'+
-        '<div class="mf"><label>Average rate</label><input class="mf-avg" type="text" inputmode="decimal" value="5.4%"></div>'+
-        '<div class="mf-toggle"><div class="mf-toggle-t">Exclude from your withdrawal strategies</div>'+
-          '<button class="mf-switch" type="button" role="switch" aria-checked="false" aria-label="Exclude from your withdrawal strategies"><span class="mf-switch-knob"></span></button></div>'+
+        planFields+
         '<button class="medit-save" type="button">Save</button></div>';
       return w;
     }
@@ -1999,8 +2008,9 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
         var nm=row.querySelector('.macct-nm').textContent;
         var ty=row.querySelector('.macct-ty').childNodes[0].textContent.trim();
         var amt=row.querySelector('.macct-amt').textContent;
+        var linked=!!row.querySelector('.mlinked');
         var rowH=row.offsetHeight;
-        var ed=buildEditor(nm, ty, amt);
+        var ed=buildEditor(nm, ty, amt, pushOrigin==='plan', linked);
         row.after(ed);
         row.style.display='none';
         var h=ed.scrollHeight;
@@ -2014,9 +2024,6 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
         ed.querySelector('.mf-nm').focus();
         return;
       }
-      /* exclude toggle switch */
-      var sw=e.target.closest('.mf-switch');
-      if(sw){ var on=sw.getAttribute('aria-checked')==='true'; sw.setAttribute('aria-checked', on?'false':'true'); return; }
       /* kebab menu: toggle open/close */
       var kebab=e.target.closest('.medit-kebab');
       if(kebab){
@@ -2029,6 +2036,24 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
         return;
       }
       /* Delete from the kebab menu: remove the editor and its row */
+      /* Disconnect account: sever the live link but keep the account */
+      var disc=e.target.closest('.medit-menu-disconnect');
+      if(disc){
+        var edX=disc.closest('.medit');
+        var rowX=edX.previousElementSibling;   // the hidden account row
+        var badge=rowX && rowX.querySelector('.mlinked');
+        if(badge){
+          if(!reduce && badge.animate){
+            badge.animate([{opacity:1},{opacity:0}],{duration:220,easing:EASE,fill:'both'}).finished.then(function(){ badge.remove(); });
+          } else badge.remove();
+        }
+        // remove the item from the menu and close it
+        disc.remove();
+        var menuX=edX.querySelector('.medit-menu'); if(menuX) menuX.hidden=true;
+        var kbX=edX.querySelector('.medit-kebab'); if(kbX) kbX.setAttribute('aria-expanded','false');
+        toast('Account disconnected. Balances will no longer update on their own.');
+        return;
+      }
       var del=e.target.closest('.medit-menu-delete');
       if(del){
         var edD=del.closest('.medit');
