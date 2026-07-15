@@ -515,12 +515,13 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
 
 /* the fade behind the nav: content scrolls away beneath it */
 .mnav-fade{ position:fixed; left:50%; transform:translateX(-50%); bottom:0; width:100%; max-width:480px;
-  height:112px; z-index:68; pointer-events:none;
-  background:linear-gradient(to top, #FFFFFF 0%, #FFFFFF 78%, rgba(255,255,255,0) 100%); }
-/* solid-white foot spilling below the viewport so an iOS toolbar shift never opens a gap under the nav */
+  height:calc(96px + env(safe-area-inset-bottom)); z-index:68; pointer-events:none;
+  /* solid white from the bottom up to (height - 24px), then a 24px feather to transparent */
+  background:linear-gradient(to top, #FFFFFF 0%, #FFFFFF calc(100% - 24px), rgba(255,255,255,0) 100%); }
+/* solid-white foot spilling far below so no iOS toolbar / URL bar shift reveals a gap */
 .mnav-fade::after{ content:''; position:fixed; left:50%; transform:translateX(-50%); width:100%; max-width:480px;
-  bottom:calc(-1 * env(safe-area-inset-bottom)); height:calc(56px + env(safe-area-inset-bottom)); background:#FFFFFF; z-index:67;
-  box-shadow:0 300px 0 300px #FFFFFF; }
+  bottom:calc(-1 * env(safe-area-inset-bottom)); height:calc(60px + env(safe-area-inset-bottom)); background:#FFFFFF; z-index:67;
+  box-shadow:0 400px 0 400px #FFFFFF; }
 /* a light "coming next" toast for the other tabs */
 .mtoast{ position:fixed; left:50%; transform:translateX(-50%) translateY(8px); bottom:calc(92px + env(safe-area-inset-bottom));
   background:var(--ink); color:#FFFFFF; font-size:15.5px; font-weight:500; border-radius:999px; padding:9px 16px;
