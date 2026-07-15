@@ -267,10 +267,10 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .mpanel{ display:none; padding-top:18px; }
 .mpanel.on{ display:block; animation:mpin .3s var(--push-ease); }
 @keyframes mpin{ from{ opacity:0; transform:translateY(5px);} to{ opacity:1; transform:none;} }
-.mfig-row{ display:flex; flex-direction:row; align-items:center; gap:12px; flex-wrap:wrap; margin-top:6px; }
+.mfig-row{ display:flex; flex-direction:row; align-items:flex-end; gap:12px; flex-wrap:wrap; margin-top:6px; }
 .mfig{ font:700 48px/1 'DM Sans',sans-serif; letter-spacing:-1px; font-variant-numeric:tabular-nums; display:block; }
 .mfig-green{ color:var(--green-cta); }
-.mdelta{ display:inline-flex; align-items:center; gap:5px; font:600 14px 'DM Sans',sans-serif; color:var(--green-cta); background:var(--mint); border-radius:999px; padding:5px 12px; }
+.mdelta{ display:inline-flex; align-items:center; gap:5px; font:600 14px 'DM Sans',sans-serif; color:var(--green-cta); background:var(--mint); border-radius:999px; padding:5px 12px; margin-bottom:6px; }
 .mfig-sub{ font-size:15.5px; color:var(--text-tertiary); margin-top:5px; }
 .mstack-bar{ display:flex; gap:3px; height:14px; margin:16px 0 4px; }
 .mstack-bar i{ display:block; border-radius:99px; transform-origin:left; min-width:8px; }
@@ -413,7 +413,7 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .mchip4 .lab{ font-size:11px; color:var(--text-tertiary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .mchip4 .val{ font:600 15px 'DM Sans',sans-serif; letter-spacing:-0.3px; margin-top:3px; font-variant-numeric:tabular-nums; }
 /* boost your confidence card */
-.mplan-seclabel{ font-size:15px; font-weight:600; color:var(--text-secondary); margin:24px 2px 8px; }
+.mplan-seclabel{ font-size:18px; font-weight:600; color:var(--text-secondary); margin:24px 2px 8px; }
 .mplan-boost{ margin-top:0; }
 .mboost-hd{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
 .mboost-t{ font-size:17px; font-weight:600; letter-spacing:-0.2px; line-height:1.3; }
@@ -471,17 +471,38 @@ body.pushed .msub{ transform:translateX(0); }
   border-radius:999px; padding:2px 8px; font-size:14.5px; font-weight:600; }
 .macct-edit{ cursor:pointer; }
 .macct-edit:active{ background:#FAFBFC; }
-.medit{ overflow:hidden; }
+.medit{ overflow:hidden; margin-left:-18px; margin-right:-18px; }
 .medit-card{ background:linear-gradient(180deg, rgba(255,231,128,0.04) 0%, rgba(255,231,128,0.16) 100%);
-  border:1px solid #EFEFEF; border-radius:18px; padding:18px 16px 20px; margin:8px 0 10px; }
+  border:0; border-top:1px solid #EFEFEF; border-bottom:1px solid #EFEFEF; border-radius:0; padding:18px 18px 20px; margin:8px 0 28px; }
 .medit-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:16px; }
 .medit-t{ font-size:22px; font-weight:700; letter-spacing:-0.3px; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.medit-actions{ display:flex; align-items:center; gap:8px; flex:none; }
+.medit-kebab-wrap{ position:relative; display:flex; }
+.medit-kebab{ width:34px; height:34px; flex:none; border-radius:999px; background:none; border:0; color:var(--text-secondary);
+  display:flex; align-items:center; justify-content:center; cursor:pointer; }
+.medit-kebab:active{ background:#EFEFEA; }
+.medit-menu{ position:absolute; top:calc(100% + 6px); right:0; z-index:20; min-width:150px;
+  background:var(--white); border:1px solid var(--hairline); border-radius:12px; padding:6px; overflow:hidden; }
+.medit-menu[hidden]{ display:none; }
+.medit-menu-item{ display:flex; align-items:center; gap:10px; width:100%; background:none; border:0;
+  font-family:inherit; font-size:16px; font-weight:500; color:var(--ink); padding:11px 12px; border-radius:8px; cursor:pointer; text-align:left; }
+.medit-menu-item:active{ background:#F4F5F6; }
+.medit-menu-delete{ color:#C2410C; }
+.medit-menu-delete:active{ background:rgba(194,65,12,0.08); }
 .medit-x{ width:34px; height:34px; flex:none; border-radius:999px; background:#EFEFEA; border:0; color:var(--ink);
   display:flex; align-items:center; justify-content:center; cursor:pointer; }
-.mf{ position:relative; background:var(--white); border:1px solid #E3E4E6; border-radius:10px; padding:13px 12px 11px; margin-bottom:12px; }
+.mf{ position:relative; background:var(--white); border:1px solid #E3E4E6; border-radius:10px; padding:15px 12px 13px; margin-bottom:22px; }
 .mf label{ position:absolute; top:-8px; left:12px; padding:0 6px; background:var(--white); border-radius:4px;
   font-size:14px; color:var(--text-secondary); line-height:1; }
 .mf input{ width:100%; border:0; background:none; outline:none; font-family:var(--font); font-size:18px; font-weight:500; color:var(--ink); }
+.mf-toggle{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:22px; padding:2px 2px; }
+.mf-toggle-t{ font-size:16px; font-weight:500; color:var(--ink); line-height:1.35; max-width:74%; }
+.mf-switch{ position:relative; flex:none; width:52px; height:31px; border-radius:999px; background:#D6D9DE; border:0;
+  cursor:pointer; padding:0; transition:background .22s var(--push-ease); }
+.mf-switch[aria-checked="true"]{ background:var(--green); }
+.mf-switch-knob{ position:absolute; top:2.5px; left:2.5px; width:26px; height:26px; border-radius:999px; background:#FFFFFF;
+  transition:transform .22s var(--push-ease); }
+.mf-switch[aria-checked="true"] .mf-switch-knob{ transform:translateX(21px); }
 .medit-save{ height:44px; padding:0 30px; border-radius:999px; background:#127154; color:#FFFFFF; border:0;
   font-family:inherit; font-size:17px; font-weight:600; cursor:pointer; margin-top:4px; }
 .medit-save:active{ transform:scale(.98); }
@@ -808,7 +829,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
 
 <div class="mtab" id="tabToday" hidden>
   <div class="mgreet meye">Today</div>
-  <h1 class="mhl">In <em class="mhl-em">better</em> shape than it <em class="mhl-gold">feels</em>.</h1>
+  <h1 class="mhl">You are in <em class="mhl-em">better</em> shape than it <em class="mhl-gold">feels</em>.</h1>
   <p class="msubhead msubhead-today">Fact, not forecast. Your real numbers, today.</p>
   <section class="mcard" id="mwhats">
     <div class="mcard-t">What&#8217;s already yours</div>
@@ -857,7 +878,13 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     </div>
   </section>
 
-  <div class="mplan-seclabel" style="font-size:18px; margin:40px 2px -6px">Everything you have</div>
+  <div class="mplan-stats3" id="mtodayStats3" style="margin-top:28px">
+    <div class="mstat3" data-msx="spend" role="button" tabindex="0"><div class="lab">Monthly spending</div><div class="fig">$8,850</div><div class="sub">&#9660; $120 since last visit</div></div>
+    <div class="mstat3" data-msx="income" role="button" tabindex="0"><div class="lab">Monthly income</div><div class="fig">$12,300</div><div class="sub">&#9650; $85 since last visit</div></div>
+    <div class="mstat3" data-msx="savings" role="button" tabindex="0"><div class="lab">Current savings</div><div class="fig">$106,750</div><div class="sub">&#9650; $1,070 since last visit</div></div>
+  </div>
+
+  <div class="mplan-seclabel" style="margin:40px 2px -6px">Everything you have</div>
   <div class="mlist" id="mlist"></div>
 </div>
 
@@ -1731,7 +1758,31 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
         opps:{t:'Delay Social Security to 70', s:'The larger check compounds across decades and pushes depletion past <b>2105</b>.'},
         risks:{t:'Care costs in the late years', s:'Four years of long-term care pulls the horizon back to <b>2094</b>.'},
         decide:{t:'Plan to 92 or to 95', s:'The age you test is the risk you accept. Three years is the whole margin.'},
-        step:{t:'Model claiming at 70 side by side', act:'plan'} }
+        step:{t:'Model claiming at 70 side by side', act:'plan'} },
+      spend:{ label:'Monthly Spending', fig:'$8,850',
+        pts:[9180,9280,9110,9400,9020,10170,9230,8910,9045,8860,8970,8850], fmt:'money',
+        sub:'Down $120 from your usual. Housing takes 27 cents of every dollar.',
+        note:'December is the outlier it always is. The line underneath it has drifted down $330 in a year.',
+        opps:{t:'Trim the quiet subscriptions', g:'+$28 / mo', s:'Four streaming services total <b>$63 a month</b>; two have sat unwatched since March.'},
+        risks:{t:'Housing is 27% of spend', s:'Comfortably under the 30% line, but one roof or HVAC year pushes it past <b>35%</b>.'},
+        decide:{t:'Set your retirement spending level', s:'Must spend (<b>$5,191</b>) versus like to spend (<b>$6,323</b>) moves your Fire number by <b>$340K</b>.'},
+        step:{t:'Open the Detailed Budgeter and set must vs like', act:'optimize'} },
+      income:{ label:'Monthly Income', fig:'$12,300',
+        pts:[12215,12215,12215,12223,12215,12234,12215,12215,12300,12300,12300,12300], fmt:'money',
+        sub:'Salary, Lily\u2019s part-time, and dividends, steady as a metronome.',
+        note:'The March step is Lily\u2019s extra shift. Everything else is the quiet metronome of salary.',
+        opps:{t:'Capture the full 401(k) match', g:'+$85 / mo', s:'You leave <b>$1,020 a year</b> of match unclaimed. It is the highest-yield dollar available to you.'},
+        risks:{t:'Single-employer concentration', s:'<b>72%</b> of income is Marshall\u2019s paycheck. A 2027 layoff moves retirement by roughly <b>19 months</b>.'},
+        decide:{t:'Social Security at 67 or 70', s:'Waiting lifts the check from <b>$3,180</b> to <b>$3,940 a month</b>, a guaranteed 8% raise per year of patience.'},
+        step:{t:'Model claiming ages side by side', act:'plan'} },
+      savings:{ label:'Current Savings', fig:'$106,750',
+        pts:[96730,97930,99260,99560,97150,99300,100760,102040,103150,104440,105680,106750], fmt:'money',
+        sub:'Twelve months of essentials. The strong kind of boring.',
+        note:'October\u2019s dip healed in nine weeks. Saving through it is why the line ends higher.',
+        opps:{t:'Put idle cash to work', g:'+$59 / mo', s:'<b>$18,300</b> sits at 0.4%. A 4.3% money market earns the difference without adding risk.'},
+        risks:{t:'A drop and a roof at once', s:'Twelve months is a healthy floor, but a 20% dip paired with a big repair would force selling low.'},
+        decide:{t:'Emergency floor: 6 or 12 months', s:'The difference is <b>$21K</b> that could otherwise compound for the 2040s.'},
+        step:{t:'Move the idle $18,300 into the money market', act:'today'} }
     };
     var MONTHS=['Jul','Oct','Jan','Apr','Jun'];
     function fmtV(v, fmt){
@@ -1801,7 +1852,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
       setTimeout(function(){ modal.hidden=true; sheet.innerHTML=''; }, reduce?0:380);
     }
     /* clicks on the 3 stat cards */
-    document.getElementById('tabPlan').addEventListener('click', function(e){
+    document.addEventListener('click', function(e){
       var c=e.target.closest('.mstat3[data-msx]'); if(!c) return;
       open(c.dataset.msx);
     });
@@ -1818,10 +1869,20 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
       var w=document.createElement('div'); w.className='medit';
       w.innerHTML='<div class="medit-card">'+
         '<div class="medit-head"><div class="medit-t">'+nm+'</div>'+
-        '<button class="medit-x" type="button" aria-label="Close"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>'+
+        '<div class="medit-actions">'+
+          '<div class="medit-kebab-wrap">'+
+            '<button class="medit-kebab" type="button" aria-label="More options" aria-haspopup="true" aria-expanded="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg></button>'+
+            '<div class="medit-menu" role="menu" hidden><button class="medit-menu-item medit-menu-delete" type="button" role="menuitem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>Delete</button></div>'+
+          '</div>'+
+          '<button class="medit-x" type="button" aria-label="Close"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>'+
+        '</div></div>'+
         '<div class="mf"><label>Name</label><input class="mf-nm" type="text" value="'+nm.replace(/"/g,'&quot;')+'"></div>'+
         '<div class="mf"><label>Account type</label><input class="mf-ty" type="text" value="'+ty+'"></div>'+
         '<div class="mf"><label>Balance</label><input class="mf-amt" type="text" inputmode="decimal" value="'+amt+'"></div>'+
+        '<div class="mf"><label>Rate of return</label><input class="mf-ror" type="text" inputmode="decimal" value="6.0%"></div>'+
+        '<div class="mf"><label>Average rate</label><input class="mf-avg" type="text" inputmode="decimal" value="5.4%"></div>'+
+        '<div class="mf-toggle"><div class="mf-toggle-t">Exclude from your withdrawal strategies</div>'+
+          '<button class="mf-switch" type="button" role="switch" aria-checked="false" aria-label="Exclude from your withdrawal strategies"><span class="mf-switch-knob"></span></button></div>'+
         '<button class="medit-save" type="button">Save</button></div>';
       return w;
     }
@@ -1845,6 +1906,31 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
             {duration:360,easing:EASE});
         }
         ed.querySelector('.mf-nm').focus();
+        return;
+      }
+      /* exclude toggle switch */
+      var sw=e.target.closest('.mf-switch');
+      if(sw){ var on=sw.getAttribute('aria-checked')==='true'; sw.setAttribute('aria-checked', on?'false':'true'); return; }
+      /* kebab menu: toggle open/close */
+      var kebab=e.target.closest('.medit-kebab');
+      if(kebab){
+        var menu=kebab.parentElement.querySelector('.medit-menu');
+        var willOpen=menu.hidden;
+        // close any other open menus first
+        document.querySelectorAll('.medit-menu').forEach(function(m){ m.hidden=true; });
+        menu.hidden=!willOpen;
+        kebab.setAttribute('aria-expanded', willOpen?'true':'false');
+        return;
+      }
+      /* Delete from the kebab menu: remove the editor and its row */
+      var del=e.target.closest('.medit-menu-delete');
+      if(del){
+        var edD=del.closest('.medit');
+        var rowD=edD.previousElementSibling;
+        function gone(){ edD.remove(); if(rowD) rowD.remove(); }
+        if(!reduce && edD.animate){
+          edD.animate([{height:edD.offsetHeight+'px',opacity:1},{height:'0px',opacity:0}],{duration:300,easing:EASE,fill:'both'}).finished.then(gone);
+        } else gone();
         return;
       }
       var closeBtn=e.target.closest('.medit-x, .medit-save');
@@ -1871,6 +1957,11 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
           ed2.querySelector('.medit-card').animate([{opacity:1},{opacity:0.2}],{duration:220,easing:EASE});
         } else done();
       }
+    });
+    /* tap outside closes any open kebab menu */
+    document.addEventListener('click', function(e){
+      if(e.target.closest('.medit-kebab') || e.target.closest('.medit-menu')) return;
+      document.querySelectorAll('.medit-menu').forEach(function(m){ if(!m.hidden){ m.hidden=true; var k=m.parentElement.querySelector('.medit-kebab'); if(k) k.setAttribute('aria-expanded','false'); } });
     });
   })();
 
