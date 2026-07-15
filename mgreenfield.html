@@ -794,7 +794,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
 <main class="mroot" id="mroot">
 <div class="mtab" id="tabHome">
   <div class="mgreet meye" id="mhGreet">Good afternoon, Marshall</div>
-  <h1 class="mhl">Great news, you are <em class="mhl-gold" style="white-space:nowrap">on&nbsp;track</em> to retire <em class="mhl-em">December&nbsp;2028.</em></h1>
+  <h1 class="mhl">You&rsquo;re <em class="mhl-gold">on track</em> to retire <em class="mhl-em">December&nbsp;2028.</em></h1>
   <p class="msubhead">Your money, working across 38 years.</p>
 
   <button class="mh-viz" id="mhViz" type="button" aria-label="See the plan">
@@ -1313,20 +1313,13 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     }
   }
   function drawHome(){
-    var num=document.getElementById('mhNum'); if(!num) return;
-    var target=87;
-    if(reduce){ num.textContent=target; return; }
-    var t0=null;
-    function step(ts){
-      if(!t0) t0=ts;
-      var p=Math.min(1,(ts-t0)/900);
-      var e=1-Math.pow(1-p,3);
-      num.textContent=Math.round(target*e);
-      if(p<1) requestAnimationFrame(step);
+    var line=document.getElementById('mhLineP'); if(!line) return;
+    if(reduce){
+      document.getElementById('mhAreaP').style.opacity='1';
+      document.getElementById('mhPt').style.opacity='1';
+      return;
     }
-    requestAnimationFrame(step);
-    var line=document.getElementById('mhLineP');
-    if(line && line.animate){
+    if(line.animate){
       line.style.strokeDasharray='1';
       line.animate([{strokeDashoffset:1},{strokeDashoffset:0}],
         {duration:950, delay:150, easing:'cubic-bezier(0.22,1,0.36,1)', fill:'backwards'});
