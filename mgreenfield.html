@@ -447,9 +447,9 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
 @media (prefers-reduced-motion: reduce){ .mnav .mai-spk .sp-body, .mnav .mai-spk .sp-tw{ animation:none; } }
 
 /* the fade behind the nav: content scrolls away beneath it */
-.mnav-fade{ position:fixed; left:50%; transform:translateX(-50%); bottom:0; width:100%; max-width:480px;
-  height:calc(150px + env(safe-area-inset-bottom)); z-index:68; pointer-events:none;
-  background:linear-gradient(to top, #FFFFFF 0%, #FFFFFF 60%, rgba(255,255,255,0.92) 80%, rgba(255,255,255,0) 100%); }
+.mnav-fade{ position:fixed; left:50%; transform:translateX(-50%); bottom:-60px; width:100%; max-width:480px;
+  height:calc(210px + env(safe-area-inset-bottom)); z-index:68; pointer-events:none;
+  background:linear-gradient(to top, #FFFFFF 0%, #FFFFFF 70%, rgba(255,255,255,0.92) 85%, rgba(255,255,255,0) 100%); }
 /* a light "coming next" toast for the other tabs */
 .mtoast{ position:fixed; left:50%; transform:translateX(-50%) translateY(8px); bottom:calc(92px + env(safe-area-inset-bottom));
   background:var(--ink); color:#FFFFFF; font-size:15.5px; font-weight:500; border-radius:999px; padding:9px 16px;
