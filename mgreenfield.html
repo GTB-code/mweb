@@ -392,10 +392,12 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .mplan-card{ margin-top:16px; }
 /* the 3 stat cards, like desktop */
 .mplan-stats3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:9px; margin-top:16px; }
-.mstat3{ border:1px solid var(--hairline); border-radius:14px; padding:9px 11px; }
-.mstat3 .lab{ font-size:13px; color:var(--text-tertiary); line-height:1.2; }
-.mstat3 .fig{ font:700 20px 'DM Sans',sans-serif; letter-spacing:-0.6px; margin-top:3px; font-variant-numeric:tabular-nums; }
-.mstat3 .sub{ font-size:12px; color:var(--text-tertiary); margin-top:1px; }
+.mstat3{ border:1px solid var(--hairline); border-radius:14px; padding:12px 11px 11px; }
+.mstat3 .lab{ font-size:13px; color:var(--text-tertiary); line-height:1.2; white-space:nowrap; }
+.mstat3 .fig{ font:700 20px 'DM Sans',sans-serif; letter-spacing:-0.6px; margin-top:5px; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.mstat3 .sub{ font-size:13px; margin-top:4px; white-space:nowrap; }
+.mstat3 .sub .up{ color:var(--green-cta); font-weight:600; }
+.mstat3 .sub .dn{ color:var(--text-tertiary); font-weight:600; }
 /* chart head: portfolio dropdown + filter */
 .mplan-chead{ display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
 .mplan-dd{ display:inline-flex; align-items:center; gap:5px; background:none; border:0; font-family:inherit;
@@ -629,26 +631,26 @@ body.menu-open .mmenu{ transform:translateX(0); }
 .msx.on .msx-sheet{ transform:translateY(0); }
 .msx-grip{ width:38px; height:5px; border-radius:99px; background:#D6D9DE; margin:2px auto 14px; }
 .msx-head{ display:flex; align-items:flex-start; justify-content:space-between; gap:14px; }
-.msx-title{ font-size:15px; color:var(--text-secondary); font-weight:500; }
-.msx-fig{ font:700 34px 'DM Sans',sans-serif; letter-spacing:-1px; color:var(--green-cta); margin-top:2px; line-height:1.1; font-variant-numeric:tabular-nums; }
-.msx-sub{ font-size:14px; color:var(--text-secondary); margin-top:6px; line-height:1.45; }
+.msx-title{ font-size:17px; color:var(--text-secondary); font-weight:500; }
+.msx-fig{ font:700 40px 'DM Sans',sans-serif; letter-spacing:-1px; color:var(--green-cta); margin-top:3px; line-height:1.08; font-variant-numeric:tabular-nums; }
+.msx-sub{ font-size:16.5px; color:var(--text-secondary); margin-top:8px; line-height:1.5; }
 .msx-x{ width:36px; height:36px; flex:none; border-radius:999px; background:#F2F3F5; border:0; color:var(--ink);
   display:flex; align-items:center; justify-content:center; cursor:pointer; }
 .msx-chart{ margin:18px 0 4px; }
 .msx-chart svg{ display:block; width:100%; height:auto; }
-.msx-note{ font-size:13px; color:var(--text-tertiary); line-height:1.5; margin-top:8px; }
+.msx-note{ font-size:15px; color:var(--text-tertiary); line-height:1.55; margin-top:10px; }
 .msx-sec{ margin-top:22px; }
-.msx-sec-label{ font-size:12.5px; font-weight:700; letter-spacing:0.02em; text-transform:none; color:var(--text-tertiary); margin-bottom:10px; }
+.msx-sec-label{ font-size:14.5px; font-weight:700; letter-spacing:0.02em; text-transform:none; color:var(--text-tertiary); margin-bottom:12px; }
 .msx-item{ display:flex; gap:11px; align-items:flex-start; padding:2px 0 12px; }
 .msx-dot{ width:7px; height:7px; border-radius:999px; background:var(--green); flex:none; margin-top:7px; }
-.msx-num{ width:22px; height:22px; flex:none; border-radius:999px; background:var(--mint); color:var(--green-cta);
-  font:700 12px 'DM Sans',sans-serif; display:flex; align-items:center; justify-content:center; }
-.msx-it-t{ font-size:15px; font-weight:600; line-height:1.35; }
-.msx-it-t .gain{ color:var(--green-cta); font-weight:700; margin-left:6px; font-size:13.5px; }
-.msx-it-s{ font-size:13.5px; color:var(--text-secondary); line-height:1.5; margin-top:3px; }
+.msx-num{ width:26px; height:26px; flex:none; border-radius:999px; background:var(--mint); color:var(--green-cta);
+  font:700 14px 'DM Sans',sans-serif; display:flex; align-items:center; justify-content:center; }
+.msx-it-t{ font-size:17px; font-weight:600; line-height:1.4; }
+.msx-it-t .gain{ color:var(--green-cta); font-weight:700; margin-left:6px; font-size:15px; }
+.msx-it-s{ font-size:15.5px; color:var(--text-secondary); line-height:1.55; margin-top:4px; }
 .msx-it-s b{ font-weight:600; color:var(--ink); }
-.msx-link{ display:inline-flex; align-items:center; gap:5px; margin-top:6px; color:var(--green-cta); font-size:13.5px; font-weight:600; cursor:pointer; }
-.msx-learn{ display:inline-flex; align-items:center; gap:6px; margin-top:22px; color:var(--green-cta); font-size:14.5px; font-weight:600; cursor:pointer; }
+.msx-link{ display:inline-flex; align-items:center; gap:5px; margin-top:8px; color:var(--green-cta); font-size:15.5px; font-weight:600; cursor:pointer; }
+.msx-learn{ display:inline-flex; align-items:center; gap:6px; margin-top:24px; color:var(--green-cta); font-size:16.5px; font-weight:600; cursor:pointer; }
 @media (prefers-reduced-motion: reduce){ .msx-scrim, .msx-sheet{ transition:none; } }
 /* ===== the simulated iOS keyboard ===== */
 .mkb{ position:fixed; left:50%; transform:translateX(-50%) translateY(102%); width:100%; max-width:480px;
@@ -748,7 +750,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
 <main class="mroot" id="mroot">
 <div class="mtab" id="tabHome">
   <div class="mgreet meye" id="mhGreet">Good afternoon, Marshall</div>
-  <h1 class="mhl">Confidence <em class="mhl-gold" id="mhNum">87</em>, on track for <em class="mhl-em">December 2028.</em></h1>
+  <h1 class="mhl">Great news, you are <em class="mhl-gold" style="white-space:nowrap">on&nbsp;track</em> to retire <em class="mhl-em">December&nbsp;2028.</em></h1>
   <p class="msubhead">Your money, working across 38 years.</p>
 
   <button class="mh-viz" id="mhViz" type="button" aria-label="See the plan">
@@ -879,9 +881,9 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
   </section>
 
   <div class="mplan-stats3" id="mtodayStats3" style="margin-top:28px">
-    <div class="mstat3" data-msx="spend" role="button" tabindex="0"><div class="lab">Monthly spending</div><div class="fig">$8,850</div><div class="sub">&#9660; $120 since last visit</div></div>
-    <div class="mstat3" data-msx="income" role="button" tabindex="0"><div class="lab">Monthly income</div><div class="fig">$12,300</div><div class="sub">&#9650; $85 since last visit</div></div>
-    <div class="mstat3" data-msx="savings" role="button" tabindex="0"><div class="lab">Current savings</div><div class="fig">$106,750</div><div class="sub">&#9650; $1,070 since last visit</div></div>
+    <div class="mstat3" data-msx="spend" role="button" tabindex="0"><div class="lab">Spending</div><div class="fig">$8,850</div><div class="sub"><span class="dn">&#9660; $120</span></div></div>
+    <div class="mstat3" data-msx="income" role="button" tabindex="0"><div class="lab">Income</div><div class="fig">$12,300</div><div class="sub"><span class="up">&#9650; $85</span></div></div>
+    <div class="mstat3" data-msx="savings" role="button" tabindex="0"><div class="lab">Savings</div><div class="fig">$106,750</div><div class="sub"><span class="up">&#9650; $1,070</span></div></div>
   </div>
 
   <div class="mplan-seclabel" style="margin:40px 2px -6px">Everything you have</div>
