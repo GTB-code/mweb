@@ -30,13 +30,13 @@ body{ font-family:var(--font); background:var(--white); color:var(--ink);
   transition:opacity .26s var(--push-ease); }
 body.pushed .mtop{ opacity:0; pointer-events:none; }
 .mtop .brand{ display:flex; align-items:center; }
-.mtop .brand svg{ display:block; height:28px; width:auto; }
-.mtop .mright{ display:flex; align-items:center; gap:10px; }
-.mtop .mico{ width:42px; height:42px; border-radius:999px; display:flex; align-items:center; justify-content:center;
+.mtop .brand svg{ display:block; height:32px; width:auto; }
+.mtop .mright{ display:flex; align-items:center; gap:11px; }
+.mtop .mico{ width:46px; height:46px; border-radius:999px; display:flex; align-items:center; justify-content:center;
   color:#6E7480; background:var(--white); border:1px solid var(--hairline); }
-.mtop .mico svg{ width:23px; height:23px; }
-.mtop .mava{ width:42px; height:42px; border-radius:999px; background:var(--white); color:#6E7480;
-  border:1px solid var(--hairline); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:600; }
+.mtop .mico svg{ width:26px; height:26px; }
+.mtop .mava{ width:46px; height:46px; border-radius:999px; background:var(--white); color:#6E7480;
+  border:1px solid var(--hairline); display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:600; }
 
 /* ===== root panel (Today) ===== */
 .mroot{ padding:calc(66px + env(safe-area-inset-top)) 18px calc(120px + env(safe-area-inset-bottom));
@@ -48,26 +48,150 @@ body.pushed .mroot{ transform:translateX(-24%); opacity:.5; pointer-events:none;
 .mv-ico{ width:38px; height:38px; flex:none; border-radius:12px; background:var(--mint); color:var(--green-cta);
   display:flex; align-items:center; justify-content:center; }
 .mv-ico svg{ width:19px; height:19px; }
-/* the mobile index (marketing) page */
-.mx-hero{ margin-top:6px; }
-.mx-cta{ display:inline-flex; align-items:center; justify-content:center; height:50px; padding:0 28px;
-  border-radius:999px; background:#0E794E; color:#FFFFFF; border:0; font-family:inherit; font-size:16px; font-weight:600;
-  cursor:pointer; margin-top:20px; }
-.mx-cta:active{ background:#0B5F3D; transform:scale(.98); }
-.mx-proof{ display:block; margin-top:12px; font-size:13px; color:var(--text-tertiary); }
-.mx-proof b{ color:#FBBD04; font-weight:600; letter-spacing:1px; }
-.mx-voices{ margin-top:34px; padding-top:26px; border-top:1px solid var(--hairline); display:flex; flex-direction:column; gap:24px; }
-.mx-q{ font-size:17px; font-weight:500; line-height:1.5; letter-spacing:-0.1px; }
-.mx-who{ display:flex; align-items:center; gap:10px; margin-top:10px; }
-.mx-who .mh-ava{ width:34px; height:34px; font-size:12px; }
-.mx-meta{ font-size:13px; color:var(--text-tertiary); line-height:1.35; }
-.mx-meta b{ display:block; color:var(--ink); font-weight:600; font-size:15px; }
-.mx-note{ margin-top:34px; padding-top:26px; border-top:1px solid var(--hairline); display:flex; gap:13px; align-items:flex-start; }
-.mx-note-p{ font-size:15px; line-height:1.6; }
-.mx-note-a{ margin-top:9px; font-size:13px; font-weight:600; color:var(--text-secondary); }
-.mx-final{ margin-top:34px; padding:26px 0 10px; border-top:1px solid var(--hairline); }
-.mx-final-t{ font-size:19px; font-weight:600; letter-spacing:-0.2px; }
-.mx-final-s{ font-size:15px; color:var(--text-secondary); line-height:1.5; margin-top:6px; }
+/* ===== landing page (boldin.com register, from the logo) ===== */
+body[data-page="landing"] .mtop,
+body[data-page="landing"] .mroot,
+body[data-page="landing"] .msub,
+body[data-page="landing"] .mai-bar2,
+body[data-page="landing"] .mai-sheet,
+body[data-page="landing"] .mmenu,
+body[data-page="landing"] .mkb,
+body[data-page="landing"] .mnav,
+body[data-page="landing"] .mnav-fade{ display:none !important; }
+.mland[hidden]{ display:none; }
+.mland{ background:var(--white); min-height:100vh; padding-bottom:calc(24px + env(safe-area-inset-bottom)); }
+.ml-head{ position:sticky; top:0; z-index:5; background:var(--white); border-bottom:1px solid var(--hairline);
+  padding:calc(12px + env(safe-area-inset-top)) 18px 12px; }
+.ml-brand svg{ display:block; height:26px; width:auto; }
+.ml-hero{ padding:34px 18px 44px; }
+.ml-h1{ font-size:40px; line-height:1.08; font-weight:600; letter-spacing:-0.8px; }
+.ml-h1 em{ color:var(--green-cta); }
+.ml-sub{ margin-top:14px; font-size:18px; line-height:1.55; color:var(--text-secondary); }
+.ml-proof{ margin-top:18px; display:flex; flex-direction:column; gap:6px; font-size:14px; color:var(--text-secondary); }
+.ml-proof b{ color:var(--ink); font-weight:600; }
+.ml-proof .stars{ color:#FBBD04; letter-spacing:1.5px; }
+.ml-card{ margin-top:26px; border:1px solid var(--hairline); border-radius:16px; padding:22px 18px; scroll-margin-top:84px; }
+.ml-card-t{ font-size:22px; font-weight:600; letter-spacing:-0.3px; margin-bottom:16px; }
+.ml-namerow{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.ml-field{ display:block; margin-bottom:12px; }
+.ml-field span{ display:block; font-size:14px; font-weight:600; color:var(--text-secondary); margin-bottom:6px; }
+.ml-field input{ width:100%; height:60px; border:1px solid var(--hairline); border-radius:12px; padding:0 14px;
+  font-family:inherit; font-size:18px; color:var(--ink); background:var(--white); }
+.ml-field input:focus{ outline:none; border-color:var(--green-cta); }
+.ml-check{ display:flex; gap:10px; align-items:flex-start; font-size:14px; color:var(--text-secondary); margin:2px 0 16px; line-height:1.4; }
+.ml-check input{ width:18px; height:18px; margin-top:1px; accent-color:var(--green-cta); }
+.ml-cta{ display:flex; align-items:center; justify-content:center; width:100%; height:60px; border-radius:999px;
+  background:var(--green-cta); color:#FFFFFF; border:0; font-family:inherit; font-size:18px; font-weight:600; cursor:pointer;
+  transition:background .18s ease, transform .1s ease; }
+.ml-cta:active{ background:#0B5F3D; transform:scale(.99); }
+.ml-or{ display:flex; align-items:center; gap:12px; margin:14px 0; color:var(--text-tertiary); font-size:13px; }
+.ml-or::before,.ml-or::after{ content:""; flex:1; height:1px; background:var(--hairline); }
+.ml-google{ display:flex; align-items:center; justify-content:center; gap:10px; width:100%; height:60px; border-radius:999px;
+  background:var(--white); border:1px solid var(--hairline); color:var(--ink); font-family:inherit; font-size:18px; font-weight:600; cursor:pointer; }
+.ml-google:active{ background:#F7F8F8; }
+.ml-terms{ margin-top:14px; font-size:13px; color:var(--text-tertiary); line-height:1.5; }
+.ml-sec{ padding:44px 18px; border-top:1px solid var(--hairline); }
+.ml-eyebrow{ display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:600; color:var(--green-cta); }
+.ml-eyebrow .d{ width:7px; height:7px; border-radius:999px; background:var(--green); }
+.ml-h2{ font-size:27px; line-height:1.18; font-weight:600; letter-spacing:-0.4px; margin-top:10px; }
+.ml-lede{ margin-top:10px; font-size:18px; line-height:1.55; color:var(--text-secondary); }
+.ml-visual{ margin-top:22px; border:1px solid var(--hairline); border-radius:16px; padding:16px; }
+.ml-vt{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; font-size:13px; font-weight:600; color:var(--text-secondary); margin-bottom:12px; }
+.ml-vt .val{ font-family:'DM Sans',sans-serif; font-size:17px; color:var(--ink); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.ml-pts{ list-style:none; margin-top:18px; display:flex; flex-direction:column; gap:12px; }
+.ml-pts li{ display:flex; gap:10px; font-size:18px; line-height:1.45; color:var(--ink); }
+.ml-pts svg{ width:20px; height:20px; flex:none; margin-top:3px; color:var(--green-cta); }
+.ml-ai{ display:inline-flex; align-items:flex-start; gap:9px; min-height:60px; margin-top:10px; background:none; border:0; padding:0;
+  font-family:inherit; font-size:18px; font-weight:600; color:var(--green-cta); text-align:left; cursor:pointer; line-height:1.35; }
+.ml-ai .sp{ width:22px; height:22px; flex:none; margin-top:1px; } .ml-ai .sp svg{ width:22px; height:22px; display:block; }
+.ml-ai .arw{ width:18px; height:18px; flex:none; margin-top:3px; }
+.ml-op{ margin-top:22px; border:1px solid var(--hairline); border-radius:16px; padding:16px 16px 12px; }
+.ml-op-top{ display:flex; flex-direction:column; gap:3px; margin-bottom:10px; }
+.ml-op-top .t{ font-size:15px; font-weight:600; }
+.ml-op-top .s{ font-size:13px; color:var(--text-secondary); } .ml-op-top .s b{ color:var(--green-cta); }
+.ml-op-chart{ display:block; width:100%; height:130px; } .ml-op-chart .op-area{ opacity:.10; }
+.ml-op-axis{ display:flex; justify-content:space-between; font-size:13px; color:var(--text-tertiary); margin-top:6px; }
+.ml-cols{ margin-top:26px; display:flex; flex-direction:column; gap:22px; }
+.ml-col .ic{ width:40px; height:40px; border-radius:12px; background:var(--mint); color:var(--green-cta); display:flex; align-items:center; justify-content:center; margin-bottom:10px; }
+.ml-col .ic svg{ width:20px; height:20px; }
+.ml-col h3{ font-size:20px; font-weight:600; letter-spacing:-0.2px; }
+.ml-col p{ margin-top:5px; font-size:18px; line-height:1.5; color:var(--text-secondary); }
+.ml-voices{ margin-top:30px; padding-top:26px; border-top:1px solid var(--hairline); display:flex; flex-direction:column; gap:24px; }
+.ml-q{ font-size:18px; font-weight:500; line-height:1.5; letter-spacing:-0.1px; }
+.ml-who{ display:flex; align-items:center; gap:10px; margin-top:10px; }
+.ml-who .mh-ava{ width:34px; height:34px; font-size:12px; }
+.ml-meta{ font-size:13px; color:var(--text-tertiary); line-height:1.35; }
+.ml-meta b{ display:block; color:var(--ink); font-weight:600; font-size:15px; }
+.ml-tree{ display:grid; grid-template-columns:1.25fr 1fr; grid-auto-rows:74px; gap:8px; }
+.ml-tree .tile{ border-radius:12px; padding:11px 12px; color:#fff; display:flex; flex-direction:column; justify-content:space-between; }
+.ml-tree .tile b{ font-size:13px; font-weight:600; opacity:.9; }
+.ml-tree .tile .v{ font-family:'DM Sans',sans-serif; font-variant-numeric:tabular-nums; font-size:19px; font-weight:700; }
+.ml-tree .home{ grid-row:span 2; background:var(--teal); }
+.ml-tree .ret{ background:#146F57; }
+.ml-tree .brk{ background:#04B477; }
+.ml-tree .cash{ background:#7FCDB0; color:var(--ink); }
+.ml-sankey{ display:block; width:100%; height:auto; }
+.ml-legend{ display:flex; flex-wrap:wrap; gap:8px 16px; margin-top:12px; font-size:13px; color:var(--text-secondary); }
+.ml-legend i{ display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:6px; vertical-align:-1px; }
+.ml-win{ display:flex; align-items:flex-end; gap:6px; height:120px; margin-bottom:24px; }
+.ml-win .col{ flex:1; border-radius:6px 6px 0 0; position:relative; }
+.ml-win .col small{ position:absolute; bottom:-19px; left:0; right:0; text-align:center; font-size:12px; color:var(--text-tertiary); }
+.ml-band{ background:var(--teal); border-top:0; }
+.ml-band .ml-h2{ color:#fff; }
+.ml-band .ml-lede{ color:rgba(255,255,255,0.78); }
+.ml-band .ml-eyebrow{ color:var(--mint); }
+.ml-vision{ margin-top:26px; border-radius:16px; overflow:hidden; }
+.ml-vision svg{ display:block; width:100%; height:auto; }
+.ml-agent{ margin-top:22px; border:1px solid var(--hairline); border-radius:16px; overflow:hidden; background:var(--white); }
+.ml-agent-h{ display:flex; align-items:center; gap:9px; padding:12px 15px; background:#FAFBFB; border-bottom:1px solid var(--hairline); }
+.ml-agent-h .dot{ width:8px; height:8px; border-radius:999px; background:var(--green); outline:4px solid rgba(4,180,119,0.14); }
+.ml-agent-h b{ font-size:14px; color:var(--ink); }
+.ml-agent-h .tag{ margin-left:auto; font-size:12px; font-weight:600; color:var(--text-secondary); border:1px solid var(--hairline); border-radius:999px; padding:3px 10px; background:#fff; }
+.ml-agent-r{ display:flex; gap:11px; align-items:flex-start; padding:11px 15px; font-size:14px; color:var(--ink); border-top:1px solid var(--hairline); line-height:1.4; }
+.ml-agent-r:first-of-type{ border-top:0; }
+.ml-agent-r .ck{ width:20px; height:20px; flex:none; border-radius:999px; background:var(--mint); color:var(--green-cta); display:flex; align-items:center; justify-content:center; }
+.ml-agent-r .ck svg{ width:12px; height:12px; }
+.ml-agent-alloc{ display:flex; justify-content:space-between; gap:10px; padding:11px 15px; font-size:14px; border-top:1px solid var(--hairline); }
+.ml-agent-alloc .k{ font-weight:600; color:var(--ink); }
+.ml-agent-alloc .num{ font-family:'DM Sans',sans-serif; font-variant-numeric:tabular-nums; }
+.ml-agent-alloc .was{ color:#9AA0AE; text-decoration:line-through; }
+.ml-agent-alloc b{ color:var(--green-cta); }
+.ml-all{ margin-top:22px; display:flex; flex-direction:column; gap:10px; }
+.ml-fcard{ display:flex; gap:14px; align-items:flex-start; border:1px solid var(--hairline); border-radius:16px; padding:16px; }
+.ml-fcard .ic{ width:38px; height:38px; flex:none; border-radius:12px; background:var(--mint); color:var(--green-cta); display:flex; align-items:center; justify-content:center; }
+.ml-fcard .ic svg{ width:19px; height:19px; }
+.ml-fcard h4{ font-size:19px; font-weight:600; }
+.ml-fcard p{ margin-top:3px; font-size:18px; line-height:1.45; color:var(--text-secondary); }
+.ml-sand{ background:#FBF7F0; border-top:0; }
+.ml-steps{ margin-top:22px; display:flex; flex-direction:column; gap:22px; }
+.ml-step .n{ width:34px; height:34px; border-radius:999px; background:#EBF8F2; color:var(--green-cta); font-weight:700; font-size:15px; display:flex; align-items:center; justify-content:center; margin-bottom:10px; }
+.ml-step h4{ font-size:19px; font-weight:600; }
+.ml-step p{ margin-top:4px; font-size:18px; line-height:1.5; color:var(--text-secondary); }
+.ml-stats{ margin-top:26px; display:flex; flex-direction:column; gap:24px; }
+.ml-stats .big{ font-size:42px; font-weight:700; color:#fff; letter-spacing:-1px; line-height:1; font-variant-numeric:tabular-nums; }
+.ml-stats .lbl{ margin-top:6px; font-size:14px; color:rgba(255,255,255,0.72); }
+.ml-vs{ margin-top:22px; display:flex; flex-direction:column; gap:14px; }
+.ml-vscol{ border:1px solid var(--hairline); border-radius:16px; padding:20px 18px; }
+.ml-vscol.win{ border-color:#CDEBDD; background:#EBF8F2; }
+.ml-vscol .cap{ font-size:14px; font-weight:700; margin-bottom:10px; color:var(--text-secondary); }
+.ml-vscol.win .cap{ color:var(--green-cta); }
+.ml-vsrow{ display:flex; gap:11px; align-items:flex-start; padding:8px 0; font-size:18px; color:var(--ink); line-height:1.45; }
+.ml-vsrow svg{ width:19px; height:19px; flex:none; margin-top:3px; }
+.ml-vscol.win .ml-vsrow svg{ color:var(--green-cta); }
+.ml-vscol.old .ml-vsrow{ color:var(--text-secondary); }
+.ml-vscol.old .ml-vsrow svg{ color:#C9CCD3; }
+.ml-note{ display:flex; gap:13px; align-items:flex-start; }
+.ml-note .mh-ava{ flex:none; }
+.ml-note-p{ font-size:18px; line-height:1.6; }
+.ml-note-a{ margin-top:9px; font-size:13px; font-weight:600; color:var(--text-secondary); }
+.ml-final .ml-cta{ margin-top:24px; }
+.ml-ghost{ display:flex; align-items:center; justify-content:center; gap:9px; width:100%; height:60px; border-radius:999px;
+  background:var(--white); border:1px solid var(--hairline); color:var(--ink); font-family:inherit; font-size:18px; font-weight:600; cursor:pointer; margin-top:10px; }
+.ml-ghost svg{ width:19px; height:19px; }
+.ml-trust{ margin-top:24px; display:flex; flex-direction:column; gap:10px; font-size:14px; color:var(--text-secondary); }
+.ml-trust span{ display:flex; align-items:center; gap:9px; }
+.ml-trust svg{ width:18px; height:18px; flex:none; color:var(--green-cta); }
+.ml-fine{ margin-top:18px; font-size:13px; color:var(--text-tertiary); line-height:1.5; }
 .mv-upload{ display:flex; align-items:center; gap:12px; margin-top:22px; }
 .mv-up-pill{ flex:1; height:54px; border-radius:999px; background:var(--green-cta); color:#FFFFFF; border:0;
   display:inline-flex; align-items:center; justify-content:center; gap:9px; font-family:inherit; font-size:16px; font-weight:600; cursor:pointer;
@@ -413,7 +537,7 @@ body.kb-open .mai-bar2{ transform:translateX(-50%) translateY(-138px); border-co
 body.nav-mini .mnav{ transform:translateX(-50%) scale(0.7); }
 .mnav button{ background:none; border:0; padding:6px 12px; cursor:pointer; color:#6E7268; display:flex; }
 .mnav button.on{ color:var(--green-cta); }
-.mnav svg{ display:block; width:31px; height:31px; }
+.mnav svg{ display:block; width:34px; height:34px; }
 
 /* the fade behind the nav: content scrolls away beneath it */
 .mnav-fade{ position:fixed; left:50%; transform:translateX(-50%); bottom:0; width:100%; max-width:480px;
@@ -742,11 +866,273 @@ body.nav-mini .mnav{ transform:translateX(-50%) scale(0.7); }
 <div class="mnav-fade" aria-hidden="true"></div>
 <nav class="mnav" id="mnav">
   <button data-tab="home" class="on" aria-label="Home"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.2 3.6 10v10.3h5.9v-6.2h5v6.2h5.9V10z"/></svg></button>
-  <button data-tab="today" aria-label="Today"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor"><path d="M4.5 5.5h15a1.5 1.5 0 0 1 1.5 1.5v10a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17V7a1.5 1.5 0 0 1 1.5-1.5z" opacity=".95"/><path d="M12 8.4c.4 0 .7.3.7.7v.3c.8.2 1.4.7 1.5 1.5h-1.2c-.1-.4-.5-.6-1-.6-.6 0-1 .3-1 .7 0 .3.3.5.9.7l.7.2c1.1.3 1.7.8 1.7 1.7 0 .9-.7 1.5-1.6 1.7v.3a.7.7 0 0 1-1.4 0v-.3c-.9-.2-1.6-.8-1.7-1.7h1.3c.1.5.5.7 1.1.7.6 0 1-.3 1-.7 0-.3-.3-.5-.9-.7l-.8-.2c-1-.3-1.6-.8-1.6-1.7 0-.8.6-1.4 1.5-1.6v-.3c0-.4.3-.7.8-.7z" fill="#F4F5F2"/></svg></button>
-  <button data-tab="plan" aria-label="Plan"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.2l1.2 1.2 2-2.2M4 12l1.2 1.2 2-2.2M4 17.8l1.2 1.2 2-2.2M11 6.4h9M11 12h9M11 17.6h9"/></svg></button>
+  <button data-tab="today" aria-label="Today"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor"><rect x="3.6" y="4" width="16.8" height="16" rx="3.6"/><path d="M12 7.4c.44 0 .8.36.8.8v.42c1 .22 1.72.86 1.86 1.82h-1.44c-.12-.5-.6-.78-1.22-.78-.72 0-1.2.36-1.2.86 0 .38.34.62 1.08.84l.86.24c1.32.36 2.04.98 2.04 2.02 0 1.06-.82 1.78-1.96 2v.42a.8.8 0 0 1-1.6 0v-.42c-1.06-.22-1.86-.92-2-2h1.5c.14.56.62.86 1.32.86.72 0 1.2-.34 1.2-.84 0-.38-.34-.62-1.08-.84l-.94-.26c-1.2-.34-1.92-.96-1.92-2 0-1 .74-1.7 1.82-1.9v-.42c0-.44.36-.8.8-.8z" fill="#F4F5F2"/></svg></button>
+  <button data-tab="plan" aria-label="Plan"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.2l1.2 1.2 2-2.2M4 12l1.2 1.2 2-2.2M4 17.8l1.2 1.2 2-2.2M11 6.4h9M11 12h9M11 17.6h9"/></svg></button>
   <button data-tab="optimize" aria-label="Optimize"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor"><path d="M13.2 2.5 5.4 13.3h5l-1.6 8.2 7.8-10.8h-5z"/></svg></button>
   <button data-tab="ai" aria-label="Boldin AI"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor"><path d="M10 3.5l1.3 5.2L16.5 10l-5.2 1.3L10 16.5l-1.3-5.2L3.5 10l5.2-1.3z"/><path d="M18 13l.8 3.2L22 17l-3.2.8L18 21l-.8-3.2L14 17l3.2-.8z"/></svg></button>
 </nav>
+
+
+<!-- ===== LANDING page (boldin.com register, from the logo) ===== -->
+<div class="mland" id="mland" hidden>
+  <header class="ml-head"><span class="ml-brand" id="mlandBrand" role="img" aria-label="Boldin"></span></header>
+
+  <div class="ml-hero">
+    <h1 class="ml-h1">Confidence you can <em>see</em>.</h1>
+    <p class="ml-sub">Boldin turns your real numbers into a living plan. Taxes, Social Security, healthcare, and the life in between.</p>
+    <div class="ml-proof">
+      <span><b>250,000+</b> planning with Boldin</span>
+      <span><b class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</b> 5/5 from 5,295 reviews</span>
+      <span>Featured in Forbes, NYT, MarketWatch</span>
+    </div>
+    <div class="ml-card" id="mlCard">
+      <div class="ml-card-t">Get started for free</div>
+      <div class="ml-namerow">
+        <label class="ml-field"><span>First name</span><input type="text" placeholder="Marshall"></label>
+        <label class="ml-field"><span>Last name</span><input type="text" placeholder="Hartwell"></label>
+      </div>
+      <label class="ml-field"><span>Email address</span><input type="email" placeholder="you@example.com"></label>
+      <label class="ml-field"><span>Password</span><input type="password" placeholder="8+ characters"></label>
+      <label class="ml-check"><input type="checkbox" checked><span>Send me planning tips and product updates</span></label>
+      <button class="ml-cta" type="button" data-ml-enter>Get Started For Free</button>
+      <div class="ml-or"><span>or</span></div>
+      <button class="ml-google" type="button" data-ml-enter>
+        <svg width="18" height="18" viewBox="0 0 24 24"><path d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.4z" fill="#4285F4"/><path d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22z" fill="#34A853"/><path d="M6.4 14a6 6 0 0 1 0-3.9V7.5H3.1a10 10 0 0 0 0 9l3.3-2.5z" fill="#FBBC05"/><path d="M12 6c1.5 0 2.8.5 3.8 1.5L18.7 4.7A10 10 0 0 0 3.1 7.5L6.4 10c.8-2.3 3-4 5.6-4z" fill="#EA4335"/></svg>
+        Continue with Google
+      </button>
+      <div class="ml-terms">By creating an account, you agree to the Terms of Use and Privacy Policy.</div>
+    </div>
+  </div>
+
+  <section class="ml-sec">
+    <h2 class="ml-h2">One plan. Every moving part.</h2>
+    <p class="ml-lede">Everything that shapes your retirement, working together in a single view.</p>
+    <div class="ml-op">
+      <div class="ml-op-top"><span class="t">Your plan, funded to age 99</span><span class="s"><b>87%</b> chance of success, run across 1,000 futures</span></div>
+      <svg class="ml-op-chart" viewBox="0 0 1000 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
+        <path class="op-area" d="M0 160 C220 140 380 116 500 84 C620 52 740 24 900 20 C950 18 985 26 1000 40 L1000 180 L0 180 Z" fill="#04B477"/>
+        <path d="M0 160 C220 140 380 116 500 84 C620 52 740 24 900 20 C950 18 985 26 1000 40" fill="none" stroke="#04B477" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+      </svg>
+      <div class="ml-op-axis"><span>Today</span><span>Age 99</span></div>
+    </div>
+    <div class="ml-cols">
+      <div class="ml-col"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></div><h3>Every number, in one plan</h3><p>Taxes, Social Security, real estate, healthcare, and long-term care, all modeled together across 250+ inputs.</p></div>
+      <div class="ml-col"><div class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l1.6 5.4L19 10l-5.4 1.6L12 17l-1.6-5.4L5 10l5.4-1.6z" fill="currentColor"/></svg></div><h3>Answers from Boldin AI</h3><p>Ask anything in plain language and get answers drawn from your real plan, never the open internet.</p></div>
+      <div class="ml-col"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></div><h3>Real people, when you want them</h3><p>Live classes, community, and 1:1 coaching, plus fee-only fiduciary CFP&#174; professionals.</p></div>
+    </div>
+    <div class="ml-voices">
+      <div class="ml-voice"><div class="ml-q">&#8220;We stopped arguing about money the week we could both see the same plan.&#8221;</div>
+        <div class="ml-who"><span class="mh-ava t">D&amp;B</span><span class="ml-meta"><b>Diane &amp; Bob</b>Tucson &#183; retired 2024</span></div></div>
+      <div class="ml-voice"><div class="ml-q">&#8220;I used to check the market every morning. Now I check my confidence score. It is a much calmer habit.&#8221;</div>
+        <div class="ml-who"><span class="mh-ava g">P</span><span class="ml-meta"><b>Priya</b>Sacramento &#183; retiring 2027</span></div></div>
+      <div class="ml-voice"><div class="ml-q">&#8220;Boldin found a Roth window my old advisor never mentioned. One afternoon paid for itself.&#8221;</div>
+        <div class="ml-who"><span class="mh-ava" style="background:#5B8A72">T</span><span class="ml-meta"><b>Tom</b>Grand Rapids &#183; planning since 2022</span></div></div>
+    </div>
+  </section>
+
+  <section class="ml-sec">
+    <span class="ml-eyebrow"><span class="d"></span>Net worth, made real</span>
+    <h2 class="ml-h2">Everything you own, in one honest picture.</h2>
+    <p class="ml-lede">Link an account or type it in. Boldin gathers your home, retirement, brokerage, and cash into one live number, and keeps it current.</p>
+    <div class="ml-visual">
+      <div class="ml-vt"><span>Net worth today</span><span class="val">$1.14M</span></div>
+      <div class="ml-tree">
+        <div class="tile home"><b>Home</b><span class="v">$905K</span></div>
+        <div class="tile ret"><b>Retirement</b><span class="v">$310K</span></div>
+        <div class="tile brk"><b>Brokerage</b><span class="v">$150K</span></div>
+        <div class="tile cash"><b>Cash</b><span class="v">$107K</span></div>
+      </div>
+    </div>
+    <ul class="ml-pts">
+      <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Real-time net worth the moment balances change</li>
+      <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Bank-level security through Plaid, read-only by default</li>
+      <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Works whether you link accounts or enter them by hand</li>
+    </ul>
+    <button type="button" class="ml-ai" data-ml-top><span class="sp"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l1.6 5.4L19 10l-5.4 1.6L12 17l-1.6-5.4L5 10l5.4-1.6z" fill="#04B477"/></svg></span><span>Ask Boldin AI: &#8220;Am I on track to retire?&#8221;</span><svg class="arw" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </section>
+
+  <section class="ml-sec">
+    <span class="ml-eyebrow"><span class="d"></span>Cash flow, played forward</span>
+    <h2 class="ml-h2">Watch your money reshape, year by year.</h2>
+    <p class="ml-lede">Slide through time and see salaries give way to Social Security and portfolio draws, every dollar in and out conserved to the penny.</p>
+    <div class="ml-visual">
+      <div class="ml-vt"><span>Cash flow &#183; the working years</span><span class="val">$12,300 / mo</span></div>
+      <svg class="ml-sankey" viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<rect x="20" y="30" width="14" height="86" rx="3" fill="#0D3F4A"/>
+<rect x="20" y="126" width="14" height="70" rx="3" fill="#0E794E"/>
+<rect x="250" y="46" width="10" height="150" rx="3" fill="#CDEBDD"/>
+<rect x="486" y="30" width="14" height="34" rx="3" fill="#8A90A0"/>
+<rect x="486" y="70" width="14" height="40" rx="3" fill="#6E7687"/>
+<rect x="486" y="116" width="14" height="26" rx="3" fill="#9FDFC6"/>
+<rect x="486" y="148" width="14" height="26" rx="3" fill="#A7CBA0"/>
+<rect x="486" y="180" width="14" height="16" rx="3" fill="#04B477"/>
+<path d="M34 34 C150 34 150 60 250 60 L250 96 C150 96 150 73 34 73 Z" fill="#0D3F4A" opacity="0.5"/>
+<path d="M34 130 C150 130 150 110 250 110 L250 180 C150 180 150 160 34 196 Z" fill="#0E794E" opacity="0.5"/>
+<path d="M260 50 C380 50 380 34 486 34 L486 64 C380 64 380 66 260 70 Z" fill="#8A90A0" opacity="0.5"/>
+<path d="M260 72 C380 72 380 70 486 70 L486 110 C380 110 380 96 260 106 Z" fill="#6E7687" opacity="0.5"/>
+<path d="M260 108 C380 108 380 116 486 116 L486 142 C380 142 380 130 260 132 Z" fill="#9FDFC6" opacity="0.6"/>
+<path d="M260 134 C380 134 380 148 486 148 L486 174 C380 174 380 156 260 158 Z" fill="#A7CBA0" opacity="0.6"/>
+<path d="M260 160 C380 160 380 180 486 180 L486 196 C380 196 380 190 260 190 Z" fill="#04B477" opacity="0.6"/>
+</svg>
+      <div class="ml-legend"><span><i style="background:#0D3F4A"></i>Income</span><span><i style="background:#8A90A0"></i>Taxes &amp; home</span><span><i style="background:#9FDFC6"></i>Living</span><span><i style="background:#04B477"></i>Savings</span></div>
+    </div>
+    <ul class="ml-pts">
+      <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Four life phases, from working years to the Social Security era</li>
+      <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Every flow balances, so the picture is always true</li>
+      <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> See exactly when each income source switches on</li>
+    </ul>
+    <button type="button" class="ml-ai" data-ml-top><span class="sp"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l1.6 5.4L19 10l-5.4 1.6L12 17l-1.6-5.4L5 10l5.4-1.6z" fill="#04B477"/></svg></span><span>Ask Boldin AI: &#8220;Will my income cover my spending in retirement?&#8221;</span><svg class="arw" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </section>
+
+  <section class="ml-sec">
+    <span class="ml-eyebrow"><span class="d"></span>Tax strategy</span>
+    <h2 class="ml-h2">Find the cheap-tax years most people never see.</h2>
+    <p class="ml-lede">Between your last paycheck and your first required withdrawal sit years in a low bracket. Boldin maps them and shows what filling them with Roth conversions is worth, for life.</p>
+    <div class="ml-visual">
+      <div class="ml-vt"><span>Marginal bracket by year</span><span class="val">8 years at 12%</span></div>
+      <div class="ml-win"><div class="col" style="height:96px;background:#A7CBA0"><small>&#39;26</small></div><div class="col" style="height:52px;background:#F2B34C"><small>&#39;29</small></div><div class="col" style="height:52px;background:#F2B34C"><small>&#39;31</small></div><div class="col" style="height:52px;background:#F2B34C"><small>&#39;33</small></div><div class="col" style="height:52px;background:#F2B34C"><small>&#39;35</small></div><div class="col" style="height:96px;background:#A7CBA0"><small>&#39;37</small></div></div>
+      <div class="ml-legend"><span><i style="background:#F2B34C"></i>The window</span><span><i style="background:#A7CBA0"></i>Back to 22%</span></div>
+    </div>
+    <ul class="ml-pts">
+      <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> The window, drawn out year by year</li>
+      <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> A slider that prices every conversion against the IRMAA cliff</li>
+      <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> One member kept $93,000 out of future taxes</li>
+    </ul>
+    <button type="button" class="ml-ai" data-ml-top><span class="sp"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l1.6 5.4L19 10l-5.4 1.6L12 17l-1.6-5.4L5 10l5.4-1.6z" fill="#04B477"/></svg></span><span>Ask Boldin AI: &#8220;How much could Roth conversions save me?&#8221;</span><svg class="arw" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </section>
+
+  <section class="ml-sec ml-band">
+    <span class="ml-eyebrow"><span class="d"></span>The Vision Board</span>
+    <h2 class="ml-h2">You didn&rsquo;t save a number. You saved mornings like these.</h2>
+    <p class="ml-lede">Turn the life you&rsquo;re planning for into something you can see. Name a dream, and Boldin prices it against your plan on the spot, so you know it&rsquo;s real.</p>
+    <div class="ml-vision"><svg viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<defs>
+<linearGradient id="mlLake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD9A0"/><stop offset="1" stop-color="#2E5F63"/></linearGradient>
+<linearGradient id="mlGarden" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EAF6E7"/><stop offset="1" stop-color="#5E9E6F"/></linearGradient>
+<linearGradient id="mlKyoto" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBE3EC"/><stop offset="1" stop-color="#EFB0C8"/></linearGradient>
+</defs>
+<g>
+<rect x="0" y="0" width="250" height="200" rx="14" fill="url(#mlLake)"/>
+<circle cx="180" cy="70" r="30" fill="#FFE7BC" opacity="0.85"/>
+<rect x="30" y="150" width="90" height="5" rx="2" fill="#FFCF9E" opacity="0.6"/>
+<text x="18" y="182" font-size="15" font-weight="600" fill="#fff">Mornings on the lake</text>
+</g>
+<g>
+<rect x="262" y="0" width="120" height="96" rx="14" fill="url(#mlKyoto)"/>
+<rect x="308" y="30" width="8" height="52" fill="#5E3A44"/><rect x="342" y="30" width="8" height="52" fill="#5E3A44"/><path d="M300 30 h58 l4 -8 h-66 z" fill="#5E3A44"/>
+<text x="274" y="86" font-size="12" font-weight="600" fill="#5E3A44">Kyoto</text>
+</g>
+<g>
+<rect x="262" y="104" width="120" height="96" rx="14" fill="url(#mlGarden)"/>
+<text x="274" y="190" font-size="12" font-weight="600" fill="#fff">The garden</text>
+</g>
+<g>
+<rect x="394" y="0" width="126" height="200" rx="14" fill="#E7F7F0" stroke="#CDEBDD"/>
+<text x="410" y="150" font-size="30">&#43;</text>
+<text x="410" y="180" font-size="12" font-weight="600" fill="#0E794E">Add a dream</text>
+</g>
+</svg></div>
+  </section>
+
+  <section class="ml-sec">
+    <span class="ml-eyebrow"><span class="d"></span>Boldin AI</span>
+    <h2 class="ml-h2">An assistant that knows your plan, and acts on it.</h2>
+    <p class="ml-lede">Ask anything in plain language and get answers drawn from your actual numbers. Then let it do the work, from Roth conversions to rebalancing your brokerage, with your approval on every move.</p>
+    <div class="ml-agent">
+      <div class="ml-agent-h"><span class="dot"></span><b>Rebalancing your brokerage</b><span class="tag">Fidelity</span></div>
+      <div class="ml-agent-r"><span class="ck"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Connected, read-write via Plaid</div>
+      <div class="ml-agent-r"><span class="ck"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Staged 4 trades, tax-efficient</div>
+      <div class="ml-agent-alloc"><span class="k">Allocation</span><span class="num"><span class="was">71/22/7</span> &#8594; <b>60/25/15</b></span></div>
+    </div>
+    <ul class="ml-pts">
+      <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Answers from your plan, never the open internet</li>
+      <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Takes real action at your accounts, you approve each step</li>
+      <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Your data never trains public AI models</li>
+    </ul>
+    <button type="button" class="ml-ai" data-ml-top><span class="sp"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l1.6 5.4L19 10l-5.4 1.6L12 17l-1.6-5.4L5 10l5.4-1.6z" fill="#04B477"/></svg></span><span>Try Boldin AI free</span><svg class="arw" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </section>
+
+  <section class="ml-sec">
+    <span class="ml-eyebrow"><span class="d"></span>Everything in one place</span>
+    <h2 class="ml-h2">The whole plan, and every tool to shape it.</h2>
+    <div class="ml-all">
+      <div class="ml-fcard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><h4>Retirement Planner</h4><p>250+ inputs across taxes, Social Security, real estate, healthcare, and long-term care.</p></div></div>
+      <div class="ml-fcard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16M8 16l3-4 3 2 5-7"/></svg></div><div><h4>Monte Carlo</h4><p>Your chance of success, run across 1,000 possible futures. Right now, 87%.</p></div></div>
+      <div class="ml-fcard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg></div><div><h4>Roth conversion explorer</h4><p>Fill the low-bracket window and watch lifetime taxes fall.</p></div></div>
+      <div class="ml-fcard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 8l7-5 7 5"/></svg></div><div><h4>Social Security optimizer</h4><p>See the exact month to claim, and what waiting until 70 is worth.</p></div></div>
+      <div class="ml-fcard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div><div><h4>Detailed budgeter</h4><p>Every dollar in and out, editable inline, live totals as you type.</p></div></div>
+      <div class="ml-fcard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="16" height="13" rx="2"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/></svg></div><div><h4>The Vault</h4><p>Wills, deeds, and policies, encrypted by default and shared only by choice.</p></div></div>
+      <div class="ml-fcard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></div><div><h4>Coaching &amp; advisors</h4><p>1:1 coaching to master your plan, plus fee-only fiduciary CFP&#174; professionals.</p></div></div>
+      <div class="ml-fcard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 20h8M12 18v2"/></svg></div><div><h4>Classes &amp; live events</h4><p>20+ classes and weekly live Q&amp;A, from Roth conversions to income planning.</p></div></div>
+      <div class="ml-fcard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7z"/></svg></div><div><h4>The Vision Board</h4><p>Name the life you want, and see it priced against your plan.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ml-sec ml-sand">
+    <span class="ml-eyebrow"><span class="d"></span>How it works</span>
+    <h2 class="ml-h2">From a few numbers to a plan you trust, in minutes.</h2>
+    <div class="ml-steps">
+      <div class="ml-step"><div class="n">1</div><h4>Start with what you have</h4><p>A few real numbers are all it takes. Link accounts or type them in.</p></div>
+      <div class="ml-step"><div class="n">2</div><h4>See your whole picture</h4><p>Net worth, cash flow, and your chance of success, all at once.</p></div>
+      <div class="ml-step"><div class="n">3</div><h4>Find your best moves</h4><p>Boldin surfaces the tax, timing, and savings changes that matter most.</p></div>
+      <div class="ml-step"><div class="n">4</div><h4>Act, with confidence</h4><p>Make the moves yourself, or let Boldin AI and our experts help.</p></div>
+    </div>
+  </section>
+
+  <section class="ml-sec ml-band">
+    <span class="ml-eyebrow"><span class="d"></span>Why people stay</span>
+    <h2 class="ml-h2">Planning you&rsquo;ll actually keep coming back to.</h2>
+    <div class="ml-stats">
+      <div><div class="big">250,000+</div><div class="lbl">people planning their future with Boldin</div></div>
+      <div><div class="big">$3.6B+</div><div class="lbl">in assets tracked and planned across the community</div></div>
+      <div><div class="big">4.9&#9733;</div><div class="lbl">average rating from more than 5,000 reviews</div></div>
+    </div>
+  </section>
+
+  <section class="ml-sec">
+    <span class="ml-eyebrow"><span class="d"></span>Built differently</span>
+    <h2 class="ml-h2">Not a calculator. Not an advisor selling products.</h2>
+    <div class="ml-vs">
+      <div class="ml-vscol old">
+        <div class="cap">A typical retirement calculator</div>
+        <div class="ml-vsrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg> One number, from a handful of guesses</div>
+        <div class="ml-vsrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg> No taxes, healthcare, or real estate</div>
+        <div class="ml-vsrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg> Static, and forgotten by next week</div>
+        <div class="ml-vsrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg> No one to ask when you&rsquo;re stuck</div>
+      </div>
+      <div class="ml-vscol win">
+        <div class="cap">Boldin</div>
+        <div class="ml-vsrow"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> A living plan from 250+ real inputs</div>
+        <div class="ml-vsrow"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Taxes, Social Security, healthcare, and home, together</div>
+        <div class="ml-vsrow"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Updates the moment your money changes</div>
+        <div class="ml-vsrow"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> AI, classes, coaches, and fiduciary advisors on hand</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ml-sec">
+    <div class="ml-note">
+      <span class="mh-ava t">S</span>
+      <div>
+        <p class="ml-note-p">We started Boldin because retirement math felt like a test nobody had studied for. It should feel like your life, thought through. Every feature on this page exists because a member asked for it, usually by name, usually more than once.</p>
+        <div class="ml-note-a">Steve, founder of Boldin</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ml-sec ml-final">
+    <h2 class="ml-h2">Your future is worth an honest look.</h2>
+    <p class="ml-lede">A few real numbers are all it takes to see your retirement take shape. Free to start, no credit card, and your first plan takes minutes.</p>
+    <button class="ml-cta" type="button" data-ml-top>Get Started For Free</button>
+    <button class="ml-ghost" type="button" data-ml-top>Take a look around first <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <div class="ml-trust">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="16" height="13" rx="2"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/></svg> Bank-level encryption</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 4v5c0 4-3 7-7 8-4-1-7-4-7-8V7z"/></svg> We never sell your data</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12l2.5 2.5L16 9"/></svg> Free forever plan</span>
+    </div>
+    <div class="ml-fine">Boldin Planner and PlannerPlus are planning tools, not a complete financial plan or investment advice.</div>
+  </section>
+</div>
 
 <div class="mtoast" id="mtoast"></div>
 
@@ -1054,31 +1440,35 @@ body.nav-mini .mnav{ transform:translateX(-50%) scale(0.7); }
     if(!reduce && r.animate) r.animate([{transform:'scale(0.985)'},{transform:'scale(1)'}],{duration:260,easing:'cubic-bezier(0.22,1,0.36,1)'});
   });
 
-  /* ===== the index page, from the logo ===== */
-  var INDEX_HTML='<div class="mx-hero">'+
-    '<h1 class="mhl">Confidence you <em class="mhl-em">can see.</em></h1>'+
-    '<p class="msubhead" style="max-width:none">Your whole retirement, planned in one place.</p>'+
-    '<button class="mx-cta" type="button" data-toast="Signup lands next in the mobile build">Get started for free</button>'+
-    '<span class="mx-proof"><b>&#9733;&#9733;&#9733;&#9733;&#9733;</b> 4.8 &#183; 5,295 reviews &#183; no credit card</span>'+
-    '</div>'+
-    '<div class="mx-voices">'+
-      '<div class="mx-voice"><div class="mx-q">&#8220;We stopped arguing about money the week we could both see the same plan.&#8221;</div>'+
-        '<div class="mx-who"><span class="mh-ava t">D&amp;B</span><span class="mx-meta"><b>Diane &amp; Bob</b>Tucson &#183; retired 2024</span></div></div>'+
-      '<div class="mx-voice"><div class="mx-q">&#8220;I used to check the market every morning. Now I check my confidence score. It is a much calmer habit.&#8221;</div>'+
-        '<div class="mx-who"><span class="mh-ava g">P</span><span class="mx-meta"><b>Priya</b>Sacramento &#183; retiring 2027</span></div></div>'+
-      '<div class="mx-voice"><div class="mx-q">&#8220;Boldin found a Roth window my old advisor never mentioned. One afternoon paid for itself.&#8221;</div>'+
-        '<div class="mx-who"><span class="mh-ava" style="background:#5B8A72">T</span><span class="mx-meta"><b>Tom</b>Grand Rapids &#183; planning since 2022</span></div></div>'+
-    '</div>'+
-    '<div class="mx-note"><span class="mh-ava t" style="flex:none">S</span>'+
-      '<div><p class="mx-note-p">We started Boldin because retirement math felt like a test nobody had studied for. It should feel like your life, thought through.</p>'+
-      '<div class="mx-note-a">Steve, founder of Boldin</div></div></div>'+
-    '<div class="mx-final"><div class="mx-final-t">Your future is worth an honest look.</div>'+
-      '<div class="mx-final-s">A few real numbers are all it takes. Free to start, and your first plan takes minutes.</div>'+
-      '<button class="mx-cta" type="button" data-toast="Signup lands next in the mobile build">Get started for free</button></div>';
+  /* ===== the landing page, from the logo ===== */
+  var mland=document.getElementById('mland');
+  document.getElementById('mlandBrand').innerHTML=document.querySelector('.mtop .brand').innerHTML;
+  function openLanding(){
+    var mm=document.getElementById('mmenu');
+    var burger=document.querySelector('.mtop .mico[aria-label="More"]');
+    if(mm && !mm.hidden && burger) burger.click();
+    if(document.body.classList.contains('pushed')) pop();
+    mland.hidden=false;
+    document.body.dataset.page='landing';
+    window.scrollTo(0,0);
+  }
+  function enterApp(){
+    mland.hidden=true;
+    delete document.body.dataset.page;
+    activateTab('home');
+    window.scrollTo(0,0);
+    toast('Welcome to Boldin');
+  }
   var brandEl=document.querySelector('.mtop .brand');
   brandEl.style.cursor='pointer';
   brandEl.setAttribute('role','button'); brandEl.setAttribute('tabindex','0'); brandEl.setAttribute('aria-label','About Boldin');
-  brandEl.addEventListener('click', function(){ push(INDEX_HTML, false); });
+  brandEl.addEventListener('click', openLanding);
+  mland.addEventListener('click', function(e){
+    if(e.target.closest('[data-ml-enter]')){ enterApp(); return; }
+    if(e.target.closest('[data-ml-top]')){
+      document.getElementById('mlCard').scrollIntoView({behavior: reduce?'auto':'smooth', block:'start'});
+    }
+  });
 
   /* ===== Vault + Profile, from the top bar ===== */
   var DOC='<span class="mv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V9z"/><path d="M13 3v6h6"/></svg></span>';
