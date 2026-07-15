@@ -291,7 +291,7 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .mflow-v{ width:64px; flex:none; text-align:right; font:500 15.5px 'DM Sans',sans-serif; font-variant-numeric:tabular-nums; }
 
 /* ===== Home: the Plan page's discipline. One scale: 33 / 19 / 17 / 13. ===== */
-.mh-sec{ margin-top:30px; }
+.mh-sec{ margin-top:44px; }
 .mh-sec-head{ display:flex; align-items:baseline; justify-content:space-between; }
 .mh-sec-t{ font-size:21px; font-weight:600; letter-spacing:-0.2px; }
 .mh-meta{ font:500 15px 'DM Sans',sans-serif; color:var(--text-tertiary); font-variant-numeric:tabular-nums; }
@@ -307,11 +307,24 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .mh-classes{ display:flex; gap:11px; margin-top:14px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;
   margin-left:-18px; margin-right:-18px; padding:0 18px 4px; }
 .mh-classes::-webkit-scrollbar{ display:none; }
-.mh-class{ flex:none; width:172px; display:flex; flex-direction:column; gap:8px; text-align:left;
-  border:1px solid var(--hairline); border-radius:16px; background:var(--white); padding:14px; font-family:inherit; cursor:pointer; }
-.mh-class:active{ background:#FAFBFC; }
-.mh-thumb{ width:44px; height:44px; border-radius:13px; display:flex; align-items:center; justify-content:center; color:#FFFFFF; }
-.mh-thumb.t{ background:var(--teal); } .mh-thumb.g{ background:#0E794E; } .mh-thumb.d{ background:#5B8A72; }
+.mh-class{ flex:none; width:210px; display:flex; flex-direction:column; gap:10px; text-align:left;
+  background:none; border:0; padding:0; font-family:inherit; cursor:pointer; }
+.mh-class:active .mh-thumb{ transform:scale(0.985); }
+.mh-thumb{ position:relative; width:100%; aspect-ratio:16/9; border-radius:14px; overflow:hidden;
+  display:block; transition:transform .15s ease; }
+.mh-thumb::after{ content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(16,24,44,0) 40%, rgba(16,24,44,0.28) 100%); }
+/* tonal "video still" backgrounds, layered so they read as imagery not a flat chip */
+.mh-thumb.t{ background:radial-gradient(120% 90% at 20% 15%, #14515E 0%, #0D3F4A 55%, #082A32 100%); }
+.mh-thumb.g{ background:radial-gradient(120% 90% at 78% 20%, #12B074 0%, #0E794E 55%, #0A5537 100%); }
+.mh-thumb.d{ background:radial-gradient(120% 90% at 30% 80%, #7BA88C 0%, #5B8A72 50%, #3F6853 100%); }
+.mh-play{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:2;
+  width:44px; height:44px; border-radius:999px; background:rgba(255,255,255,0.92);
+  display:flex; align-items:center; justify-content:center; }
+.mh-play svg{ width:17px; height:17px; margin-left:2px; color:#10182C; }
+.mh-badge{ position:absolute; right:8px; bottom:8px; z-index:2; font:600 12px 'DM Sans',sans-serif;
+  color:#FFFFFF; background:rgba(16,24,44,0.72); border-radius:6px; padding:2px 7px; letter-spacing:0.02em; }
+.mh-badge.live{ display:inline-flex; align-items:center; gap:5px; background:rgba(229,72,77,0.92); }
+.mh-badge.live::before{ content:''; width:6px; height:6px; border-radius:999px; background:#FFFFFF; }
 .mh-class-t{ font-size:17px; font-weight:600; line-height:1.35; }
 .mh-class-m{ display:inline-flex; align-items:center; gap:6px; font-size:15px; color:var(--text-tertiary); }
 .mh-class-m .live{ width:7px; height:7px; border-radius:999px; background:#E5484D; display:inline-block; }
@@ -675,26 +688,26 @@ body.menu-open .mmenu{ transform:translateX(0); }
 .msx.on .msx-sheet{ transform:translateY(0); }
 .msx-grip{ width:38px; height:5px; border-radius:99px; background:#D6D9DE; margin:2px auto 14px; }
 .msx-head{ display:flex; align-items:flex-start; justify-content:space-between; gap:14px; }
-.msx-title{ font-size:17px; color:var(--text-secondary); font-weight:500; }
-.msx-fig{ font:700 40px 'DM Sans',sans-serif; letter-spacing:-1px; color:var(--green-cta); margin-top:3px; line-height:1.08; font-variant-numeric:tabular-nums; }
-.msx-sub{ font-size:16.5px; color:var(--text-secondary); margin-top:8px; line-height:1.5; }
+.msx-title{ font-size:18.5px; color:var(--text-secondary); font-weight:500; }
+.msx-fig{ font:700 44px 'DM Sans',sans-serif; letter-spacing:-1px; color:var(--green-cta); margin-top:3px; line-height:1.08; font-variant-numeric:tabular-nums; }
+.msx-sub{ font-size:18px; color:var(--text-secondary); margin-top:8px; line-height:1.5; }
 .msx-x{ width:36px; height:36px; flex:none; border-radius:999px; background:#F2F3F5; border:0; color:var(--ink);
   display:flex; align-items:center; justify-content:center; cursor:pointer; }
 .msx-chart{ margin:18px 0 4px; }
 .msx-chart svg{ display:block; width:100%; height:auto; }
-.msx-note{ font-size:15px; color:var(--text-tertiary); line-height:1.55; margin-top:10px; }
+.msx-note{ font-size:16.5px; color:var(--text-tertiary); line-height:1.55; margin-top:10px; }
 .msx-sec{ margin-top:22px; }
-.msx-sec-label{ font-size:14.5px; font-weight:700; letter-spacing:0.02em; text-transform:none; color:var(--text-tertiary); margin-bottom:12px; }
+.msx-sec-label{ font-size:16px; font-weight:700; letter-spacing:0.02em; text-transform:none; color:var(--text-tertiary); margin-bottom:12px; }
 .msx-item{ display:flex; gap:11px; align-items:flex-start; padding:2px 0 12px; }
 .msx-dot{ width:7px; height:7px; border-radius:999px; background:var(--green); flex:none; margin-top:7px; }
-.msx-num{ width:26px; height:26px; flex:none; border-radius:999px; background:var(--mint); color:var(--green-cta);
-  font:700 14px 'DM Sans',sans-serif; display:flex; align-items:center; justify-content:center; }
-.msx-it-t{ font-size:17px; font-weight:600; line-height:1.4; }
-.msx-it-t .gain{ color:var(--green-cta); font-weight:700; margin-left:6px; font-size:15px; }
-.msx-it-s{ font-size:15.5px; color:var(--text-secondary); line-height:1.55; margin-top:4px; }
+.msx-num{ width:28px; height:28px; flex:none; border-radius:999px; background:var(--mint); color:var(--green-cta);
+  font:700 15px 'DM Sans',sans-serif; display:flex; align-items:center; justify-content:center; }
+.msx-it-t{ font-size:18.5px; font-weight:600; line-height:1.4; }
+.msx-it-t .gain{ color:var(--green-cta); font-weight:700; margin-left:6px; font-size:16.5px; }
+.msx-it-s{ font-size:17px; color:var(--text-secondary); line-height:1.55; margin-top:4px; }
 .msx-it-s b{ font-weight:600; color:var(--ink); }
-.msx-link{ display:inline-flex; align-items:center; gap:5px; margin-top:8px; color:var(--green-cta); font-size:15.5px; font-weight:600; cursor:pointer; }
-.msx-learn{ display:inline-flex; align-items:center; gap:6px; margin-top:24px; color:var(--green-cta); font-size:16.5px; font-weight:600; cursor:pointer; }
+.msx-link{ display:inline-flex; align-items:center; gap:5px; margin-top:8px; color:var(--green-cta); font-size:17px; font-weight:600; cursor:pointer; }
+.msx-learn{ display:inline-flex; align-items:center; gap:6px; margin-top:24px; color:var(--green-cta); font-size:18px; font-weight:600; cursor:pointer; }
 @media (prefers-reduced-motion: reduce){ .msx-scrim, .msx-sheet{ transition:none; } }
 /* ===== the simulated iOS keyboard ===== */
 .mkb{ position:fixed; left:50%; transform:translateX(-50%) translateY(102%); width:100%; max-width:480px;
@@ -727,6 +740,7 @@ body.kb-open .mai-bar2{ transform:translateX(-50%) translateY(-138px); border-co
   display:flex; align-items:center; justify-content:space-around; padding:7px 10px;
   transform-origin:50% 100%; transition:transform .32s var(--push-ease); }
 body.nav-mini .mnav{ transform:translateX(-50%) scale(0.7); }
+body.pushed .mnav, body.pushed .mnav-fade{ opacity:0; pointer-events:none; transform:translateX(-50%) translateY(20px); transition:opacity .2s ease, transform .2s ease; }
 .mnav button{ background:none; border:0; padding:6px 12px; cursor:pointer; color:#6E7268; display:flex; }
 .mnav button.on{ color:var(--green-cta); }
 .mnav svg{ display:block; width:31px; height:31px; }
@@ -839,7 +853,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
   </section>
 
   <section class="mh-sec">
-    <div class="mh-sec-head"><span class="mh-sec-t">Real people, when you want them</span></div>
+    <div class="mh-sec-head"><span class="mh-sec-t" style="color:var(--green-cta)">Real people, when you want them</span></div>
     <div class="mlist">
       <button class="mrow" type="button" data-go="advisor"><span class="mh-ava t">RO</span><span class="mrow-txt"><span class="mrow-t">Advice from a CFP&#174;</span><span class="mrow-s" style="display:block">A fiduciary who reads your plan before you meet</span></span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
       <button class="mrow" type="button" data-go="coaching"><span class="mh-ava g">DP</span><span class="mrow-txt"><span class="mrow-t">Coaching</span><span class="mrow-s" style="display:block">A 1-on-1 session to get your plan set up right</span></span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
@@ -847,20 +861,20 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
   </section>
 
   <section class="mh-sec">
-    <div class="mh-sec-head"><span class="mh-sec-t">Classes and community</span></div>
+    <div class="mh-sec-head"><span class="mh-sec-t" style="color:var(--green-cta)">Classes and community</span></div>
     <div class="mh-classes">
       <button class="mh-class" type="button" data-toast="Class player lands next in the mobile build">
-        <span class="mh-thumb t"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+        <span class="mh-thumb t"><span class="mh-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="mh-badge live">Live</span></span>
         <span class="mh-class-t">Social Security Masterclass</span>
         <span class="mh-class-m"><i class="live"></i>Live &#183; Thursday 10am</span>
       </button>
       <button class="mh-class" type="button" data-toast="Video player lands next in the mobile build">
-        <span class="mh-thumb g"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+        <span class="mh-thumb g"><span class="mh-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="mh-badge">12:00</span></span>
         <span class="mh-class-t">The Roth window, in 12 minutes</span>
         <span class="mh-class-m">Video &#183; 12 min</span>
       </button>
       <button class="mh-class" type="button" data-toast="Class player lands next in the mobile build">
-        <span class="mh-thumb d"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+        <span class="mh-thumb d"><span class="mh-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="mh-badge">4 parts</span></span>
         <span class="mh-class-t">Budgeting for the last mile</span>
         <span class="mh-class-m">Class &#183; 4 parts</span>
       </button>
@@ -1136,6 +1150,42 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
   'use strict';
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* Taste rule: no headline may strand a single word on its last line.
+     Join the final two words with a non-breaking space so any wrap keeps
+     at least two words together on the last line. Operates on the last
+     descendant text node, preserving inner <em> emphasis markup. */
+  function noOrphans(el){
+    if(!el) return;
+    // gather descendant text nodes in document order
+    var nodes=[]; (function walk(n){
+      for(var i=0;i<n.childNodes.length;i++){
+        var c=n.childNodes[i];
+        if(c.nodeType===3){ if(c.nodeValue.replace(/\s/g,'')) nodes.push(c); }
+        else if(c.nodeType===1) walk(c);
+      }
+    })(el);
+    if(!nodes.length) return;
+    // the last non-space character sits in the last node; the space that
+    // precedes the final word may live in the same node or an earlier one.
+    var last=nodes[nodes.length-1];
+    if(/\s\S+\s*$/.test(last.nodeValue)){
+      // final word and a space are both in the last node -> join within it
+      last.nodeValue=last.nodeValue.replace(/\s+(\S+\s*)$/, function(m, tail){ return '\u00A0'+tail; });
+    } else {
+      // last node is a single word (e.g. an <em> word); join it to the
+      // trailing space of the previous text node
+      for(var i=nodes.length-2;i>=0;i--){
+        if(/\s+$/.test(nodes[i].nodeValue)){
+          nodes[i].nodeValue=nodes[i].nodeValue.replace(/\s+$/,'\u00A0');
+          break;
+        }
+      }
+    }
+  }
+  function fixHeadlines(root){
+    (root||document).querySelectorAll('.mhl:not(.mai-title), .msub-hl, .mx-h1, .mx-sec-h, .mx-final-t').forEach(noOrphans);
+  }
+
 
   /* ===== the Today sections and their detail pages ===== */
   var LINKED='<span class="mlinked"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>Connected</span>';
@@ -1236,6 +1286,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     pushOrigin=activeTab;
     backLabel();
     subBody.innerHTML=html;
+    fixHeadlines(subBody);
     subBody.scrollTop=0;
     document.body.classList.add('pushed');
     document.body.classList.toggle('ai-open', !!isAI);
@@ -1678,6 +1729,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
 
   /* ===== Home wiring ===== */
   (function(){
+    fixHeadlines();
     setTimeout(drawHome, 350);
     document.getElementById('mhViz').addEventListener('click', function(){ activateTab('plan'); });
     var gh=document.getElementById('mhGreet');
@@ -1771,9 +1823,9 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
       var L=LENS[lens]; if(!L) return;
       ddl.textContent=L.dd;
       renderStats(L); renderChips(L); renderSections(L);
-      if(reduce || !animate){ hl.innerHTML=L.hl; return; }
+      if(reduce || !animate){ hl.innerHTML=L.hl; noOrphans(hl); return; }
       hl.classList.add('hl-sw');
-      setTimeout(function(){ hl.innerHTML=L.hl; hl.classList.remove('hl-sw'); }, 180);
+      setTimeout(function(){ hl.innerHTML=L.hl; noOrphans(hl); hl.classList.remove('hl-sw'); }, 180);
     }
     row.addEventListener('click', function(e){
       var p=e.target.closest('.mlens'); if(!p || p.classList.contains('on')) return;
