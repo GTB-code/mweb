@@ -50,25 +50,102 @@ body.pushed .mroot{ transform:translateX(-24%); opacity:.5; pointer-events:none;
   display:flex; align-items:center; justify-content:center; }
 .mv-ico svg{ width:19px; height:19px; }
 /* the mobile index (marketing) page */
-.mx-hero{ margin-top:6px; }
-.mx-cta{ display:inline-flex; align-items:center; justify-content:center; height:50px; padding:0 28px;
-  border-radius:999px; background:#0E794E; color:#FFFFFF; border:0; font-family:inherit; font-size:18px; font-weight:600;
-  cursor:pointer; margin-top:20px; }
+/* ===== the true index: a full standalone boldin.com landing page ===== */
+.mindex{ position:fixed; inset:0; z-index:95; background:#FFFFFF; overflow-y:auto; -webkit-overflow-scrolling:touch;
+  transform:translateX(100%); transition:transform .4s var(--push-ease); }
+.mindex.on{ transform:translateX(0); }
+.mindex[hidden]{ display:none; }
+@media (prefers-reduced-motion: reduce){ .mindex{ transition:none; } }
+/* its own top bar with the real logo */
+.mx-top{ position:sticky; top:0; z-index:10; display:flex; align-items:center; justify-content:space-between;
+  padding:calc(14px + env(safe-area-inset-top)) 20px 14px; background:rgba(255,255,255,0.92);
+  -webkit-backdrop-filter:saturate(180%) blur(12px); backdrop-filter:saturate(180%) blur(12px); border-bottom:1px solid #F1F2F4; }
+.mx-top .brand svg{ display:block; height:30px; width:auto; }
+.mx-top-r{ display:flex; align-items:center; gap:10px; }
+.mx-signin{ font-size:15px; font-weight:600; color:var(--ink); background:none; border:0; cursor:pointer; padding:8px 6px; }
+.mx-start{ font-size:15px; font-weight:600; color:#FFFFFF; background:#0E794E; border:0; border-radius:999px; padding:10px 18px; cursor:pointer; }
+.mx-start:active{ background:#0B5F3D; }
+.mx-close{ width:36px; height:36px; flex:none; border-radius:999px; background:#F2F3F5; border:0; color:var(--ink);
+  display:flex; align-items:center; justify-content:center; cursor:pointer; }
+.mx-wrap{ padding:0 20px calc(60px + env(safe-area-inset-bottom)); }
+/* hero */
+.mx-hero{ padding:44px 0 36px; text-align:center; }
+.mx-eyebrow{ display:inline-block; font-size:14px; font-weight:600; color:var(--green-cta); background:var(--mint);
+  border-radius:999px; padding:6px 14px; margin-bottom:20px; }
+.mx-h1{ font-size:40px; font-weight:600; letter-spacing:-1.2px; line-height:1.08; }
+.mx-h1 em{ font-style:italic; color:var(--green-cta); }
+.mx-lede{ font-size:18px; color:var(--text-secondary); line-height:1.5; margin:16px auto 0; max-width:30ch; }
+.mx-cta{ display:inline-flex; align-items:center; justify-content:center; height:54px; padding:0 32px;
+  border-radius:999px; background:#0E794E; color:#FFFFFF; border:0; font-family:inherit; font-size:17px; font-weight:600;
+  cursor:pointer; margin-top:26px; }
 .mx-cta:active{ background:#0B5F3D; transform:scale(.98); }
-.mx-proof{ display:block; margin-top:12px; font-size:15px; color:var(--text-tertiary); }
+.mx-proof{ display:block; margin-top:16px; font-size:14px; color:var(--text-tertiary); }
 .mx-proof b{ color:#FBBD04; font-weight:600; letter-spacing:1px; }
-.mx-voices{ margin-top:34px; padding-top:26px; border-top:1px solid var(--hairline); display:flex; flex-direction:column; gap:24px; }
+/* the hero visual: the confidence ring, echoing the product */
+.mx-ring{ position:relative; width:220px; height:220px; margin:38px auto 0; }
+.mx-ring svg{ width:100%; height:100%; display:block; transform:rotate(-90deg); }
+.mx-ring-c{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.mx-ring-n{ font:700 56px 'DM Sans',sans-serif; letter-spacing:-2px; line-height:1; }
+.mx-ring-l{ font-size:14px; color:var(--text-tertiary); margin-top:4px; }
+/* section rhythm */
+.mx-sec{ padding:40px 0; border-top:1px solid #F1F2F4; }
+.mx-sec-eyebrow{ font-size:13px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; color:var(--green-cta); margin-bottom:10px; }
+.mx-sec-h{ font-size:27px; font-weight:600; letter-spacing:-0.5px; line-height:1.2; }
+.mx-sec-s{ font-size:16px; color:var(--text-secondary); line-height:1.55; margin-top:10px; }
+/* how it works: 3 numbered steps */
+.mx-steps{ margin-top:26px; display:flex; flex-direction:column; gap:22px; }
+.mx-step{ display:flex; gap:15px; align-items:flex-start; }
+.mx-step-n{ width:34px; height:34px; flex:none; border-radius:999px; background:var(--mint); color:var(--green-cta);
+  font:700 16px 'DM Sans',sans-serif; display:flex; align-items:center; justify-content:center; }
+.mx-step-t{ font-size:17px; font-weight:600; }
+.mx-step-s{ font-size:15px; color:var(--text-secondary); line-height:1.5; margin-top:3px; }
+/* feature cards */
+.mx-feats{ margin-top:24px; display:flex; flex-direction:column; gap:14px; }
+.mx-feat{ border:1px solid var(--hairline); border-radius:18px; padding:20px; }
+.mx-feat-ico{ width:44px; height:44px; border-radius:13px; background:var(--mint); color:var(--green-cta);
+  display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
+.mx-feat-ico svg{ width:22px; height:22px; }
+.mx-feat-t{ font-size:18px; font-weight:600; }
+.mx-feat-s{ font-size:15px; color:var(--text-secondary); line-height:1.55; margin-top:6px; }
+/* services */
+.mx-serv{ margin-top:24px; display:flex; flex-direction:column; gap:14px; }
+.mx-serv-card{ border:1px solid var(--hairline); border-radius:18px; padding:20px; display:flex; gap:14px; align-items:flex-start; }
+.mx-serv-ava{ width:46px; height:46px; flex:none; border-radius:999px; color:#FFFFFF; display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:600; }
+.mx-serv-t{ font-size:17px; font-weight:600; }
+.mx-serv-s{ font-size:14.5px; color:var(--text-secondary); line-height:1.5; margin-top:4px; }
+.mx-serv-l{ display:inline-flex; align-items:center; gap:5px; margin-top:9px; color:var(--green-cta); font-size:14.5px; font-weight:600; cursor:pointer; }
+/* social proof / voices */
+.mx-voices{ margin-top:24px; display:flex; flex-direction:column; gap:22px; }
 .mx-q{ font-size:19px; font-weight:500; line-height:1.5; letter-spacing:-0.1px; }
-.mx-who{ display:flex; align-items:center; gap:10px; margin-top:10px; }
-.mx-who .mh-ava{ width:34px; height:34px; font-size:14px; }
-.mx-meta{ font-size:15px; color:var(--text-tertiary); line-height:1.35; }
-.mx-meta b{ display:block; color:var(--ink); font-weight:600; font-size:17px; }
-.mx-note{ margin-top:34px; padding-top:26px; border-top:1px solid var(--hairline); display:flex; gap:13px; align-items:flex-start; }
+.mx-who{ display:flex; align-items:center; gap:10px; margin-top:12px; }
+.mx-who .mh-ava{ width:36px; height:36px; font-size:14px; }
+.mx-meta{ font-size:14px; color:var(--text-tertiary); line-height:1.35; }
+.mx-meta b{ display:block; color:var(--ink); font-weight:600; font-size:16px; }
+/* stat band */
+.mx-stats{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-top:24px; text-align:center; }
+.mx-stat-n{ font:700 26px 'DM Sans',sans-serif; letter-spacing:-0.8px; color:var(--green-cta); }
+.mx-stat-l{ font-size:12.5px; color:var(--text-tertiary); line-height:1.3; margin-top:4px; }
+/* community */
+.mx-comm{ display:flex; align-items:center; gap:14px; margin-top:22px; }
+.mx-faces{ display:flex; flex:none; }
+.mx-faces i{ width:32px; height:32px; border-radius:999px; border:2px solid #FFFFFF; margin-left:-9px;
+  color:#FFFFFF; font-style:normal; font-size:13px; font-weight:600; display:flex; align-items:center; justify-content:center; }
+.mx-faces i:first-child{ margin-left:0; }
+/* founder note */
+.mx-note{ margin-top:24px; display:flex; gap:14px; align-items:flex-start; }
+.mx-note .mh-ava{ width:46px; height:46px; flex:none; font-size:15px; }
 .mx-note-p{ font-size:17px; line-height:1.6; }
-.mx-note-a{ margin-top:9px; font-size:15px; font-weight:600; color:var(--text-secondary); }
-.mx-final{ margin-top:34px; padding:26px 0 10px; border-top:1px solid var(--hairline); }
-.mx-final-t{ font-size:21px; font-weight:600; letter-spacing:-0.2px; }
-.mx-final-s{ font-size:17px; color:var(--text-secondary); line-height:1.5; margin-top:6px; }
+.mx-note-a{ margin-top:10px; font-size:14.5px; font-weight:600; color:var(--text-secondary); }
+/* final CTA band */
+.mx-final{ margin-top:8px; padding:46px 24px; text-align:center; background:var(--mint); border-radius:24px; }
+.mx-final-t{ font-size:26px; font-weight:600; letter-spacing:-0.5px; line-height:1.2; }
+.mx-final-s{ font-size:16px; color:#2A5A47; line-height:1.5; margin-top:10px; }
+/* footer */
+.mx-foot{ padding:34px 0 10px; text-align:center; }
+.mx-foot .brand svg{ height:26px; width:auto; opacity:0.9; }
+.mx-foot-links{ display:flex; flex-wrap:wrap; gap:8px 20px; justify-content:center; margin-top:18px; }
+.mx-foot-links a{ font-size:14px; color:var(--text-secondary); cursor:pointer; }
+.mx-foot-c{ font-size:12.5px; color:var(--text-tertiary); margin-top:20px; }
 .mv-upload{ display:flex; align-items:center; gap:12px; }
 body.vault-open .mv-upload{ position:fixed; left:50%; transform:translateX(-50%);
   width:calc(100% - 36px); max-width:444px; bottom:calc(168px + env(safe-area-inset-bottom)); z-index:74; }
@@ -292,7 +369,7 @@ body.pushed .msub{ transform:translateX(0); }
   padding:6px 18px calc(130px + env(safe-area-inset-bottom)); }
 .msub-title{ font-size:30px; font-weight:700; letter-spacing:-0.4px; }
 .msub-sub{ font-size:17px; color:var(--text-secondary); margin-top:3px; }
-.mbucket{ margin-top:24px; }
+.mbucket{ margin-top:40px; }
 .mbucket-label{ font-size:16.5px; font-weight:600; color:var(--text-tertiary); margin-bottom:2px; }
 .macct{ display:flex; align-items:center; justify-content:space-between; gap:12px;
   border-bottom:1px solid var(--hairline); padding:14px 0; }
@@ -318,7 +395,7 @@ body.pushed .msub{ transform:translateX(0); }
   font-family:inherit; font-size:17px; font-weight:600; cursor:pointer; margin-top:4px; }
 .medit-save:active{ transform:scale(.98); }
 .madd{ display:inline-flex; align-items:center; gap:6px; color:var(--green-cta); font-size:18px; font-weight:600;
-  padding:14px 0 28px; background:none; border:0; font-family:inherit; cursor:pointer; }
+  padding:14px 0 44px; background:none; border:0; font-family:inherit; cursor:pointer; }
 .mempty{ background:#FBFCFD; border-radius:12px; padding:16px; margin-top:8px; }
 .mempty-t{ font-size:18px; font-weight:600; }
 .mempty-s{ font-size:16.5px; color:var(--text-secondary); margin-top:4px; line-height:1.45; }
@@ -514,14 +591,16 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
 @media (prefers-reduced-motion: reduce){ .mnav .mai-spk .sp-body, .mnav .mai-spk .sp-tw{ animation:none; } }
 
 /* the fade behind the nav: content scrolls away beneath it */
-.mnav-fade{ position:fixed; left:50%; transform:translateX(-50%); bottom:0; width:100%; max-width:480px;
+.mnav-fade{ position:fixed; left:50%; bottom:0; width:100%; max-width:480px;
   height:calc(96px + env(safe-area-inset-bottom)); z-index:68; pointer-events:none;
+  transform:translateX(-50%) translateZ(0);
   /* solid white from the bottom up to (height - 24px), then a 24px feather to transparent */
   background:linear-gradient(to top, #FFFFFF 0%, #FFFFFF calc(100% - 24px), rgba(255,255,255,0) 100%); }
-/* solid-white foot spilling far below so no iOS toolbar / URL bar shift reveals a gap */
-.mnav-fade::after{ content:''; position:fixed; left:50%; transform:translateX(-50%); width:100%; max-width:480px;
-  bottom:calc(-1 * env(safe-area-inset-bottom)); height:calc(60px + env(safe-area-inset-bottom)); background:#FFFFFF; z-index:67;
-  box-shadow:0 400px 0 400px #FFFFFF; }
+/* a real, tall solid-white block (not a box-shadow) extending far below the viewport,
+   so it paints on first load AND covers behind the iOS URL bar / home indicator */
+.mnav-fade::after{ content:''; position:fixed; left:50%; width:100%; max-width:480px;
+  bottom:-400px; height:calc(460px + env(safe-area-inset-bottom)); background:#FFFFFF; z-index:67;
+  transform:translateX(-50%) translateZ(0); pointer-events:none; }
 /* a light "coming next" toast for the other tabs */
 .mtoast{ position:fixed; left:50%; transform:translateX(-50%) translateY(8px); bottom:calc(92px + env(safe-area-inset-bottom));
   background:var(--ink); color:#FFFFFF; font-size:15.5px; font-weight:500; border-radius:999px; padding:9px 16px;
@@ -806,6 +885,23 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
   <button class="mai-sheet-row" type="button" data-idea="What if we downsize the house in 2030?">What if we downsize the house in 2030?</button>
   <button class="mai-sheet-row" type="button" data-idea="Rebalance my 401(k) to the target mix">Rebalance my 401(k) to the target mix</button>
 </div>
+<div class="mindex" id="mindex" hidden><div class="mx-top"><span class="brand" id="mxLogo"><svg viewBox="0 0 225 54" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Boldin">
+      <path d="M30.5987 20.6816C17.612 20.6816 6.9557 31.1933 6.33866 44.612L6.32775 44.8512H10.1104L10.1219 44.6352C10.3913 39.4179 12.5222 34.4839 16.1096 30.7711C17.9734 28.834 20.1878 27.2877 22.6289 26.2186C25.1492 25.1199 27.8599 24.5536 30.5988 24.5536C33.3377 24.5536 36.0485 25.1199 38.5688 26.2186C41.0101 27.2879 43.2246 28.8344 45.0885 30.7717C48.676 34.4844 50.8068 39.4184 51.076 44.6358L51.0876 44.8518H54.8698L54.859 44.6126C54.242 31.1933 43.5856 20.6816 30.5987 20.6816ZM27.4672 30.3775C19.7343 30.3775 13.2762 36.6286 12.7646 44.6089L12.7491 44.8522H16.5345L16.5516 44.643C16.772 41.977 17.8977 39.4746 19.7327 37.5712C20.7424 36.5195 21.9463 35.6843 23.2742 35.1142C24.6021 34.5441 26.0274 34.2505 27.4672 34.2505C28.9069 34.2505 30.3323 34.5441 31.6602 35.1142C32.9881 35.6843 34.192 36.5195 35.2017 37.5712C37.0366 39.4747 38.1622 41.9771 38.3827 44.643L38.3998 44.8522H42.1852L42.1698 44.6089C41.6581 36.6286 35.1999 30.3775 27.4672 30.3775ZM71.9549 44.6173C71.7153 35.0041 67.8201 25.867 61.0997 19.1546C54.3793 12.4421 45.3656 8.6853 35.9805 8.6853C26.5955 8.6853 17.5817 12.4421 10.8614 19.1546C4.14097 25.867 0.245712 35.0041 0.00619139 44.6173L0 44.8518H3.78055L3.78718 44.63C4.02446 36.043 7.52031 27.8893 13.5318 21.9015C19.5434 15.9137 27.5967 12.5639 35.9805 12.5639C44.3643 12.5639 52.4177 15.9137 58.4292 21.9015C64.4408 27.8893 67.9366 36.043 68.1739 44.63L68.1804 44.8518H71.9609L71.9549 44.6173Z" fill="#04B477"/>
+      <path d="M80.2627 11.3701H93.1105C99.4678 11.3701 103.914 14.5132 103.914 20.7084C103.914 23.214 102.446 25.9017 100.223 27.177C103.069 28.4069 105.114 31.5501 105.114 34.739C105.114 41.2531 100.802 44.8518 93.6883 44.8518H80.2627V11.3701ZM92.9825 24.3702C95.3802 24.3702 96.6399 23.2043 96.6399 21.1221C96.6399 19.1649 95.2982 17.9573 93.0637 17.9573H87.5372V24.3705L92.9825 24.3702ZM93.7639 38.2316C96.4872 38.2316 97.7472 36.7738 97.7472 34.6497C97.7472 32.5256 96.2026 31.1098 94.0483 31.1098H87.5858V38.2316H93.7639Z" fill="#10182C"/>
+      <path d="M107.903 31.6056C107.903 23.5163 114.071 17.5504 122.163 17.5504C130.255 17.5504 136.423 23.5163 136.423 31.6056C136.423 39.6444 130.255 45.6103 122.163 45.6103C114.071 45.6103 107.903 39.6442 107.903 31.6056ZM122.163 38.6837C126.16 38.6837 129.071 35.7007 129.071 31.6056C129.071 27.5105 126.16 24.5274 122.163 24.5274C118.166 24.5274 115.255 27.5104 115.255 31.6056C115.255 35.7008 118.167 38.6837 122.163 38.6837Z" fill="#10182C"/>
+      <path d="M139.68 7.69177H146.933V44.8519H139.68V7.69177Z" fill="#10182C"/>
+      <path d="M151.176 31.6057C151.176 23.4153 156.899 17.5505 164.844 17.5505C167.706 17.5505 170.271 18.4102 172.344 19.9268V7.69177H179.597V33.982L183.643 44.8519H176.192L172.787 35.7012V42.5773C171.258 44.4479 167.607 45.6106 164.103 45.6106C156.653 45.6102 151.176 39.7455 151.176 31.6057ZM165.584 38.6838C169.58 38.6838 172.491 35.7008 172.491 31.6057C172.491 27.5107 169.58 24.5275 165.584 24.5275C161.587 24.5275 158.676 27.5105 158.676 31.6057C158.676 35.7009 161.587 38.6838 165.584 38.6838Z" fill="#10182C"/>
+      <path d="M190.451 6.68054C191.344 6.68552 192.216 6.9617 192.956 7.47415C193.695 7.98661 194.27 8.71233 194.607 9.55954C194.945 10.4067 195.029 11.3374 194.85 12.2338C194.671 13.1302 194.237 13.9521 193.602 14.5955C192.967 15.2389 192.16 15.675 191.284 15.8486C190.407 16.0222 189.5 15.9255 188.676 15.5708C187.853 15.216 187.151 14.6192 186.659 13.8556C186.167 13.0921 185.907 12.1962 185.912 11.2813C185.914 10.6734 186.034 10.0721 186.263 9.51156C186.493 8.95108 186.828 8.44253 187.249 8.01509C187.671 7.58766 188.171 7.24974 188.721 7.02072C189.27 6.79171 189.858 6.6761 190.451 6.68054ZM186.8 18.5618H194.054V44.8518H186.8V18.5618Z" fill="#10182C"/>
+      <path d="M199.481 18.5617H206.735V21.7467C208.363 18.966 210.929 17.5504 214.481 17.5504C220.6 17.5504 223.807 21.7467 223.807 29.7854V44.8518H216.554V30.8471C216.554 26.2463 215.271 24.4263 212.063 24.4263C208.56 24.4263 206.735 26.954 206.735 31.0493V44.8516H199.481V18.5617Z" fill="#10182C"/>
+    </svg></span><div class="mx-top-r"><button class="mx-signin" type="button" data-toast="Sign in lands next in the mobile build">Sign in</button><button class="mx-close" id="mxClose" type="button" aria-label="Back to app"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div></div><div class="mx-wrap"><section class="mx-hero"><span class="mx-eyebrow">Retirement planning, reimagined</span><h1 class="mx-h1">Confidence you <em>can see.</em></h1><p class="mx-lede">Build the whole picture of your retirement in one place, and watch a single number tell you if you are on track.</p><button class="mx-cta" type="button" data-toast="Signup lands next in the mobile build">Get started for free</button><span class="mx-proof"><b>&#9733;&#9733;&#9733;&#9733;&#9733;</b> 4.8 &#183; 5,295 reviews &#183; no credit card</span><div class="mx-ring"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="#EEF0F2" stroke-width="9"/><circle id="mxArc" cx="60" cy="60" r="52" fill="none" stroke="#04B477" stroke-width="9" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7"/></svg><span class="mx-ring-c"><span class="mx-ring-n" id="mxNum">0</span><span class="mx-ring-l">confidence</span></span></div></section><section class="mx-sec"><div class="mx-sec-eyebrow">How it works</div><h2 class="mx-sec-h">Your plan, in three steps.</h2><div class="mx-steps"><div class="mx-step"><span class="mx-step-n">1</span><div><div class="mx-step-t">Add your real numbers</div><div class="mx-step-s">Accounts, income, home, and what you spend. Link them or type them in, once.</div></div></div><div class="mx-step"><span class="mx-step-n">2</span><div><div class="mx-step-t">See your confidence score</div><div class="mx-step-s">A Monte Carlo engine runs thousands of futures and gives you one honest number.</div></div></div><div class="mx-step"><span class="mx-step-n">3</span><div><div class="mx-step-t">Find your best moves</div><div class="mx-step-s">Social Security timing, Roth windows, withdrawals. See what lifts the score most.</div></div></div></div></section><section class="mx-sec"><div class="mx-sec-eyebrow">What you get</div><h2 class="mx-sec-h">Everything in one honest place.</h2><div class="mx-feats"><div class="mx-feat"><span class="mx-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg></span><div class="mx-feat-t">The Plan Score</div><div class="mx-feat-s">One number, stress-tested against thousands of market scenarios, updated as your life changes.</div></div><div class="mx-feat"><span class="mx-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg></span><div class="mx-feat-t">Tax strategy</div><div class="mx-feat-s">Roth conversions, withdrawal order, and the low-bracket windows most people miss.</div></div><div class="mx-feat"><span class="mx-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 8l7-5 7 5"/></svg></span><div class="mx-feat-t">Social Security timing</div><div class="mx-feat-s">See exactly what waiting to 70 is worth, down to the dollar, for your situation.</div></div></div></section><section class="mx-sec"><div class="mx-sec-eyebrow">Real people</div><h2 class="mx-sec-h">The software runs the math. People help you trust it.</h2><div class="mx-serv"><div class="mx-serv-card"><span class="mx-serv-ava" style="background:#0D3F4A">RO</span><div><div class="mx-serv-t">Talk to a fiduciary advisor</div><div class="mx-serv-s">Flat-fee CFP&#174; professionals who work from your exact plan. Advice, never a sales pitch.</div><span class="mx-serv-l" data-toast="Advisor intro lands next in the mobile build">Meet Boldin Advisors <svg viewBox="0 0 24 24" fill="none" width="13" height="13"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div><div class="mx-serv-card"><span class="mx-serv-ava" style="background:#0E794E">DP</span><div><div class="mx-serv-t">Work with a coach</div><div class="mx-serv-s">Eight-week cohorts that turn the plan into habits and keep your momentum.</div><span class="mx-serv-l" data-toast="Coaching lands next in the mobile build">Explore coaching <svg viewBox="0 0 24 24" fill="none" width="13" height="13"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div></div></section><section class="mx-sec"><div class="mx-stats"><div><div class="mx-stat-n">$60B+</div><div class="mx-stat-l">planned on Boldin</div></div><div><div class="mx-stat-n">200K+</div><div class="mx-stat-l">households</div></div><div><div class="mx-stat-n">4.8&#9733;</div><div class="mx-stat-l">5,295 reviews</div></div></div></section><section class="mx-sec"><div class="mx-sec-eyebrow">Loved by planners</div><h2 class="mx-sec-h">People finally feel in control.</h2><div class="mx-voices"><div><div class="mx-q">&#8220;We stopped arguing about money the week we could both see the same plan.&#8221;</div><div class="mx-who"><span class="mh-ava t">D&amp;B</span><span class="mx-meta"><b>Diane &amp; Bob</b>Tucson &#183; retired 2024</span></div></div><div><div class="mx-q">&#8220;I used to check the market every morning. Now I check my confidence score. A much calmer habit.&#8221;</div><div class="mx-who"><span class="mh-ava g">P</span><span class="mx-meta"><b>Priya</b>Sacramento &#183; retiring 2027</span></div></div><div><div class="mx-q">&#8220;Boldin found a Roth window my old advisor never mentioned. One afternoon paid for itself.&#8221;</div><div class="mx-who"><span class="mh-ava" style="background:#5B8A72">T</span><span class="mx-meta"><b>Tom</b>Grand Rapids &#183; planning since 2022</span></div></div></div><div class="mx-comm"><span class="mx-faces"><i class="f1" style="background:#0D3F4A">D</i><i class="f2" style="background:#0E794E">P</i><i class="f3" style="background:#5B8A72">T</i><i class="f4" style="background:#FBBD04;color:#10182C">+</i></span><span class="mx-meta" style="font-size:15px">Join 8,200 planners comparing notes in the Boldin community.</span></div></section><section class="mx-sec"><div class="mx-note"><span class="mh-ava t" style="width:46px;height:46px;font-size:15px">S</span><div><p class="mx-note-p">We started Boldin because retirement math felt like a test nobody had studied for. It should feel like your life, thought through.</p><div class="mx-note-a">Steve, founder of Boldin</div></div></div></section><section class="mx-sec" style="border-top:0"><div class="mx-final"><div class="mx-final-t">Your future is worth an honest look.</div><div class="mx-final-s">A few real numbers are all it takes. Free to start, and your first plan takes minutes.</div><button class="mx-cta" type="button" data-toast="Signup lands next in the mobile build">Get started for free</button></div></section><footer class="mx-foot"><span class="brand"><svg viewBox="0 0 225 54" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Boldin">
+      <path d="M30.5987 20.6816C17.612 20.6816 6.9557 31.1933 6.33866 44.612L6.32775 44.8512H10.1104L10.1219 44.6352C10.3913 39.4179 12.5222 34.4839 16.1096 30.7711C17.9734 28.834 20.1878 27.2877 22.6289 26.2186C25.1492 25.1199 27.8599 24.5536 30.5988 24.5536C33.3377 24.5536 36.0485 25.1199 38.5688 26.2186C41.0101 27.2879 43.2246 28.8344 45.0885 30.7717C48.676 34.4844 50.8068 39.4184 51.076 44.6358L51.0876 44.8518H54.8698L54.859 44.6126C54.242 31.1933 43.5856 20.6816 30.5987 20.6816ZM27.4672 30.3775C19.7343 30.3775 13.2762 36.6286 12.7646 44.6089L12.7491 44.8522H16.5345L16.5516 44.643C16.772 41.977 17.8977 39.4746 19.7327 37.5712C20.7424 36.5195 21.9463 35.6843 23.2742 35.1142C24.6021 34.5441 26.0274 34.2505 27.4672 34.2505C28.9069 34.2505 30.3323 34.5441 31.6602 35.1142C32.9881 35.6843 34.192 36.5195 35.2017 37.5712C37.0366 39.4747 38.1622 41.9771 38.3827 44.643L38.3998 44.8522H42.1852L42.1698 44.6089C41.6581 36.6286 35.1999 30.3775 27.4672 30.3775ZM71.9549 44.6173C71.7153 35.0041 67.8201 25.867 61.0997 19.1546C54.3793 12.4421 45.3656 8.6853 35.9805 8.6853C26.5955 8.6853 17.5817 12.4421 10.8614 19.1546C4.14097 25.867 0.245712 35.0041 0.00619139 44.6173L0 44.8518H3.78055L3.78718 44.63C4.02446 36.043 7.52031 27.8893 13.5318 21.9015C19.5434 15.9137 27.5967 12.5639 35.9805 12.5639C44.3643 12.5639 52.4177 15.9137 58.4292 21.9015C64.4408 27.8893 67.9366 36.043 68.1739 44.63L68.1804 44.8518H71.9609L71.9549 44.6173Z" fill="#04B477"/>
+      <path d="M80.2627 11.3701H93.1105C99.4678 11.3701 103.914 14.5132 103.914 20.7084C103.914 23.214 102.446 25.9017 100.223 27.177C103.069 28.4069 105.114 31.5501 105.114 34.739C105.114 41.2531 100.802 44.8518 93.6883 44.8518H80.2627V11.3701ZM92.9825 24.3702C95.3802 24.3702 96.6399 23.2043 96.6399 21.1221C96.6399 19.1649 95.2982 17.9573 93.0637 17.9573H87.5372V24.3705L92.9825 24.3702ZM93.7639 38.2316C96.4872 38.2316 97.7472 36.7738 97.7472 34.6497C97.7472 32.5256 96.2026 31.1098 94.0483 31.1098H87.5858V38.2316H93.7639Z" fill="#10182C"/>
+      <path d="M107.903 31.6056C107.903 23.5163 114.071 17.5504 122.163 17.5504C130.255 17.5504 136.423 23.5163 136.423 31.6056C136.423 39.6444 130.255 45.6103 122.163 45.6103C114.071 45.6103 107.903 39.6442 107.903 31.6056ZM122.163 38.6837C126.16 38.6837 129.071 35.7007 129.071 31.6056C129.071 27.5105 126.16 24.5274 122.163 24.5274C118.166 24.5274 115.255 27.5104 115.255 31.6056C115.255 35.7008 118.167 38.6837 122.163 38.6837Z" fill="#10182C"/>
+      <path d="M139.68 7.69177H146.933V44.8519H139.68V7.69177Z" fill="#10182C"/>
+      <path d="M151.176 31.6057C151.176 23.4153 156.899 17.5505 164.844 17.5505C167.706 17.5505 170.271 18.4102 172.344 19.9268V7.69177H179.597V33.982L183.643 44.8519H176.192L172.787 35.7012V42.5773C171.258 44.4479 167.607 45.6106 164.103 45.6106C156.653 45.6102 151.176 39.7455 151.176 31.6057ZM165.584 38.6838C169.58 38.6838 172.491 35.7008 172.491 31.6057C172.491 27.5107 169.58 24.5275 165.584 24.5275C161.587 24.5275 158.676 27.5105 158.676 31.6057C158.676 35.7009 161.587 38.6838 165.584 38.6838Z" fill="#10182C"/>
+      <path d="M190.451 6.68054C191.344 6.68552 192.216 6.9617 192.956 7.47415C193.695 7.98661 194.27 8.71233 194.607 9.55954C194.945 10.4067 195.029 11.3374 194.85 12.2338C194.671 13.1302 194.237 13.9521 193.602 14.5955C192.967 15.2389 192.16 15.675 191.284 15.8486C190.407 16.0222 189.5 15.9255 188.676 15.5708C187.853 15.216 187.151 14.6192 186.659 13.8556C186.167 13.0921 185.907 12.1962 185.912 11.2813C185.914 10.6734 186.034 10.0721 186.263 9.51156C186.493 8.95108 186.828 8.44253 187.249 8.01509C187.671 7.58766 188.171 7.24974 188.721 7.02072C189.27 6.79171 189.858 6.6761 190.451 6.68054ZM186.8 18.5618H194.054V44.8518H186.8V18.5618Z" fill="#10182C"/>
+      <path d="M199.481 18.5617H206.735V21.7467C208.363 18.966 210.929 17.5504 214.481 17.5504C220.6 17.5504 223.807 21.7467 223.807 29.7854V44.8518H216.554V30.8471C216.554 26.2463 215.271 24.4263 212.063 24.4263C208.56 24.4263 206.735 26.954 206.735 31.0493V44.8516H199.481V18.5617Z" fill="#10182C"/>
+    </svg></span><div class="mx-foot-links"><a data-toast="Coming next">Pricing</a><a data-toast="Coming next">Security</a><a data-toast="Coming next">Help center</a><a data-toast="Coming next">About</a><a data-toast="Coming next">Privacy</a></div><div class="mx-foot-c">&#169; 2026 Boldin. Planning tools for the years that matter most.</div></footer></div></div>
 <div class="msx" id="msx" hidden>
   <div class="msx-scrim" id="msxScrim"></div>
   <div class="msx-sheet" role="dialog" aria-modal="true" id="msxSheet"></div>
@@ -903,9 +999,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
             bucket('Other owned real estate',
               acct('888 Hill St, South Lake Tahoe','Condo','$285,000'),'Add other real estate') },
     { key:'expenses', t:'Expenses', s:'What you spend each month today', amt:'$8,850/mo',
-      body: bucket('Recurring expenses',
-              '<div class="mempty"><div class="mempty-t">No recurring expenses yet</div><div class="mempty-s">Add what you spend each month, from housing to the small things, and your plan carries it forward year by year.</div></div>',
-              'Add a recurring expense')+
+      body: bucket('Recurring expenses', '', 'Add a recurring expense')+
             bucket('One-time expenses', acct('Kitchen remodel','2027 &middot; one-time','$38,000'),'Add a one-time expense')+
             bucket('Medical expenses before 65', acct('Health insurance bridge','Until Medicare at 65','$1,180'),'Add a pre-65 medical expense')+
             bucket('Long-term care', acct('Long-term care reserve','Planned from age 82','$6,500'),'Add a long-term care expense') }
@@ -1172,30 +1266,25 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
   });
 
   /* ===== the index page, from the logo ===== */
-  var INDEX_HTML='<div class="mx-hero">'+
-    '<h1 class="mhl">Confidence you <em class="mhl-em">can see.</em></h1>'+
-    '<p class="msubhead" style="max-width:none">Your whole retirement, planned in one place.</p>'+
-    '<button class="mx-cta" type="button" data-toast="Signup lands next in the mobile build">Get started for free</button>'+
-    '<span class="mx-proof"><b>&#9733;&#9733;&#9733;&#9733;&#9733;</b> 4.8 &#183; 5,295 reviews &#183; no credit card</span>'+
-    '</div>'+
-    '<div class="mx-voices">'+
-      '<div class="mx-voice"><div class="mx-q">&#8220;We stopped arguing about money the week we could both see the same plan.&#8221;</div>'+
-        '<div class="mx-who"><span class="mh-ava t">D&amp;B</span><span class="mx-meta"><b>Diane &amp; Bob</b>Tucson &#183; retired 2024</span></div></div>'+
-      '<div class="mx-voice"><div class="mx-q">&#8220;I used to check the market every morning. Now I check my confidence score. It is a much calmer habit.&#8221;</div>'+
-        '<div class="mx-who"><span class="mh-ava g">P</span><span class="mx-meta"><b>Priya</b>Sacramento &#183; retiring 2027</span></div></div>'+
-      '<div class="mx-voice"><div class="mx-q">&#8220;Boldin found a Roth window my old advisor never mentioned. One afternoon paid for itself.&#8221;</div>'+
-        '<div class="mx-who"><span class="mh-ava" style="background:#5B8A72">T</span><span class="mx-meta"><b>Tom</b>Grand Rapids &#183; planning since 2022</span></div></div>'+
-    '</div>'+
-    '<div class="mx-note"><span class="mh-ava t" style="flex:none">S</span>'+
-      '<div><p class="mx-note-p">We started Boldin because retirement math felt like a test nobody had studied for. It should feel like your life, thought through.</p>'+
-      '<div class="mx-note-a">Steve, founder of Boldin</div></div></div>'+
-    '<div class="mx-final"><div class="mx-final-t">Your future is worth an honest look.</div>'+
-      '<div class="mx-final-s">A few real numbers are all it takes. Free to start, and your first plan takes minutes.</div>'+
-      '<button class="mx-cta" type="button" data-toast="Signup lands next in the mobile build">Get started for free</button></div>';
   var brandEl=document.querySelector('.mtop .brand');
   brandEl.style.cursor='pointer';
-  brandEl.setAttribute('role','button'); brandEl.setAttribute('tabindex','0'); brandEl.setAttribute('aria-label','About Boldin');
-  brandEl.addEventListener('click', function(){ push(INDEX_HTML, false); });
+  brandEl.setAttribute('role','button'); brandEl.setAttribute('tabindex','0'); brandEl.setAttribute('aria-label','boldin.com home');
+  var mindex=document.getElementById('mindex');
+  function openIndex(){
+    mindex.hidden=false; void mindex.offsetWidth; mindex.classList.add('on');
+    mindex.scrollTop=0; document.body.style.overflow='hidden';
+    var arc=document.getElementById('mxArc'), num=document.getElementById('mxNum');
+    if(reduce){ arc.style.strokeDashoffset=String(326.7*(1-0.87)); num.textContent='87'; return; }
+    if(arc.animate){
+      arc.animate([{strokeDashoffset:326.7},{strokeDashoffset:326.7*(1-0.87)}],{duration:1100,delay:250,easing:'cubic-bezier(0.22,1,0.36,1)',fill:'both'});
+      var t0=null; function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/1050); num.textContent=Math.round(87*(1-Math.pow(1-p,3))); if(p<1) requestAnimationFrame(step); }
+      setTimeout(function(){ requestAnimationFrame(step); }, 250);
+    } else { arc.style.strokeDashoffset=String(326.7*(1-0.87)); num.textContent='87'; }
+  }
+  function closeIndex(){ mindex.classList.remove('on'); document.body.style.overflow=''; setTimeout(function(){ mindex.hidden=true; }, reduce?0:400); }
+  brandEl.addEventListener('click', openIndex);
+  document.getElementById('mxClose').addEventListener('click', closeIndex);
+  document.getElementById('mxLogo').addEventListener('click', function(){ mindex.scrollTo({top:0, behavior: reduce?'auto':'smooth'}); });
 
   /* ===== Vault + Profile, from the top bar ===== */
   var DOC='<span class="mv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V9z"/><path d="M13 3v6h6"/></svg></span>';
