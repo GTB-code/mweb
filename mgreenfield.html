@@ -225,10 +225,43 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .mhl-plan.hl-sw{ opacity:0; transform:translateY(4px); }
 .mhl-plan{ transition:opacity .18s ease, transform .18s ease; }
 /* the plan chart card */
-.mplan-card{ margin-top:18px; }
-.mplan-chart{ margin-top:14px; }
+.mplan-card{ margin-top:16px; }
+/* the 3 stat cards, like desktop */
+.mplan-stats3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:9px; margin-top:16px; }
+.mstat3{ border:1px solid var(--hairline); border-radius:14px; padding:9px 11px; }
+.mstat3 .lab{ font-size:13px; color:var(--text-tertiary); line-height:1.2; }
+.mstat3 .fig{ font:700 20px 'DM Sans',sans-serif; letter-spacing:-0.6px; margin-top:3px; font-variant-numeric:tabular-nums; }
+.mstat3 .sub{ font-size:12px; color:var(--text-tertiary); margin-top:1px; }
+/* chart head: portfolio dropdown + filter */
+.mplan-chead{ display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+.mplan-dd{ display:inline-flex; align-items:center; gap:5px; background:none; border:0; font-family:inherit;
+  font-size:18px; font-weight:700; letter-spacing:-0.3px; color:var(--ink); cursor:pointer; padding:0; }
+.mplan-dd svg{ color:var(--text-secondary); }
+.mplan-filter{ width:34px; height:34px; border-radius:10px; border:1px solid var(--hairline); background:var(--white);
+  color:var(--text-secondary); display:flex; align-items:center; justify-content:center; cursor:pointer; }
+.mplan-chart{ margin-top:4px; }
 .mplan-chart svg{ display:block; width:100%; height:auto; }
-.mplan-stats{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:14px; padding-top:14px; border-top:1px solid #F1F2F4; }
+.pcgrid{ stroke:#F1F2F4; stroke-width:1; }
+.pcax{ font-size:9px; fill:#9AA0AE; font-family:'DM Sans',sans-serif; }
+/* chips row */
+.mplan-chips{ display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:8px; margin-top:16px; padding-top:16px; border-top:1px solid #F1F2F4; }
+.mchip4{ min-width:0; }
+.mchip4 .lab{ font-size:11px; color:var(--text-tertiary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.mchip4 .val{ font:600 15px 'DM Sans',sans-serif; letter-spacing:-0.3px; margin-top:3px; font-variant-numeric:tabular-nums; }
+/* boost your confidence card */
+.mplan-seclabel{ font-size:15px; font-weight:600; color:var(--text-secondary); margin:24px 2px 8px; }
+.mplan-boost{ margin-top:0; }
+.mboost-hd{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+.mboost-t{ font-size:17px; font-weight:600; letter-spacing:-0.2px; line-height:1.3; }
+.mboost-badge{ flex:none; font-size:12px; font-weight:700; color:#0E794E; background:var(--mint); border-radius:999px; padding:4px 10px; white-space:nowrap; }
+.mboost-sub{ font-size:13.5px; color:var(--text-secondary); line-height:1.5; margin-top:8px; }
+.mlever{ margin-top:16px; }
+.mlever-top{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom:7px; }
+.mlever-name{ font-size:14.5px; font-weight:500; }
+.mlever-pts{ flex:none; font:700 13px 'DM Sans',sans-serif; color:var(--green-cta); white-space:nowrap; }
+.mlever-bar{ height:7px; border-radius:99px; background:#EEF0F2; overflow:hidden; }
+.mlever-bar i{ display:block; height:100%; border-radius:99px; background:var(--green); transform-origin:left; }
+.mboost-cta{ display:inline-flex; align-items:center; gap:6px; margin-top:18px; color:var(--green-cta); font-size:14.5px; font-weight:600; cursor:pointer; }
 .mps{ display:flex; flex-direction:column; gap:2px; }
 .mps-v{ font:700 19px 'DM Sans',sans-serif; letter-spacing:-0.4px; font-variant-numeric:tabular-nums; }
 .mps-l{ font-size:14px; color:var(--text-tertiary); }
@@ -259,7 +292,7 @@ body.pushed .msub{ transform:translateX(0); }
 .msub-title{ font-size:30px; font-weight:700; letter-spacing:-0.4px; }
 .msub-sub{ font-size:17px; color:var(--text-secondary); margin-top:3px; }
 .mbucket{ margin-top:24px; }
-.mbucket-label{ font-size:16.5px; font-weight:600; color:var(--green-cta); margin-bottom:2px; }
+.mbucket-label{ font-size:16.5px; font-weight:600; color:var(--text-tertiary); margin-bottom:2px; }
 .macct{ display:flex; align-items:center; justify-content:space-between; gap:12px;
   border-bottom:1px solid var(--hairline); padding:14px 0; }
 .macct-nm{ font-size:19px; font-weight:600; }
@@ -394,6 +427,39 @@ body.menu-open .mmenu{ transform:translateX(0); }
 .mmenu-out{ color:#B4231F; }
 .mmenu-out svg{ color:#B4231F; }
 @media (prefers-reduced-motion: reduce){ .mmenu, .mmenu-scrim{ transition:none; } }
+/* ===== the stat detail modal (mirrors desktop sx-modal) ===== */
+.msx{ position:fixed; inset:0; z-index:90; }
+.msx[hidden]{ display:none; }
+.msx-scrim{ position:absolute; inset:0; background:rgba(16,24,44,0.34); opacity:0; transition:opacity .3s var(--push-ease); }
+.msx.on .msx-scrim{ opacity:1; }
+.msx-sheet{ position:absolute; left:0; right:0; bottom:0; margin:0 auto; width:100%; max-width:480px;
+  max-height:92%; overflow-y:auto; -webkit-overflow-scrolling:touch; background:var(--white);
+  border-radius:24px 24px 0 0; padding:10px 20px calc(28px + env(safe-area-inset-bottom));
+  transform:translateY(100%); transition:transform .38s var(--push-ease); }
+.msx.on .msx-sheet{ transform:translateY(0); }
+.msx-grip{ width:38px; height:5px; border-radius:99px; background:#D6D9DE; margin:2px auto 14px; }
+.msx-head{ display:flex; align-items:flex-start; justify-content:space-between; gap:14px; }
+.msx-title{ font-size:15px; color:var(--text-secondary); font-weight:500; }
+.msx-fig{ font:700 34px 'DM Sans',sans-serif; letter-spacing:-1px; color:var(--green-cta); margin-top:2px; line-height:1.1; font-variant-numeric:tabular-nums; }
+.msx-sub{ font-size:14px; color:var(--text-secondary); margin-top:6px; line-height:1.45; }
+.msx-x{ width:36px; height:36px; flex:none; border-radius:999px; background:#F2F3F5; border:0; color:var(--ink);
+  display:flex; align-items:center; justify-content:center; cursor:pointer; }
+.msx-chart{ margin:18px 0 4px; }
+.msx-chart svg{ display:block; width:100%; height:auto; }
+.msx-note{ font-size:13px; color:var(--text-tertiary); line-height:1.5; margin-top:8px; }
+.msx-sec{ margin-top:22px; }
+.msx-sec-label{ font-size:12.5px; font-weight:700; letter-spacing:0.02em; text-transform:none; color:var(--text-tertiary); margin-bottom:10px; }
+.msx-item{ display:flex; gap:11px; align-items:flex-start; padding:2px 0 12px; }
+.msx-dot{ width:7px; height:7px; border-radius:999px; background:var(--green); flex:none; margin-top:7px; }
+.msx-num{ width:22px; height:22px; flex:none; border-radius:999px; background:var(--mint); color:var(--green-cta);
+  font:700 12px 'DM Sans',sans-serif; display:flex; align-items:center; justify-content:center; }
+.msx-it-t{ font-size:15px; font-weight:600; line-height:1.35; }
+.msx-it-t .gain{ color:var(--green-cta); font-weight:700; margin-left:6px; font-size:13.5px; }
+.msx-it-s{ font-size:13.5px; color:var(--text-secondary); line-height:1.5; margin-top:3px; }
+.msx-it-s b{ font-weight:600; color:var(--ink); }
+.msx-link{ display:inline-flex; align-items:center; gap:5px; margin-top:6px; color:var(--green-cta); font-size:13.5px; font-weight:600; cursor:pointer; }
+.msx-learn{ display:inline-flex; align-items:center; gap:6px; margin-top:22px; color:var(--green-cta); font-size:14.5px; font-weight:600; cursor:pointer; }
+@media (prefers-reduced-motion: reduce){ .msx-scrim, .msx-sheet{ transition:none; } }
 /* ===== the simulated iOS keyboard ===== */
 .mkb{ position:fixed; left:50%; transform:translateX(-50%) translateY(102%); width:100%; max-width:480px;
   bottom:0; z-index:80; background:#D6D9DE; padding:8px 4px calc(10px + env(safe-area-inset-bottom));
@@ -629,37 +695,39 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     <button class="mlens" type="button" data-lens="tax" role="tab" aria-selected="false">Tax Strategy</button>
   </div>
 
+  <!-- 3 stat cards, like desktop -->
+  <div class="mplan-stats3" id="mplanStats3"></div>
+
   <section class="mcard mplan-card">
-    <div class="mcard-t">Where the plan goes</div>
+    <div class="mplan-chead">
+      <button class="mplan-dd" type="button" id="mplanDD"><span id="mplanDDl">Portfolio</span><svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="mplan-filter" type="button" aria-label="Filters" data-toast="Filters land next in the mobile build"><svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M4 6h16M7 12h10M10 18h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    </div>
     <div class="mplan-chart">
-      <svg viewBox="0 0 356 156" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-label="Plan trajectory to age 99">
+      <svg viewBox="0 0 356 176" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-label="Projected portfolio value">
         <defs>
           <linearGradient id="pcg" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#04B477" stop-opacity="0.20"/>
             <stop offset="100%" stop-color="#04B477" stop-opacity="0"/>
           </linearGradient>
         </defs>
-        <path id="pcArea" d="M4,120 C 30,116 48,110 64,104 C 120,80 200,44 258,30 C 280,25 300,32 318,44 C 332,53 344,63 350,72 L350,150 L4,150 Z" fill="url(#pcg)" opacity="0"/>
-        <path id="pcLine" d="M4,120 C 30,116 48,110 64,104 C 120,80 200,44 258,30 C 280,25 300,32 318,44 C 332,53 344,63 350,72" fill="none" stroke="#0E794E" stroke-width="2.4" stroke-linecap="round" pathLength="1"/>
+        <line class="pcgrid" x1="34" y1="14" x2="352" y2="14"/><line class="pcgrid" x1="34" y1="46" x2="352" y2="46"/><line class="pcgrid" x1="34" y1="78" x2="352" y2="78"/><line class="pcgrid" x1="34" y1="110" x2="352" y2="110"/><line class="pcgrid" x1="34" y1="142" x2="352" y2="142"/>
+        <text class="pcax" x="30" y="17" text-anchor="end">$2.5M</text><text class="pcax" x="30" y="49" text-anchor="end">$2M</text><text class="pcax" x="30" y="81" text-anchor="end">$1.5M</text><text class="pcax" x="30" y="113" text-anchor="end">$1M</text><text class="pcax" x="30" y="145" text-anchor="end">$0</text>
+        <path id="pcArea" d="M40,132 C 80,124 120,108 170,86 C 220,64 270,40 300,32 C 320,27 340,26 352,26 L352,142 L40,142 Z" fill="url(#pcg)" opacity="0"/>
+        <path id="pcLine" d="M40,132 C 80,124 120,108 170,86 C 220,64 270,40 300,32 C 320,27 340,26 352,26" fill="none" stroke="#0E794E" stroke-width="2.4" stroke-linecap="round" pathLength="1"/>
         <g id="pcMarks" opacity="0">
-          <circle cx="4" cy="120" r="3.4" fill="#0D3F4A"/>
-          <circle cx="64" cy="104" r="3.4" fill="#0D3F4A"/>
-          <circle cx="258" cy="30" r="4.2" fill="#04B477"/>
-          <circle cx="258" cy="30" r="8" fill="none" stroke="#04B477" stroke-width="1.4" opacity="0.45"/>
-          <circle cx="350" cy="72" r="3.4" fill="#FFFFFF" stroke="#0E794E" stroke-width="2"/>
-          <text x="4" y="140" font-size="10.5" fill="#6E7480">Now</text>
-          <text x="100" y="140" font-size="10.5" fill="#6E7480" text-anchor="middle">Retire &#183; Dec 2028</text>
-          <text x="258" y="16" font-size="10.5" font-weight="700" fill="#0E794E" text-anchor="middle">Peak $2.16M &#183; 2056</text>
-          <text x="350" y="140" font-size="10.5" fill="#6E7480" text-anchor="end">Age 99</text>
+          <text class="pcax" x="40" y="162" text-anchor="start">2026</text>
+          <text class="pcax" x="196" y="162" text-anchor="middle">2041</text>
+          <text class="pcax" x="352" y="162" text-anchor="end">2057</text>
         </g>
       </svg>
     </div>
-    <div class="mplan-stats">
-      <div class="mps"><span class="mps-v">87</span><span class="mps-l">Confidence</span></div>
-      <div class="mps"><span class="mps-v">$2.16M</span><span class="mps-l">Peak &#183; 2056</span></div>
-      <div class="mps"><span class="mps-v">Age 99</span><span class="mps-l">Funded to</span></div>
-    </div>
+    <div class="mplan-chips" id="mplanChips"></div>
   </section>
+
+  <!-- Boost your confidence: the desktop levers card -->
+  <div class="mplan-seclabel" id="mplanBoostLabel">Boost your confidence</div>
+  <section class="mcard mplan-boost" id="mplanBoost"></section>
 
   <div class="mlist" id="mlistPlan"></div>
 </div>
@@ -731,6 +799,10 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
   <div class="mai-sheet-div"></div>
   <button class="mai-sheet-row" type="button" data-idea="What if we downsize the house in 2030?">What if we downsize the house in 2030?</button>
   <button class="mai-sheet-row" type="button" data-idea="Rebalance my 401(k) to the target mix">Rebalance my 401(k) to the target mix</button>
+</div>
+<div class="msx" id="msx" hidden>
+  <div class="msx-scrim" id="msxScrim"></div>
+  <div class="msx-sheet" role="dialog" aria-modal="true" id="msxSheet"></div>
 </div>
 <div class="mkb" id="mkb" aria-hidden="true">
   <div class="mkb-row">
@@ -834,13 +906,21 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
   ];
 
   var CHEV='<span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span>';
-  var ROWS_HTML=SECTIONS.map(function(s){
+  function rowFor(s){
     return '<button class="mrow" type="button" data-sec="'+s.key+'">'+
       '<span class="mrow-txt"><span class="mrow-t">'+s.t+'</span><span class="mrow-s" style="display:block">'+s.s+'</span></span>'+
       '<span class="mrow-amt">'+s.amt+'</span>'+CHEV+'</button>';
-  }).join('');
+  }
+  var ROWS_HTML=SECTIONS.map(rowFor).join('');
   document.getElementById('mlist').innerHTML=ROWS_HTML;
   document.getElementById('mlistPlan').innerHTML=ROWS_HTML;
+  /* build the Plan section list for a given lens: a heading + the relevant sections */
+  window.__planSections=function(keys, heading){
+    var rows=keys.map(function(k){
+      var s=SECTIONS.find(function(x){ return x.key===k; }); return s?rowFor(s):'';
+    }).join('');
+    return '<div class="mplan-seclabel">'+heading+'</div>'+rows;
+  };
 
   /* ===== What's already yours: segmented control ===== */
   (function(){
@@ -1002,21 +1082,14 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     });
   }
   function drawPlanChart(){
-    var line=document.getElementById('pcLine'); if(!line || !line.animate || reduce){
-      if(line){ document.getElementById('pcArea').style.opacity='1'; document.getElementById('pcMarks').style.opacity='1'; }
-      return;
-    }
+    var line=document.getElementById('pcLine'); if(!line) return;
+    var marks=document.getElementById('pcMarks'), area=document.getElementById('pcArea');
+    if(!line.animate || reduce){ area.style.opacity='1'; marks.style.opacity='1'; return; }
     line.style.strokeDasharray='1';
     line.animate([{strokeDashoffset:1},{strokeDashoffset:0}],
-      {duration:800, easing:'cubic-bezier(0.22,1,0.36,1)', fill:'both'});
-    document.getElementById('pcArea').animate([{opacity:0},{opacity:1}],
-      {duration:500, delay:380, easing:'ease', fill:'both'});
-    document.getElementById('pcMarks').animate([{opacity:0},{opacity:1}],
-      {duration:380, delay:540, easing:'ease', fill:'both'});
-    document.querySelectorAll('.mps').forEach(function(s,i){
-      s.animate([{opacity:0, transform:'translateY(6px)'},{opacity:1, transform:'none'}],
-        {duration:380, delay:520+i*80, easing:'cubic-bezier(0.22,1,0.36,1)', fill:'backwards'});
-    });
+      {duration:850, easing:'cubic-bezier(0.22,1,0.36,1)', fill:'both'});
+    area.animate([{opacity:0},{opacity:1}],{duration:520, delay:400, easing:'ease', fill:'both'});
+    marks.animate([{opacity:0},{opacity:1}],{duration:380, delay:560, easing:'ease', fill:'both'});
   }
   document.getElementById('mnav').addEventListener('click', function(e){
     var b=e.target.closest('button'); if(!b) return;
@@ -1199,25 +1272,212 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     });
   })();
 
-  /* plan lenses: the headline follows the lens, desktop copy verbatim */
+  /* plan lenses: each pill mirrors the full desktop lens card */
   (function(){
-    var days=Math.max(0, Math.ceil((new Date('2028-12-31')-new Date())/86400000));
-    var HLS={
-      snapshot:'Retire in <em class="mhl-em">8 years</em> on <em class="mhl-gold">$7,200</em> a month.',
-      fl:'Saving <em class="mhl-gold">28%</em>, growing into <em class="mhl-em">freedom.</em>',
-      retirement:'<em class="mhl-gold">$1.14M</em> working toward your <em class="mhl-em">retirement.</em>',
-      tax:'One conversion saves <em class="mhl-gold">$430</em> a <em class="mhl-em">month.</em>'
+    var LENS={
+      snapshot:{
+        hl:'Retire in <em class="mhl-em">8 years</em> on <em class="mhl-gold">$7,200</em> a month.',
+        dd:'Portfolio',
+        stats:[['Confidence','87%','Monte Carlo +','conf'],['Fire number','$2.16M','50% funded','fire'],['Funds depleted','2099','Age 82 &middot; 12 yrs','depleted']],
+        chips:[['Surplus/mo','$3,450'],['Portfolio','$1.09M'],['Savings rate','28%'],['Cash runway','14 mo']],
+        boostT:'Three moves that lift your score the most', badge:'87% today',
+        boostSub:'Your plan already survives most markets. These close the gap in the toughest 1-in-10 outcomes.',
+        levers:[['Delay Social Security to 70','+6 pts &rarr; 93%',100],['Trim spending $400/mo for the first 5 years','+4 pts &rarr; 91%',67],['Work through age 64 instead of 62','+3 pts &rarr; 90%',50]],
+        cta:'Compare these scenarios',
+        secKeys:['assets','debts','income','home','expenses'], secHeading:'Your full picture'
+      },
+      fl:{
+        hl:'Saving <em class="mhl-gold">28%</em>, growing into <em class="mhl-em">freedom.</em>',
+        dd:'Net worth',
+        stats:[['Net worth','$1.14M','Assets &minus; debts'],['Surplus','$3,450','After expenses'],['Savings rate','28%','Above target']],
+        chips:[['Income/mo','$12,300'],['Spending/mo','$8,850'],['Into Roth','$2,400'],['Into taxable','$1,050']],
+        boostT:'Put your surplus to work', badge:'28% saved',
+        boostSub:'Your $3,450 monthly surplus is above target. Directing it deliberately compounds into years of freedom.',
+        levers:[['Automate a monthly Roth transfer','+$2,400/mo',100],['Top up the brokerage','+$1,050/mo',44],['Sweep the year-end bonus','once a year',30]],
+        cta:'See the full breakdown',
+        secKeys:['income','expenses','assets'], secHeading:'What drives your surplus'
+      },
+      retirement:{
+        hl:'<em class="mhl-gold">$1.14M</em> working toward your <em class="mhl-em">retirement.</em>',
+        dd:'Retirement income',
+        stats:[['Success','87%','Monte Carlo +'],['To retirement','7 yrs','Dec 2028'],['Safe spending','$8,400','per month']],
+        chips:[['SS at 70','$3,940'],['Withdrawals','$3,100'],['Pension','$1,360'],['Total/mo','$8,400']],
+        boostT:'Claim Social Security at 70', badge:'+$420/mo',
+        boostSub:'Waiting to 70 adds $420 a month for life and gives the Roth window more room to work.',
+        levers:[['Delay Social Security to 70','+$420/mo',100],['Hold spending steady to 72','+2 yrs funded',60],['Keep the bond glide-path','lower drawdown',45]],
+        cta:'Model your retirement income',
+        secKeys:['assets','income','expenses'], secHeading:'What funds retirement'
+      },
+      tax:{
+        hl:'One conversion saves <em class="mhl-gold">$430</em> a <em class="mhl-em">month.</em>',
+        dd:'Lifetime taxes',
+        stats:[['Effective rate','19.4%','This year'],['Lifetime rate','23.1%','Projected'],['Lifetime tax','$648K','If unchanged']],
+        chips:[['12% bracket','$106,750'],['Convert/yr','~$17,800'],['Windows','6 yrs'],['Tax saved','$61,000']],
+        boostT:'Fill the December Roth window', badge:'&minus;$61K tax',
+        boostSub:'Six low-bracket Decembers between 2029 and 2035, before Social Security starts. Filling them erases $61,000 of lifetime tax.',
+        levers:[['Convert to the top of the 12% bracket','&minus;$61,000',100],['Start with 2029 before it closes','&minus;$10,200',52],['Coordinate with Medicare IRMAA','avoid surcharge',35]],
+        cta:'Plan your conversions',
+        secKeys:['assets','income'], secHeading:'What the strategy works on'
+      }
     };
     var row=document.querySelector('.mlens-row'); if(!row) return;
+    var hl=document.getElementById('planHl');
+    var stats3=document.getElementById('mplanStats3');
+    var chipsEl=document.getElementById('mplanChips');
+    var boostEl=document.getElementById('mplanBoost');
+    var ddl=document.getElementById('mplanDDl');
+    var listEl=document.getElementById('mlistPlan');
+    function stagger(nodes, dy){
+      if(reduce) return;
+      nodes.forEach(function(n,i){ if(n.animate) n.animate(
+        [{opacity:0,transform:'translateY('+(dy||6)+'px)'},{opacity:1,transform:'none'}],
+        {duration:360,delay:40+i*55,easing:'cubic-bezier(0.22,1,0.36,1)',fill:'backwards'}); });
+    }
+    function renderStats(L){
+      stats3.innerHTML=L.stats.map(function(s){ return '<div class="mstat3"'+(s[3]?' data-msx="'+s[3]+'" role="button" tabindex="0"':'')+'><div class="lab">'+s[0]+'</div><div class="fig">'+s[1]+'</div><div class="sub">'+s[2]+'</div></div>'; }).join('');
+      stagger([].slice.call(stats3.children));
+    }
+    function renderChips(L){
+      chipsEl.innerHTML=L.chips.map(function(c){ return '<div class="mchip4"><div class="lab">'+c[0]+'</div><div class="val">'+c[1]+'</div></div>'; }).join('');
+      stagger([].slice.call(chipsEl.children),4);
+    }
+    function renderBoost(L){
+      boostEl.innerHTML='<div class="mboost-hd"><div class="mboost-t">'+L.boostT+'</div><span class="mboost-badge">'+L.badge+'</span></div>'+
+        '<div class="mboost-sub">'+L.boostSub+'</div>'+
+        L.levers.map(function(lv){ return '<div class="mlever"><div class="mlever-top"><span class="mlever-name">'+lv[0]+'</span><span class="mlever-pts">'+lv[1]+'</span></div><div class="mlever-bar"><i style="width:'+lv[2]+'%"></i></div></div>'; }).join('')+
+        '<span class="mboost-cta" data-toast="Scenario comparison lands next in the mobile build">'+L.cta+' <svg viewBox="0 0 24 24" fill="none" width="13" height="13"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
+      if(!reduce){
+        boostEl.querySelectorAll('.mlever-bar i').forEach(function(bar,i){
+          if(bar.animate) bar.animate([{transform:'scaleX(0)'},{transform:'scaleX(1)'}],{duration:620,delay:180+i*120,easing:'cubic-bezier(0.22,1,0.36,1)',fill:'backwards'});
+        });
+      }
+    }
+    function renderSections(L){
+      listEl.innerHTML=window.__planSections(L.secKeys, L.secHeading);
+      stagger([].slice.call(listEl.querySelectorAll('.mrow')));
+    }
+    function apply(lens, animate){
+      var L=LENS[lens]; if(!L) return;
+      ddl.textContent=L.dd;
+      renderStats(L); renderChips(L); renderBoost(L); renderSections(L);
+      if(reduce || !animate){ hl.innerHTML=L.hl; return; }
+      hl.classList.add('hl-sw');
+      setTimeout(function(){ hl.innerHTML=L.hl; hl.classList.remove('hl-sw'); }, 180);
+    }
     row.addEventListener('click', function(e){
       var p=e.target.closest('.mlens'); if(!p || p.classList.contains('on')) return;
       row.querySelectorAll('.mlens').forEach(function(x){ x.classList.toggle('on', x===p); x.setAttribute('aria-selected', x===p?'true':'false'); });
       p.scrollIntoView({behavior: reduce?'auto':'smooth', inline:'center', block:'nearest'});
-      var hl=document.getElementById('planHl');
-      if(reduce){ hl.innerHTML=HLS[p.dataset.lens]; return; }
-      hl.classList.add('hl-sw');
-      setTimeout(function(){ hl.innerHTML=HLS[p.dataset.lens]; hl.classList.remove('hl-sw'); }, 180);
+      apply(p.dataset.lens, true);
     });
+    document.getElementById('mplanDD').addEventListener('click', function(){ toast('Portfolio views land next in the mobile build'); });
+    apply('snapshot', false);
+    window.__applyLens=apply;
+  })();
+
+  /* ===== stat detail modal — mirrors the desktop sx-modal ===== */
+  (function(){
+    var SX={
+      conf:{ label:'Confidence', fig:'87%',
+        pts:[79,80,81,82,80,82,83,84,85,86,86,87], fmt:'pct',
+        sub:'87 of every 100 simulated futures end with money left over.',
+        note:'Eight points in a year. Confidence climbs when you keep saving through the dips.',
+        opps:{t:'Push past 90 with the catch-up window', g:'+3 pts', s:'Maxing the 2026 super catch-up (<b>$35,750</b> each) lifts confidence about three points.'},
+        risks:{t:'Sequence risk in the first five years', s:'A 2028 to 2029 bear market costs roughly <b>9 points</b>. The order of returns matters most at the start.'},
+        decide:{t:'Retire in 2028 or 2029', s:'One more working year adds about <b>6 points</b> and $86K of contributions plus growth.'},
+        step:{t:'Run the catch-up contribution scenario', act:'plan'} },
+      fire:{ label:'Fire number', fig:'$2.16M',
+        pts:[42,42.6,43.3,43.5,42.4,43.6,44.6,45.5,46.6,47.8,49.0,50.0], fmt:'pct',
+        sub:'The portfolio that funds your life from 2028 on. Half is already yours.',
+        note:'Half funded. Each month of saving buys about 0.7% more of the finish line.',
+        opps:{t:'The super catch-up adds $286K by 2028', s:'Both of you maxing the age 60 to 63 window (<b>$35,750</b> each) closes 13% of the gap alone.'},
+        risks:{t:'The number assumes the 4% trim', s:'Skip the retirement spending trim and the target grows to <b>$2.41M</b>.'},
+        decide:{t:'Count the house or leave it out', s:'Tapping <b>$190K</b> of equity at 75 cuts the target 9%. It is a choice, not an assumption.'},
+        step:{t:'See the funded-percent path in your plan', act:'plan'} },
+      depleted:{ label:'Funds depleted', fig:'2099',
+        pts:[2093,2093,2094,2094,2093,2095,2096,2096,2097,2098,2098,2099], fmt:'year',
+        sub:'The year the money runs out. Twelve years past the plan\u2019s test age.',
+        note:'Six years gained in twelve months. Every good saving month pushes the horizon out.',
+        opps:{t:'Delay Social Security to 70', s:'The larger check compounds across decades and pushes depletion past <b>2105</b>.'},
+        risks:{t:'Care costs in the late years', s:'Four years of long-term care pulls the horizon back to <b>2094</b>.'},
+        decide:{t:'Plan to 92 or to 95', s:'The age you test is the risk you accept. Three years is the whole margin.'},
+        step:{t:'Model claiming at 70 side by side', act:'plan'} }
+    };
+    var MONTHS=['Jul','Oct','Jan','Apr','Jun'];
+    function fmtV(v, fmt){
+      var r=Math.round(v*10)/10;
+      if(fmt==='pct') return r+'%';
+      if(fmt==='year') return String(Math.round(v));
+      return '$'+Math.round(v).toLocaleString('en-US');
+    }
+    function chart(d){
+      var W=356,H=150,padL=10,padR=52,padT=14,padB=26;
+      var iw=W-padL-padR, ih=H-padT-padB, pts=d.pts;
+      var min=Math.min.apply(null,pts), max=Math.max.apply(null,pts);
+      var span=(max-min)||1, lo=min-span*0.18, hi=max+span*0.16, rng=hi-lo;
+      var X=function(i){ return padL+iw*(i/(pts.length-1)); };
+      var Y=function(v){ return padT+ih*(1-(v-lo)/rng); };
+      var line=pts.map(function(v,i){ return (i?'L':'M')+X(i).toFixed(1)+' '+Y(v).toFixed(1); }).join(' ');
+      var area=line+' L'+X(pts.length-1).toFixed(1)+' '+(H-padB)+' L'+padL+' '+(H-padB)+' Z';
+      var last=pts[pts.length-1], lx=X(pts.length-1), ly=Y(last);
+      var grid=[min,max].map(function(v){ return '<line x1="'+padL+'" x2="'+(W-padR)+'" y1="'+Y(v).toFixed(1)+'" y2="'+Y(v).toFixed(1)+'" stroke="#EEEEEE" stroke-width="1"/>'+
+        '<text x="'+(W-padR+8)+'" y="'+(Y(v)+4).toFixed(1)+'" font-size="11" fill="#9AA0AE">'+fmtV(v,d.fmt)+'</text>'; }).join('');
+      var mstep=(pts.length-1)/(MONTHS.length-1);
+      var mlab=MONTHS.map(function(m,i){ return '<text x="'+X(Math.round(i*mstep)).toFixed(1)+'" y="'+(H-6)+'" font-size="11" fill="#9AA0AE" text-anchor="middle">'+m+'</text>'; }).join('');
+      return '<div class="msx-chart"><svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">'+
+        '<defs><linearGradient id="msxFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#04B477" stop-opacity="0.16"/><stop offset="1" stop-color="#04B477" stop-opacity="0"/></linearGradient></defs>'+
+        grid+
+        '<path class="msx-area" d="'+area+'" fill="url(#msxFill)" opacity="0"/>'+
+        '<path class="msx-line" d="'+line+'" fill="none" stroke="#04B477" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" pathLength="1"/>'+
+        '<circle class="msx-enddot" cx="'+lx.toFixed(1)+'" cy="'+ly.toFixed(1)+'" r="4.5" fill="#04B477" stroke="#fff" stroke-width="2"/>'+
+        '<text x="'+(lx-6).toFixed(1)+'" y="'+(ly-10).toFixed(1)+'" font-size="12.5" font-weight="700" fill="#10182C" text-anchor="end">'+fmtV(last,d.fmt)+'</text>'+
+        mlab+'</svg></div>';
+    }
+    function item(it, numbered){
+      var marker = numbered ? '<span class="msx-num">1</span>' : '<span class="msx-dot"></span>';
+      var gain = it.g ? ' <span class="gain">'+it.g+'</span>' : '';
+      var body = it.s ? '<div class="msx-it-s">'+it.s+'</div>' : '';
+      var link = it.act ? '<span class="msx-link" data-toast="Deep link lands next in the mobile build">Take me there <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' : '';
+      return '<div class="msx-item">'+marker+'<div><div class="msx-it-t">'+it.t+gain+'</div>'+body+link+'</div></div>';
+    }
+    function sec(label, it, numbered){ return '<div class="msx-sec"><div class="msx-sec-label">'+label+'</div>'+item(it,numbered)+'</div>'; }
+    function build(d){
+      return '<div class="msx-grip"></div>'+
+        '<div class="msx-head"><div><div class="msx-title">'+d.label+'</div><div class="msx-fig">'+d.fig+'</div><div class="msx-sub">'+d.sub+'</div></div>'+
+        '<button class="msx-x" aria-label="Close" data-msx-close><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>'+
+        chart(d)+'<div class="msx-note">'+d.note+'</div>'+
+        sec('Top opportunities', d.opps, false)+
+        sec('Key risks', d.risks, false)+
+        sec('Key decisions', d.decide, false)+
+        sec('Suggested next steps', d.step, true)+
+        '<span class="msx-learn" data-toast="Learn more lands next in the mobile build">Learn more <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
+    }
+    var modal=document.getElementById('msx'), sheet=document.getElementById('msxSheet'), scrim=document.getElementById('msxScrim');
+    function open(key){
+      var d=SX[key]; if(!d) return;
+      sheet.innerHTML=build(d);
+      modal.hidden=false; void modal.offsetWidth; modal.classList.add('on');
+      document.body.style.overflow='hidden';
+      if(!reduce){
+        var line=sheet.querySelector('.msx-line'), area=sheet.querySelector('.msx-area');
+        if(line && line.animate){ line.style.strokeDasharray='1';
+          line.animate([{strokeDashoffset:1},{strokeDashoffset:0}],{duration:800,delay:220,easing:'cubic-bezier(0.22,1,0.36,1)',fill:'both'});
+          area.animate([{opacity:0},{opacity:1}],{duration:500,delay:520,easing:'ease',fill:'both'});
+        }
+      }
+    }
+    function close(){
+      modal.classList.remove('on'); document.body.style.overflow='';
+      setTimeout(function(){ modal.hidden=true; sheet.innerHTML=''; }, reduce?0:380);
+    }
+    /* clicks on the 3 stat cards */
+    document.getElementById('tabPlan').addEventListener('click', function(e){
+      var c=e.target.closest('.mstat3[data-msx]'); if(!c) return;
+      open(c.dataset.msx);
+    });
+    scrim.addEventListener('click', close);
+    sheet.addEventListener('click', function(e){ if(e.target.closest('[data-msx-close]')) close(); });
+    window.__openStat=open;
   })();
 
   /* ===== the Chase row opens an inline field editor, desktop-smooth ===== */
