@@ -514,6 +514,50 @@ body.pushed .msub{ transform:translateX(0); }
 .mempty-t{ font-size:18px; font-weight:600; }
 .mempty-s{ font-size:16.5px; color:var(--text-secondary); margin-top:4px; line-height:1.45; }
 
+/* ===== next best moves: actionable cards ===== */
+.mmove{ border:1px solid var(--hairline); border-radius:18px; padding:18px 18px 16px; margin-top:12px; background:var(--white); }
+.mmove-top{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+.mmove-gain{ display:inline-flex; align-items:baseline; gap:4px; background:var(--mint); color:var(--green-cta);
+  border-radius:999px; padding:6px 13px; font:700 17px 'DM Sans',sans-serif; letter-spacing:-0.3px; font-variant-numeric:tabular-nums; }
+.mmove-gain .per{ font-size:13px; font-weight:600; }
+.mmove-when{ font-size:13.5px; font-weight:600; color:#B45309; background:#FEF3E2; border-radius:999px; padding:6px 11px; }
+.mmove-t{ font-size:20px; font-weight:600; letter-spacing:-0.2px; line-height:1.25; }
+.mmove-s{ font-size:15.5px; color:var(--text-secondary); line-height:1.5; margin-top:6px; }
+.mmove-acts{ display:flex; align-items:center; gap:8px; margin-top:16px; }
+.mmove-cta{ flex:1; display:inline-flex; align-items:center; justify-content:center; gap:7px; height:50px; border-radius:999px;
+  background:var(--green-cta); color:#FFFFFF; border:0; font-family:inherit; font-size:16.5px; font-weight:600; cursor:pointer; }
+.mmove-cta:active{ background:#0B5F3D; transform:scale(.99); }
+.mmove-cta svg{ width:15px; height:15px; }
+.mmove-skip{ flex:none; height:50px; padding:0 18px; border-radius:999px; background:none; border:0;
+  font-family:inherit; font-size:15.5px; font-weight:600; color:var(--text-tertiary); cursor:pointer; }
+.mmove-skip:active{ color:var(--ink); }
+.mmove.mmove-gone{ opacity:0; transform:translateY(-6px); transition:opacity .3s ease, transform .3s ease; }
+/* ===== service pages (advisor / coaching) ===== */
+.msvc-price{ display:flex; align-items:baseline; gap:10px; margin-top:22px; padding-bottom:20px; border-bottom:1px solid var(--hairline); flex-wrap:wrap; }
+.msvc-price .amt{ font:700 30px 'DM Sans',sans-serif; letter-spacing:-0.8px; color:var(--green-cta); font-variant-numeric:tabular-nums; }
+.msvc-price .per{ font-size:16px; color:var(--text-secondary); }
+.msvc-seclabel{ font-size:18px; font-weight:600; letter-spacing:-0.2px; margin:32px 0 4px; }
+.msvc-feat{ display:flex; gap:12px; align-items:flex-start; padding:14px 0; border-bottom:1px solid var(--hairline); }
+.msvc-feat-ic{ width:40px; height:40px; flex:none; border-radius:11px; background:var(--mint); color:var(--green-cta); display:flex; align-items:center; justify-content:center; }
+.msvc-feat-ic svg{ width:21px; height:21px; }
+.msvc-feat-t{ font-size:17px; font-weight:600; }
+.msvc-feat-s{ font-size:15px; color:var(--text-secondary); line-height:1.45; margin-top:2px; }
+.msvc-coach{ display:flex; gap:13px; align-items:flex-start; padding:15px 0; border-bottom:1px solid var(--hairline); }
+.msvc-coach .mh-ava{ width:46px; height:46px; flex:none; font-size:15px; }
+.msvc-coach-t{ font-size:17px; font-weight:600; }
+.msvc-coach-cred{ font-size:13.5px; font-weight:600; color:var(--green-cta); margin-left:6px; }
+.msvc-coach-s{ font-size:14.5px; color:var(--text-secondary); line-height:1.5; margin-top:3px; }
+.msvc-tiers{ margin-top:8px; }
+.msvc-tier{ border:1px solid var(--hairline); border-radius:16px; padding:16px 16px 14px; margin-top:12px; }
+.msvc-tier-top{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; }
+.msvc-tier-t{ font-size:17px; font-weight:600; }
+.msvc-tier-p{ font:700 17px 'DM Sans',sans-serif; color:var(--green-cta); white-space:nowrap; }
+.msvc-tier-s{ font-size:14.5px; color:var(--text-secondary); line-height:1.5; margin-top:6px; }
+.msvc-cta{ display:flex; align-items:center; justify-content:center; gap:8px; width:100%; height:56px; border-radius:999px;
+  background:var(--green-cta); color:#FFFFFF; border:0; font-family:inherit; font-size:17px; font-weight:600; cursor:pointer; margin-top:26px; }
+.msvc-cta:active{ background:#0B5F3D; transform:scale(.99); }
+.msvc-cta svg{ width:16px; height:16px; }
+.msvc-reassure{ font-size:13.5px; color:var(--text-tertiary); line-height:1.55; margin-top:16px; }
 /* ===== AI screen ===== */
 /* ===== the AI tab ===== */
 .mtab-ai{ display:flex; flex-direction:column; min-height:calc(100dvh - 260px); }
@@ -797,8 +841,8 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
   <section class="mh-sec">
     <div class="mh-sec-head"><span class="mh-sec-t">Real people, when you want them</span></div>
     <div class="mlist">
-      <button class="mrow" type="button" data-toast="Booking lands next in the mobile build"><span class="mh-ava t">RO</span><span class="mrow-txt"><span class="mrow-t">Advice from a CFP&#174;</span><span class="mrow-s" style="display:block">Renee Okafor reads your plan before you meet</span></span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
-      <button class="mrow" type="button" data-toast="Coaching signup lands next in the mobile build"><span class="mh-ava g">DP</span><span class="mrow-txt"><span class="mrow-t">Coaching</span><span class="mrow-s" style="display:block">Eight-week cohorts that turn the plan into habits</span></span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
+      <button class="mrow" type="button" data-go="advisor"><span class="mh-ava t">RO</span><span class="mrow-txt"><span class="mrow-t">Advice from a CFP&#174;</span><span class="mrow-s" style="display:block">A fiduciary who reads your plan before you meet</span></span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
+      <button class="mrow" type="button" data-go="coaching"><span class="mh-ava g">DP</span><span class="mrow-txt"><span class="mrow-t">Coaching</span><span class="mrow-s" style="display:block">A 1-on-1 session to get your plan set up right</span></span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
     </div>
   </section>
 
@@ -1341,14 +1385,16 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
         '<button class="mss-row" type="button" data-age="67"><span class="mss-age">67</span><span class="mss-note">Full retirement age</span><span class="mss-amt">$3,180/mo</span><span class="mss-tag">In your plan</span></button>'+
         '<button class="mss-row on" type="button" data-age="70"><span class="mss-age">70</span><span class="mss-note">Maximum benefit</span><span class="mss-amt">$3,940/mo</span><span class="mss-tag">In your plan</span></button>'+
       '</div>'+
-      '<div class="mo-note">Every year you wait past full retirement age adds 8%, guaranteed, inflation-adjusted, for both of your lifetimes.</div>',
+      '<div class="mo-note">Every year you wait past full retirement age adds 8%, guaranteed, inflation-adjusted, for both of your lifetimes.</div>'+
+      '<button class="msvc-cta" type="button" data-toast="Applying this to your plan lands next in the mobile build">Set my claim age to 70 <svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17L17 7M9 7h8v8\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button>',
     tax:'<div class="msub-title">Tax Planning</div><div class="msub-sub">Six low-bracket Decembers before Social Security starts.</div>'+
       '<div class="mo-hero"><div class="mo-fig g">$61,000</div><div class="mo-fig-sub">lifetime tax saved by filling the window</div></div>'+
       '<div class="mo-decs">'+
         '<span class="mo-dec hot"><b>2029</b><i>closes Dec 31</i></span><span class="mo-dec"><b>2030</b><i>open</i></span><span class="mo-dec"><b>2031</b><i>open</i></span>'+
         '<span class="mo-dec"><b>2032</b><i>open</i></span><span class="mo-dec"><b>2033</b><i>open</i></span><span class="mo-dec"><b>2034</b><i>open</i></span>'+
       '</div>'+
-      '<div class="mo-note">Convert just enough each December to fill the 12% bracket, and never meet those taxes at RMD time. One conversion saves $430 a month.</div>',
+      '<div class="mo-note">Convert just enough each December to fill the 12% bracket, and never meet those taxes at RMD time. One conversion saves $430 a month.</div>'+
+      '<button class="msvc-cta" type="button" data-toast="Starting a conversion lands next in the mobile build">Plan my 2029 conversion <svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17L17 7M9 7h8v8\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button>',
     alloc:'<div class="msub-title">Asset Allocation</div><div class="msub-sub">Your mix drifted while the market moved.</div>'+
       '<div class="mo-hero"><div class="mo-fig">2.4%</div><div class="mo-fig-sub">drift from your target mix</div></div>'+
       '<div class="mo-bars">'+
@@ -1644,12 +1690,25 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     var gh=document.getElementById('mhGreet');
     var hh=new Date().getHours();
     gh.textContent=(hh<12?'Good morning':hh<18?'Good afternoon':'Good evening')+', Marshall';
+    var ADVISOR_HTML='<div class="msub-eye">Boldin Advisors</div><h1 class="msub-hl">A fiduciary <em>in your corner.</em></h1><p class="msub-hl2">Work one-on-one with a flat-fee CERTIFIED FINANCIAL PLANNER&#174; professional. Fiduciary advice, no commissions, for a fraction of what most advisors charge.</p><div class="msvc-seclabel">How it works</div><div class="mo-rows"><div class="mo-row"><span class="mo-num">1</span><span class="mo-row-t">Free discovery session<span class="mo-row-s" style="display:block">A small-group intro to see if personalized advice is your next step</span></span></div><div class="mo-row"><span class="mo-num">2</span><span class="mo-row-t">Collaborate on your goals<span class="mo-row-s" style="display:block">Your advisor studies your plan and hunts for opportunities</span></span></div><div class="mo-row"><span class="mo-num">3</span><span class="mo-row-t">Get your action plan<span class="mo-row-s" style="display:block">A clear strategy across investments, taxes, income, and Social Security</span></span></div></div><div class="msvc-seclabel">Why a Boldin Advisor</div><div class="msvc-feat"><span class="msvc-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 2.8v5.1c0 4.8-3.4 7.7-7 9.6-3.6-1.9-7-4.8-7-9.6V5.8z"/><path d="M9 12l2.1 2.1L15.4 9.8"/></svg></span><div><div class="msvc-feat-t">Trustworthy</div><div class="msvc-feat-s">Fiduciaries, bound to put your interests first, always.</div></div></div><div class="msvc-feat"><span class="msvc-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .3c0 1.7-2.5 2-2.5 3.4"/><circle cx="12" cy="16.5" r=".4"/></svg></span><div><div class="msvc-feat-t">Understandable</div><div class="msvc-feat-s">Plain answers, plus the tools to see the why behind every move.</div></div></div><div class="msvc-feat" style="border-bottom:0"><span class="msvc-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 19.5c1.1-3.1 3.5-4.7 6.5-4.7s5.4 1.6 6.5 4.7"/></svg></span><div><div class="msvc-feat-t">Personalized</div><div class="msvc-feat-s">Turning savings into income, not just growing a balance.</div></div></div><div class="msvc-seclabel">Choose your level</div><div class="msvc-tiers"><div class="msvc-tier"><div class="msvc-tier-top"><span class="msvc-tier-t">Retirement Plan Checkup</span><span class="msvc-tier-p">$3,200</span></div><div class="msvc-tier-s">The most popular option. A thorough review of your whole plan with specific recommendations on Roth conversions, withdrawals, and cash flow.</div></div><div class="msvc-tier"><div class="msvc-tier-top"><span class="msvc-tier-t">Ongoing Advisory</span><span class="msvc-tier-p">from $1,200/yr</span></div><div class="msvc-tier-s">You stay in control while an advisor provides trusted fiduciary guidance throughout the year.</div></div></div><button class="msvc-cta" type="button" data-toast="Booking a discovery session lands next in the mobile build">Book a free discovery session <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><p class="msvc-reassure">Advisory services offered through NewRetirement Advisors LLC d/b/a Boldin Advisors, a registered investment advisor.</p>';
+    var COACHING_HTML='<div class="msub-eye">Coaching</div><h1 class="msub-hl">Get it set up <em>right.</em></h1><p class="msub-hl2">Book a 1-on-1 session with a Boldin expert. Verify your data, understand your numbers, and get more out of the planner. No judgment, just support.</p><div class="msvc-price"><span class="amt">$250</span><span class="per">per session, tailored to you</span></div><div class="msvc-seclabel">What you get</div><div class="msvc-feat"><span class="msvc-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h13M4 11h13M4 16h9"/><circle cx="20" cy="6" r="1.3"/></svg></span><div><div class="msvc-feat-t">Check your data</div><div class="msvc-feat-s">Walk through every input so your plan rests on accurate numbers.</div></div></div><div class="msvc-feat"><span class="msvc-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .3c0 1.7-2.5 2-2.5 3.4"/><circle cx="12" cy="16.5" r=".4"/></svg></span><div><div class="msvc-feat-t">Ask anything</div><div class="msvc-feat-s">Confirm you understand the strategies behind your plan.</div></div></div><div class="msvc-feat"><span class="msvc-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15l4.5-5 3.5 3.2L20 6"/><path d="M4 20h16"/></svg></span><div><div class="msvc-feat-t">Explore your metrics</div><div class="msvc-feat-s">Understand what your key numbers really mean for your future.</div></div></div><div class="msvc-feat" style="border-bottom:0"><span class="msvc-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg></span><div><div class="msvc-feat-t">Plan your next steps</div><div class="msvc-feat-s">Leave every session with a clear, confident plan of action.</div></div></div><div class="msvc-seclabel">How it works</div><div class="mo-rows"><div class="mo-row"><span class="mo-num">1</span><span class="mo-row-t">Schedule<span class="mo-row-s" style="display:block">Pick a time slot for your private session</span></span></div><div class="mo-row"><span class="mo-num">2</span><span class="mo-row-t">Meet on Zoom<span class="mo-row-s" style="display:block">Work one-on-one to confirm your plan is set up right</span></span></div><div class="mo-row"><span class="mo-num">3</span><span class="mo-row-t">Keep planning<span class="mo-row-s" style="display:block">Leave confident, and book a follow-up whenever you need one</span></span></div></div><div class="msvc-seclabel">Meet a few coaches</div><div class="msvc-coach"><span class="mh-ava t">NG</span><div><div class="msvc-coach-t">Nancy Gates</div><div class="msvc-coach-s">A supportive space to build financial literacy and confidence, on the Boldin team since 2021.</div></div></div><div class="msvc-coach"><span class="mh-ava g">DP</span><div><div class="msvc-coach-t">Debbie Perks</div><div class="msvc-coach-s">A decade of client service at Wells Fargo, Schwab, and Fidelity, focused on simplifying the complex.</div></div></div><div class="msvc-coach" style="border-bottom:0"><span class="mh-ava" style="background:#5B8A72">FH</span><div><div class="msvc-coach-t">Frances Harrison</div><div class="msvc-coach-s">A former CPA who came to Boldin as a subscriber first, here to replace anxiety with confidence.</div></div></div><button class="msvc-cta" type="button" data-toast="Scheduling a session lands next in the mobile build">Schedule your first session <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><p class="msvc-reassure">Coaching helps you understand and use the Boldin planner. It is not tax, legal, or investment advice, and forms no fiduciary relationship.</p>';
     document.getElementById('tabHome').addEventListener('click', function(e){
+      var skip=e.target.closest('[data-skip]');
+      if(skip){
+        var card=skip.closest('.mmove');
+        if(card){
+          if(reduce){ card.remove(); }
+          else { card.classList.add('mmove-gone'); setTimeout(function(){ card.remove(); }, 320); }
+        }
+        return;
+      }
       var el=e.target.closest('[data-go]');
       if(el){
         var go=el.dataset.go;
         if(go==='opt-ss'){ push(OPT.ss, false); }
         else if(go==='opt-tax'){ push(OPT.tax, false); }
+        else if(go==='advisor'){ push(ADVISOR_HTML, false); }
+        else if(go==='coaching'){ push(COACHING_HTML, false); }
         else {
           var s=SECTIONS.find(function(x){ return x.key===go; });
           if(s) push('<div class="msub-title">'+s.t+'</div><div class="msub-sub">'+s.s+'</div>'+s.body, false);
