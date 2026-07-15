@@ -148,9 +148,9 @@ body.pushed .mroot{ transform:translateX(-24%); opacity:.5; pointer-events:none;
 body.mq-pay-mode .mq-prog, body.mq-pay-mode .mq-step-n, body.mq-pay-mode .mq-back{ display:none; }
 .mq-top .brand{ display:none; }
 body.mq-pay-mode .mq-top .brand{ display:block; }
-.mq-top .brand svg{ height:26px; width:auto; display:block; }
+.mq-top .brand svg{ height:30px; width:auto; display:block; }
 .mq-toplogo{ flex:1; }
-.mq-topskip{ display:none; background:none; border:0; font-family:inherit; font-size:15px; font-weight:600; color:var(--text-secondary); cursor:pointer; padding:8px 4px; white-space:nowrap; }
+.mq-topskip{ display:none; background:none; border:0; font-family:inherit; font-size:18px; font-weight:600; color:var(--text-secondary); cursor:pointer; padding:8px 4px; white-space:nowrap; }
 body.mq-pay-mode .mq-topskip{ display:block; }
 .mq-back{ width:38px; height:38px; flex:none; border-radius:999px; background:#F2F3F5; border:0; color:var(--ink);
   display:flex; align-items:center; justify-content:center; cursor:pointer; }
@@ -190,8 +190,8 @@ body.mq-pay-mode .mq-topskip{ display:block; }
 .mq-note{ font-size:14px; color:var(--text-tertiary); margin-top:12px; line-height:1.5; }
 /* footer next button */
 .mq-foot{ flex:none; padding:12px 22px calc(16px + env(safe-area-inset-bottom)); border-top:1px solid #F1F2F4; }
-.mq-next{ width:100%; height:54px; border-radius:999px; background:var(--green-cta); color:#FFFFFF; border:0;
-  font-family:inherit; font-size:17px; font-weight:600; cursor:pointer; transition:background .18s ease, opacity .18s ease; }
+.mq-next{ width:100%; height:60px; border-radius:999px; background:var(--green-cta); color:#FFFFFF; border:0;
+  font-family:inherit; font-size:19px; font-weight:600; cursor:pointer; transition:background .18s ease, opacity .18s ease; }
 .mq-next:active{ background:#0B5F3D; }
 .mq-next:disabled{ opacity:0.4; pointer-events:none; }
 .mq-skip{ display:block; width:100%; margin-top:12px; background:none; border:0; font-family:inherit; font-size:15px; font-weight:500; color:var(--text-secondary); cursor:pointer; }
@@ -203,26 +203,26 @@ body.mq-pay-mode .mq-topskip{ display:block; }
 .mq-done-s{ font-size:16px; color:var(--text-secondary); line-height:1.55; margin-top:12px; max-width:30ch; margin-left:auto; margin-right:auto; }
 /* the Boldin Plus paywall roadblock (mirrors desktop PlannerPlus trial) */
 .mq-pay{ padding:0; }
-.mq-pay-badge{ display:inline-block; font-size:13px; font-weight:700; letter-spacing:0.03em; color:var(--green-cta); background:var(--mint); border-radius:999px; padding:6px 13px; }
-.mq-pay-h{ font-size:26px; font-weight:600; letter-spacing:-0.5px; line-height:1.14; margin-top:2px; }
-.mq-pay-price{ font-size:15px; color:var(--text-secondary); line-height:1.45; margin-top:8px; }
+.mq-pay-badge{ display:inline-block; font-size:16px; font-weight:700; letter-spacing:0.03em; color:var(--green-cta); background:var(--mint); border-radius:999px; padding:8px 16px; }
+.mq-pay-h{ font-size:34px; font-weight:600; letter-spacing:-0.6px; line-height:1.16; margin-top:14px; }
+.mq-pay-price{ font-size:20px; color:var(--text-secondary); line-height:1.5; margin-top:14px; }
 .mq-pay-price b{ color:var(--ink); font-weight:600; }
-.mq-pay-feats{ list-style:none; margin:16px 0 0; padding:0; display:flex; flex-direction:column; gap:9px; }
-.mq-pay-feats li{ display:flex; gap:10px; align-items:flex-start; font-size:14.5px; line-height:1.4; }
-.mq-pay-feats li svg{ width:18px; height:18px; flex:none; color:var(--green); margin-top:1px; }
-.mq-pay-card{ margin-top:16px; padding-top:16px; border-top:1px solid #F1F2F4; }
-.mq-fld{ display:block; margin-bottom:10px; }
-.mq-fld span{ display:block; font-size:12.5px; font-weight:600; color:var(--text-secondary); margin-bottom:5px; }
-.mq-fld input{ width:100%; box-sizing:border-box; height:48px; border:1.5px solid var(--hairline); border-radius:13px;
-  padding:0 15px; font-family:inherit; font-size:16px; color:var(--ink); background:var(--white); outline:none;
+.mq-pay-feats{ list-style:none; margin:20px 0 0; padding:0; display:flex; flex-direction:column; gap:13px; }
+.mq-pay-feats li{ display:flex; gap:12px; align-items:flex-start; font-size:18.5px; line-height:1.5; }
+.mq-pay-feats li svg{ width:24px; height:24px; flex:none; color:var(--green); margin-top:2px; }
+.mq-pay-card{ margin-top:22px; padding-top:22px; border-top:1px solid #F1F2F4; }
+.mq-fld{ display:block; margin-bottom:14px; }
+.mq-fld span{ display:block; font-size:16px; font-weight:600; color:var(--text-secondary); margin-bottom:9px; }
+.mq-fld input{ width:100%; box-sizing:border-box; height:60px; border:1.5px solid var(--hairline); border-radius:14px;
+  padding:0 18px; font-family:inherit; font-size:19px; color:var(--ink); background:var(--white); outline:none;
   font-variant-numeric:tabular-nums; transition:border-color .18s ease; }
 .mq-fld input:focus{ border-color:var(--green); }
 .mq-fld input::placeholder{ color:var(--text-tertiary); }
 .mq-fld-row{ display:flex; gap:12px; }
 .mq-fld-row .mq-fld{ flex:1; }
-.mq-pay-risk{ font-size:12.5px; color:var(--text-tertiary); line-height:1.45; margin-top:12px; text-align:center; }
+.mq-pay-risk{ font-size:15.5px; color:var(--text-tertiary); line-height:1.55; margin-top:18px; text-align:center; }
 .mq-pay-lock{ display:inline-flex; align-items:center; gap:6px; }
-.mq-pay-lock svg{ width:13px; height:13px; }
+.mq-pay-lock svg{ width:15px; height:15px; }
 /* footer */
 .mx-foot{ padding:34px 0 10px; text-align:center; }
 .mx-foot .brand svg{ height:26px; width:auto; opacity:0.9; }
@@ -254,6 +254,9 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 /* the What's-already-yours card */
 .mcard{ border:1px solid var(--hairline); border-radius:18px; padding:18px 16px 16px; margin-top:20px; background:var(--white); }
 .mcard-t{ font-size:21px; font-weight:600; letter-spacing:-0.2px; }
+/* the What's already yours card: no outline, no side padding (flush like the page) */
+#mwhats{ border:0; border-radius:0; padding:0; margin-top:16px; }
+#mwhats .mcard-t{ display:none; }
 .mseg{ position:relative; display:grid; grid-template-columns:1fr 1fr 1fr; background:#F2F3F5; border-radius:11px; padding:3px; margin-top:14px; }
 .mseg-thumb{ position:absolute; top:3px; left:3px; width:calc((100% - 6px)/3); height:calc(100% - 6px);
   background:var(--white); border:1px solid var(--hairline); border-radius:9px;
@@ -854,6 +857,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     </div>
   </section>
 
+  <div class="mplan-seclabel" style="margin-top:26px">Everything you have</div>
   <div class="mlist" id="mlist"></div>
 </div>
 
@@ -898,9 +902,6 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     <div class="mplan-chips" id="mplanChips"></div>
   </section>
 
-  <!-- Boost your confidence: the desktop levers card -->
-  <div class="mplan-seclabel" id="mplanBoostLabel">Boost your confidence</div>
-  <section class="mcard mplan-boost" id="mplanBoost"></section>
 
   <div class="mlist" id="mlistPlan"></div>
 </div>
@@ -1637,10 +1638,6 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
         dd:'Portfolio',
         stats:[['Confidence','87%','Monte Carlo +','conf'],['Fire number','$2.16M','50% funded','fire'],['Funds depleted','2099','Age 82 &middot; 12 yrs','depleted']],
         chips:[['Surplus/mo','$3,450'],['Portfolio','$1.09M'],['Savings rate','28%'],['Cash runway','14 mo']],
-        boostT:'Three moves that lift your score the most', badge:'87% today',
-        boostSub:'Your plan already survives most markets. These close the gap in the toughest 1-in-10 outcomes.',
-        levers:[['Delay Social Security to 70','+6 pts &rarr; 93%',100],['Trim spending $400/mo for the first 5 years','+4 pts &rarr; 91%',67],['Work through age 64 instead of 62','+3 pts &rarr; 90%',50]],
-        cta:'Compare these scenarios',
         secKeys:['assets','debts','income','home','expenses'], secHeading:'Your full picture'
       },
       fl:{
@@ -1648,10 +1645,6 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
         dd:'Net worth',
         stats:[['Net worth','$1.14M','Assets &minus; debts'],['Surplus','$3,450','After expenses'],['Savings rate','28%','Above target']],
         chips:[['Income/mo','$12,300'],['Spending/mo','$8,850'],['Into Roth','$2,400'],['Into taxable','$1,050']],
-        boostT:'Put your surplus to work', badge:'28% saved',
-        boostSub:'Your $3,450 monthly surplus is above target. Directing it deliberately compounds into years of freedom.',
-        levers:[['Automate a monthly Roth transfer','+$2,400/mo',100],['Top up the brokerage','+$1,050/mo',44],['Sweep the year-end bonus','once a year',30]],
-        cta:'See the full breakdown',
         secKeys:['income','expenses','assets'], secHeading:'What drives your surplus'
       },
       retirement:{
@@ -1659,10 +1652,6 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
         dd:'Retirement income',
         stats:[['Success','87%','Monte Carlo +'],['To retirement','7 yrs','Dec 2028'],['Safe spending','$8,400','per month']],
         chips:[['SS at 70','$3,940'],['Withdrawals','$3,100'],['Pension','$1,360'],['Total/mo','$8,400']],
-        boostT:'Claim Social Security at 70', badge:'+$420/mo',
-        boostSub:'Waiting to 70 adds $420 a month for life and gives the Roth window more room to work.',
-        levers:[['Delay Social Security to 70','+$420/mo',100],['Hold spending steady to 72','+2 yrs funded',60],['Keep the bond glide-path','lower drawdown',45]],
-        cta:'Model your retirement income',
         secKeys:['assets','income','expenses'], secHeading:'What funds retirement'
       },
       tax:{
@@ -1670,10 +1659,6 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
         dd:'Lifetime taxes',
         stats:[['Effective rate','19.4%','This year'],['Lifetime rate','23.1%','Projected'],['Lifetime tax','$648K','If unchanged']],
         chips:[['12% bracket','$106,750'],['Convert/yr','~$17,800'],['Windows','6 yrs'],['Tax saved','$61,000']],
-        boostT:'Fill the December Roth window', badge:'&minus;$61K tax',
-        boostSub:'Six low-bracket Decembers between 2029 and 2035, before Social Security starts. Filling them erases $61,000 of lifetime tax.',
-        levers:[['Convert to the top of the 12% bracket','&minus;$61,000',100],['Start with 2029 before it closes','&minus;$10,200',52],['Coordinate with Medicare IRMAA','avoid surcharge',35]],
-        cta:'Plan your conversions',
         secKeys:['assets','income'], secHeading:'What the strategy works on'
       }
     };
@@ -1681,7 +1666,6 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     var hl=document.getElementById('planHl');
     var stats3=document.getElementById('mplanStats3');
     var chipsEl=document.getElementById('mplanChips');
-    var boostEl=document.getElementById('mplanBoost');
     var ddl=document.getElementById('mplanDDl');
     var listEl=document.getElementById('mlistPlan');
     function stagger(nodes, dy){
@@ -1698,17 +1682,6 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
       chipsEl.innerHTML=L.chips.map(function(c){ return '<div class="mchip4"><div class="lab">'+c[0]+'</div><div class="val">'+c[1]+'</div></div>'; }).join('');
       stagger([].slice.call(chipsEl.children),4);
     }
-    function renderBoost(L){
-      boostEl.innerHTML='<div class="mboost-hd"><div class="mboost-t">'+L.boostT+'</div><span class="mboost-badge">'+L.badge+'</span></div>'+
-        '<div class="mboost-sub">'+L.boostSub+'</div>'+
-        L.levers.map(function(lv){ return '<div class="mlever"><div class="mlever-top"><span class="mlever-name">'+lv[0]+'</span><span class="mlever-pts">'+lv[1]+'</span></div><div class="mlever-bar"><i style="width:'+lv[2]+'%"></i></div></div>'; }).join('')+
-        '<span class="mboost-cta" data-toast="Scenario comparison lands next in the mobile build">'+L.cta+' <svg viewBox="0 0 24 24" fill="none" width="13" height="13"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
-      if(!reduce){
-        boostEl.querySelectorAll('.mlever-bar i').forEach(function(bar,i){
-          if(bar.animate) bar.animate([{transform:'scaleX(0)'},{transform:'scaleX(1)'}],{duration:620,delay:180+i*120,easing:'cubic-bezier(0.22,1,0.36,1)',fill:'backwards'});
-        });
-      }
-    }
     function renderSections(L){
       listEl.innerHTML=window.__planSections(L.secKeys, L.secHeading);
       stagger([].slice.call(listEl.querySelectorAll('.mrow')));
@@ -1716,7 +1689,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     function apply(lens, animate){
       var L=LENS[lens]; if(!L) return;
       ddl.textContent=L.dd;
-      renderStats(L); renderChips(L); renderBoost(L); renderSections(L);
+      renderStats(L); renderChips(L); renderSections(L);
       if(reduce || !animate){ hl.innerHTML=L.hl; return; }
       hl.classList.add('hl-sw');
       setTimeout(function(){ hl.innerHTML=L.hl; hl.classList.remove('hl-sw'); }, 180);
