@@ -255,7 +255,7 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .mcard{ border:1px solid var(--hairline); border-radius:18px; padding:18px 16px 16px; margin-top:20px; background:var(--white); }
 .mcard-t{ font-size:21px; font-weight:600; letter-spacing:-0.2px; }
 /* the What's already yours card: no outline, no side padding (flush like the page) */
-#mwhats{ border:0; border-radius:0; padding:0; margin-top:16px; }
+#mwhats{ border:0; border-radius:0; padding:0; margin-top:34px; }
 #mwhats .mcard-t{ display:none; }
 .mseg{ position:relative; display:grid; grid-template-columns:1fr 1fr 1fr; background:#F2F3F5; border-radius:11px; padding:3px; margin-top:14px; }
 .mseg-thumb{ position:absolute; top:3px; left:3px; width:calc((100% - 6px)/3); height:calc(100% - 6px);
@@ -267,11 +267,11 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .mpanel{ display:none; padding-top:18px; }
 .mpanel.on{ display:block; animation:mpin .3s var(--push-ease); }
 @keyframes mpin{ from{ opacity:0; transform:translateY(5px);} to{ opacity:1; transform:none;} }
-.mfig-row{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; }
-.mfig{ font:700 36px 'DM Sans',sans-serif; letter-spacing:-1.4px; font-variant-numeric:tabular-nums; }
+.mfig-row{ display:flex; flex-direction:row; align-items:center; gap:12px; flex-wrap:wrap; margin-top:6px; }
+.mfig{ font:700 48px/1 'DM Sans',sans-serif; letter-spacing:-1px; font-variant-numeric:tabular-nums; display:block; }
 .mfig-green{ color:var(--green-cta); }
-.mdelta{ font:600 15px 'DM Sans',sans-serif; color:var(--green-cta); }
-.mfig-sub{ font-size:15.5px; color:var(--text-tertiary); margin-top:2px; }
+.mdelta{ display:inline-flex; align-items:center; gap:5px; font:600 14px 'DM Sans',sans-serif; color:var(--green-cta); background:var(--mint); border-radius:999px; padding:5px 12px; }
+.mfig-sub{ font-size:15.5px; color:var(--text-tertiary); margin-top:5px; }
 .mstack-bar{ display:flex; gap:3px; height:14px; margin:16px 0 4px; }
 .mstack-bar i{ display:block; border-radius:99px; transform-origin:left; min-width:8px; }
 .c1{ background:var(--teal); } .c2{ background:#1B6B5C; } .c3{ background:#04B477; } .c4{ background:#CDEBDD; }
@@ -435,9 +435,9 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
   border-bottom:1px solid var(--hairline); padding:17px 2px; font-family:inherit; cursor:pointer; }
 .mrow:active{ background:#FAFBFC; }
 .mrow-txt{ flex:1; min-width:0; }
-.mrow-t{ font-size:19px; font-weight:600; color:var(--ink); }
-.mrow-s{ font-size:15px; color:var(--text-tertiary); margin-top:2px; }
-.mrow-amt{ font:500 17px 'DM Sans',sans-serif; color:var(--text-secondary); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.mrow-t{ font-size:20px; font-weight:600; color:var(--ink); }
+.mrow-s{ font-size:16px; color:var(--text-tertiary); margin-top:2px; }
+.mrow-amt{ font:500 18px 'DM Sans',sans-serif; color:var(--text-secondary); font-variant-numeric:tabular-nums; white-space:nowrap; }
 .mrow-chev{ color:#C4C8CF; flex:none; }
 .mrow-chev svg{ display:block; }
 
@@ -808,7 +808,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
 
 <div class="mtab" id="tabToday" hidden>
   <div class="mgreet meye">Today</div>
-  <h1 class="mhl">You&rsquo;ve done <em class="mhl-em">better</em> than you <em class="mhl-gold">think</em>.</h1>
+  <h1 class="mhl">In <em class="mhl-em">better</em> shape than it <em class="mhl-gold">feels</em>.</h1>
   <p class="msubhead msubhead-today">Fact, not forecast. Your real numbers, today.</p>
   <section class="mcard" id="mwhats">
     <div class="mcard-t">What&#8217;s already yours</div>
@@ -857,7 +857,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     </div>
   </section>
 
-  <div class="mplan-seclabel" style="margin-top:26px">Everything you have</div>
+  <div class="mplan-seclabel" style="font-size:18px; margin:40px 2px -6px">Everything you have</div>
   <div class="mlist" id="mlist"></div>
 </div>
 
