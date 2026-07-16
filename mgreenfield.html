@@ -647,28 +647,58 @@ body.pushed .msub{ transform:translateX(0); }
 .mps-pill.done .mps-chk path{ stroke-dashoffset:0; transition:stroke-dashoffset 560ms cubic-bezier(0.22,1,0.36,1) 200ms; }
 .mps-pill.done .mps-pts{ display:none; }
 
-/* quest card: the desktop's armed editor, ported to the pushed page */
-.mq-quest{ position:relative; border:1.5px solid #C4DBF8; border-radius:18px; padding:18px 16px 16px; margin:0 0 30px; background:var(--white); }
-.mq-quest-eye{ font-size:14px; font-weight:600; color:#3B82D9; margin-bottom:5px; }
-.mq-quest-t{ font-size:20.5px; font-weight:600; letter-spacing:-0.2px; color:var(--ink); }
-.mq-quest-t .pts{ color:var(--green-cta); font:700 17px 'DM Sans',sans-serif; margin-left:7px; }
-.mq-quest-s{ font-size:16px; color:var(--text-secondary); line-height:1.45; margin:5px 0 20px; }
-.mq-fields .mf{ margin-bottom:18px; }
-.mq-save{ display:flex; align-items:center; justify-content:center; gap:9px; width:100%; height:54px; border:0; border-radius:999px;
-  background:var(--green-cta); color:#FFFFFF; font-family:var(--font); font-size:18px; font-weight:600; cursor:pointer;
-  transition:background .18s ease; }
-.mq-save:active, .mq-save.is-saved{ background:#0B5F3D; }
-.mq-save .sp{ width:16px; height:16px; border-radius:999px; border:2.5px solid rgba(255,255,255,0.35); border-top-color:#FFFFFF;
-  animation:mq-spin .7s linear infinite; display:none; }
-.mq-save.is-saving .sp{ display:inline-block; }
+/* ===== compact sticky Plan Score bar: hidden at the top, reveals as you scroll ===== */
+.mps-sticky{ position:fixed; top:calc(74px + env(safe-area-inset-top)); left:50%; transform:translateX(-50%) translateY(-8px);
+  width:calc(100% - 36px); max-width:444px; z-index:55; display:none; align-items:center; gap:12px;
+  padding:9px 15px; background:var(--white); border:1px solid var(--hairline); border-radius:999px;
+  opacity:0; pointer-events:none; transition:opacity .28s var(--push-ease), transform .28s var(--push-ease); cursor:pointer; }
+.mps-sticky-t{ font-size:14.5px; font-weight:600; color:var(--ink); white-space:nowrap; flex:none; }
+.mps-sticky-t .mps-sticky-num{ color:var(--green-cta); font-variant-numeric:tabular-nums; }
+.mps-sticky-bar{ flex:1; height:7px; border-radius:999px; background:#E7E9EC; overflow:hidden; }
+.mps-sticky-bar i{ display:block; height:100%; border-radius:999px; background:var(--green-cta); width:0;
+  transition:width .7s cubic-bezier(0.22,1,0.36,1); }
+body.show-score-bar .mps-sticky{ display:flex; }
+body.show-score-bar.score-bar-in .mps-sticky{ opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0); }
+body.pushed .mps-sticky{ opacity:0; pointer-events:none; transform:translateX(-50%) translateY(-8px); }
+
+/* ===== quest mode: the widget docks at the top and stays put while the
+   section slides up underneath it, exactly like the desktop's pinned column ===== */
+.qmode{ position:fixed; inset:0; margin:0 auto; width:100%; max-width:480px; z-index:66;
+  background:var(--white); display:flex; flex-direction:column;
+  opacity:0; pointer-events:none; transition:opacity .24s ease; }
+body.quest-mode .qmode{ opacity:1; pointer-events:auto; }
+.qdock{ flex:none; background:var(--white); border-bottom:1px solid var(--hairline);
+  padding:calc(10px + env(safe-area-inset-top)) 18px 0;
+  transform:translateY(-14px); opacity:0; transition:transform .3s var(--push-ease), opacity .3s var(--push-ease); }
+body.quest-mode .qdock{ transform:translateY(0); opacity:1; }
+.qdock-top{ display:flex; align-items:center; justify-content:space-between; min-height:40px; }
+.qdock-back{ display:inline-flex; align-items:center; gap:2px; background:none; border:0; font-family:inherit;
+  font-size:17px; font-weight:500; color:var(--ink); cursor:pointer; padding:6px 10px 6px 0; margin-left:-4px; }
+.qdock-count{ font-size:14.5px; color:var(--text-tertiary); font-variant-numeric:tabular-nums; }
+.qdock .mps{ border:0; border-radius:0; padding:4px 0 16px; margin:0; }
+.qdock .mps-bar{ margin-top:12px; }
+.qdock .mps-pills{ margin:14px -18px 0; padding:2px 18px 2px; }
+.qbody{ flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; overscroll-behavior:contain;
+  padding:24px 18px calc(44px + env(safe-area-inset-bottom));
+  transform:translateY(30px); opacity:0; transition:transform .36s var(--push-ease) .05s, opacity .36s var(--push-ease) .05s; }
+body.quest-mode .qbody{ transform:translateY(0); opacity:1; }
+/* the quest editor is the section's own editor, already open and focused */
+.qedit .medit-card{ position:relative; }
+/* two-phase save on the section's own Save button (desktop's Saving -> Saved) */
+.medit-save .sp{ width:14px; height:14px; border-radius:999px; border:2.4px solid rgba(255,255,255,0.35); border-top-color:#FFFFFF;
+  animation:mq-spin .7s linear infinite; display:none; vertical-align:-2px; margin-right:7px; }
+.medit-save.is-saving .sp{ display:inline-block; }
+.medit-save.is-saving, .medit-save.is-saved{ pointer-events:none; }
 @keyframes mq-spin{ to{ transform:rotate(360deg); } }
-.mq-skip{ display:block; width:100%; text-align:center; margin-top:14px; background:none; border:0; font-family:var(--font);
-  font-size:16.5px; color:var(--text-tertiary); cursor:pointer; padding:8px 0; }
-/* the green ring that traces the card perimeter while saving (desktop's ringSweep) */
+/* the green ring that traces the editor's perimeter while saving (desktop's ringSweep) */
 .mq-ring{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; overflow:visible; }
-.mq-ring rect{ x:1px; y:1px; rx:17px; width:calc(100% - 2px); height:calc(100% - 2px);
+.mq-ring rect{ x:0px; y:0px; rx:0px; width:100%; height:100%;
   fill:none; stroke:#04B477; stroke-width:3; stroke-dasharray:1; stroke-dashoffset:1; }
-.mq-quest.saving .mq-ring rect{ transition:stroke-dashoffset .9s cubic-bezier(0.4,0,0.2,1); stroke-dashoffset:0; }
+.medit-card.saving .mq-ring rect{ transition:stroke-dashoffset .9s cubic-bezier(0.4,0,0.2,1); stroke-dashoffset:0; }
+/* quest-mode chrome: the app nav and sticky bar step aside */
+body.quest-mode .mnav{ opacity:0; pointer-events:none; transform:translateX(-50%) translateY(20px); transition:opacity .2s ease, transform .2s ease; }
+body.quest-mode .mnav-fade{ opacity:0; transition:opacity .2s ease; }
+body.quest-mode .mps-sticky{ opacity:0; pointer-events:none; }
 
 /* the score number pulses when it ticks, the bar brightens */
 .mps-num.tick{ display:inline-block; animation:mps-tick .5s cubic-bezier(0.34,1.3,0.64,1); }
@@ -917,6 +947,11 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     <button class="mico" aria-label="More"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg></button>
   </span>
 </header>
+
+<div class="mps-sticky" id="mpsSticky" role="button" tabindex="0" aria-label="Plan Score, jump to details">
+  <span class="mps-sticky-t">Plan Score <span class="mps-sticky-num">0</span></span>
+  <span class="mps-sticky-bar"><i></i></span>
+</div>
 
 <main class="mroot" id="mroot">
 <div class="mtab" id="tabHome">
@@ -1236,6 +1271,17 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
 </section>
 
 <div class="mnav-fade" aria-hidden="true"></div>
+<div class="qmode" id="qmode" aria-hidden="true">
+  <div class="qdock">
+    <div class="qdock-top">
+      <button class="qdock-back" type="button"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg>Back</button>
+      <span class="qdock-count" id="qdockCount"></span>
+    </div>
+    <div id="qdockWidget"></div>
+  </div>
+  <div class="qbody" id="qbody"></div>
+</div>
+
 <nav class="mnav" id="mnav">
   <button data-tab="home" class="on" aria-label="Home"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.2 3.6 10v10.3h5.9v-6.2h5v6.2h5.9V10z"/></svg></button>
   <button data-tab="today" aria-label="Today"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor"><path d="M3.5 3.5h17a1.5 1.5 0 0 1 1.5 1.5v14a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 19V5a1.5 1.5 0 0 1 1.5-1.5z" opacity=".95"/><path d="M12 6.4c.45 0 .8.35.8.8v.5c1 .25 1.7.9 1.85 1.9h-1.5c-.12-.5-.6-.8-1.25-.8-.75 0-1.25.38-1.25.9 0 .4.35.63 1.15.87l.9.26c1.35.38 2.1 1 2.1 2.12 0 1.1-.85 1.85-2 2.1v.55a.8.8 0 0 1-1.6 0v-.55c-1.1-.25-1.95-1-2.1-2.1h1.6c.13.6.6.9 1.35.9.75 0 1.25-.35 1.25-.87 0-.4-.35-.63-1.15-.87l-.95-.28c-1.25-.36-2-.98-2-2.08 0-1 .8-1.72 1.9-1.97v-.5c0-.45.35-.8.8-.8z" fill="#F4F5F2"/></svg></button>
@@ -1363,9 +1409,20 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     { id:'balances', label:'Balances',           pts:5,  done:true,  go:'assets'   }
   ];
   function psScore(){ return PS_TASKS.filter(function(t){return t.done;}).reduce(function(a,t){return a+t.pts;},0); }
-  var psPending=null;   // task id armed and awaiting its in-section save
-  var psSaved=false;    // true only after the user actually taps Save on the quest card
+  // paint the compact sticky bar to the current score (instant; used on tab entry)
+  function updateStickyScore(){
+    var s=document.getElementById('mpsSticky'); if(!s) return;
+    var sc=psScore();
+    var num=s.querySelector('.mps-sticky-num'), bar=s.querySelector('.mps-sticky-bar i');
+    if(num) num.textContent=String(sc);
+    if(bar) bar.style.width=sc+'%';
+  }
+  var questActive=null;   // the step currently open in quest mode
+  var questOrigin='home';  // the tab to land on when quest mode closes
 
+  function psPillHTML(t){
+    return '<button class="mps-pill" type="button" data-ps="'+t.id+'"><span class="mps-chk"><svg viewBox="0 0 24 24"><path d="M5.5 12.5l4.2 4.2 9-9.6"/></svg></span>'+t.label+'<span class="mps-pts">+'+t.pts+'</span></button>';
+  }
   function buildPlanScore(el){
     if(!el) return;
     var sc=psScore();
@@ -1374,9 +1431,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       ? ''
       : 'Complete. Every input is in, and your plan is fully modeled.';
     var pills = open.length
-      ? '<div class="mps-pills" id="mpsPills">'+open.map(function(t){
-          return '<button class="mps-pill" type="button" data-ps="'+t.id+'"><span class="mps-chk"><svg viewBox="0 0 24 24"><path d="M5.5 12.5l4.2 4.2 9-9.6"/></svg></span>'+t.label+'<span class="mps-pts">+'+t.pts+'</span></button>';
-        }).join('')+'</div>'
+      ? '<div class="mps-pills">'+open.map(psPillHTML).join('')+'</div>'
       : '<div class="mps-alldone">Nicely done. Your plan is <b>fully built</b>, and every projection on this page rests on real inputs.</div>';
     el.innerHTML=
       '<div class="mps">'+
@@ -1406,6 +1461,17 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         num.textContent=Math.round(before+(after-before)*e); if(p<1) requestAnimationFrame(step); }
       requestAnimationFrame(step);
     });
+    // the compact sticky bar ticks in lockstep
+    var st=document.getElementById('mpsSticky');
+    if(st){
+      var sbar=st.querySelector('.mps-sticky-bar i'), snum=st.querySelector('.mps-sticky-num');
+      if(sbar) sbar.style.width=after+'%';
+      if(snum){
+        if(reduce){ snum.textContent=String(after); }
+        else { var s0=null; function tick(ts){ if(!s0)s0=ts; var p=Math.min(1,(ts-s0)/700); var e=1-Math.pow(1-p,3);
+          snum.textContent=Math.round(before+(after-before)*e); if(p<1) requestAnimationFrame(tick); } requestAnimationFrame(tick); }
+      }
+    }
   }
 
   // the "+N" that rises off a completed pill
@@ -1432,6 +1498,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     var before=psScore();
     task.done=true;
     var pills=[].slice.call(document.querySelectorAll('.mps-pill[data-ps="'+id+'"]'));
+    pills.sort(function(a,b){ return (b.closest('.qdock')?1:0)-(a.closest('.qdock')?1:0); });
     var flew=false;
     pills.forEach(function(pill){
       pill.classList.remove('armed');
@@ -1474,9 +1541,11 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         // the desktop's advance-to-next: the next step arms itself and centers in the row
         var next=PS_TASKS.find(function(t){return !t.done;});
         if(next){
+          var inQuest=document.body.classList.contains('quest-mode');
           document.querySelectorAll('.mps-pill[data-ps="'+next.id+'"]').forEach(function(p){
             p.classList.add('armed');
-            if(p.offsetParent && p.scrollIntoView) p.scrollIntoView({behavior:reduce?'auto':'smooth', inline:'center', block:'nearest'});
+            var canScroll = inQuest ? p.closest('.qdock') : p.offsetParent;
+            if(canScroll && p.scrollIntoView) p.scrollIntoView({behavior:reduce?'auto':'smooth', inline:'center', block:'nearest'});
           });
         }
       }, reduce?0:360);
@@ -1565,12 +1634,6 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     document.body.classList.remove('vault-open');
     sub.setAttribute('aria-hidden','true');
     setNav(pushOrigin);
-    // a step only completes after its Save; backing out just disarms (desktop parity)
-    if(psPending){
-      var id=psPending; psPending=null;
-      if(psSaved){ psSaved=false; setTimeout(function(){ psCelebrate(id); }, 460); }
-      else { document.querySelectorAll('.mps-pill.armed').forEach(function(p){ p.classList.remove('armed'); }); }
-    }
   }
   document.getElementById('mback').addEventListener('click', pop);
   document.addEventListener('click', function(e){
@@ -1578,10 +1641,8 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     if(pill){
       var id=pill.dataset.ps; var task=PS_TASKS.find(function(t){return t.id===id;});
       if(task && !task.done){
-        psPending=id; psSaved=false;
-        document.querySelectorAll('.mps-pill[data-ps="'+id+'"]').forEach(function(p){ p.classList.add('armed'); });
-        psRoute(task.go);
-        injectQuestCard(task);
+        if(document.body.classList.contains('quest-mode')){ if(id!==questActive) switchQuest(task); }
+        else enterQuest(task);
       }
       return;
     }
@@ -1597,53 +1658,150 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     if(s){ push('<div class="msub-title">'+s.t+'</div><div class="msub-sub">'+s.s+'</div>'+s.body, false); }
   }
 
-  /* ===== quest card: each step gets its own fields, saved in place (desktop's applyQuestForm) ===== */
+  /* ===== quest mode: the desktop flow, translated. The widget docks at the top and
+     stays visible; the section slides up under it; you edit in the section's own
+     editor; Save completes the step in front of you; the next section slides in. ===== */
   var PS_FORMS={
-    housing:{ t:'Confirm your housing', s:'Two numbers anchor the whole plan.', f:[['Home value','$905,000'],['Mortgage balance','$332,550']] },
-    work:{ t:'Confirm work income', s:'What comes in each month, until the last paycheck.', f:[['Monthly income','$12,300'],['Income ends','December 2028']] },
-    ss:{ t:'Set Social Security', s:'The claim age drives the biggest guaranteed raise.', f:[['Claiming age','70'],['Benefit at 70','$3,940/mo']] },
-    roth:{ t:'Plan the Roth conversion', s:'Fill the low bracket while the window is open.', f:[['2029 conversion','$17,800'],['Target bracket','12%']] },
-    healthcare:{ t:'Confirm healthcare costs', s:'Medicare timing, and the premium in between.', f:[['Medicare starts','Age 65'],['Monthly premium','$385']] },
-    expenses:{ t:'Confirm monthly expenses', s:'What life costs, essentials and extras.', f:[['Monthly spending','$8,850'],['Essential share','72%']] },
-    pension:{ t:'Confirm pension income', s:'Steady income the plan can lean on.', f:[['Pension income','$1,360/mo'],['Starts','2029']] },
-    debts:{ t:'Confirm debts and loans', s:'What is owed, and what it costs to carry.', f:[['Loans total','$20,550'],['Highest rate','6.4%']] },
-    realestate:{ t:'Confirm real estate', s:'The property, and how it grows.', f:[['Property value','$905,000'],['Appreciation','3.0%/yr']] }
+    housing:{ t:'Primary residence', f:[['Home value','$620,000'],['Mortgage balance','$332,550']] },
+    work:{ t:'Work income', f:[['Monthly income','$12,300'],['Income ends','December 2028']] },
+    ss:{ t:'Social Security', f:[['Claiming age','70'],['Benefit at 70','$3,940/mo']] },
+    roth:{ t:'Roth conversion', f:[['2029 conversion','$17,800'],['Target bracket','12%']] },
+    healthcare:{ t:'Healthcare', f:[['Medicare starts','Age 65'],['Monthly premium','$385']] },
+    expenses:{ t:'Monthly expenses', f:[['Monthly spending','$8,850'],['Essential share','72%']] },
+    pension:{ t:'Pension', f:[['Pension income','$1,360/mo'],['Starts','2029']] },
+    debts:{ t:'Debts and loans', f:[['Loans total','$20,550'],['Highest rate','6.4%']] },
+    realestate:{ t:'Tahoe condo', f:[['Property value','$285,000'],['Appreciation','3.0%/yr']] }
   };
-  function injectQuestCard(task){
-    var body=document.getElementById('msubBody'); if(!body) return;
-    var F=PS_FORMS[task.id]||{ t:'Confirm '+task.label.toLowerCase(), s:'A quick check keeps the plan honest.', f:[['Value','']] };
-    var card=document.createElement('div'); card.className='mq-quest'; card.dataset.ps=task.id;
-    card.innerHTML=
+  function questEditorHTML(task){
+    var F=PS_FORMS[task.id]||{ t:task.label, f:[['Value','']] };
+    return '<div class="medit qedit"><div class="medit-card">'+
       '<svg class="mq-ring" preserveAspectRatio="none"><rect pathLength="1"/></svg>'+
-      '<div class="mq-quest-eye">Plan Score step</div>'+
-      '<div class="mq-quest-t">'+F.t+'<span class="pts">+'+task.pts+'</span></div>'+
-      '<div class="mq-quest-s">'+F.s+'</div>'+
-      '<div class="mq-fields">'+F.f.map(function(x){ return '<div class="mf"><label>'+x[0]+'</label><input type="text" value="'+x[1]+'"></div>'; }).join('')+'</div>'+
-      '<button class="mq-save" type="button"><span class="sp"></span><span class="mq-save-t">Save</span></button>'+
-      '<button class="mq-skip" type="button">Not now</button>';
-    body.insertBefore(card, body.firstChild);
+      '<div class="medit-head"><div class="medit-t">'+F.t+'</div>'+
+        '<div class="medit-actions"><button class="medit-x qedit-skip" type="button" aria-label="Not now"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>'+
+      '</div>'+
+      F.f.map(function(x){ return '<div class="mf"><label>'+x[0]+'</label><input type="text" value="'+x[1]+'"></div>'; }).join('')+
+      '<button class="medit-save" type="button"><span class="sp"></span><span class="msv-t">Save</span></button>'+
+    '</div></div>';
   }
-  // two-phase save (desktop's Saving -> Saved with the perimeter ring), then home
-  document.addEventListener('click', function(e){
-    var sv=e.target.closest('.mq-save');
+  function questBodyHTML(task){
+    // ss and roth live on their Optimize pages; everything else on its section page.
+    // Either way it is the page's own UI, with its own editor opened for this step.
+    if(task.go==='opt-ss' || task.go==='opt-tax'){
+      var src = task.go==='opt-ss' ? OPT.ss : OPT.tax;
+      var cut = src.indexOf('</p>');
+      var ed=questEditorHTML(task);
+      return cut>-1 ? src.slice(0,cut+4)+ed+src.slice(cut+4) : ed+src;
+    }
+    var s=SECTIONS.find(function(x){ return x.key===task.go; });
+    if(!s) return questEditorHTML(task);
+    return '<div class="msub-title">'+s.t+'</div><div class="msub-sub">'+s.s+'</div>'+questEditorHTML(task)+s.body;
+  }
+  function buildDock(){
+    var w=document.getElementById('qdockWidget'); if(!w) return;
+    var sc=psScore();
+    var open=PS_TASKS.filter(function(t){return !t.done;});
+    w.innerHTML='<div class="mps">'+
+      '<div class="mps-txt"><div class="mps-t">Plan Score <span class="mps-num">'+sc+'</span></div></div>'+
+      '<div class="mps-bar"><i style="width:'+sc+'%"></i></div>'+
+      (open.length ? '<div class="mps-pills">'+open.map(psPillHTML).join('')+'</div>'
+                   : '<div class="mps-alldone">Nicely done. Your plan is <b>fully built</b>.</div>')+
+    '</div>';
+    updateDockCount();
+  }
+  function updateDockCount(){
+    var c=document.getElementById('qdockCount'); if(!c) return;
+    var left=PS_TASKS.filter(function(t){return !t.done;}).length;
+    c.textContent = left ? (left===1 ? '1 step left' : left+' steps left') : 'Complete';
+  }
+  function armDockPill(id){
+    document.querySelectorAll('.qdock .mps-pill').forEach(function(p){ p.classList.toggle('armed', p.dataset.ps===id); });
+    var p=document.querySelector('.qdock .mps-pill[data-ps="'+id+'"]');
+    if(p && p.scrollIntoView) setTimeout(function(){ p.scrollIntoView({behavior:reduce?'auto':'smooth', inline:'center', block:'nearest'}); }, 80);
+  }
+  function fillQuestBody(task){
+    var qb=document.getElementById('qbody');
+    qb.innerHTML=questBodyHTML(task);
+    qb.scrollTop=0;
+    qb.querySelectorAll('.msub-title, .msub-hl').forEach(function(t){ noOrphans(t); });
+  }
+  function enterQuest(task){
+    questActive=task.id; questOrigin=activeTab;
+    buildDock();
+    fillQuestBody(task);
+    document.getElementById('qmode').setAttribute('aria-hidden','false');
+    document.body.classList.add('quest-mode');
+    armDockPill(task.id);
+  }
+  function advanceBody(task){
+    var qb=document.getElementById('qbody');
+    var swap=function(){
+      fillQuestBody(task);
+      if(!reduce && qb.animate){
+        qb.animate([{opacity:0, transform:'translateY(26px)'},{opacity:1, transform:'translateY(0)'}],
+          {duration:340, easing:'cubic-bezier(0.22,1,0.36,1)'});
+        var card=qb.querySelector('.qedit .medit-card');
+        if(card && card.animate) card.animate(
+          [{opacity:0.3, transform:'translateY(12px)'},{opacity:1, transform:'translateY(0)'}],
+          {duration:360, delay:120, easing:'cubic-bezier(0.4,0,0.2,1)', fill:'backwards'});
+      }
+    };
+    if(reduce || !qb.animate){ swap(); return; }
+    var out=qb.animate([{opacity:1, transform:'translateY(0)'},{opacity:0, transform:'translateY(18px)'}],
+      {duration:220, easing:'cubic-bezier(0.4,0,0.2,1)', fill:'forwards'});
+    out.onfinish=function(){ out.cancel(); swap(); };
+  }
+  function switchQuest(task){
+    questActive=task.id;
+    armDockPill(task.id);
+    advanceBody(task);
+  }
+  function exitQuest(){
+    questActive=null;
+    document.body.classList.remove('quest-mode');
+    document.getElementById('qmode').setAttribute('aria-hidden','true');
+    // nothing stays armed after leaving; every widget already carries the new score
+    document.querySelectorAll('.mps-pill.armed').forEach(function(p){ p.classList.remove('armed'); });
+    updateStickyScore();
+  }
+  document.querySelector('.qdock-back').addEventListener('click', exitQuest);
+  // two-phase save on the section's own Save button, then the celebration runs
+  // in the docked widget in plain view, then the next section slides in under it
+  document.getElementById('qbody').addEventListener('click', function(e){
+    var sv=e.target.closest('.qedit .medit-save');
     if(sv){
       if(sv.classList.contains('is-saving')||sv.classList.contains('is-saved')) return;
-      var card=sv.closest('.mq-quest');
+      var card=sv.closest('.medit-card');
+      var id=questActive;
       var settle=function(){
         sv.classList.remove('is-saving'); sv.classList.add('is-saved');
-        sv.querySelector('.mq-save-t').innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="vertical-align:-2px;margin-right:3px"><path d="M4.5 12.5l5 5L19.5 7" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Saved';
-        psSaved=true;
-        setTimeout(function(){ pop(); }, reduce?60:680);
+        sv.querySelector('.msv-t').innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="vertical-align:-1.5px;margin-right:5px"><path d="M4.5 12.5l5 5L19.5 7" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Saved';
+        setTimeout(function(){
+          psCelebrate(id);
+          setTimeout(function(){
+            updateDockCount();
+            var next=PS_TASKS.find(function(t){return !t.done;});
+            if(next){ questActive=next.id; advanceBody(next); }
+            else { setTimeout(exitQuest, 2600); }
+          }, reduce?200:1500);
+        }, reduce?40:520);
       };
       if(reduce){ settle(); return; }
       sv.classList.add('is-saving');
-      sv.querySelector('.mq-save-t').textContent='Saving\u2026';
+      sv.querySelector('.msv-t').textContent='Saving\u2026';
       if(card) card.classList.add('saving');
       setTimeout(settle, 950);
       return;
     }
-    var sk=e.target.closest('.mq-skip');
-    if(sk){ pop(); }
+    var sk=e.target.closest('.qedit-skip');
+    if(sk){
+      // Not now: leave this step unfinished and slide the next one in (desktop's skipQuest)
+      var cur=questActive;
+      var items=PS_TASKS.filter(function(t){return !t.done;});
+      var ci=items.findIndex(function(t){return t.id===cur;});
+      var nxt=items.slice(ci+1).concat(items.slice(0,ci)).find(function(t){return t.id!==cur;});
+      if(nxt){ switchQuest(nxt); }
+      else exitQuest();
+    }
   });
 
   /* the nav shrinks on scroll down, returns on scroll up; the score bar reveals on scroll */
@@ -1657,6 +1815,8 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         if(y<=12){ setMini(false); }
         else if(y>last+4 && y>72){ setMini(true); }
         else if(y<last-4){ setMini(false); }
+        // the compact score bar reveals once past a threshold, tucks away near the top
+        document.body.classList.toggle('score-bar-in', y>96);
         last=y;
       }, {passive:true});
     }
@@ -1692,6 +1852,11 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     });
     window.scrollTo(0,0);
     setNav(t);
+    // the compact score bar follows the three score-bearing tabs, starting tucked away
+    var showBar=(t==='home'||t==='today'||t==='plan');
+    document.body.classList.toggle('show-score-bar', showBar);
+    document.body.classList.remove('score-bar-in');
+    if(showBar) updateStickyScore();
     document.body.classList.toggle('ai-tab', t==='ai');
     if(t==='ai') enterAI();
     if(t==='plan'){ drawPlanChart(); if(window.__hintLenses) setTimeout(window.__hintLenses, 120); }
@@ -2119,6 +2284,19 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     fixHeadlines();
     setTimeout(drawHome, 350);
     document.getElementById('mhViz').addEventListener('click', function(){ activateTab('plan'); });
+    // compact sticky score bar: painted on boot, tap jumps to the full widget
+    document.body.classList.add('show-score-bar');
+    updateStickyScore();
+    (function(){
+      var st=document.getElementById('mpsSticky'); if(!st) return;
+      function jump(){
+        if(activeTab==='home') return;   // Home carries the score in the bar alone
+        var el=document.getElementById(activeTab==='today' ? 'todayScore' : 'planScore');
+        if(el) el.scrollIntoView({behavior: reduce?'auto':'smooth', block:'center'});
+      }
+      st.addEventListener('click', jump);
+      st.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); jump(); } });
+    })();
     var gh=document.getElementById('mhGreet');
     var hh=new Date().getHours();
     gh.textContent=(hh<12?'Good morning':hh<18?'Good afternoon':'Good evening')+', Marshall';
