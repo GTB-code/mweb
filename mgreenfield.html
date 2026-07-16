@@ -259,7 +259,7 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 .mcard{ border:1px solid var(--hairline); border-radius:18px; padding:14px 16px 12px; margin-top:20px; background:var(--white); }
 .mcard-t{ font-size:21px; font-weight:600; letter-spacing:-0.2px; }
 /* the What's already yours card: no outline, no side padding (flush like the page) */
-#mwhats{ border:0; border-radius:0; padding:0; margin-top:34px; }
+#mwhats{ border:0; border-radius:0; padding:0; margin-top:18px; }
 #mwhats .mcard-t{ display:none; }
 .mseg{ position:relative; display:grid; grid-template-columns:1fr 1fr 1fr; background:#F2F3F5; border-radius:11px; padding:3px; margin-top:14px; }
 .mseg-thumb{ position:absolute; top:3px; left:3px; width:calc((100% - 6px)/3); height:calc(100% - 6px);
@@ -459,7 +459,7 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 .mlist{ margin-top:26px; border-top:1px solid var(--hairline); }
 /* the Plan list is led by the Plan Score card, which provides its own separation —
    drop the top hairline so it doesn't read as a stray line above the widget */
-#mlistPlan{ border-top:0; margin-top:40px; }
+#mlistPlan{ border-top:0; margin-top:22px; }
 /* Today: air between the 3 stat blocks and the Plan Score widget */
 #todayScore .mps{ margin-top:26px; }
 /* Home: air between the net-worth graph and the Plan Score widget */
@@ -612,7 +612,7 @@ body.pushed .msub{ transform:translateX(0); }
 .mscore-mini .mscore-t{ font-size:16.5px; }
 .mscore-mini .mscore-s{ font-size:14px; }
 /* ===== interactive Plan Score widget (pills + ring, echoes desktop) ===== */
-.mps{ border:1px solid var(--hairline); border-radius:18px; padding:12px 16px 10px; margin:8px 0 4px; }
+.mps{ border:1px solid var(--hairline); border-radius:18px; padding:17px 16px 15px; margin:8px 0 4px; }
 .mps-row{ display:flex; align-items:center; gap:14px; }
 .mps-t{ flex:none; white-space:nowrap; font-size:18px; font-weight:600; color:var(--ink); letter-spacing:-0.2px; }
 .mps-t .mps-num{ color:var(--green-cta); font-variant-numeric:tabular-nums; }
@@ -624,7 +624,7 @@ body.pushed .msub{ transform:translateX(0); }
 .mps-pills{ display:flex; gap:8px; margin:6px -16px 0; padding:2px 16px 2px; overflow-x:auto;
   -webkit-overflow-scrolling:touch; scrollbar-width:none; }
 .mps-pills::-webkit-scrollbar{ display:none; }
-.mps-pill{ flex:none; display:inline-flex; align-items:center; gap:8px; height:30px; padding:0 14px;
+.mps-pill{ flex:none; display:inline-flex; align-items:center; gap:8px; height:40px; padding:0 14px;
   border:1px solid var(--hairline); border-radius:999px; background:var(--white); font-family:inherit;
   font-size:15px; font-weight:500; color:var(--ink); white-space:nowrap; cursor:pointer;
   transition:border-color .16s ease, background .16s ease, opacity .3s ease, transform .3s ease; }
@@ -962,7 +962,6 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       </defs>
       <path id="mhAreaP" d="M8,106.4 C 60,97.3 100,85.1 140,66.9 C 180,48.6 216,33.4 252,28.9 C 278,25.8 300,33.4 320,45.6 C 334,54.7 346,62.3 352,69.9 L352,127.7 L8,127.7 Z" fill="url(#mhArea)" opacity="0"/>
       <path id="mhLineP" d="M8,106.4 C 60,97.3 100,85.1 140,66.9 C 180,48.6 216,33.4 252,28.9 C 278,25.8 300,33.4 320,45.6 C 334,54.7 346,62.3 352,69.9" fill="none" stroke="url(#mhLine)" stroke-width="3" stroke-linecap="round" pathLength="1"/>
-      <line x1="8" y1="127.7" x2="352" y2="127.7" stroke="#E7E9EC" stroke-width="1.5"/>
       <g id="mhPt" opacity="0">
         <line x1="252" y1="33.4" x2="252" y2="127.7" stroke="#E7E9EC" stroke-width="1.2" stroke-dasharray="3 4"/>
         <g class="mh-halo" style="transform-box:fill-box; transform-origin:center;"><circle cx="252" cy="28.9" r="20" fill="url(#mhHalo)"/></g>
@@ -970,7 +969,6 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         <text x="252" y="13.7" font-size="12.5" font-weight="700" fill="#0E794E" text-anchor="middle">Peak $2.16M &#183; 2056</text>
       </g>
       <text x="8" y="142.9" font-size="11" fill="#9AA0AE">Today</text>
-      <text x="352" y="142.9" font-size="11" fill="#9AA0AE" text-anchor="end">Age 99</text>
     </svg>
   </button>
 
@@ -1063,9 +1061,8 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     </div>
   </section>
 
-  <div class="mplan-stats3" id="mtodayStats3" style="margin-top:28px">
+  <div class="mplan-stats3" id="mtodayStats3" style="margin-top:28px; grid-template-columns:1fr 1fr">
     <div class="mstat3" data-msx="spend" role="button" tabindex="0"><div class="lab">Spending</div><div class="fig">$8,850</div><div class="sub"><span class="dn">&#9660; $120</span></div></div>
-    <div class="mstat3" data-msx="income" role="button" tabindex="0"><div class="lab">Income</div><div class="fig">$12,300</div><div class="sub"><span class="up">&#9650; $85</span></div></div>
     <div class="mstat3" data-msx="savings" role="button" tabindex="0"><div class="lab">Savings</div><div class="fig">$106,750</div><div class="sub"><span class="up">&#9650; $1,070</span></div></div>
   </div>
 
@@ -2332,7 +2329,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       snapshot:{
         hl:'Retire in <em class="mhl-em">8 years</em> on <em class="mhl-gold">$7,200</em> a month.',
         dd:'Portfolio',
-        stats:[['Confidence','87%','Monte Carlo +','conf'],['Fire number','$2.16M','50% funded','fire'],['Funds depleted','2099','Age 82 &middot; 12 yrs','depleted']],
+        stats:[['Confidence','87%','Monte Carlo +','conf'],['Funds depleted','2099','Age 82 &middot; 12 yrs','depleted']],
         chips:[['Portfolio','$1.09M'],['Savings rate','28%']],
         secKeys:['assets','debts','income','home','expenses','flows','withdrawal','taxplan','estate','rates'], secHeading:'Future money'
       },
@@ -2371,6 +2368,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         {duration:360,delay:40+i*55,easing:'cubic-bezier(0.22,1,0.36,1)',fill:'backwards'}); });
     }
     function renderStats(L){
+      stats3.style.gridTemplateColumns='repeat('+L.stats.length+', 1fr)';
       stats3.innerHTML=L.stats.map(function(s){ return '<div class="mstat3"'+(s[3]?' data-msx="'+s[3]+'" role="button" tabindex="0"':'')+'><div class="lab">'+s[0]+'</div><div class="fig">'+s[1]+'</div><div class="sub">'+s[2]+'</div></div>'; }).join('');
       stagger([].slice.call(stats3.children));
     }
