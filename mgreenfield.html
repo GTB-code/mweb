@@ -493,6 +493,13 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 .mstat3 .sub{ font-size:13px; margin-top:4px; white-space:nowrap; }
 .mstat3 .sub .up{ color:var(--green-cta); font-weight:600; }
 .mstat3 .sub .dn{ color:var(--text-tertiary); font-weight:600; }
+.mstat3 .sub .since{ display:block; font-size:11px; color:var(--text-tertiary); font-weight:500; margin-top:2px; }
+/* What's already yours: the desktop net-worth block mosaic, restacked for mobile */
+.myours svg{ display:block; width:100%; height:auto; }
+.myours-side{ margin-top:18px; }
+.myours-hr{ height:1px; background:rgba(16,24,44,0.10); margin:12px 0; }
+.myours-note{ font-size:14px; color:var(--text-secondary); line-height:1.5; }
+.myours-delta{ font:700 13.5px 'DM Sans',sans-serif; color:#0E794E; margin-top:12px; }
 /* chart head: portfolio dropdown + filter */
 .mplan-chead{ display:flex; align-items:center; justify-content:space-between; margin-bottom:2px; }
 .mplan-dd{ display:inline-flex; align-items:center; gap:5px; background:none; border:0; font-family:inherit;
@@ -1093,49 +1100,52 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
   <div class="mgreet meye">Today</div>
   <h1 class="mhl">You are in <em class="mhl-em">better</em> shape than it <em class="mhl-gold">feels</em>.</h1>
   <p class="msubhead msubhead-today">Fact, not forecast. Your real numbers, today.</p>
-  <section class="mcard" id="mwhats">
-    <div class="mcard-t">What&#8217;s already yours</div>
-    <div class="mseg" role="tablist" aria-label="What&#8217;s already yours">
-      <span class="mseg-thumb" id="msegThumb" aria-hidden="true"></span>
-      <button class="mseg-b on" type="button" data-p="worth" role="tab" aria-selected="true">Net worth</button>
-      <button class="mseg-b" type="button" data-p="alloc" role="tab" aria-selected="false">Allocation</button>
-      <button class="mseg-b" type="button" data-p="flow" role="tab" aria-selected="false">Cash flow</button>
-    </div>
 
-    <div class="mpanel on" data-p="worth">
-      <div class="mfig-row"><span class="mfig">$1.14M</span><span class="mdelta">&#9650; $8,200 since January</span></div>
-      <div class="mfig-sub">Net worth today</div>
-      <div class="mflow mflow-assets">
-        <div class="mflow-row"><span class="mflow-l">Home</span><span class="mflow-track"><i class="c1" style="width:100%"></i></span><span class="mflow-v">$905K</span></div>
-        <div class="mflow-row"><span class="mflow-l">Retirement</span><span class="mflow-track"><i class="c2" style="width:34%"></i></span><span class="mflow-v">$310K</span></div>
-        <div class="mflow-row"><span class="mflow-l">Brokerage</span><span class="mflow-track"><i class="c3" style="width:17%"></i></span><span class="mflow-v">$150K</span></div>
-      </div>
+  <div class="mplan-seclabel" style="margin:30px 2px 10px">What&#8217;s already yours</div>
+  <div class="myours" id="myoursBlocks">
+    <svg viewBox="0 0 344 274" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-label="Net worth blocks">
+      <defs>
+        <pattern id="utHatch" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+          <rect width="8" height="8" fill="rgba(255,255,255,0.55)"/>
+          <line x1="0" y1="0" x2="0" y2="8" stroke="#10182C" stroke-width="1.4"/>
+        </pattern>
+      </defs>
+      <g class="nwb">
+        <rect x="0" y="6" width="165" height="262" fill="#0D3F4A"/>
+        <rect x="0" y="195" width="165" height="73" fill="url(#utHatch)"/>
+        <text x="14" y="32" font-size="14" font-weight="700" fill="#fff">Home</text>
+        <text x="14" y="52" font-size="13" fill="rgba(255,255,255,0.85)">$905K</text>
+        <text x="14" y="236" font-size="12.5" font-weight="600" fill="#10182C">Mortgage &#8722;$333K</text>
+      </g>
+      <g class="nwb">
+        <rect x="169" y="6" width="175" height="154" fill="#1B6B5C"/>
+        <text x="183" y="32" font-size="14" font-weight="700" fill="#fff">Retirement</text>
+        <text x="183" y="52" font-size="13" fill="rgba(255,255,255,0.85)">$310K</text>
+      </g>
+      <g class="nwb">
+        <rect x="169" y="164" width="104" height="104" fill="#04B477"/>
+        <text x="183" y="190" font-size="14" font-weight="700" fill="#fff">Brokerage</text>
+        <text x="183" y="210" font-size="13" fill="rgba(255,255,255,0.85)">$150K</text>
+      </g>
+      <g class="nwb">
+        <rect x="277" y="164" width="67" height="104" fill="#9BD9C1"/>
+        <text x="288" y="190" font-size="13.5" font-weight="700" fill="#10182C">Cash</text>
+        <text x="288" y="209" font-size="12.5" fill="#10182C" opacity="0.75">$107K</text>
+      </g>
+    </svg>
+    <div class="myours-side">
+      <div class="mfig-sub" style="margin-top:0">Net worth today</div>
+      <div class="mfig" style="margin-top:4px">$1.14M</div>
+      <div class="myours-hr"></div>
+      <p class="myours-note">Everything you own, minus the $333K left on the house.</p>
+      <div class="myours-delta">&#9650; $8,200 since January</div>
     </div>
+  </div>
 
-    <div class="mpanel" data-p="alloc">
-      <div class="mfig-row"><span class="mfig">$744.6K</span></div>
-      <div class="mfig-sub">Invested today</div>
-      <div class="mflow mflow-assets">
-        <div class="mflow-row"><span class="mflow-l">Stocks</span><span class="mflow-track"><i class="c1" style="width:100%"></i></span><span class="mflow-v">$432K</span></div>
-        <div class="mflow-row"><span class="mflow-l">Bonds</span><span class="mflow-track"><i class="c2" style="width:43%"></i></span><span class="mflow-v">$186K</span></div>
-        <div class="mflow-row"><span class="mflow-l">Cash</span><span class="mflow-track"><i class="c4" style="width:29%"></i></span><span class="mflow-v">$126.6K</span></div>
-      </div>
-    </div>
-
-    <div class="mpanel" data-p="flow">
-      <div class="mfig-row"><span class="mfig mfig-green">+$3,450</span></div>
-      <div class="mfig-sub">Kept each month</div>
-      <div class="mflow">
-        <div class="mflow-row"><span class="mflow-l">Income</span><span class="mflow-track"><i class="fin" style="width:100%"></i></span><span class="mflow-v">$12,300</span></div>
-        <div class="mflow-row"><span class="mflow-l">Spending</span><span class="mflow-track"><i class="fout" style="width:72%"></i></span><span class="mflow-v">$8,850</span></div>
-        <div class="mflow-row"><span class="mflow-l">Kept</span><span class="mflow-track"><i class="fkeep" style="width:28%"></i></span><span class="mflow-v">$3,450</span></div>
-      </div>
-    </div>
-  </section>
-
-  <div class="mplan-stats3" id="mtodayStats3" style="margin-top:28px; grid-template-columns:1fr 1fr">
-    <div class="mstat3" data-msx="spend" role="button" tabindex="0"><div class="lab">Spending</div><div class="fig">$8,850</div><div class="sub"><span class="dn">&#9660; $120</span></div></div>
-    <div class="mstat3" data-msx="savings" role="button" tabindex="0"><div class="lab">Savings</div><div class="fig">$106,750</div><div class="sub"><span class="up">&#9650; $1,070</span></div></div>
+  <div class="mplan-stats3" id="mtodayStats3" style="margin-top:14px">
+    <div class="mstat3" data-msx="spend" role="button" tabindex="0"><div class="lab">Spending</div><div class="fig">$8,850</div><div class="sub"><span class="dn">&#9660; $120</span><span class="since">since last visit</span></div></div>
+    <div class="mstat3" data-msx="income" role="button" tabindex="0"><div class="lab">Income</div><div class="fig">$12,300</div><div class="sub"><span class="up">&#9650; $85</span><span class="since">since last visit</span></div></div>
+    <div class="mstat3" data-msx="savings" role="button" tabindex="0"><div class="lab">Savings</div><div class="fig">$106,750</div><div class="sub"><span class="up">&#9650; $1,070</span><span class="since">since last visit</span></div></div>
   </div>
 
   <div id="todayScore"></div>
@@ -1661,35 +1671,6 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     }
   }
 
-
-  /* ===== What's already yours: segmented control ===== */
-  (function(){
-    var seg=document.querySelector('.mseg'); if(!seg) return;
-    var thumb=document.getElementById('msegThumb');
-    var order=['worth','alloc','flow'];
-    function growBars(panel){
-      if(reduce) return;
-      panel.querySelectorAll('.mstack-bar i, .mflow-track i').forEach(function(bar, i){
-        if(bar.animate) bar.animate(
-          [{transform:'scaleX(0)'},{transform:'scaleX(1)'}],
-          {duration:520, delay:60+i*70, easing:'cubic-bezier(0.22,1,0.36,1)', fill:'backwards'});
-      });
-    }
-    seg.addEventListener('click', function(e){
-      var b=e.target.closest('.mseg-b'); if(!b) return;
-      var key=b.dataset.p;
-      seg.querySelectorAll('.mseg-b').forEach(function(x){ x.classList.toggle('on', x===b); x.setAttribute('aria-selected', x===b?'true':'false'); });
-      thumb.style.transform='translateX('+(order.indexOf(key)*100)+'%)';
-      document.querySelectorAll('#mwhats .mpanel').forEach(function(p){
-        var on=p.dataset.p===key;
-        p.classList.toggle('on', on);
-        if(on) growBars(p);
-      });
-    });
-    /* first-load grow-in for the default panel */
-    var first=document.querySelector('#mwhats .mpanel.on');
-    if(first) setTimeout(function(){ growBars(first); }, 250);
-  })();
 
   /* ===== push / pop ===== */
   var sub=document.getElementById('msub'), subBody=document.getElementById('msubBody');
