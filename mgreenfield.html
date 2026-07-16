@@ -418,6 +418,30 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 .mh-faces .f1{ background:var(--teal); } .mh-faces .f2{ background:#0E794E; } .mh-faces .f3{ background:#5B8A72; }
 .mh-faces .f4{ background:#FBBD04; color:#10182C; }
 /* ===== Optimize tab ===== *//* ===== Optimize tab ===== */
+/* the $412K, decomposed */
+.mop-stack{ margin-top:22px; }
+.mop-bar{ display:flex; gap:3px; height:16px; border-radius:9px; overflow:hidden; }
+.mop-bar i{ display:block; height:100%; border-radius:3px; }
+.mop-bar i:first-child{ border-radius:9px 3px 3px 9px; }
+.mop-bar i:last-child{ border-radius:3px 9px 9px 3px; }
+.mop-legend{ display:flex; flex-wrap:wrap; gap:6px 14px; margin-top:10px; }
+.mop-legend span{ display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--text-secondary); font-variant-numeric:tabular-nums; }
+.mop-legend i{ width:8px; height:8px; border-radius:3px; flex:none; }
+/* the featured move */
+.mop-card.mop-hero{ display:block; text-align:left; border:0; background:#E7F7F0; border-radius:20px; padding:18px 17px 17px; }
+.mop-card.mop-hero:active{ background:#DDF2E8; transform:scale(.99); }
+.mop-hero-top{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; }
+.mop-hero-t{ display:inline-flex; align-items:center; gap:8px; font-size:20px; font-weight:700; color:var(--ink); }
+.mop-hero-val{ font:800 25px 'DM Sans',sans-serif; letter-spacing:-0.6px; color:var(--green-cta); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.mop-hero-val i{ font-style:normal; font:600 13.5px 'DM Sans',sans-serif; color:var(--text-secondary); margin-left:3px; letter-spacing:0; }
+.mop-hero-s{ display:block; font-size:15.5px; color:#33413C; line-height:1.5; margin-top:8px; max-width:34ch; }
+.mop-hero-cta{ display:flex; align-items:center; gap:12px; margin-top:14px; }
+.mop-go{ display:inline-flex; align-items:center; gap:7px; background:#0E794E; color:#FFFFFF; border-radius:999px; padding:10px 18px; font-size:15.5px; font-weight:600; }
+.mop-hero:active .mop-go{ background:#0B5F3D; }
+.mop-hero-cta em{ font-style:normal; font-size:13.5px; color:var(--text-tertiary); }
+/* the ranked queue */
+.mop-n{ width:29px; height:29px; flex:none; border-radius:999px; background:var(--mint); color:var(--green-cta);
+  display:inline-flex; align-items:center; justify-content:center; font-size:15px; font-weight:700; font-variant-numeric:tabular-nums; }
 .mop-cards{ margin-top:20px; display:flex; flex-direction:column; gap:12px; }
 .mop-card{ display:flex; align-items:center; gap:13px; text-align:left; width:100%;
   border:1px solid var(--hairline); border-radius:18px; background:var(--white);
@@ -495,7 +519,39 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 .mstat3 .sub .dn{ color:var(--text-tertiary); font-weight:600; }
 .mstat3 .sub .since{ display:block; font-size:11px; color:var(--text-tertiary); font-weight:500; margin-top:2px; }
 /* What's already yours: the desktop net-worth block mosaic, restacked for mobile */
-.myours{ border-radius:18px; overflow:hidden; }
+.myours{ border-radius:14px; overflow:hidden; cursor:pointer; transition:transform .15s ease; }
+.myours:active{ transform:scale(.99); }
+/* net-worth deep dive extras */
+.msx-comp{ }
+.msx-comp-row{ display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid #F1F2F4; }
+.msx-comp-row:last-child{ border-bottom:0; }
+.msx-comp-row i{ width:11px; height:11px; border-radius:4px; flex:none; }
+.msx-comp-row .l{ flex:1; font-size:17px; font-weight:600; color:var(--ink); }
+.msx-comp-row .v{ font-size:17px; font-weight:600; color:var(--ink); font-variant-numeric:tabular-nums; }
+.msx-cmp-row{ display:flex; align-items:center; gap:10px; margin-bottom:11px; }
+.msx-cmp-row .l{ flex:none; width:96px; font-size:13.5px; color:var(--text-secondary); line-height:1.25; }
+.msx-cmp-row .bar{ flex:1; height:12px; border-radius:7px; background:#F2F3F5; overflow:hidden; }
+.msx-cmp-row .bar i{ display:block; height:100%; border-radius:7px; background:#C9CFD8; }
+.msx-cmp-row .bar i.you{ background:var(--green-cta); }
+.msx-cmp-row .v{ flex:none; font-size:14.5px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums; }
+.msx-cmp-cap{ font-size:13.5px; color:var(--text-tertiary); margin-top:2px; }
+/* the ultimate timeline */
+.msx-tl{ position:relative; padding-top:2px; }
+.msx-tl::before{ content:''; position:absolute; left:5.5px; top:8px; bottom:14px; width:1.5px; background:#EAECEF; }
+.msx-tl-row{ position:relative; display:flex; gap:14px; padding-bottom:20px; }
+.msx-tl-row:last-child{ padding-bottom:4px; }
+.msx-tl-dot{ width:13px; height:13px; flex:none; border-radius:999px; border:2.5px solid #FFFFFF; margin-top:4px; position:relative; z-index:1; box-sizing:border-box; outline:1.5px solid transparent; }
+.msx-tl-body{ flex:1; min-width:0; }
+.msx-tl-when{ font-size:13.5px; color:var(--text-tertiary); font-variant-numeric:tabular-nums; }
+.msx-tl-t{ font-size:18px; font-weight:600; color:var(--ink); margin-top:2px; line-height:1.35; }
+.msx-tl-s{ font-size:15.5px; color:var(--text-secondary); line-height:1.5; margin-top:3px; }
+.msx-ask{ display:flex; align-items:center; gap:9px; margin-top:22px; padding-top:16px; border-top:1px solid #F1F2F4; }
+.msx-ask-in{ flex:1; height:48px; border:1px solid var(--hairline); border-radius:999px; background:#FAFAFB; padding:0 18px;
+  font-family:inherit; font-size:16px; color:var(--ink); outline:none; }
+.msx-ask-in:focus{ border-color:#BFC9D4; background:#FFFFFF; }
+.msx-ask-go{ width:48px; height:48px; flex:none; border-radius:999px; border:0; background:#0E794E; color:#FFFFFF;
+  display:flex; align-items:center; justify-content:center; cursor:pointer; }
+.msx-ask-go:active{ background:#0B5F3D; }
 .myours svg{ display:block; width:100%; height:auto; }
 .myours-side{ display:flex; align-items:center; gap:18px; margin-top:18px; }
 .myours-l{ flex:none; }
@@ -509,7 +565,8 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 .mplan-dd svg{ color:var(--text-secondary); }
 .mplan-filter{ width:34px; height:34px; border-radius:10px; border:1px solid var(--hairline); background:var(--white);
   color:var(--text-secondary); display:flex; align-items:center; justify-content:center; cursor:pointer; }
-.mplan-chart{ margin-top:0; }
+.mplan-chart{ margin-top:0; cursor:pointer; border-radius:10px; transition:opacity .15s ease; }
+.mplan-chart:active{ opacity:.82; }
 .mplan-chart svg{ display:block; width:100%; height:auto; }
 .pcgrid{ stroke:#F1F2F4; stroke-width:1; }
 .pcax{ font-size:9px; fill:#9AA0AE; font-family:'DM Sans',sans-serif; }
@@ -543,7 +600,7 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
    drop the top hairline so it doesn't read as a stray line above the widget */
 #mlistPlan{ border-top:0; margin-top:22px; }
 /* Today: air between the 3 stat blocks and the Plan Score widget */
-#todayScore .mps{ margin-top:26px; }
+#todayScore .mps{ margin-top:14px; }
 /* Home: air between the net-worth graph and the Plan Score widget */
 #homeScore .mps{ margin-top:50px; }
 .mrow{ display:flex; align-items:center; gap:12px; width:100%; text-align:left; background:none; border:0;
@@ -788,6 +845,11 @@ body.quest-mode .mnav-fade{ opacity:0; transition:opacity .2s ease; }
   font-family:inherit; font-size:15px; font-weight:600; color:var(--green-cta); cursor:pointer; }
 .mai-new:active{ background:#F7FCFA; transform:scale(.97); }
 body.ai-live .mai-new{ display:inline-flex; }
+.mai-livebar{ display:none; align-items:center; justify-content:space-between; min-height:40px; }
+body.ai-live .mai-livebar{ display:flex; }
+body.ai-live .mai-title{ display:none; }
+.mai-back{ display:inline-flex; align-items:center; gap:2px; background:none; border:0; font-family:inherit;
+  font-size:17px; font-weight:500; color:var(--ink); cursor:pointer; padding:6px 10px 6px 0; margin-left:-4px; }
 @keyframes msparkle{ 0%,100%{ transform:scale(1) rotate(0deg); opacity:1; } 50%{ transform:scale(1.12) rotate(8deg); opacity:.85; } }
 .mai-recents{ margin-top:24px; }
 .mai-rec-label{ font-size:14.5px; font-weight:600; color:var(--text-tertiary); margin-bottom:4px; }
@@ -1103,7 +1165,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
   <h1 class="mhl">You are in <em class="mhl-em">better</em> shape than it <em class="mhl-gold">feels</em>.</h1>
   <p class="msubhead msubhead-today">Fact, not forecast. Your real numbers, today.</p>
 
-  <div class="myours" id="myoursBlocks" style="margin-top:26px">
+  <div class="myours" id="myoursBlocks" style="margin-top:26px" role="button" tabindex="0" aria-label="Open the net worth deep dive">
     <svg viewBox="0 4 344 184" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-label="Net worth blocks">
       <defs>
         <pattern id="utHatch" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
@@ -1136,7 +1198,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     </svg>
   </div>
 
-  <div class="mplan-stats3" id="mtodayStats3" style="margin-top:30px; grid-template-columns:1fr 1fr">
+  <div class="mplan-stats3" id="mtodayStats3" style="margin-top:16px; grid-template-columns:1fr 1fr">
     <div class="mstat3" data-msx="spend" role="button" tabindex="0"><div class="lab">Spending</div><div class="fig">$8,850</div><div class="sub"><span class="dn">&#9660; $120</span></div></div>
     <div class="mstat3" data-msx="savings" role="button" tabindex="0"><div class="lab">Savings</div><div class="fig">$106,750</div><div class="sub"><span class="up">&#9650; $1,070</span></div></div>
   </div>
@@ -1162,7 +1224,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       <button class="mplan-dd" type="button" id="mplanDD"><span id="mplanDDl">Portfolio</span><svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <button class="mplan-filter" type="button" aria-label="Filters" data-toast="Filters land next in the mobile build"><svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M4 6h16M7 12h10M10 18h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
-    <div class="mplan-chart">
+    <div class="mplan-chart" id="mplanChart" role="button" tabindex="0" aria-label="Open the ultimate timeline">
       <svg viewBox="0 0 356 104" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-label="Projected portfolio value">
         <defs>
           <linearGradient id="pcg" x1="0" y1="0" x2="0" y2="1">
@@ -1193,25 +1255,50 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
 <div class="mtab" id="tabOptimize" hidden>
   <div class="mgreet meye">Optimize</div>
   <h1 class="mhl">There is still <em class="mhl-em">$412,000</em> on the <em class="mhl-gold">table.</em></h1>
-  <p class="msubhead msubhead-opt">The same life, funded better.</p>
+  <p class="msubhead msubhead-opt">The same life, funded better. Five moves, ranked by payoff.</p>
+
+  <!-- where the $412K lives -->
+  <div class="mop-stack" aria-label="Where the $412,000 comes from">
+    <div class="mop-bar">
+      <i style="width:52%; background:#0D3F4A"></i>
+      <i style="width:24%; background:#1B6B5C"></i>
+      <i style="width:15%; background:#04B477"></i>
+      <i style="width:9%; background:#9BD9C1"></i>
+    </div>
+    <div class="mop-legend">
+      <span><i style="background:#0D3F4A"></i>Claim timing $214K</span>
+      <span><i style="background:#1B6B5C"></i>Withdrawal order $98K</span>
+      <span><i style="background:#04B477"></i>Tax windows $61K</span>
+      <span><i style="background:#9BD9C1"></i>Rebalance $39K</span>
+    </div>
+  </div>
+
   <div class="mop-cards" id="mopCards">
-    <button class="mop-card" type="button" data-op="ss">
-      <span class="mop-txt"><span class="mop-t">Social Security <i class="mop-alert">1</i></span><span class="mop-s">The one guaranteed 8% raise in America. Claim it right.</span></span>
-      <span class="mop-val"><b>+$760</b><i>/mo at 70</i></span>
+    <div class="mplan-seclabel" style="margin:14px 2px 0">Your next best move</div>
+    <button class="mop-card mop-hero" type="button" data-op="ss">
+      <span class="mop-hero-top"><span class="mop-hero-t">Social Security <i class="mop-alert">1</i></span><span class="mop-hero-val">+$760<i>/mo for life</i></span></span>
+      <span class="mop-hero-s">The one guaranteed 8% raise in America. Waiting to 70 lifts every check you will ever get.</span>
+      <span class="mop-hero-cta"><span class="mop-go">Claim it right <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span><em>2 minutes, one decision</em></span>
     </button>
+
+    <div class="mplan-seclabel" style="margin:16px 2px 0">Then, in order</div>
     <button class="mop-card" type="button" data-op="tax">
+      <span class="mop-n">2</span>
       <span class="mop-txt"><span class="mop-t">Tax Planning</span><span class="mop-s">Six low-bracket Decembers. The first closes December 31.</span></span>
       <span class="mop-val"><b>$61,000</b><i>lifetime</i></span>
     </button>
-    <button class="mop-card" type="button" data-op="alloc">
-      <span class="mop-txt"><span class="mop-t">Asset Allocation</span><span class="mop-s">Your mix drifted while the market moved. One rebalance resets it.</span></span>
-      <span class="mop-val"><b>2.4%</b><i>drift</i></span>
-    </button>
     <button class="mop-card" type="button" data-op="withdraw">
+      <span class="mop-n">3</span>
       <span class="mop-txt"><span class="mop-t">Withdrawal Strategy</span><span class="mop-s">The order you spend from decides how long it lasts.</span></span>
       <span class="mop-val"><b>+$380</b><i>/mo</i></span>
     </button>
+    <button class="mop-card" type="button" data-op="alloc">
+      <span class="mop-n">4</span>
+      <span class="mop-txt"><span class="mop-t">Asset Allocation</span><span class="mop-s">Your mix drifted while the market moved. One rebalance resets it.</span></span>
+      <span class="mop-val"><b>2.4%</b><i>drift</i></span>
+    </button>
     <button class="mop-card" type="button" data-op="budget">
+      <span class="mop-n">5</span>
       <span class="mop-txt"><span class="mop-t">Detailed Budgeter</span><span class="mop-s">You live $2,077 under your safe line. See where the room is.</span></span>
       <span class="mop-val"><b>$2,077</b><i>of room</i></span>
     </button>
@@ -1220,8 +1307,11 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
 
 <div class="mtab mtab-ai" id="tabAI" hidden>
   <div class="mai-hero">
-    <h1 class="mhl mai-title">Ask anything <span class="mai-spark"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6z"/></svg></span>
-      <button class="mai-new" id="maiNew" type="button"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>New chat</button></h1>
+    <div class="mai-livebar">
+      <button class="mai-back" id="maiBack" type="button"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5.5L8.5 12l6.5 6.5"/></svg>Back</button>
+      <button class="mai-new" id="maiNew" type="button"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>New chat</button>
+    </div>
+    <h1 class="mhl mai-title">Ask anything <span class="mai-spark"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6z"/></svg></span></h1>
     <p class="msubhead mai-sub">AI grounded in your plan, not the open web.</p>
   </div>
 
@@ -2671,6 +2761,40 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
   /* ===== stat detail modal — mirrors the desktop sx-modal ===== */
   (function(){
     var SX={
+      tl:{ label:'The ultimate timeline', fig:'2026 to 2099',
+        pts:[567,640,720,810,900,1000,1110,1230,1360,1500,1650,1800,1930,2050,2130,2160], fmt:'moneyK',
+        xlabels:['2026','2041','2057'],
+        sub:'Every milestone in one place, from today to a plan that outlives the plan.',
+        note:'The portfolio crests at $2.16M in 2056, by design. Everything below is the route.',
+        timeline:[
+          ['#04B477','2026 &middot; Marshall 61, Lily 59','Today','Net worth $1.14M, confidence 87. The starting line is already strong.'],
+          ['#FBBD04','December 2028 &middot; Marshall 63','Retirement day','Work income stops. The portfolio starts paying $3,100 a month, in the right order.'],
+          ['#1B6B5C','2029','The first Roth window','Convert about $17,800 to the top of the 12% band. Six Decembers like this save $61,000.'],
+          ['#04B477','2030 &middot; Marshall 65','Medicare arrives','The $1,180 a month insurance bridge ends. Spending gets a permanent haircut.'],
+          ['#1B6B5C','2034','The last conversion window','The low-bracket years close. The tax savings are locked in for good.'],
+          ['#0E794E','2035 &middot; Marshall 70','Social Security, claimed right','$3,940 a month for life. Three years of patience became a 24% raise.'],
+          ['#9BD9C1','2038 &middot; Marshall 73','RMDs begin, already tamed','Required withdrawals start, shrunk by the conversions of the early thirties.'],
+          ['#0D3F4A','2046','The house is yours outright','The 3.1% mortgage retires. $905K of value with zero debt against it.'],
+          ['#FBBD04','2056','The peak: $2.16M','The portfolio crests. From here the plan spends down by design, not by accident.'],
+          ['#04B477','2099','Still funded','The plan carries past 99 with money left over. That is the whole point.']
+        ],
+        opps:{t:'Six Decembers decide the 2030s', g:'$61K', s:'The Roth windows from <b>2029 to 2034</b> are the quiet years that cut the loud RMD years down to size.'},
+        risks:{t:'The first five years carry the weight', s:'A bear market in <b>2028 or 2029</b> matters more than any other stretch. Sequence risk peaks at the handoff.'},
+        decide:{t:'Claim at 67, or hold to 70', s:'The 2035 start at <b>$3,940</b> is the plan. Claiming early moves the whole right half of this timeline down.'},
+        step:{t:'Stress-test the timeline against a 2028 bear', act:'plan'},
+        ask:'Ask Boldin AI about your timeline&#8230;' },
+      nw:{ label:'Net worth', fig:'$1.14M',
+        pts:[1096,1099,1103,1101,1106,1112,1118,1126,1132,1134,1137,1140], fmt:'moneyK',
+        sub:'Everything you own, minus the $333K left on the house.',
+        note:'Up $8,200 since January, and the spring dip already healed. Boring is winning.',
+        comp:[['Home','$905K','#0D3F4A'],['Retirement','$310K','#1B6B5C'],['Brokerage','$150K','#04B477'],['Cash','$107K','#9BD9C1'],['Mortgage','&minus;$333K','#8B98A5']],
+        compare:{ youLab:'You', you:'$1.14M', youW:100, peerLab:'Typical household, 55 to 64', peer:'$364K', peerW:32,
+          cap:'Median for your age band. You are at roughly 3x.' },
+        opps:{t:'Home equity is a quiet lever', g:'+$190K option', s:'Tapping <b>$190K</b> of equity around 75 is a move most plans never model. Yours can, and it is a choice you make later.'},
+        risks:{t:'Half the pie is the house', s:'About <b>50%</b> of net worth is home equity. It pays no bills until you decide how it should.'},
+        decide:{t:'Pay down 3.1%, or invest at 6%', s:'Every extra dollar can retire mortgage debt at <b>3.1%</b> or compound at <b>6%</b>. The spread is the decision.'},
+        step:{t:'Keep every account linked and fresh', act:'today'},
+        ask:true },
       cx_portfolio:{ label:'Portfolio', fig:'$1.09M',
         pts:[1002,1010,1022,1034,1028,1046,1058,1066,1074,1082,1086,1090], fmt:'moneyK',
         sub:'Everything invested and working: retirement, brokerage, and cash.',
@@ -2806,8 +2930,9 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       var last=pts[pts.length-1], lx=X(pts.length-1), ly=Y(last);
       var grid=[min,max].map(function(v){ return '<line x1="'+padL+'" x2="'+(W-padR)+'" y1="'+Y(v).toFixed(1)+'" y2="'+Y(v).toFixed(1)+'" stroke="#EEEEEE" stroke-width="1"/>'+
         '<text x="'+(W-padR+8)+'" y="'+(Y(v)+4).toFixed(1)+'" font-size="11" fill="#9AA0AE">'+fmtV(v,d.fmt)+'</text>'; }).join('');
-      var mstep=(pts.length-1)/(MONTHS.length-1);
-      var mlab=MONTHS.map(function(m,i){ return '<text x="'+X(Math.round(i*mstep)).toFixed(1)+'" y="'+(H-6)+'" font-size="11" fill="#9AA0AE" text-anchor="middle">'+m+'</text>'; }).join('');
+      var LBL=d.xlabels||MONTHS;
+      var mstep=(pts.length-1)/(LBL.length-1);
+      var mlab=LBL.map(function(m,i){ return '<text x="'+X(Math.round(i*mstep)).toFixed(1)+'" y="'+(H-6)+'" font-size="11" fill="#9AA0AE" text-anchor="middle">'+m+'</text>'; }).join('');
       return '<div class="msx-chart"><svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">'+
         '<defs><linearGradient id="msxFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#04B477" stop-opacity="0.16"/><stop offset="1" stop-color="#04B477" stop-opacity="0"/></linearGradient></defs>'+
         grid+
@@ -2826,15 +2951,25 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     }
     function sec(label, it, numbered){ return '<div class="msx-sec"><div class="msx-sec-label">'+label+'</div>'+item(it,numbered)+'</div>'; }
     function build(d){
+      var compH = d.comp ? '<div class="msx-sec"><div class="msx-sec-label">What it is made of</div><div class="msx-comp">'+
+        d.comp.map(function(c){ return '<div class="msx-comp-row"><i style="background:'+c[2]+'"></i><span class="l">'+c[0]+'</span><span class="v">'+c[1]+'</span></div>'; }).join('')+'</div></div>' : '';
+      var cmpH = d.compare ? '<div class="msx-sec"><div class="msx-sec-label">How you compare</div>'+
+        '<div class="msx-cmp"><div class="msx-cmp-row"><span class="l">'+d.compare.youLab+'</span><span class="bar"><i class="you" style="width:'+d.compare.youW+'%"></i></span><span class="v">'+d.compare.you+'</span></div>'+
+        '<div class="msx-cmp-row"><span class="l">'+d.compare.peerLab+'</span><span class="bar"><i style="width:'+d.compare.peerW+'%"></i></span><span class="v">'+d.compare.peer+'</span></div>'+
+        '<div class="msx-cmp-cap">'+d.compare.cap+'</div></div></div>' : '';
+      var tlH = d.timeline ? '<div class="msx-sec"><div class="msx-sec-label">The milestones</div><div class="msx-tl">'+
+        d.timeline.map(function(m){ return '<div class="msx-tl-row"><span class="msx-tl-dot" style="background:'+m[0]+'"></span><div class="msx-tl-body"><div class="msx-tl-when">'+m[1]+'</div><div class="msx-tl-t">'+m[2]+'</div><div class="msx-tl-s">'+m[3]+'</div></div></div>'; }).join('')+'</div></div>' : '';
+      var askH = d.ask ? '<div class="msx-ask"><input class="msx-ask-in" id="msxAskIn" type="text" placeholder="'+(typeof d.ask==='string'? d.ask : 'Ask Boldin AI about your net worth&#8230;')+'" autocomplete="off"><button class="msx-ask-go" id="msxAskGo" type="button" aria-label="Ask"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M6 12l6-6 6 6"/></svg></button></div>' : '';
       return '<div class="msx-grip"></div>'+
         '<div class="msx-head"><div><div class="msx-title">'+d.label+'</div><div class="msx-fig">'+d.fig+'</div><div class="msx-sub">'+d.sub+'</div></div>'+
         '<button class="msx-x" aria-label="Close" data-msx-close><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>'+
         chart(d)+'<div class="msx-note">'+d.note+'</div>'+
+        compH+cmpH+tlH+
         sec('Top opportunities', d.opps, false)+
         sec('Key risks', d.risks, false)+
         sec('Key decisions', d.decide, false)+
         sec('Suggested next steps', d.step, true)+
-        '<span class="msx-learn" data-toast="Learn more lands next in the mobile build">Learn more <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
+        '<span class="msx-learn" data-toast="Learn more lands next in the mobile build">Learn more <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>'+askH;
     }
     var modal=document.getElementById('msx'), sheet=document.getElementById('msxSheet'), scrim=document.getElementById('msxScrim');
     function open(key){
@@ -2866,6 +3001,28 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     });
     scrim.addEventListener('click', close);
     sheet.addEventListener('click', function(e){ if(e.target.closest('[data-msx-close]')) close(); });
+    /* the ask row hands the question to Boldin AI on the AI tab */
+    function askAI(){
+      var inp=document.getElementById('msxAskIn'); if(!inp) return;
+      var q=inp.value.trim() || 'Explain my net worth';
+      close();
+      document.querySelector('.mnav button[data-tab="ai"]').click();
+      setTimeout(function(){ if(typeof sendAI==='function') sendAI(q); }, reduce?60:480);
+    }
+    sheet.addEventListener('click', function(e){ if(e.target.closest('#msxAskGo')) askAI(); });
+    sheet.addEventListener('keydown', function(e){ if(e.key==='Enter' && e.target.id==='msxAskIn'){ e.preventDefault(); askAI(); } });
+    /* the Plan graph opens the ultimate timeline */
+    var planChart=document.getElementById('mplanChart');
+    if(planChart){
+      planChart.addEventListener('click', function(){ open('tl'); });
+      planChart.addEventListener('keydown', function(e){ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); open('tl'); } });
+    }
+    /* the Today mosaic opens the net-worth deep dive */
+    var mosaic=document.getElementById('myoursBlocks');
+    if(mosaic){
+      mosaic.addEventListener('click', function(){ open('nw'); });
+      mosaic.addEventListener('keydown', function(e){ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); open('nw'); } });
+    }
     window.__openStat=open;
   })();
 
@@ -3042,6 +3199,10 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
   }
   var ANSWERS=[
     { re:/rebalanc|401\s*\(?k|make (the |a )?trade|place (the |an )?order/i, agent:true },
+    { re:/timeline|milestone|peak|2056|2099|when.*(retire|medicare|rmd|social)/i,
+      a:'The route: retirement December 2028, Roth conversions 2029 through 2034, Medicare in 2030, Social Security at 70 in 2035 at $3,940 a month, RMDs in 2038 already shrunk by the conversions, the mortgage gone in 2046, the portfolio peaking at $2.16M in 2056, and the plan still funded in 2099. The whole right half of that line depends on one decision: holding Social Security to 70.' },
+    { re:/net\s*worth|worth|1\.14|mosaic|equity/i,
+      a:'Your net worth is $1.14M: the $905K home and $567K of investable assets, minus the $333K mortgage at 3.1%. It is up $8,200 since January. About half of it is home equity, which is why the plan leans on the portfolio and Social Security for income, and keeps the house as a later lever, roughly $190K of tappable equity around 75.' },
     { re:/retire.*(year )?earlier|earlier.*retire|2027/i,
       a:'You can. Moving the date to December 2027 keeps the plan funded to 96 and safe spending at $6,900 a month. Confidence eases from 87 to 84, still comfortably green. The bigger lever is Social Security: hold that to 70 and the earlier date barely dents the long run.' },
     { re:/tax|roth|convert/i,
@@ -3120,6 +3281,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     else { closeSheet(); toast('File upload lands next in the mobile build'); }
   });
   document.getElementById('maiNew').addEventListener('click', resetAI);
+  document.getElementById('maiBack').addEventListener('click', resetAI);
 
   /* ===== the simulated keyboard ===== */
   var kb=document.getElementById('mkb');
