@@ -744,7 +744,8 @@ body.kb-open .mai-bar2{ transform:translateX(-50%) translateY(-138px); border-co
   display:flex; align-items:center; justify-content:space-around; padding:7px 10px;
   transform-origin:50% 100%; transition:transform .32s var(--push-ease); }
 body.nav-mini .mnav{ transform:translateX(-50%) scale(0.7); }
-body.pushed .mnav, body.pushed .mnav-fade{ opacity:0; pointer-events:none; transform:translateX(-50%) translateY(20px); transition:opacity .2s ease, transform .2s ease; }
+body.pushed .mnav{ opacity:0; pointer-events:none; transform:translateX(-50%) translateY(20px); transition:opacity .2s ease, transform .2s ease; }
+body.pushed .mnav-fade{ opacity:0; transition:opacity .2s ease; }
 .mnav button{ background:none; border:0; padding:6px 12px; cursor:pointer; color:#6E7268; display:flex; }
 .mnav button.on{ color:var(--green-cta); }
 .mnav svg{ display:block; width:31px; height:31px; }
