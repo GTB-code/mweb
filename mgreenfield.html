@@ -552,6 +552,26 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 .msx-ask-go{ width:48px; height:48px; flex:none; border-radius:999px; border:0; background:#0E794E; color:#FFFFFF;
   display:flex; align-items:center; justify-content:center; cursor:pointer; }
 .msx-ask-go:active{ background:#0B5F3D; }
+/* the live camera sheet */
+.mcam{ position:fixed; inset:0; z-index:130; background:#0B0F14; display:flex; flex-direction:column; }
+.mcam[hidden]{ display:none; }
+.mcam-top{ flex:none; display:flex; align-items:center; gap:12px; padding:calc(14px + env(safe-area-inset-top)) 16px 12px; }
+.mcam-x{ width:40px; height:40px; flex:none; border-radius:999px; background:rgba(255,255,255,0.14); border:0; color:#FFFFFF;
+  display:flex; align-items:center; justify-content:center; cursor:pointer; }
+.mcam-t{ font-size:17.5px; font-weight:600; color:#FFFFFF; }
+#mcamVideo{ flex:1; width:100%; min-height:0; object-fit:cover; background:#0B0F14; }
+.mcam-foot{ flex:none; display:flex; flex-direction:column; align-items:center; gap:16px;
+  padding:18px 18px calc(26px + env(safe-area-inset-bottom)); }
+.mcam-hint{ font-size:15px; color:rgba(255,255,255,0.75); }
+.mcam-snap{ width:76px; height:76px; border-radius:999px; border:4px solid #FFFFFF; background:transparent;
+  display:flex; align-items:center; justify-content:center; cursor:pointer; padding:0; }
+.mcam-snap i{ display:block; width:58px; height:58px; border-radius:999px; background:#FFFFFF; transition:transform .12s ease; }
+.mcam-snap:active i{ transform:scale(.86); }
+/* captured document thumbnails in the Vault list */
+.mv-ico.mv-thumb{ background:#EEF0F2; overflow:hidden; padding:0; }
+.mv-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+.mrow.mv-new{ animation:mvnew 1.4s cubic-bezier(0.33,0,0.2,1); border-radius:14px; }
+@keyframes mvnew{ 0%{ background:var(--mint); } 60%{ background:var(--mint); } 100%{ background:transparent; } }
 .myours svg{ display:block; width:100%; height:auto; }
 .myours-side{ display:flex; align-items:center; gap:18px; margin-top:18px; }
 .myours-l{ flex:none; }
@@ -1455,6 +1475,20 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
 
 <div class="mtoast" id="mtoast"></div>
 
+
+<!-- ===== real camera capture for the Vault ===== -->
+<div class="mcam" id="mcam" hidden>
+  <div class="mcam-top">
+    <button class="mcam-x" id="mcamX" type="button" aria-label="Close camera"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <span class="mcam-t">Scan a document</span>
+  </div>
+  <video id="mcamVideo" playsinline autoplay muted></video>
+  <div class="mcam-foot">
+    <span class="mcam-hint">Lay the page flat and fill the frame</span>
+    <button class="mcam-snap" id="mcamSnap" type="button" aria-label="Take photo"><i></i></button>
+  </div>
+</div>
+<input type="file" id="mcamFile" accept="image/*" capture="environment" style="display:none">
 <script>
 (function(){
   'use strict';
@@ -2577,7 +2611,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     '</div>'+
     '<div class="mv-upload">'+
       '<button class="mv-up-pill" type="button" data-toast="Upload lands next in the mobile build"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M5 15v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3"/></svg>Upload a file</button>'+
-      '<button class="mv-up-cam" type="button" data-toast="Camera lands next in the mobile build" aria-label="Take a photo"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5h2.5l1.3-2h8.4l1.3 2H20a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 20 19.5H4A1.5 1.5 0 0 1 2.5 18v-8A1.5 1.5 0 0 1 4 8.5z"/><circle cx="12" cy="13.5" r="3.4"/></svg></button>'+
+      '<button class="mv-up-cam" type="button" aria-label="Take a photo"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5h2.5l1.3-2h8.4l1.3 2H20a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 20 19.5H4A1.5 1.5 0 0 1 2.5 18v-8A1.5 1.5 0 0 1 4 8.5z"/><circle cx="12" cy="13.5" r="3.4"/></svg></button>'+
     '</div>';
   var PROFILE_HTML='<div class="msub-eye">Profile</div><h1 class="msub-hl">Marshall <em>&amp; Lily.</em></h1><p class="msub-hl2">Two people, one plan, every number kept in sync.</p>'+
     '<div class="mlist" style="margin-top:16px">'+
@@ -2591,6 +2625,61 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       '<button class="mrow" type="button" data-toast="Preferences land next in the mobile build"><span class="mrow-txt"><span class="mrow-t">Preferences</span><span class="mrow-s" style="display:block">Currency, rounding, and assumptions</span></span>'+VCHEV+'</button>'+
     '</div></div>';
   document.querySelector('.mtop .mico[aria-label="File vault"]').addEventListener('click', function(){ push(VAULT_HTML, false); document.body.classList.add('vault-open'); });
+
+  /* ===== real camera capture for the Vault ===== */
+  (function(){
+    var mcam=document.getElementById('mcam'), video=document.getElementById('mcamVideo'),
+        snap=document.getElementById('mcamSnap'), xBtn=document.getElementById('mcamX'),
+        fileIn=document.getElementById('mcamFile');
+    var stream=null;
+    function stopCam(){
+      if(stream){ stream.getTracks().forEach(function(t){ t.stop(); }); stream=null; }
+      video.srcObject=null;
+    }
+    function closeCam(){ stopCam(); mcam.hidden=true; }
+    function openCam(){
+      /* the live in-page camera needs a secure context (https or local); otherwise use the native camera app */
+      if(!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)){ fileIn.click(); return; }
+      navigator.mediaDevices.getUserMedia({ video:{ facingMode:'environment' }, audio:false })
+        .then(function(s){ stream=s; video.srcObject=s; mcam.hidden=false; })
+        .catch(function(){ fileIn.click(); }); /* permission denied or no camera: native fallback */
+    }
+    function addToVault(dataURL){
+      var list=document.querySelector('#msubBody .mlist'); if(!list) return;
+      var n=new Date();
+      var hh=n.getHours()%12||12, mm=String(n.getMinutes()).padStart(2,'0'), ap=n.getHours()<12?'am':'pm';
+      var row=document.createElement('button');
+      row.className='mrow mv-new'; row.type='button';
+      row.setAttribute('data-toast','File preview lands next in the mobile build');
+      row.innerHTML='<span class="mv-ico mv-thumb"><img alt="Scanned document" src="'+dataURL+'"></span>'+
+        '<span class="mrow-txt"><span class="mrow-t">Scanned document.jpg</span><span class="mrow-s" style="display:block">Added just now, '+hh+':'+mm+' '+ap+'</span></span>'+VCHEV;
+      list.insertBefore(row, list.firstChild);
+      row.scrollIntoView({ block:'nearest', behavior: reduce?'auto':'smooth' });
+    }
+    snap.addEventListener('click', function(){
+      if(!video.videoWidth){ return; }
+      var c=document.createElement('canvas');
+      c.width=video.videoWidth; c.height=video.videoHeight;
+      c.getContext('2d').drawImage(video, 0, 0);
+      var dataURL=c.toDataURL('image/jpeg', 0.85);
+      closeCam();
+      addToVault(dataURL);
+    });
+    xBtn.addEventListener('click', closeCam);
+    fileIn.addEventListener('change', function(){
+      var f=fileIn.files && fileIn.files[0]; if(!f) return;
+      var r=new FileReader();
+      r.onload=function(){ addToVault(r.result); };
+      r.readAsDataURL(f);
+      fileIn.value='';
+    });
+    /* the Vault camera button is injected markup, so delegate */
+    document.addEventListener('click', function(e){
+      if(e.target.closest('.mv-up-cam')) openCam();
+    });
+    /* leaving the Vault closes the camera too */
+    document.getElementById('mback').addEventListener('click', closeCam);
+  })();
   var ava=document.querySelector('.mtop .mava');
   ava.style.cursor='pointer';
   ava.setAttribute('role','button'); ava.setAttribute('tabindex','0'); ava.setAttribute('aria-label','Your profile');
