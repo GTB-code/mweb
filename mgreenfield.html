@@ -658,7 +658,7 @@ body.pushed .msub{ transform:translateX(0); }
   opacity:0; pointer-events:none; transition:opacity .24s ease; }
 body.quest-mode .qmode{ opacity:1; pointer-events:auto; }
 .qdock{ flex:none; background:var(--white); border-bottom:1px solid var(--hairline);
-  padding:calc(10px + env(safe-area-inset-top)) 18px 0;
+  padding:calc(24px + env(safe-area-inset-top)) 18px 0;
   transform:translateY(-14px); opacity:0; transition:transform .3s var(--push-ease), opacity .3s var(--push-ease); }
 body.quest-mode .qdock{ transform:translateY(0); opacity:1; }
 .qdock-top{ display:flex; align-items:center; justify-content:space-between; min-height:40px; }
@@ -668,7 +668,7 @@ body.quest-mode .qdock{ transform:translateY(0); opacity:1; }
 .qdock .mps{ border:0; border-radius:0; padding:4px 0 12px; margin:0; }
 .qdock .mps-pills{ margin:12px -18px 0; padding:2px 18px 2px; }
 .qbody{ flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; overscroll-behavior:contain;
-  padding:24px 18px calc(44px + env(safe-area-inset-bottom));
+  padding:36px 18px calc(44px + env(safe-area-inset-bottom));
   transform:translateY(30px); opacity:0; transition:transform .36s var(--push-ease) .05s, opacity .36s var(--push-ease) .05s; }
 body.quest-mode .qbody{ transform:translateY(0); opacity:1; }
 /* the quest editor is the section's own editor, already open and focused */
@@ -1106,7 +1106,6 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         </g>
       </svg>
     </div>
-    <div class="mplan-chips" id="mplanChips"></div>
   </section>
 
   <!-- 3 stat cards, like desktop, now under the portfolio card -->
@@ -2385,7 +2384,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     function apply(lens, animate){
       var L=LENS[lens]; if(!L) return;
       ddl.textContent=L.dd;
-      renderStats(L); renderChips(L); renderSections(L);
+      renderStats(L); renderSections(L);
       if(reduce || !animate){ hl.innerHTML=L.hl; noOrphans(hl); return; }
       hl.classList.add('hl-sw');
       setTimeout(function(){ hl.innerHTML=L.hl; noOrphans(hl); hl.classList.remove('hl-sw'); }, 180);
