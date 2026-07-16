@@ -495,6 +495,7 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 .mstat3 .sub .dn{ color:var(--text-tertiary); font-weight:600; }
 .mstat3 .sub .since{ display:block; font-size:11px; color:var(--text-tertiary); font-weight:500; margin-top:2px; }
 /* What's already yours: the desktop net-worth block mosaic, restacked for mobile */
+.myours{ border-radius:18px; overflow:hidden; }
 .myours svg{ display:block; width:100%; height:auto; }
 .myours-side{ display:flex; align-items:center; gap:18px; margin-top:18px; }
 .myours-l{ flex:none; }
@@ -1102,9 +1103,8 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
   <h1 class="mhl">You are in <em class="mhl-em">better</em> shape than it <em class="mhl-gold">feels</em>.</h1>
   <p class="msubhead msubhead-today">Fact, not forecast. Your real numbers, today.</p>
 
-  <div class="mplan-seclabel" style="margin:30px 2px 10px">What&#8217;s already yours</div>
-  <div class="myours" id="myoursBlocks">
-    <svg viewBox="0 0 344 192" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-label="Net worth blocks">
+  <div class="myours" id="myoursBlocks" style="margin-top:26px">
+    <svg viewBox="0 4 344 184" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-label="Net worth blocks">
       <defs>
         <pattern id="utHatch" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
           <rect width="8" height="8" fill="rgba(255,255,255,0.55)"/>
@@ -1114,24 +1114,24 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       <g class="nwb">
         <rect x="0" y="4" width="165" height="184" fill="#0D3F4A"/>
         <rect x="0" y="137" width="165" height="51" fill="url(#utHatch)"/>
-        <text x="14" y="28" font-size="14" font-weight="700" fill="#fff">Home</text>
-        <text x="14" y="47" font-size="13" fill="rgba(255,255,255,0.85)">$905K</text>
-        <text x="14" y="167" font-size="12.5" font-weight="600" fill="#10182C">Mortgage &#8722;$333K</text>
+        <text x="14" y="30" font-size="17" font-weight="700" fill="#fff">Home</text>
+        <text x="14" y="51" font-size="15.5" fill="rgba(255,255,255,0.85)">$905K</text>
+        <text x="14" y="168" font-size="14.5" font-weight="600" fill="#10182C">Mortgage &#8722;$333K</text>
       </g>
       <g class="nwb">
         <rect x="169" y="4" width="175" height="108" fill="#1B6B5C"/>
-        <text x="183" y="28" font-size="14" font-weight="700" fill="#fff">Retirement</text>
-        <text x="183" y="47" font-size="13" fill="rgba(255,255,255,0.85)">$310K</text>
+        <text x="183" y="30" font-size="17" font-weight="700" fill="#fff">Retirement</text>
+        <text x="183" y="51" font-size="15.5" fill="rgba(255,255,255,0.85)">$310K</text>
       </g>
       <g class="nwb">
         <rect x="169" y="116" width="104" height="72" fill="#04B477"/>
-        <text x="183" y="140" font-size="14" font-weight="700" fill="#fff">Brokerage</text>
-        <text x="183" y="158" font-size="13" fill="rgba(255,255,255,0.85)">$150K</text>
+        <text x="183" y="142" font-size="17" font-weight="700" fill="#fff">Brokerage</text>
+        <text x="183" y="162" font-size="15.5" fill="rgba(255,255,255,0.85)">$150K</text>
       </g>
       <g class="nwb">
         <rect x="277" y="116" width="67" height="72" fill="#9BD9C1"/>
-        <text x="288" y="140" font-size="13.5" font-weight="700" fill="#10182C">Cash</text>
-        <text x="288" y="158" font-size="12.5" fill="#10182C" opacity="0.75">$107K</text>
+        <text x="288" y="142" font-size="16" font-weight="700" fill="#10182C">Cash</text>
+        <text x="288" y="161" font-size="14.5" fill="#10182C" opacity="0.75">$107K</text>
       </g>
     </svg>
   </div>
