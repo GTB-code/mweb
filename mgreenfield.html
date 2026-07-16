@@ -39,6 +39,7 @@ body.pushed .mtop{ opacity:0; pointer-events:none; }
 .mtop .mava{ width:42px; height:42px; border-radius:999px; background:var(--white); color:#6E7480;
   border:1px solid var(--hairline); display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:600; }
 
+
 /* ===== root panel (Today) ===== */
 .mroot{ padding:calc(82px + env(safe-area-inset-top)) 18px calc(120px + env(safe-area-inset-bottom));
   transition:transform .36s var(--push-ease), opacity .36s var(--push-ease); }
@@ -231,9 +232,12 @@ body.mq-pay-mode .mq-topskip{ display:block; }
 .mx-foot-c{ font-size:12.5px; color:var(--text-tertiary); margin-top:20px; }
 .mv-upload{ display:flex; align-items:center; gap:12px; }
 body.vault-open .mv-upload{ position:fixed; left:50%; transform:translateX(-50%);
-  width:calc(100% - 36px); max-width:444px; bottom:calc(120px + env(safe-area-inset-bottom)); z-index:74; }
+  width:calc(100% - 36px); max-width:444px; bottom:calc(20px + env(safe-area-inset-bottom)); z-index:74; }
+/* a soft white fade behind the pinned bar so files scroll cleanly under it */
+body.vault-open .mv-upload::before{ content:''; position:absolute; left:-18px; right:-18px; bottom:calc(-20px - env(safe-area-inset-bottom)); top:-24px;
+  background:linear-gradient(to top, #FFFFFF 55%, rgba(255,255,255,0)); z-index:-1; pointer-events:none; }
 /* let the last file clear the fixed bar */
-body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bottom)); }
+body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bottom)); }
 .mv-up-pill{ flex:1; height:54px; border-radius:999px; background:var(--green-cta); color:#FFFFFF; border:0;
   display:inline-flex; align-items:center; justify-content:center; gap:9px; font-family:inherit; font-size:18px; font-weight:600; cursor:pointer;
   transition:background .18s ease, transform .1s ease; }
@@ -289,6 +293,8 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .mflow-track i{ display:block; height:100%; border-radius:99px; transform-origin:left; }
 .fin{ background:var(--teal); } .fout{ background:rgba(13,63,74,0.45); } .fkeep{ background:var(--green); }
 .mflow-v{ width:64px; flex:none; text-align:right; font:500 15.5px 'DM Sans',sans-serif; font-variant-numeric:tabular-nums; }
+.mflow-assets .mflow-l{ width:92px; }
+.mflow-assets .mflow-v{ font-weight:600; color:var(--text-secondary); }
 
 /* ===== Home: the Plan page's discipline. One scale: 33 / 19 / 17 / 13. ===== */
 .mh-sec{ margin-top:44px; }
@@ -303,14 +309,16 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .mh-ava{ width:38px; height:38px; flex:none; border-radius:999px; color:#FFFFFF; display:flex; align-items:center; justify-content:center;
   font-size:15px; font-weight:600; }
 .mh-ava.t{ background:var(--teal); } .mh-ava.g{ background:#0E794E; }
+.mh-ava-sil{ overflow:hidden; }
+.mh-ava-sil svg{ width:100%; height:100%; display:block; }
 .mh-link{ display:inline-flex; align-items:center; gap:6px; color:var(--green-cta); font-size:17px; font-weight:600; cursor:pointer; margin-top:14px; }
 .mh-classes{ display:flex; gap:11px; margin-top:14px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;
   margin-left:-18px; margin-right:-18px; padding:0 18px 4px; }
 .mh-classes::-webkit-scrollbar{ display:none; }
-.mh-class{ flex:none; width:210px; display:flex; flex-direction:column; gap:10px; text-align:left;
+.mh-class{ flex:none; width:152px; display:flex; flex-direction:column; gap:10px; text-align:left;
   background:none; border:0; padding:0; font-family:inherit; cursor:pointer; }
 .mh-class:active .mh-thumb{ transform:scale(0.985); }
-.mh-thumb{ position:relative; width:100%; aspect-ratio:16/9; border-radius:14px; overflow:hidden;
+.mh-thumb{ position:relative; width:100%; aspect-ratio:9/16; border-radius:14px; overflow:hidden;
   display:block; transition:transform .15s ease; }
 .mh-thumb::after{ content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(16,24,44,0) 40%, rgba(16,24,44,0.28) 100%); }
 /* tonal "video still" backgrounds, layered so they read as imagery not a flat chip */
@@ -321,6 +329,9 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
   width:44px; height:44px; border-radius:999px; background:rgba(255,255,255,0.92);
   display:flex; align-items:center; justify-content:center; }
 .mh-play svg{ width:17px; height:17px; margin-left:2px; color:#10182C; }
+/* illustrated presenter inside a video still */
+.mh-figure{ position:absolute; right:8px; bottom:0; width:46%; height:74%; z-index:1; }
+.mh-figure svg{ width:100%; height:100%; display:block; }
 .mh-badge{ position:absolute; right:8px; bottom:8px; z-index:2; font:600 12px 'DM Sans',sans-serif;
   color:#FFFFFF; background:rgba(16,24,44,0.72); border-radius:6px; padding:2px 7px; letter-spacing:0.02em; }
 .mh-badge.live{ display:inline-flex; align-items:center; gap:5px; background:rgba(229,72,77,0.92); }
@@ -345,13 +356,13 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
   display:flex; align-items:center; justify-content:center; }
 .mop-ico svg{ width:21px; height:21px; }
 .mop-txt{ flex:1; min-width:0; }
-.mop-t{ display:flex; align-items:center; gap:7px; font-size:18.5px; font-weight:600; color:var(--ink); }
-.mop-alert{ width:17px; height:17px; border-radius:999px; background:#FBBD04; color:#10182C; font-style:normal;
+.mop-t{ display:flex; align-items:center; gap:7px; font-size:20px; font-weight:600; color:var(--ink); }
+.mop-alert{ width:19px; height:19px; border-radius:999px; background:#FBBD04; color:#10182C; font-style:normal;
   font-size:13px; font-weight:700; display:inline-flex; align-items:center; justify-content:center; }
-.mop-s{ display:block; font-size:15px; color:var(--text-secondary); line-height:1.4; margin-top:3px; }
+.mop-s{ display:block; font-size:16.5px; color:var(--text-secondary); line-height:1.45; margin-top:4px; }
 .mop-val{ flex:none; text-align:right; display:flex; flex-direction:column; gap:1px; }
-.mop-val b{ font:700 18px 'DM Sans',sans-serif; letter-spacing:-0.3px; color:var(--green-cta); font-variant-numeric:tabular-nums; }
-.mop-val i{ font-style:normal; font-size:13px; color:var(--text-tertiary); }
+.mop-val b{ font:700 20px 'DM Sans',sans-serif; letter-spacing:-0.3px; color:var(--green-cta); font-variant-numeric:tabular-nums; }
+.mop-val i{ font-style:normal; font-size:14.5px; color:var(--text-tertiary); }
 /* detail widgets */
 .mo-hero{ margin-top:20px; }
 .mo-fig{ font:700 42px 'DM Sans',sans-serif; letter-spacing:-1px; font-variant-numeric:tabular-nums; }
@@ -407,7 +418,7 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .mplan-stats3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:9px; margin-top:16px; }
 .mstat3{ border:1px solid var(--hairline); border-radius:14px; padding:12px 11px 11px; }
 .mstat3 .lab{ font-size:13px; color:var(--text-tertiary); line-height:1.2; white-space:nowrap; }
-.mstat3 .fig{ font:700 20px 'DM Sans',sans-serif; letter-spacing:-0.6px; margin-top:5px; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.mstat3 .fig{ font:700 20px 'DM Sans',sans-serif; letter-spacing:-0.6px; margin-top:1px; font-variant-numeric:tabular-nums; white-space:nowrap; }
 .mstat3 .sub{ font-size:13px; margin-top:4px; white-space:nowrap; }
 .mstat3 .sub .up{ color:var(--green-cta); font-weight:600; }
 .mstat3 .sub .dn{ color:var(--text-tertiary); font-weight:600; }
@@ -425,8 +436,8 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 /* chips row */
 .mplan-chips{ display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:8px; margin-top:16px; padding-top:16px; border-top:1px solid #F1F2F4; }
 .mchip4{ min-width:0; }
-.mchip4 .lab{ font-size:11px; color:var(--text-tertiary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.mchip4 .val{ font:600 15px 'DM Sans',sans-serif; letter-spacing:-0.3px; margin-top:3px; font-variant-numeric:tabular-nums; }
+.mchip4 .lab{ font-size:14px; color:var(--text-tertiary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.mchip4 .val{ font:600 20px 'DM Sans',sans-serif; letter-spacing:-0.3px; margin-top:0px; font-variant-numeric:tabular-nums; }
 /* boost your confidence card */
 .mplan-seclabel{ font-size:18px; font-weight:600; color:var(--text-secondary); margin:24px 2px 8px; }
 .mplan-boost{ margin-top:0; }
@@ -446,6 +457,9 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .mps-l{ font-size:14px; color:var(--text-tertiary); }
 /* the section list: rows push detail pages */
 .mlist{ margin-top:26px; border-top:1px solid var(--hairline); }
+/* the Plan list is led by the Plan Score card, which provides its own separation —
+   drop the top hairline so it doesn't read as a stray line above the widget */
+#mlistPlan{ border-top:0; margin-top:20px; }
 .mrow{ display:flex; align-items:center; gap:12px; width:100%; text-align:left; background:none; border:0;
   border-bottom:1px solid var(--hairline); padding:17px 2px; font-family:inherit; cursor:pointer; }
 .mrow:active{ background:#FAFBFC; }
@@ -575,6 +589,94 @@ body.pushed .msub{ transform:translateX(0); }
 .msvc-cta:active{ background:#0B5F3D; transform:scale(.99); }
 .msvc-cta svg{ width:16px; height:16px; }
 .msvc-reassure{ font-size:15px; color:var(--text-tertiary); line-height:1.55; margin-top:18px; }
+/* ===== mini Plan Score ring (echoes the desktop Plan Score dial) ===== */
+.mscore{ display:flex; align-items:center; gap:16px; padding:16px 4px; }
+.mscore-ring{ position:relative; width:74px; height:74px; flex:none; }
+.mscore-ring svg{ display:block; transform:rotate(-90deg); }
+.mscore-ring .track{ stroke:#E7E9EC; fill:none; }
+.mscore-ring .arc{ stroke:var(--green-cta); fill:none; stroke-linecap:round;
+  transition:stroke-dashoffset 1.1s cubic-bezier(0.22,1,0.36,1); }
+.mscore-num{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  font:700 24px 'DM Sans',sans-serif; letter-spacing:-0.5px; color:var(--ink); font-variant-numeric:tabular-nums; }
+.mscore-txt{ flex:1; min-width:0; }
+.mscore-t{ font-size:18px; font-weight:600; color:var(--ink); letter-spacing:-0.2px; }
+.mscore-s{ font-size:15px; color:var(--text-secondary); line-height:1.45; margin-top:3px; }
+/* home variant: a touch smaller, sits inline under the greeting */
+.mscore.mscore-mini{ padding:10px 4px 4px; gap:13px; }
+.mscore-mini .mscore-ring{ width:58px; height:58px; }
+.mscore-mini .mscore-num{ font-size:20px; }
+.mscore-mini .mscore-t{ font-size:16.5px; }
+.mscore-mini .mscore-s{ font-size:14px; }
+/* ===== interactive Plan Score widget (pills + ring, echoes desktop) ===== */
+.mps{ border:1px solid var(--hairline); border-radius:18px; padding:18px 16px 16px; margin:8px 0 4px; }
+.mps-txt{ min-width:0; }
+.mps-t{ font-size:18px; font-weight:600; color:var(--ink); letter-spacing:-0.2px; }
+.mps-t .mps-num{ color:var(--green-cta); font-variant-numeric:tabular-nums; }
+.mps-s{ font-size:14.5px; color:var(--text-secondary); line-height:1.4; margin-top:2px; }
+/* horizontal progress bar (replaces the ring) */
+.mps-bar{ height:10px; border-radius:999px; background:#E7E9EC; overflow:hidden; margin-top:14px; }
+.mps-bar i{ display:block; height:100%; border-radius:999px; background:var(--green-cta); width:0;
+  transform-origin:left; transition:width 1.0s cubic-bezier(0.22,1,0.36,1); }
+.mps-pills{ display:flex; gap:8px; margin:24px -16px 0; padding:2px 16px 2px; overflow-x:auto;
+  -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+.mps-pills::-webkit-scrollbar{ display:none; }
+.mps-pill{ flex:none; display:inline-flex; align-items:center; gap:8px; height:38px; padding:0 14px;
+  border:1px solid var(--hairline); border-radius:999px; background:var(--white); font-family:inherit;
+  font-size:15px; font-weight:500; color:var(--ink); white-space:nowrap; cursor:pointer;
+  transition:border-color .16s ease, background .16s ease, opacity .3s ease, transform .3s ease; }
+.mps-pill:active{ transform:scale(0.97); }
+.mps-pill .mps-pts{ font-size:14px; font-weight:700; color:var(--green-cta); font-variant-numeric:tabular-nums; }
+.mps-pill.armed{ border-color:#C4DBF8; background:#F5F9FF; }
+.mps-pill.mps-gone{ opacity:0; transform:scale(0.8); }
+.mps-alldone{ font-size:15px; color:var(--text-secondary); margin-top:14px; line-height:1.45; }
+.mps-alldone b{ color:var(--green-cta); font-weight:600; }
+/* the "+N" that flies off a completed pill */
+.mps-fly{ position:fixed; z-index:120; pointer-events:none; font:700 17px 'DM Sans',sans-serif;
+  color:var(--green-cta); font-variant-numeric:tabular-nums; }
+/* pill check circle (desktop parity): blooms green when the step completes */
+.mps-chk{ width:20px; height:20px; flex:none; border-radius:999px; border:1.5px solid var(--hairline); background:#FFFFFF;
+  display:inline-flex; align-items:center; justify-content:center; }
+.mps-chk svg{ width:11px; height:11px; display:block; }
+.mps-chk path{ stroke:#FFFFFF; stroke-width:3.2; fill:none; stroke-linecap:round; stroke-linejoin:round;
+  stroke-dasharray:22; stroke-dashoffset:22; }
+.mps-pill.armed .mps-chk{ border-color:#C4DBF8; }
+.mps-pill.armed{ animation:mps-arm 1.5s ease-in-out 2; }
+@keyframes mps-arm{ 0%,100%{ background:#F5F9FF; } 50%{ background:#E7F0FD; } }
+.mps-pill.done{ color:var(--green-cta); font-weight:600; }
+.mps-pill.done .mps-chk{ background:#04B477; border-color:#04B477; }
+.mps-pill.done .mps-chk path{ stroke-dashoffset:0; transition:stroke-dashoffset 560ms cubic-bezier(0.22,1,0.36,1) 200ms; }
+.mps-pill.done .mps-pts{ display:none; }
+
+/* quest card: the desktop's armed editor, ported to the pushed page */
+.mq-quest{ position:relative; border:1.5px solid #C4DBF8; border-radius:18px; padding:18px 16px 16px; margin:0 0 30px; background:var(--white); }
+.mq-quest-eye{ font-size:14px; font-weight:600; color:#3B82D9; margin-bottom:5px; }
+.mq-quest-t{ font-size:20.5px; font-weight:600; letter-spacing:-0.2px; color:var(--ink); }
+.mq-quest-t .pts{ color:var(--green-cta); font:700 17px 'DM Sans',sans-serif; margin-left:7px; }
+.mq-quest-s{ font-size:16px; color:var(--text-secondary); line-height:1.45; margin:5px 0 20px; }
+.mq-fields .mf{ margin-bottom:18px; }
+.mq-save{ display:flex; align-items:center; justify-content:center; gap:9px; width:100%; height:54px; border:0; border-radius:999px;
+  background:var(--green-cta); color:#FFFFFF; font-family:var(--font); font-size:18px; font-weight:600; cursor:pointer;
+  transition:background .18s ease; }
+.mq-save:active, .mq-save.is-saved{ background:#0B5F3D; }
+.mq-save .sp{ width:16px; height:16px; border-radius:999px; border:2.5px solid rgba(255,255,255,0.35); border-top-color:#FFFFFF;
+  animation:mq-spin .7s linear infinite; display:none; }
+.mq-save.is-saving .sp{ display:inline-block; }
+@keyframes mq-spin{ to{ transform:rotate(360deg); } }
+.mq-skip{ display:block; width:100%; text-align:center; margin-top:14px; background:none; border:0; font-family:var(--font);
+  font-size:16.5px; color:var(--text-tertiary); cursor:pointer; padding:8px 0; }
+/* the green ring that traces the card perimeter while saving (desktop's ringSweep) */
+.mq-ring{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; overflow:visible; }
+.mq-ring rect{ x:1px; y:1px; rx:17px; width:calc(100% - 2px); height:calc(100% - 2px);
+  fill:none; stroke:#04B477; stroke-width:3; stroke-dasharray:1; stroke-dashoffset:1; }
+.mq-quest.saving .mq-ring rect{ transition:stroke-dashoffset .9s cubic-bezier(0.4,0,0.2,1); stroke-dashoffset:0; }
+
+/* the score number pulses when it ticks, the bar brightens */
+.mps-num.tick{ display:inline-block; animation:mps-tick .5s cubic-bezier(0.34,1.3,0.64,1); }
+@keyframes mps-tick{ 0%{ transform:scale(1); } 40%{ transform:scale(1.22); } 100%{ transform:scale(1); } }
+@keyframes mps-barp{ 0%,100%{ filter:brightness(1); } 45%{ filter:brightness(1.3); } }
+.mps-bar.pulse i{ animation:mps-barp .8s ease; }
+/* confetti for the moment every step is done */
+.mps-confetti{ position:fixed; left:0; top:0; z-index:130; pointer-events:none; }
 /* ===== AI screen ===== */
 /* ===== the AI tab ===== */
 .mtab-ai{ display:flex; flex-direction:column; min-height:calc(100dvh - 260px); }
@@ -752,20 +854,26 @@ body.pushed .mnav-fade{ opacity:0; transition:opacity .2s ease; }
 /* the AI sparkle: a living green aura swells continuously (never a hard pulse),
    and the small accent star twinkles, matching the desktop ask-bar sparkle. */
 .mnav button[data-tab="ai"]{ color:#6E7268; }
+/* main star: same size as the other icons, with a gentle blue aura swell */
 .mnav .mai-spk .sp-body{ animation:mnav-aura 5.5s ease-in-out infinite; transform-box:fill-box; transform-origin:center; }
-.mnav .mai-spk .sp-tw{ transform-box:fill-box; transform-origin:center; fill:#5FA8F0; animation:mnav-tw 5.5s ease-in-out infinite; animation-delay:-1.2s; }
+/* small blue stars twinkle around the main star, each on its own stagger */
+.mnav .mai-spk .sp-tw{ transform-box:fill-box; transform-origin:center; fill:#5FA8F0; }
+.mnav .mai-spk .sp-tw1{ animation:mnav-tw 2.8s ease-in-out infinite; animation-delay:0s; }
+.mnav .mai-spk .sp-tw2{ animation:mnav-tw 2.8s ease-in-out infinite; animation-delay:-0.9s; }
+.mnav .mai-spk .sp-tw3{ animation:mnav-tw 2.8s ease-in-out infinite; animation-delay:-1.8s; }
 @keyframes mnav-aura{
   0%{ filter:drop-shadow(0 0 0px rgba(95,168,240,0)); }
   50%{ filter:drop-shadow(0 0 5px rgba(95,168,240,.8)); }
   100%{ filter:drop-shadow(0 0 0px rgba(95,168,240,0)); }
 }
 @keyframes mnav-tw{
-  0%,100%{ opacity:.5; transform:scale(0.9); }
-  40%{ opacity:1; transform:scale(1.2); }
-  70%{ opacity:.7; transform:scale(1); }
+  0%,100%{ opacity:0; transform:scale(0.4); }
+  45%{ opacity:1; transform:scale(1.15); }
+  75%{ opacity:.4; transform:scale(0.85); }
 }
 body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animation:none; }
-@media (prefers-reduced-motion: reduce){ .mnav .mai-spk .sp-body, .mnav .mai-spk .sp-tw{ animation:none; } }
+body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
+@media (prefers-reduced-motion: reduce){ .mnav .mai-spk .sp-body, .mnav .mai-spk .sp-tw{ animation:none; } .mnav .mai-spk .sp-tw{ opacity:.9; } }
 
 /* the fade behind the nav: content scrolls away beneath it */
 .mnav-fade{ position:fixed; left:50%; bottom:0; width:100%; max-width:480px;
@@ -814,10 +922,9 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
 <div class="mtab" id="tabHome">
   <div class="mgreet meye" id="mhGreet">Good afternoon, Marshall</div>
   <h1 class="mhl">You&rsquo;re <em class="mhl-gold">on track</em> to retire <em class="mhl-em">December&nbsp;2028.</em></h1>
-  <p class="msubhead">Your money, working across 38 years.</p>
 
   <button class="mh-viz" id="mhViz" type="button" aria-label="See the plan">
-    <svg viewBox="0 0 360 196" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-hidden="true">
+    <svg viewBox="0 0 360 149" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-hidden="true">
       <defs>
         <linearGradient id="mhLine" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0%" stop-color="#0D3F4A"/>
@@ -835,17 +942,17 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
           <stop offset="100%" stop-color="#FBBD04" stop-opacity="0"/>
         </radialGradient>
       </defs>
-      <path id="mhAreaP" d="M8,140 C 60,128 100,112 140,88 C 180,64 216,44 252,38 C 278,34 300,44 320,60 C 334,72 346,82 352,92 L352,168 L8,168 Z" fill="url(#mhArea)" opacity="0"/>
-      <path id="mhLineP" d="M8,140 C 60,128 100,112 140,88 C 180,64 216,44 252,38 C 278,34 300,44 320,60 C 334,72 346,82 352,92" fill="none" stroke="url(#mhLine)" stroke-width="3" stroke-linecap="round" pathLength="1"/>
-      <line x1="8" y1="168" x2="352" y2="168" stroke="#E7E9EC" stroke-width="1.5"/>
+      <path id="mhAreaP" d="M8,106.4 C 60,97.3 100,85.1 140,66.9 C 180,48.6 216,33.4 252,28.9 C 278,25.8 300,33.4 320,45.6 C 334,54.7 346,62.3 352,69.9 L352,127.7 L8,127.7 Z" fill="url(#mhArea)" opacity="0"/>
+      <path id="mhLineP" d="M8,106.4 C 60,97.3 100,85.1 140,66.9 C 180,48.6 216,33.4 252,28.9 C 278,25.8 300,33.4 320,45.6 C 334,54.7 346,62.3 352,69.9" fill="none" stroke="url(#mhLine)" stroke-width="3" stroke-linecap="round" pathLength="1"/>
+      <line x1="8" y1="127.7" x2="352" y2="127.7" stroke="#E7E9EC" stroke-width="1.5"/>
       <g id="mhPt" opacity="0">
-        <line x1="252" y1="44" x2="252" y2="168" stroke="#E7E9EC" stroke-width="1.2" stroke-dasharray="3 4"/>
-        <g class="mh-halo" style="transform-box:fill-box; transform-origin:center;"><circle cx="252" cy="38" r="20" fill="url(#mhHalo)"/></g>
-        <circle cx="252" cy="38" r="6" fill="#FBBD04" stroke="#FFFFFF" stroke-width="2.5"/>
-        <text x="252" y="18" font-size="12.5" font-weight="700" fill="#0E794E" text-anchor="middle">Peak $2.16M &#183; 2056</text>
+        <line x1="252" y1="33.4" x2="252" y2="127.7" stroke="#E7E9EC" stroke-width="1.2" stroke-dasharray="3 4"/>
+        <g class="mh-halo" style="transform-box:fill-box; transform-origin:center;"><circle cx="252" cy="28.9" r="20" fill="url(#mhHalo)"/></g>
+        <circle cx="252" cy="28.9" r="6" fill="#FBBD04" stroke="#FFFFFF" stroke-width="2.5"/>
+        <text x="252" y="13.7" font-size="12.5" font-weight="700" fill="#0E794E" text-anchor="middle">Peak $2.16M &#183; 2056</text>
       </g>
-      <text x="8" y="188" font-size="11" fill="#9AA0AE">Today</text>
-      <text x="352" y="188" font-size="11" fill="#9AA0AE" text-anchor="end">Age 99</text>
+      <text x="8" y="142.9" font-size="11" fill="#9AA0AE">Today</text>
+      <text x="352" y="142.9" font-size="11" fill="#9AA0AE" text-anchor="end">Age 99</text>
     </svg>
   </button>
 
@@ -860,8 +967,8 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
   <section class="mh-sec">
     <div class="mh-sec-head"><span class="mh-sec-t" style="color:var(--green-cta)">Real people, when you want them</span></div>
     <div class="mlist">
-      <button class="mrow" type="button" data-go="advisor"><span class="mh-ava t">RO</span><span class="mrow-txt"><span class="mrow-t">Advice from a CFP&#174;</span><span class="mrow-s" style="display:block">A fiduciary who reads your plan before you meet</span></span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
-      <button class="mrow" type="button" data-go="coaching"><span class="mh-ava g">DP</span><span class="mrow-txt"><span class="mrow-t">Coaching</span><span class="mrow-s" style="display:block">A 1-on-1 session to get your plan set up right</span></span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
+      <button class="mrow" type="button" data-go="advisor"><span class="mh-ava t mh-ava-sil"><svg viewBox="0 0 40 40" aria-hidden="true"><defs><clipPath id="ilAdv"><circle cx="20" cy="20" r="20"/></clipPath></defs><g clip-path="url(#ilAdv)"><path d="M4 40c0-8 6.5-12.5 16-12.5S36 32 36 40z" fill="rgba(255,255,255,0.16)"/><path d="M11.5 38.5l8.5-5 8.5 5z" fill="rgba(255,255,255,0.9)" opacity="0.9"/><circle cx="20" cy="16.5" r="7.2" fill="#F2D9C2"/><path d="M12.6 15.4c-.3-5 3.4-8.2 7.4-8.2s7.7 3 7.4 8.2c-1.3-2.4-3-3.4-3-3.4-2.6 1.7-8.4 1.5-9.2.2 0 0-1.2 1-2.6 3.2z" fill="#2E3A44"/></g></svg></span><span class="mrow-txt"><span class="mrow-t">Advice from a CFP&#174;</span><span class="mrow-s" style="display:block">A fiduciary who reads your plan before you meet</span></span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
+      <button class="mrow" type="button" data-go="coaching"><span class="mh-ava g mh-ava-sil"><svg viewBox="0 0 40 40" aria-hidden="true"><defs><clipPath id="ilCoach"><circle cx="20" cy="20" r="20"/></clipPath></defs><g clip-path="url(#ilCoach)"><path d="M4 40c0-8 6.5-12.5 16-12.5S36 32 36 40z" fill="rgba(255,255,255,0.16)"/><circle cx="20" cy="16.8" r="7.2" fill="#F2D9C2"/><path d="M11.8 22c-1.4-2-1.6-5 .1-8.4C13.4 10.4 16 8.8 20 8.8s6.6 1.6 8.1 4.8c1.7 3.4 1.5 6.4.1 8.4-.5-3.2-1-6-1.8-7-.1 2.2-.4 3.3-.4 3.3-1.3-4.6-9.1-4.7-11.8-.2 0 0-.3-1-.4-3.1-.8 1-1.3 3.8-1.6 7z" fill="#8A6A52"/></g></svg></span><span class="mrow-txt"><span class="mrow-t">Retirement Planning Coaching</span><span class="mrow-s" style="display:block">A 1-on-1 session to get your plan set up right</span></span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
     </div>
   </section>
 
@@ -869,17 +976,16 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     <div class="mh-sec-head"><span class="mh-sec-t" style="color:var(--green-cta)">Classes and community</span></div>
     <div class="mh-classes">
       <button class="mh-class" type="button" data-toast="Class player lands next in the mobile build">
-        <span class="mh-thumb t"><span class="mh-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="mh-badge live">Live</span></span>
+        <span class="mh-thumb t"><span class="mh-figure"><svg viewBox="0 0 100 88" aria-hidden="true" preserveAspectRatio="xMidYMax meet"><path d="M18 88c0-19 14-30 32-30s32 11 32 30z" fill="rgba(255,255,255,0.20)"/><path d="M38 84l12-9 12 9z" fill="rgba(255,255,255,0.85)" opacity="0.85"/><circle cx="50" cy="40" r="16" fill="#F2D9C2"/><path d="M33 39c-.8-11 7-18 17-18s17.8 7 17 18c-2.8-5.2-6.4-7.4-6.4-7.4-5.6 3.8-18 3.4-20.4.4 0 0-2.6 2.2-7.2 7z" fill="#2E3A44"/></svg></span><span class="mh-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="mh-badge live">Live</span></span>
         <span class="mh-class-t">Social Security Masterclass</span>
-        <span class="mh-class-m"><i class="live"></i>Live &#183; Thursday 10am</span>
       </button>
       <button class="mh-class" type="button" data-toast="Video player lands next in the mobile build">
-        <span class="mh-thumb g"><span class="mh-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="mh-badge">12:00</span></span>
+        <span class="mh-thumb g"><span class="mh-figure"><svg viewBox="0 0 100 88" aria-hidden="true" preserveAspectRatio="xMidYMax meet"><path d="M18 88c0-19 14-30 32-30s32 11 32 30z" fill="rgba(255,255,255,0.20)"/><path d="M38 84l12-9 12 9z" fill="rgba(255,255,255,0.85)" opacity="0.85"/><circle cx="50" cy="40" r="16" fill="#F2D9C2"/><path d="M32 50c-3-4.4-3.4-11 .2-18C35 26 40.6 22.5 50 22.5S65 26 67.8 32c3.6 7 3.2 13.6.2 18-1-7-2.2-13-4-15.4-.2 4.8-.8 7.2-.8 7.2-2.8-10-20-10.2-26-.4 0 0-.6-2.2-.8-6.8-1.8 2.2-2.8 8.4-3.6 15.4z" fill="#8A6A52"/></svg></span><span class="mh-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="mh-badge">12:00</span></span>
         <span class="mh-class-t">The Roth window, in 12 minutes</span>
         <span class="mh-class-m">Video &#183; 12 min</span>
       </button>
       <button class="mh-class" type="button" data-toast="Class player lands next in the mobile build">
-        <span class="mh-thumb d"><span class="mh-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="mh-badge">4 parts</span></span>
+        <span class="mh-thumb d"><span class="mh-figure"><svg viewBox="0 0 100 88" aria-hidden="true" preserveAspectRatio="xMidYMax meet"><path d="M18 88c0-19 14-30 32-30s32 11 32 30z" fill="rgba(255,255,255,0.20)"/><path d="M38 84l12-9 12 9z" fill="rgba(255,255,255,0.85)" opacity="0.85"/><circle cx="50" cy="40" r="16" fill="#F2D9C2"/><path d="M34 44c-4-4.4-4.4-13 0-20C37 18.6 42.6 21 50 21s13 -2.4 16 3c4.4 7 4 15.6 0 20 0-6.6-.6-11.8-2.2-14.4-4.4 4-27.4 4.2-27.6 0C34.6 32.2 34 37.4 34 44z" fill="#B9C2CB"/></svg></span><span class="mh-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="mh-badge">4 parts</span></span>
         <span class="mh-class-t">Budgeting for the last mile</span>
         <span class="mh-class-m">Class &#183; 4 parts</span>
       </button>
@@ -908,27 +1014,21 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     <div class="mpanel on" data-p="worth">
       <div class="mfig-row"><span class="mfig">$1.14M</span><span class="mdelta">&#9650; $8,200 since January</span></div>
       <div class="mfig-sub">Net worth today</div>
-      <div class="mstack-bar">
-        <i style="flex:572" class="c1"></i><i style="flex:310" class="c2"></i><i style="flex:150" class="c3"></i><i style="flex:107" class="c4"></i>
-      </div>
-      <div class="mleg">
-        <div class="mleg-row"><span class="mdot c1"></span><span class="mleg-t">Home<span class="mleg-s">Mortgage &#8722;$333K</span></span><span class="mleg-v">$905K</span></div>
-        <div class="mleg-row"><span class="mdot c2"></span><span class="mleg-t">Retirement</span><span class="mleg-v">$310K</span></div>
-        <div class="mleg-row"><span class="mdot c3"></span><span class="mleg-t">Brokerage</span><span class="mleg-v">$150K</span></div>
-        <div class="mleg-row"><span class="mdot c4"></span><span class="mleg-t">Cash</span><span class="mleg-v">$107K</span></div>
+      <div class="mflow mflow-assets">
+        <div class="mflow-row"><span class="mflow-l">Home</span><span class="mflow-track"><i class="c1" style="width:100%"></i></span><span class="mflow-v">$905K</span></div>
+        <div class="mflow-row"><span class="mflow-l">Retirement</span><span class="mflow-track"><i class="c2" style="width:34%"></i></span><span class="mflow-v">$310K</span></div>
+        <div class="mflow-row"><span class="mflow-l">Brokerage</span><span class="mflow-track"><i class="c3" style="width:17%"></i></span><span class="mflow-v">$150K</span></div>
+        <div class="mflow-row"><span class="mflow-l">Cash</span><span class="mflow-track"><i class="c4" style="width:12%"></i></span><span class="mflow-v">$107K</span></div>
       </div>
     </div>
 
     <div class="mpanel" data-p="alloc">
       <div class="mfig-row"><span class="mfig">$744.6K</span></div>
       <div class="mfig-sub">Invested today</div>
-      <div class="mstack-bar">
-        <i style="flex:58" class="c1"></i><i style="flex:25" class="c2"></i><i style="flex:17" class="c4"></i>
-      </div>
-      <div class="mleg">
-        <div class="mleg-row"><span class="mdot c1"></span><span class="mleg-t">Stocks<span class="mleg-s">58%</span></span><span class="mleg-v">$432K</span></div>
-        <div class="mleg-row"><span class="mdot c2"></span><span class="mleg-t">Bonds<span class="mleg-s">25%</span></span><span class="mleg-v">$186K</span></div>
-        <div class="mleg-row"><span class="mdot c4"></span><span class="mleg-t">Cash<span class="mleg-s">17%</span></span><span class="mleg-v">$126.6K</span></div>
+      <div class="mflow mflow-assets">
+        <div class="mflow-row"><span class="mflow-l">Stocks</span><span class="mflow-track"><i class="c1" style="width:100%"></i></span><span class="mflow-v">$432K</span></div>
+        <div class="mflow-row"><span class="mflow-l">Bonds</span><span class="mflow-track"><i class="c2" style="width:43%"></i></span><span class="mflow-v">$186K</span></div>
+        <div class="mflow-row"><span class="mflow-l">Cash</span><span class="mflow-track"><i class="c4" style="width:29%"></i></span><span class="mflow-v">$126.6K</span></div>
       </div>
     </div>
 
@@ -949,6 +1049,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     <div class="mstat3" data-msx="savings" role="button" tabindex="0"><div class="lab">Savings</div><div class="fig">$106,750</div><div class="sub"><span class="up">&#9650; $1,070</span></div></div>
   </div>
 
+  <div id="todayScore"></div>
   <div class="mplan-seclabel" style="margin:40px 2px -6px">Everything you have</div>
   <div class="mlist" id="mlist"></div>
 </div>
@@ -1000,31 +1101,26 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
 
 <div class="mtab" id="tabOptimize" hidden>
   <div class="mgreet meye">Optimize</div>
-  <h1 class="mhl"><em class="mhl-gold">$412,000</em> is <em class="mhl-em">still on the table.</em></h1>
+  <h1 class="mhl">There is still <em class="mhl-em">$412,000</em> on the <em class="mhl-gold">table.</em></h1>
   <p class="msubhead msubhead-opt">The same life, funded better.</p>
   <div class="mop-cards" id="mopCards">
     <button class="mop-card" type="button" data-op="ss">
-      <span class="mop-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 4l9 5.5"/><path d="M5 10v7M9.7 10v7M14.3 10v7M19 10v7"/><path d="M3.5 20h17"/></svg></span>
       <span class="mop-txt"><span class="mop-t">Social Security <i class="mop-alert">1</i></span><span class="mop-s">The one guaranteed 8% raise in America. Claim it right.</span></span>
       <span class="mop-val"><b>+$760</b><i>/mo at 70</i></span>
     </button>
     <button class="mop-card" type="button" data-op="tax">
-      <span class="mop-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5L5 19"/><circle cx="7.5" cy="7.5" r="2.6"/><circle cx="16.5" cy="16.5" r="2.6"/></svg></span>
       <span class="mop-txt"><span class="mop-t">Tax Planning</span><span class="mop-s">Six low-bracket Decembers. The first closes December 31.</span></span>
       <span class="mop-val"><b>$61,000</b><i>lifetime</i></span>
     </button>
     <button class="mop-card" type="button" data-op="alloc">
-      <span class="mop-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 9 9h-9z"/><path d="M15 3.5A9 9 0 0 1 20.5 9H15z"/></svg></span>
       <span class="mop-txt"><span class="mop-t">Asset Allocation</span><span class="mop-s">Your mix drifted while the market moved. One rebalance resets it.</span></span>
       <span class="mop-val"><b>2.4%</b><i>drift</i></span>
     </button>
     <button class="mop-card" type="button" data-op="withdraw">
-      <span class="mop-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h14M5 12h10M5 18h6"/></svg></span>
       <span class="mop-txt"><span class="mop-t">Withdrawal Strategy</span><span class="mop-s">The order you spend from decides how long it lasts.</span></span>
       <span class="mop-val"><b>+$380</b><i>/mo</i></span>
     </button>
     <button class="mop-card" type="button" data-op="budget">
-      <span class="mop-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5h12v17l-2.4-1.6L13.2 20.5 12 19.4l-1.2 1.1-2.4-1.6L6 20.5z"/><path d="M9 8h6M9 11.5h6M9 15h3.5"/></svg></span>
       <span class="mop-txt"><span class="mop-t">Detailed Budgeter</span><span class="mop-s">You live $2,077 under your safe line. See where the room is.</span></span>
       <span class="mop-val"><b>$2,077</b><i>of room</i></span>
     </button>
@@ -1035,7 +1131,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
   <div class="mai-hero">
     <h1 class="mhl mai-title">Ask anything <span class="mai-spark"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6z"/></svg></span>
       <button class="mai-new" id="maiNew" type="button"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>New chat</button></h1>
-    <p class="msubhead mai-sub">Grounded in your plan, not the open web.</p>
+    <p class="msubhead mai-sub">AI grounded in your plan, not the open web.</p>
   </div>
 
   <div class="mai-recents" id="maiRecents">
@@ -1144,8 +1240,8 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
   <button data-tab="home" class="on" aria-label="Home"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.2 3.6 10v10.3h5.9v-6.2h5v6.2h5.9V10z"/></svg></button>
   <button data-tab="today" aria-label="Today"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor"><path d="M3.5 3.5h17a1.5 1.5 0 0 1 1.5 1.5v14a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 19V5a1.5 1.5 0 0 1 1.5-1.5z" opacity=".95"/><path d="M12 6.4c.45 0 .8.35.8.8v.5c1 .25 1.7.9 1.85 1.9h-1.5c-.12-.5-.6-.8-1.25-.8-.75 0-1.25.38-1.25.9 0 .4.35.63 1.15.87l.9.26c1.35.38 2.1 1 2.1 2.12 0 1.1-.85 1.85-2 2.1v.55a.8.8 0 0 1-1.6 0v-.55c-1.1-.25-1.95-1-2.1-2.1h1.6c.13.6.6.9 1.35.9.75 0 1.25-.35 1.25-.87 0-.4-.35-.63-1.15-.87l-.95-.28c-1.25-.36-2-.98-2-2.08 0-1 .8-1.72 1.9-1.97v-.5c0-.45.35-.8.8-.8z" fill="#F4F5F2"/></svg></button>
   <button data-tab="plan" aria-label="Plan"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.2l1.2 1.2 2-2.2M4 12l1.2 1.2 2-2.2M4 17.8l1.2 1.2 2-2.2M11 6.4h9M11 12h9M11 17.6h9"/></svg></button>
-  <button data-tab="optimize" aria-label="Optimize"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor"><path d="M13.2 2.5 5.4 13.3h5l-1.6 8.2 7.8-10.8h-5z"/></svg></button>
-  <button data-tab="ai" aria-label="Boldin AI"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor" class="mai-spk"><path class="sp-body" d="M10 3.5l1.3 5.2L16.5 10l-5.2 1.3L10 16.5l-1.3-5.2L3.5 10l5.2-1.3z"/><path class="sp-tw" d="M18 13l.8 3.2L22 17l-3.2.8L18 21l-.8-3.2L14 17l3.2-.8z"/></svg></button>
+  <button data-tab="optimize" aria-label="Optimize"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor"><path d="M14.5 2.2 4.2 13.6c-.5.55-.13 1.4.6 1.4h4.2l-1.6 6.5c-.2.82.85 1.35 1.4.7l10.3-11.4c.5-.55.13-1.4-.6-1.4h-4.2l1.6-6.5c.2-.82-.85-1.35-1.4-.7z"/></svg></button>
+  <button data-tab="ai" aria-label="Boldin AI"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor" class="mai-spk"><path class="sp-body" d="M12 1.6l1.9 7.6 7.6 1.9-7.6 1.9L12 20.6l-1.9-7.6L2.5 11.1l7.6-1.9z"/><g class="sp-stars"><path class="sp-tw sp-tw1" d="M20 2.8l.55 2.15 2.15.55-2.15.55L20 8.2l-.55-2.15L17.3 5.5l2.15-.55z"/><path class="sp-tw sp-tw2" d="M4 15.5l.42 1.68 1.68.42-1.68.42L4 19.7l-.42-1.68L1.9 17.6l1.68-.42z"/><path class="sp-tw sp-tw3" d="M20.5 17l.35 1.4 1.4.35-1.4.35L20.5 20.5l-.35-1.4L18.75 18.75l1.4-.35z"/></g></svg></button>
 </nav>
 
 <div class="mtoast" id="mtoast"></div>
@@ -1245,8 +1341,174 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     var rows=keys.map(function(k){
       var s=SECTIONS.find(function(x){ return x.key===k; }); return s?rowFor(s):'';
     }).join('');
-    return '<div class="mplan-seclabel">'+heading+'</div>'+rows;
+    return '<div id="planScore"></div>'+'<div class="mplan-seclabel">'+heading+'</div>'+rows;
   };
+
+  /* ===== interactive Plan Score (pills route to a section; score climbs on completion) ===== */
+  // task model mirrors the desktop: each task has points, a done flag, and where it routes.
+  // score = sum of completed points (out of 100). Starts at 32 (the pre-done items), like desktop.
+  var PS_TASKS=[
+    { id:'housing',  label:'Housing',            pts:10, done:false, go:'home'     },
+    { id:'work',     label:'Work income',        pts:10, done:false, go:'income'   },
+    { id:'ss',       label:'Social Security',    pts:10, done:false, go:'opt-ss'   },
+    { id:'roth',     label:'Roth conversion',    pts:8,  done:false, go:'opt-tax'  },
+    { id:'healthcare',label:'Healthcare costs',  pts:7,  done:false, go:'expenses' },
+    { id:'expenses', label:'Monthly expenses',   pts:7,  done:false, go:'expenses' },
+    { id:'pension',  label:'Pension income',     pts:6,  done:false, go:'income'   },
+    { id:'debts',    label:'Debts and loans',    pts:5,  done:false, go:'debts'    },
+    { id:'realestate',label:'Real estate',       pts:5,  done:false, go:'home'     },
+    // pre-completed (the plan already has these) -> they seed the starting score
+    { id:'savings',  label:'Savings',            pts:21, done:true,  go:'assets'   },
+    { id:'withdrawal',label:'Withdrawal order',  pts:6,  done:true,  go:'assets'   },
+    { id:'balances', label:'Balances',           pts:5,  done:true,  go:'assets'   }
+  ];
+  function psScore(){ return PS_TASKS.filter(function(t){return t.done;}).reduce(function(a,t){return a+t.pts;},0); }
+  var psPending=null;   // task id armed and awaiting its in-section save
+  var psSaved=false;    // true only after the user actually taps Save on the quest card
+
+  function buildPlanScore(el){
+    if(!el) return;
+    var sc=psScore();
+    var open=PS_TASKS.filter(function(t){return !t.done;});
+    var sub = open.length
+      ? ''
+      : 'Complete. Every input is in, and your plan is fully modeled.';
+    var pills = open.length
+      ? '<div class="mps-pills" id="mpsPills">'+open.map(function(t){
+          return '<button class="mps-pill" type="button" data-ps="'+t.id+'"><span class="mps-chk"><svg viewBox="0 0 24 24"><path d="M5.5 12.5l4.2 4.2 9-9.6"/></svg></span>'+t.label+'<span class="mps-pts">+'+t.pts+'</span></button>';
+        }).join('')+'</div>'
+      : '<div class="mps-alldone">Nicely done. Your plan is <b>fully built</b>, and every projection on this page rests on real inputs.</div>';
+    el.innerHTML=
+      '<div class="mps">'+
+        '<div class="mps-txt"><div class="mps-t">Plan Score <span class="mps-num">0</span></div>'+(sub?'<div class="mps-s">'+sub+'</div>':'')+'</div>'+
+        '<div class="mps-bar"><i></i></div>'+
+        pills+
+      '</div>';
+    // animate the bar width + count the number up to the current earned score
+    var bar=el.querySelector('.mps-bar i'), num=el.querySelector('.mps-num');
+    if(reduce){ bar.style.width=sc+'%'; num.textContent=String(sc); return; }
+    bar.style.width='0%'; void bar.offsetWidth;
+    setTimeout(function(){ bar.style.width=sc+'%'; }, 140);
+    var t0=null; function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/950); var e=1-Math.pow(1-p,3);
+      num.textContent=Math.round(sc*e); if(p<1) requestAnimationFrame(step); }
+    setTimeout(function(){ requestAnimationFrame(step); }, 140);
+  }
+
+  // tick the bar + title number from `before` to the new score, on every mounted widget
+  function psAnimateTo(before){
+    var after=psScore();
+    document.querySelectorAll('.mps').forEach(function(mps){
+      var bar=mps.querySelector('.mps-bar i'), num=mps.querySelector('.mps-num');
+      if(!bar||!num) return;
+      if(reduce){ bar.style.width=after+'%'; num.textContent=String(after); return; }
+      bar.style.width=after+'%';
+      var t0=null; function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/700); var e=1-Math.pow(1-p,3);
+        num.textContent=Math.round(before+(after-before)*e); if(p<1) requestAnimationFrame(step); }
+      requestAnimationFrame(step);
+    });
+  }
+
+  // the "+N" that rises off a completed pill
+  function psFly(rect, pts){
+    if(reduce||!rect) return;
+    var fly=document.createElement('div'); fly.className='mps-fly'; fly.textContent='+'+pts;
+    fly.style.left=(rect.left+rect.width/2-10)+'px'; fly.style.top=rect.top+'px';
+    document.body.appendChild(fly);
+    fly.animate([
+      {transform:'translateY(4px) scale(0.85)', opacity:0, offset:0},
+      {transform:'translateY(-2px) scale(1.05)', opacity:1, offset:0.25},
+      {transform:'translateY(-6px) scale(1.05)', opacity:1, offset:0.55},
+      {transform:'translateY(-26px) scale(1)', opacity:0, offset:1}
+    ],{duration:1300, easing:'cubic-bezier(0.22,0.7,0.3,1)'});
+    setTimeout(function(){ fly.remove(); }, 1340);
+  }
+
+  // the desktop completion, ported: the check blooms in, the pill flashes mint,
+  // "+N" flies up, the score ticks after a beat, the pill poofs away, and the
+  // next step arms itself and slides to center
+  function psCelebrate(id){
+    var task=PS_TASKS.find(function(t){return t.id===id;});
+    if(!task || task.done) return;
+    var before=psScore();
+    task.done=true;
+    var pills=[].slice.call(document.querySelectorAll('.mps-pill[data-ps="'+id+'"]'));
+    var flew=false;
+    pills.forEach(function(pill){
+      pill.classList.remove('armed');
+      pill.classList.add('done');
+      var ptsEl=pill.querySelector('.mps-pts');
+      if(!flew && ptsEl && pill.offsetParent){ psFly(ptsEl.getBoundingClientRect(), task.pts); flew=true; }
+      if(!reduce && pill.animate){
+        var chk=pill.querySelector('.mps-chk');
+        if(chk && chk.animate) chk.animate(
+          [{transform:'scale(0.2)',offset:0},{transform:'scale(1.14)',offset:0.55},{transform:'scale(0.97)',offset:0.8},{transform:'scale(1)',offset:1}],
+          {duration:760, easing:'cubic-bezier(0.34,1.2,0.64,1)'});
+        pill.animate(
+          [{backgroundColor:'#FFFFFF',offset:0},{backgroundColor:'#CDF2E1',offset:0.18},{backgroundColor:'#CDF2E1',offset:0.5},{backgroundColor:'#FFFFFF',offset:1}],
+          {duration:1500, easing:'cubic-bezier(0.33,0,0.2,1)'});
+      }
+    });
+    // let the check bloom first, then the number climbs (the desktop's 340ms beat)
+    setTimeout(function(){
+      psAnimateTo(before);
+      document.querySelectorAll('.mps-num').forEach(function(n){ n.classList.remove('tick'); void n.offsetWidth; n.classList.add('tick'); });
+      document.querySelectorAll('.mps-bar').forEach(function(b){ b.classList.remove('pulse'); void b.offsetWidth; b.classList.add('pulse'); });
+    }, reduce?0:340);
+    // hold on the checked pill a beat to enjoy it, then it poofs and the row closes up
+    var allDone=PS_TASKS.every(function(t){return t.done;});
+    setTimeout(function(){
+      pills.forEach(function(pill){
+        if(!pill.parentNode) return;
+        if(reduce || !pill.animate){ pill.parentNode.removeChild(pill); return; }
+        var a=pill.animate(
+          [{opacity:1, transform:'scale(1)'},{opacity:0, transform:'scale(0.6)'}],
+          {duration:320, easing:'cubic-bezier(0.4,0,0.2,1)', fill:'forwards'});
+        a.onfinish=function(){ if(pill.parentNode) pill.parentNode.removeChild(pill); };
+      });
+      setTimeout(function(){
+        if(allDone){
+          document.querySelectorAll('.mps').forEach(function(m){ buildPlanScore(m.parentNode); });
+          psConfetti();
+          return;
+        }
+        // the desktop's advance-to-next: the next step arms itself and centers in the row
+        var next=PS_TASKS.find(function(t){return !t.done;});
+        if(next){
+          document.querySelectorAll('.mps-pill[data-ps="'+next.id+'"]').forEach(function(p){
+            p.classList.add('armed');
+            if(p.offsetParent && p.scrollIntoView) p.scrollIntoView({behavior:reduce?'auto':'smooth', inline:'center', block:'nearest'});
+          });
+        }
+      }, reduce?0:360);
+    }, reduce?60:1150);
+  }
+
+  // the desktop's confetti drop, for the moment every step is done
+  function psConfetti(){
+    if(reduce) return;
+    var vw=window.innerWidth, vh=window.innerHeight;
+    var colors=['#04B477','#A4E8CE','#FBBD04','#0E794E','#EBF8F2'];
+    for(var n=0;n<28;n++){
+      var p=document.createElement('div'); p.className='mps-confetti';
+      var w=6+Math.random()*7, round=Math.random()<0.22;
+      p.style.width=w+'px'; p.style.height=(round?w:8+Math.random()*8)+'px';
+      p.style.borderRadius=round?'50%':'2px';
+      p.style.background=colors[n%colors.length];
+      var sx=vw*0.5+Math.random()*vw*0.55, sy=-30-Math.random()*80;
+      p.style.transform='translate('+sx+'px,'+sy+'px)';
+      document.body.appendChild(p);
+      var dx=-(30+Math.random()*140), fall=vh*0.6+Math.random()*vh*0.4;
+      var rot=(Math.random()*2-1)*540, dur=1500+Math.random()*900;
+      p.animate(
+        [{transform:'translate('+sx+'px,'+sy+'px) rotate(0deg)', opacity:0, offset:0},
+         {opacity:1, offset:0.08},
+         {transform:'translate('+(sx+dx*0.5)+'px,'+(sy+fall*0.5)+'px) rotate('+(rot*0.5)+'deg)', opacity:1, offset:0.5},
+         {transform:'translate('+(sx+dx)+'px,'+(sy+fall)+'px) rotate('+rot+'deg)', opacity:0, offset:1}],
+        {duration:dur, easing:'cubic-bezier(0.3,0.1,0.4,1)'});
+      (function(pp,d){ setTimeout(function(){ pp.remove(); }, d+80); })(p,dur);
+    }
+  }
+
 
   /* ===== What's already yours: segmented control ===== */
   (function(){
@@ -1303,15 +1565,88 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     document.body.classList.remove('vault-open');
     sub.setAttribute('aria-hidden','true');
     setNav(pushOrigin);
+    // a step only completes after its Save; backing out just disarms (desktop parity)
+    if(psPending){
+      var id=psPending; psPending=null;
+      if(psSaved){ psSaved=false; setTimeout(function(){ psCelebrate(id); }, 460); }
+      else { document.querySelectorAll('.mps-pill.armed').forEach(function(p){ p.classList.remove('armed'); }); }
+    }
   }
   document.getElementById('mback').addEventListener('click', pop);
   document.addEventListener('click', function(e){
+    var pill=e.target.closest('.mps-pill');
+    if(pill){
+      var id=pill.dataset.ps; var task=PS_TASKS.find(function(t){return t.id===id;});
+      if(task && !task.done){
+        psPending=id; psSaved=false;
+        document.querySelectorAll('.mps-pill[data-ps="'+id+'"]').forEach(function(p){ p.classList.add('armed'); });
+        psRoute(task.go);
+        injectQuestCard(task);
+      }
+      return;
+    }
     var row=e.target.closest('.mrow'); if(!row) return;
     var s=SECTIONS.find(function(x){ return x.key===row.dataset.sec; }); if(!s) return;
     push('<div class="msub-title">'+s.t+'</div><div class="msub-sub">'+s.s+'</div>'+s.body, false);
   });
+  // route a Plan Score task to its destination (OPT sub-page or a section detail page)
+  function psRoute(go){
+    if(go==='opt-ss'){ push(OPT.ss, false); return; }
+    if(go==='opt-tax'){ push(OPT.tax, false); return; }
+    var s=SECTIONS.find(function(x){ return x.key===go; });
+    if(s){ push('<div class="msub-title">'+s.t+'</div><div class="msub-sub">'+s.s+'</div>'+s.body, false); }
+  }
 
-  /* the nav shrinks on scroll down, returns on scroll up */
+  /* ===== quest card: each step gets its own fields, saved in place (desktop's applyQuestForm) ===== */
+  var PS_FORMS={
+    housing:{ t:'Confirm your housing', s:'Two numbers anchor the whole plan.', f:[['Home value','$905,000'],['Mortgage balance','$332,550']] },
+    work:{ t:'Confirm work income', s:'What comes in each month, until the last paycheck.', f:[['Monthly income','$12,300'],['Income ends','December 2028']] },
+    ss:{ t:'Set Social Security', s:'The claim age drives the biggest guaranteed raise.', f:[['Claiming age','70'],['Benefit at 70','$3,940/mo']] },
+    roth:{ t:'Plan the Roth conversion', s:'Fill the low bracket while the window is open.', f:[['2029 conversion','$17,800'],['Target bracket','12%']] },
+    healthcare:{ t:'Confirm healthcare costs', s:'Medicare timing, and the premium in between.', f:[['Medicare starts','Age 65'],['Monthly premium','$385']] },
+    expenses:{ t:'Confirm monthly expenses', s:'What life costs, essentials and extras.', f:[['Monthly spending','$8,850'],['Essential share','72%']] },
+    pension:{ t:'Confirm pension income', s:'Steady income the plan can lean on.', f:[['Pension income','$1,360/mo'],['Starts','2029']] },
+    debts:{ t:'Confirm debts and loans', s:'What is owed, and what it costs to carry.', f:[['Loans total','$20,550'],['Highest rate','6.4%']] },
+    realestate:{ t:'Confirm real estate', s:'The property, and how it grows.', f:[['Property value','$905,000'],['Appreciation','3.0%/yr']] }
+  };
+  function injectQuestCard(task){
+    var body=document.getElementById('msubBody'); if(!body) return;
+    var F=PS_FORMS[task.id]||{ t:'Confirm '+task.label.toLowerCase(), s:'A quick check keeps the plan honest.', f:[['Value','']] };
+    var card=document.createElement('div'); card.className='mq-quest'; card.dataset.ps=task.id;
+    card.innerHTML=
+      '<svg class="mq-ring" preserveAspectRatio="none"><rect pathLength="1"/></svg>'+
+      '<div class="mq-quest-eye">Plan Score step</div>'+
+      '<div class="mq-quest-t">'+F.t+'<span class="pts">+'+task.pts+'</span></div>'+
+      '<div class="mq-quest-s">'+F.s+'</div>'+
+      '<div class="mq-fields">'+F.f.map(function(x){ return '<div class="mf"><label>'+x[0]+'</label><input type="text" value="'+x[1]+'"></div>'; }).join('')+'</div>'+
+      '<button class="mq-save" type="button"><span class="sp"></span><span class="mq-save-t">Save</span></button>'+
+      '<button class="mq-skip" type="button">Not now</button>';
+    body.insertBefore(card, body.firstChild);
+  }
+  // two-phase save (desktop's Saving -> Saved with the perimeter ring), then home
+  document.addEventListener('click', function(e){
+    var sv=e.target.closest('.mq-save');
+    if(sv){
+      if(sv.classList.contains('is-saving')||sv.classList.contains('is-saved')) return;
+      var card=sv.closest('.mq-quest');
+      var settle=function(){
+        sv.classList.remove('is-saving'); sv.classList.add('is-saved');
+        sv.querySelector('.mq-save-t').innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="vertical-align:-2px;margin-right:3px"><path d="M4.5 12.5l5 5L19.5 7" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Saved';
+        psSaved=true;
+        setTimeout(function(){ pop(); }, reduce?60:680);
+      };
+      if(reduce){ settle(); return; }
+      sv.classList.add('is-saving');
+      sv.querySelector('.mq-save-t').textContent='Saving\u2026';
+      if(card) card.classList.add('saving');
+      setTimeout(settle, 950);
+      return;
+    }
+    var sk=e.target.closest('.mq-skip');
+    if(sk){ pop(); }
+  });
+
+  /* the nav shrinks on scroll down, returns on scroll up; the score bar reveals on scroll */
   (function(){
     var navMini=false;
     function setMini(m){ if(m!==navMini){ navMini=m; document.body.classList.toggle('nav-mini', m); } }
@@ -1319,9 +1654,9 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
       var last=getY();
       target.addEventListener('scroll', function(){
         var y=getY();
-        if(y<=12) setMini(false);
-        else if(y>last+4 && y>72) setMini(true);
-        else if(y<last-4) setMini(false);
+        if(y<=12){ setMini(false); }
+        else if(y>last+4 && y>72){ setMini(true); }
+        else if(y<last-4){ setMini(false); }
         last=y;
       }, {passive:true});
     }
@@ -1359,8 +1694,11 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     setNav(t);
     document.body.classList.toggle('ai-tab', t==='ai');
     if(t==='ai') enterAI();
-    if(t==='plan') drawPlanChart();
+    if(t==='plan'){ drawPlanChart(); if(window.__hintLenses) setTimeout(window.__hintLenses, 120); }
     if(t==='home') drawHome();
+    if(t==='today'){
+      buildPlanScore(document.getElementById('todayScore'));
+    }
     if(t==='optimize' && !reduce){
       document.querySelectorAll('.mop-card').forEach(function(c,i){
         if(c.animate) c.animate([{opacity:0, transform:'translateY(10px)'},{opacity:1, transform:'none'}],
@@ -1368,6 +1706,44 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
       });
     }
   }
+  /* ---- mini Plan Score ring (echoes the desktop dial) ---- */
+  function scoreRingHTML(id, opts){
+    opts=opts||{};
+    var mini=opts.mini;
+    var box=mini?58:74, r=mini?25:31, sw=mini?5:6;
+    var cx=box/2, cy=box/2;
+    var t=opts.title||'Plan Score';
+    var s=opts.sub||'How likely your plan is to fund every year.';
+    return '<div class="mscore'+(mini?' mscore-mini':'')+'" id="'+id+'">'+
+      '<div class="mscore-ring">'+
+        '<svg width="'+box+'" height="'+box+'" viewBox="0 0 '+box+' '+box+'">'+
+          '<circle class="track" cx="'+cx+'" cy="'+cy+'" r="'+r+'" stroke-width="'+sw+'"/>'+
+          '<circle class="arc" cx="'+cx+'" cy="'+cy+'" r="'+r+'" stroke-width="'+sw+'"/>'+
+        '</svg>'+
+        '<div class="mscore-num">0</div>'+
+      '</div>'+
+      '<div class="mscore-txt"><div class="mscore-t">'+t+'</div><div class="mscore-s">'+s+'</div></div>'+
+    '</div>';
+  }
+  function drawScoreRing(el, target){
+    if(!el || el.dataset.drawn) return;
+    el.dataset.drawn='1';
+    var arc=el.querySelector('.arc'), num=el.querySelector('.mscore-num');
+    var r=parseFloat(arc.getAttribute('r')); var CIRC=2*Math.PI*r;
+    arc.style.strokeDasharray=CIRC;
+    var frac=target/100;
+    if(reduce){ arc.style.strokeDashoffset=CIRC*(1-frac); num.textContent=String(target); return; }
+    arc.style.strokeDashoffset=CIRC;                 // start empty
+    void arc.offsetWidth;
+    setTimeout(function(){ arc.style.strokeDashoffset=CIRC*(1-frac); }, 120);
+    // count the number up in step with the sweep
+    var t0=null, dur=1050;
+    function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/dur); var e=1-Math.pow(1-p,3);
+      num.textContent=Math.round(target*e); if(p<1) requestAnimationFrame(step); }
+    setTimeout(function(){ requestAnimationFrame(step); }, 120);
+  }
+  function resetScoreRing(el){ if(el){ el.dataset.drawn=''; var n=el.querySelector('.mscore-num'); if(n)n.textContent='0'; var a=el.querySelector('.arc'); if(a){ var r=parseFloat(a.getAttribute('r')); a.style.transition='none'; a.style.strokeDashoffset=2*Math.PI*r; void a.offsetWidth; a.style.transition=''; } } }
+
   function drawHome(){
     var line=document.getElementById('mhLineP'); if(!line) return;
     if(reduce){
@@ -1686,6 +2062,12 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
       vrow('Home deed, 555 Market St.pdf','Added January 2026')+
       vrow('Term life policy, Lily.pdf','Renews September')+
       vrow('Living trust.docx','Reviewed 2025')+
+      vrow('Marshall 401(k) statement.pdf','Added February 2026')+
+      vrow('Lily IRA statement.pdf','Added February 2026')+
+      vrow('Homeowners insurance.pdf','Renews November')+
+      vrow('Social Security estimate.pdf','Added December 2025')+
+      vrow('Medicare enrollment.pdf','Added October 2025')+
+      vrow('Will and estate plan.docx','Reviewed 2025')+
     '</div>'+
     '<div class="mv-upload">'+
       '<button class="mv-up-pill" type="button" data-toast="Upload lands next in the mobile build"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M5 15v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3"/></svg>Upload a file</button>'+
@@ -1741,7 +2123,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     var hh=new Date().getHours();
     gh.textContent=(hh<12?'Good morning':hh<18?'Good afternoon':'Good evening')+', Marshall';
     var ADVISOR_HTML='<div class="msub-eye">Boldin Advisors</div><h1 class="msub-hl">A fiduciary <em>in your corner.</em></h1><p class="msub-hl2">Work one-on-one with a flat-fee CERTIFIED FINANCIAL PLANNER&#174; professional. Fiduciary advice, no commissions, for a fraction of what most advisors charge.</p><div class="msvc-seclabel">How it works</div><div class="mo-rows"><div class="mo-row"><span class="mo-num">1</span><span class="mo-row-t">Free discovery session<span class="mo-row-s" style="display:block">A small-group intro to see if personalized advice is your next step</span></span></div><div class="mo-row"><span class="mo-num">2</span><span class="mo-row-t">Collaborate on your goals<span class="mo-row-s" style="display:block">Your advisor studies your plan and hunts for opportunities</span></span></div><div class="mo-row"><span class="mo-num">3</span><span class="mo-row-t">Get your action plan<span class="mo-row-s" style="display:block">A clear strategy across investments, taxes, income, and Social Security</span></span></div></div><div class="msvc-seclabel">Why a Boldin Advisor</div><div class="msvc-feat"><span class="msvc-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 2.8v5.1c0 4.8-3.4 7.7-7 9.6-3.6-1.9-7-4.8-7-9.6V5.8z"/><path d="M9 12l2.1 2.1L15.4 9.8"/></svg></span><div><div class="msvc-feat-t">Trustworthy</div><div class="msvc-feat-s">Fiduciaries, bound to put your interests first, always.</div></div></div><div class="msvc-feat"><span class="msvc-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .3c0 1.7-2.5 2-2.5 3.4"/><circle cx="12" cy="16.5" r=".4"/></svg></span><div><div class="msvc-feat-t">Understandable</div><div class="msvc-feat-s">Plain answers, plus the tools to see the why behind every move.</div></div></div><div class="msvc-feat" style="border-bottom:0"><span class="msvc-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 19.5c1.1-3.1 3.5-4.7 6.5-4.7s5.4 1.6 6.5 4.7"/></svg></span><div><div class="msvc-feat-t">Personalized</div><div class="msvc-feat-s">Turning savings into income, not just growing a balance.</div></div></div><div class="msvc-seclabel">Choose your level</div><div class="msvc-tiers"><div class="msvc-tier"><div class="msvc-tier-top"><span class="msvc-tier-t">Retirement Plan Checkup</span><span class="msvc-tier-p">$3,200</span></div><div class="msvc-tier-s">The most popular option. A thorough review of your whole plan with specific recommendations on Roth conversions, withdrawals, and cash flow.</div></div><div class="msvc-tier"><div class="msvc-tier-top"><span class="msvc-tier-t">Ongoing Advisory</span><span class="msvc-tier-p">from $1,200/yr</span></div><div class="msvc-tier-s">You stay in control while an advisor provides trusted fiduciary guidance throughout the year.</div></div></div><button class="msvc-cta" type="button" data-toast="Booking a discovery session lands next in the mobile build">Book a free discovery session <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><p class="msvc-reassure">Advisory services offered through NewRetirement Advisors LLC d/b/a Boldin Advisors, a registered investment advisor.</p>';
-    var COACHING_HTML='<div class="msub-eye">Coaching</div><h1 class="msub-hl">Get it set up <em>right.</em></h1><p class="msub-hl2">Book a 1-on-1 session with a Boldin expert. Verify your data, understand your numbers, and get more out of the planner. No judgment, just support.</p><div class="msvc-price"><span class="amt">$250</span><span class="per">per session, tailored to you</span></div><div class="msvc-seclabel">What you get</div><div class="msvc-feat"><span class="msvc-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h13M4 11h13M4 16h9"/><circle cx="20" cy="6" r="1.3"/></svg></span><div><div class="msvc-feat-t">Check your data</div><div class="msvc-feat-s">Walk through every input so your plan rests on accurate numbers.</div></div></div><div class="msvc-feat"><span class="msvc-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .3c0 1.7-2.5 2-2.5 3.4"/><circle cx="12" cy="16.5" r=".4"/></svg></span><div><div class="msvc-feat-t">Ask anything</div><div class="msvc-feat-s">Confirm you understand the strategies behind your plan.</div></div></div><div class="msvc-feat"><span class="msvc-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15l4.5-5 3.5 3.2L20 6"/><path d="M4 20h16"/></svg></span><div><div class="msvc-feat-t">Explore your metrics</div><div class="msvc-feat-s">Understand what your key numbers really mean for your future.</div></div></div><div class="msvc-feat" style="border-bottom:0"><span class="msvc-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg></span><div><div class="msvc-feat-t">Plan your next steps</div><div class="msvc-feat-s">Leave every session with a clear, confident plan of action.</div></div></div><div class="msvc-seclabel">How it works</div><div class="mo-rows"><div class="mo-row"><span class="mo-num">1</span><span class="mo-row-t">Schedule<span class="mo-row-s" style="display:block">Pick a time slot for your private session</span></span></div><div class="mo-row"><span class="mo-num">2</span><span class="mo-row-t">Meet on Zoom<span class="mo-row-s" style="display:block">Work one-on-one to confirm your plan is set up right</span></span></div><div class="mo-row"><span class="mo-num">3</span><span class="mo-row-t">Keep planning<span class="mo-row-s" style="display:block">Leave confident, and book a follow-up whenever you need one</span></span></div></div><div class="msvc-seclabel">Meet a few coaches</div><div class="msvc-coach"><span class="mh-ava t">NG</span><div><div class="msvc-coach-t">Nancy Gates</div><div class="msvc-coach-s">A supportive space to build financial literacy and confidence, on the Boldin team since 2021.</div></div></div><div class="msvc-coach"><span class="mh-ava g">DP</span><div><div class="msvc-coach-t">Debbie Perks</div><div class="msvc-coach-s">A decade of client service at Wells Fargo, Schwab, and Fidelity, focused on simplifying the complex.</div></div></div><div class="msvc-coach" style="border-bottom:0"><span class="mh-ava" style="background:#5B8A72">FH</span><div><div class="msvc-coach-t">Frances Harrison</div><div class="msvc-coach-s">A former CPA who came to Boldin as a subscriber first, here to replace anxiety with confidence.</div></div></div><button class="msvc-cta" type="button" data-toast="Scheduling a session lands next in the mobile build">Schedule your first session <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><p class="msvc-reassure">Coaching helps you understand and use the Boldin planner. It is not tax, legal, or investment advice, and forms no fiduciary relationship.</p>';
+    var COACHING_HTML='<div class="msub-eye">Coaching</div><h1 class="msub-hl">Get it set up <em>right.</em></h1><p class="msub-hl2">Book a 1-on-1 session with a Boldin expert. Verify your data, understand your numbers, and get more out of the planner. No judgment, just support.</p><div class="msvc-price"><span class="amt">$250</span><span class="per">per session, tailored to you</span></div><div class="msvc-seclabel">What you get</div><div class="msvc-feat"><span class="msvc-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h13M4 11h13M4 16h9"/><circle cx="20" cy="6" r="1.3"/></svg></span><div><div class="msvc-feat-t">Check your data</div><div class="msvc-feat-s">Walk through every input so your plan rests on accurate numbers.</div></div></div><div class="msvc-feat"><span class="msvc-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .3c0 1.7-2.5 2-2.5 3.4"/><circle cx="12" cy="16.5" r=".4"/></svg></span><div><div class="msvc-feat-t">Ask anything</div><div class="msvc-feat-s">Confirm you understand the strategies behind your plan.</div></div></div><div class="msvc-feat"><span class="msvc-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15l4.5-5 3.5 3.2L20 6"/><path d="M4 20h16"/></svg></span><div><div class="msvc-feat-t">Explore your metrics</div><div class="msvc-feat-s">Understand what your key numbers really mean for your future.</div></div></div><div class="msvc-feat" style="border-bottom:0"><span class="msvc-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg></span><div><div class="msvc-feat-t">Plan your next steps</div><div class="msvc-feat-s">Leave every session with a clear, confident plan of action.</div></div></div><div class="msvc-seclabel">How it works</div><div class="mo-rows"><div class="mo-row"><span class="mo-num">1</span><span class="mo-row-t">Schedule<span class="mo-row-s" style="display:block">Pick a time slot for your private session</span></span></div><div class="mo-row"><span class="mo-num">2</span><span class="mo-row-t">Meet on Zoom<span class="mo-row-s" style="display:block">Work one-on-one to confirm your plan is set up right</span></span></div><div class="mo-row"><span class="mo-num">3</span><span class="mo-row-t">Keep planning<span class="mo-row-s" style="display:block">Leave confident, and book a follow-up whenever you need one</span></span></div></div><div class="msvc-seclabel">Meet a few coaches</div><div class="msvc-coach"><span class="mh-ava t mh-ava-sil"><svg viewBox="0 0 40 40" aria-hidden="true"><defs><clipPath id="ilCoach"><circle cx="20" cy="20" r="20"/></clipPath></defs><g clip-path="url(#ilCoach)"><path d="M4 40c0-8 6.5-12.5 16-12.5S36 32 36 40z" fill="rgba(255,255,255,0.16)"/><circle cx="20" cy="16.8" r="7.2" fill="#F2D9C2"/><path d="M11.8 22c-1.4-2-1.6-5 .1-8.4C13.4 10.4 16 8.8 20 8.8s6.6 1.6 8.1 4.8c1.7 3.4 1.5 6.4.1 8.4-.5-3.2-1-6-1.8-7-.1 2.2-.4 3.3-.4 3.3-1.3-4.6-9.1-4.7-11.8-.2 0 0-.3-1-.4-3.1-.8 1-1.3 3.8-1.6 7z" fill="#8A6A52"/></g></svg></span><div><div class="msvc-coach-t">Nancy Gates</div><div class="msvc-coach-s">A supportive space to build financial literacy and confidence, on the Boldin team since 2021.</div></div></div><div class="msvc-coach"><span class="mh-ava g mh-ava-sil"><svg viewBox="0 0 40 40" aria-hidden="true"><defs><clipPath id="ilDeb"><circle cx="20" cy="20" r="20"/></clipPath></defs><g clip-path="url(#ilDeb)"><path d="M4 40c0-8 6.5-12.5 16-12.5S36 32 36 40z" fill="rgba(255,255,255,0.16)"/><circle cx="20" cy="16.8" r="7" fill="#E8C6A8"/><path d="M12 23c-1.8-2-2-6 0-9.2C13.6 11 16.2 9 20 9s6.4 2 8 4.8c2 3.2 1.8 7.2 0 9.2 0-3-.3-5.4-1-6.6-2 1.8-11 1.9-14 0-.7 1.2-1 3.6-1 6.6z" fill="#B9C2CB"/></g></svg></span><div><div class="msvc-coach-t">Debbie Perks</div><div class="msvc-coach-s">A decade of client service at Wells Fargo, Schwab, and Fidelity, focused on simplifying the complex.</div></div></div><div class="msvc-coach" style="border-bottom:0"><span class="mh-ava mh-ava-sil" style="background:#5B8A72"><svg viewBox="0 0 40 40" aria-hidden="true"><defs><clipPath id="ilFra"><circle cx="20" cy="20" r="20"/></clipPath></defs><g clip-path="url(#ilFra)"><path d="M4 40c0-8 6.5-12.5 16-12.5S36 32 36 40z" fill="rgba(255,255,255,0.16)"/><circle cx="20" cy="17" r="7" fill="#F2D9C2"/><path d="M13 16c-2 0-3-1.6-2.4-3.4.4-1.2 1.6-1.8 2.4-1.8.2-1.6 1.8-3 3.6-3 .8 0 1.4.2 1.8.6C19 7.5 19.9 7 21 7c1.6 0 3 1 3.4 2.6 1.4-.2 3 .8 3 2.6 0 1.4-1 2.2-2 2.4.2-2.6-2-4.8-6-4.8-3.4 0-5.8 1.8-6.4 4.2z" fill="#B9C2CB"/></g></svg></span><div><div class="msvc-coach-t">Frances Harrison</div><div class="msvc-coach-s">A former CPA who came to Boldin as a subscriber first, here to replace anxiety with confidence.</div></div></div><button class="msvc-cta" type="button" data-toast="Scheduling a session lands next in the mobile build">Schedule your first session <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><p class="msvc-reassure">Coaching helps you understand and use the Boldin planner. It is not tax, legal, or investment advice, and forms no fiduciary relationship.</p>';
     document.getElementById('tabHome').addEventListener('click', function(e){
       var skip=e.target.closest('[data-skip]');
       if(skip){
@@ -1775,7 +2157,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
         hl:'Retire in <em class="mhl-em">8 years</em> on <em class="mhl-gold">$7,200</em> a month.',
         dd:'Portfolio',
         stats:[['Confidence','87%','Monte Carlo +','conf'],['Fire number','$2.16M','50% funded','fire'],['Funds depleted','2099','Age 82 &middot; 12 yrs','depleted']],
-        chips:[['Surplus/mo','$3,450'],['Portfolio','$1.09M'],['Savings rate','28%'],['Cash runway','14 mo']],
+        chips:[['Surplus/mo','$3,450'],['Portfolio','$1.09M'],['Savings rate','28%']],
         secKeys:['assets','debts','income','home','expenses'], secHeading:'Your full picture'
       },
       fl:{
@@ -1817,11 +2199,13 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
       stagger([].slice.call(stats3.children));
     }
     function renderChips(L){
+      chipsEl.style.gridTemplateColumns='repeat('+L.chips.length+', 1fr)';
       chipsEl.innerHTML=L.chips.map(function(c){ return '<div class="mchip4"><div class="lab">'+c[0]+'</div><div class="val">'+c[1]+'</div></div>'; }).join('');
       stagger([].slice.call(chipsEl.children),4);
     }
     function renderSections(L){
       listEl.innerHTML=window.__planSections(L.secKeys, L.secHeading);
+      buildPlanScore(document.getElementById('planScore'));
       stagger([].slice.call(listEl.querySelectorAll('.mrow')));
     }
     function apply(lens, animate){
@@ -1841,6 +2225,29 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     document.getElementById('mplanDD').addEventListener('click', function(){ toast('Portfolio views land next in the mobile build'); });
     apply('snapshot', false);
     window.__applyLens=apply;
+
+    /* one-time nudge so people see the lens pills can slide */
+    var hinted=false;
+    window.__hintLenses=function(){
+      if(hinted) return;
+      // only run if the row actually overflows (there is more to scroll)
+      var max=row.scrollWidth - row.clientWidth;
+      if(max < 24){ hinted=true; return; }
+      hinted=true;
+      if(reduce){ row.scrollLeft=0; return; }
+      // start fully scrolled right (Tax Strategy exposed), then glide left to the
+      // resting start (SnapShot exposed) — a single directional reveal, no bump-back
+      row.scrollLeft=max;
+      var t0=null;
+      function ease(p){ return 1-Math.pow(1-p,3); }
+      function frame(ts){
+        if(!t0) t0=ts;
+        var p=Math.min(1, (ts-t0)/900);
+        row.scrollLeft=max*(1-ease(p));
+        if(p<1){ requestAnimationFrame(frame); } else { row.scrollLeft=0; }
+      }
+      requestAnimationFrame(frame);
+    };
   })();
 
   /* ===== stat detail modal — mirrors the desktop sx-modal ===== */
