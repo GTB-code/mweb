@@ -1105,6 +1105,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         </g>
       </svg>
     </div>
+    <div class="mplan-chips" id="mplanChips"></div>
   </section>
 
   <!-- 3 stat cards, like desktop, now under the portfolio card -->
@@ -2334,21 +2335,21 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       fl:{
         hl:'Saving <em class="mhl-gold">28%</em>, growing into <em class="mhl-em">freedom.</em>',
         dd:'Net worth',
-        stats:[['Net worth','$1.14M','Assets &minus; debts'],['Surplus','$3,450','After expenses'],['Savings rate','28%','Above target']],
+        stats:[['Surplus','$3,450','After expenses'],['Savings rate','28%','Above target']],
         chips:[['Income/mo','$12,300'],['Spending/mo','$8,850']],
         secKeys:['income','expenses','assets'], secHeading:'What drives your surplus'
       },
       retirement:{
         hl:'<em class="mhl-gold">$1.14M</em> working toward your <em class="mhl-em">retirement.</em>',
         dd:'Retirement income',
-        stats:[['Success','87%','Monte Carlo +'],['To retirement','7 yrs','Dec 2028'],['Safe spending','$8,400','per month']],
+        stats:[['Success','87%','Monte Carlo +'],['Safe spending','$8,400','per month']],
         chips:[['SS at 70','$3,940'],['Withdrawals','$3,100']],
         secKeys:['assets','income','expenses'], secHeading:'What funds retirement'
       },
       tax:{
         hl:'One conversion saves <em class="mhl-gold">$430</em> a <em class="mhl-em">month.</em>',
         dd:'Lifetime taxes',
-        stats:[['Effective rate','19.4%','This year'],['Lifetime rate','23.1%','Projected'],['Lifetime tax','$648K','If unchanged']],
+        stats:[['Effective rate','19.4%','This year'],['Lifetime tax','$648K','If unchanged']],
         chips:[['Tax saved','$61,000'],['Convert/yr','~$17,800']],
         secKeys:['assets','income'], secHeading:'What the strategy works on'
       }
@@ -2383,7 +2384,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     function apply(lens, animate){
       var L=LENS[lens]; if(!L) return;
       ddl.textContent=L.dd;
-      renderStats(L); renderSections(L);
+      renderStats(L); renderChips(L); renderSections(L);
       if(reduce || !animate){ hl.innerHTML=L.hl; noOrphans(hl); return; }
       hl.classList.add('hl-sw');
       setTimeout(function(){ hl.innerHTML=L.hl; noOrphans(hl); hl.classList.remove('hl-sw'); }, 180);
