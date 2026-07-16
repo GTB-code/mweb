@@ -552,6 +552,16 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 .msx-ask-go{ width:48px; height:48px; flex:none; border-radius:999px; border:0; background:#0E794E; color:#FFFFFF;
   display:flex; align-items:center; justify-content:center; cursor:pointer; }
 .msx-ask-go:active{ background:#0B5F3D; }
+/* the Vault scan callout */
+.mv-scan{ display:flex; align-items:flex-start; gap:15px; width:100%; text-align:left; border:0; cursor:pointer;
+  background:#E7F7F0; border-radius:18px; padding:19px 18px; margin-top:18px; transition:transform .15s ease; }
+.mv-scan:active{ background:#DDF2E8; transform:scale(.99); }
+.mv-scan-ico{ width:48px; height:48px; flex:none; border-radius:999px; background:#0E794E; color:#FFFFFF;
+  display:flex; align-items:center; justify-content:center; }
+.mv-scan-txt{ flex:1; min-width:0; }
+.mv-scan-t{ display:block; font-size:19px; font-weight:700; color:var(--ink); letter-spacing:-0.2px; }
+.mv-scan-s{ display:block; font-size:15.5px; color:#33413C; line-height:1.5; margin-top:5px; max-width:30ch; }
+.mv-scan-go{ display:inline-flex; align-items:center; gap:7px; margin-top:12px; font-size:16px; font-weight:600; color:#0E794E; }
 /* the live camera sheet */
 .mcam{ position:fixed; inset:0; z-index:130; background:#0B0F14; display:flex; flex-direction:column; }
 .mcam[hidden]{ display:none; }
@@ -2597,7 +2607,13 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       '<span class="mrow-txt"><span class="mrow-t">'+nm+'</span><span class="mrow-s" style="display:block">'+meta+'</span></span>'+VCHEV+'</button>';
   }
   var VAULT_HTML='<div class="msub-eye">Vault</div><h1 class="msub-hl">Everything <em>in one place.</em></h1><p class="msub-hl2">Statements, deeds, and policies, safe and ready when your plan needs them.</p>'+
-    '<div class="mlist" style="margin-top:16px">'+
+    '<button class="mv-scan" type="button">'+
+      '<span class="mv-scan-ico"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5h2.5l1.3-2h8.4l1.3 2H20a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 20 19.5H4A1.5 1.5 0 0 1 2.5 18v-8A1.5 1.5 0 0 1 4 8.5z"/><circle cx="12" cy="13.5" r="3.4"/></svg></span>'+
+      '<span class="mv-scan-txt"><span class="mv-scan-t">Scan it with your camera</span>'+
+      '<span class="mv-scan-s">Point at any statement, deed, or policy. One tap and it lands in the Vault.</span>'+
+      '<span class="mv-scan-go">Open camera <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></span>'+
+    '</button>'+
+    '<div class="mlist" style="margin-top:20px">'+
       vrow('2025 tax return.pdf','Added March 2026')+
       vrow('Home deed, 555 Market St.pdf','Added January 2026')+
       vrow('Term life policy, Lily.pdf','Renews September')+
@@ -2675,7 +2691,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     });
     /* the Vault camera button is injected markup, so delegate */
     document.addEventListener('click', function(e){
-      if(e.target.closest('.mv-up-cam')) openCam();
+      if(e.target.closest('.mv-up-cam') || e.target.closest('.mv-scan')) openCam();
     });
     /* leaving the Vault closes the camera too */
     document.getElementById('mback').addEventListener('click', closeCam);
