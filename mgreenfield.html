@@ -496,10 +496,11 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 .mstat3 .sub .since{ display:block; font-size:11px; color:var(--text-tertiary); font-weight:500; margin-top:2px; }
 /* What's already yours: the desktop net-worth block mosaic, restacked for mobile */
 .myours svg{ display:block; width:100%; height:auto; }
-.myours-side{ margin-top:18px; }
-.myours-hr{ height:1px; background:rgba(16,24,44,0.10); margin:12px 0; }
+.myours-side{ display:flex; align-items:center; gap:18px; margin-top:18px; }
+.myours-l{ flex:none; }
+.myours-r{ flex:1; min-width:0; }
 .myours-note{ font-size:14px; color:var(--text-secondary); line-height:1.5; }
-.myours-delta{ font:700 13.5px 'DM Sans',sans-serif; color:#0E794E; margin-top:12px; }
+.myours-delta{ font:700 13.5px 'DM Sans',sans-serif; color:#0E794E; margin-top:8px; }
 /* chart head: portfolio dropdown + filter */
 .mplan-chead{ display:flex; align-items:center; justify-content:space-between; margin-bottom:2px; }
 .mplan-dd{ display:inline-flex; align-items:center; gap:5px; background:none; border:0; font-family:inherit;
@@ -1103,7 +1104,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
 
   <div class="mplan-seclabel" style="margin:30px 2px 10px">What&#8217;s already yours</div>
   <div class="myours" id="myoursBlocks">
-    <svg viewBox="0 0 344 274" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-label="Net worth blocks">
+    <svg viewBox="0 0 344 192" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-label="Net worth blocks">
       <defs>
         <pattern id="utHatch" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
           <rect width="8" height="8" fill="rgba(255,255,255,0.55)"/>
@@ -1111,41 +1112,43 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         </pattern>
       </defs>
       <g class="nwb">
-        <rect x="0" y="6" width="165" height="262" fill="#0D3F4A"/>
-        <rect x="0" y="195" width="165" height="73" fill="url(#utHatch)"/>
-        <text x="14" y="32" font-size="14" font-weight="700" fill="#fff">Home</text>
-        <text x="14" y="52" font-size="13" fill="rgba(255,255,255,0.85)">$905K</text>
-        <text x="14" y="236" font-size="12.5" font-weight="600" fill="#10182C">Mortgage &#8722;$333K</text>
+        <rect x="0" y="4" width="165" height="184" fill="#0D3F4A"/>
+        <rect x="0" y="137" width="165" height="51" fill="url(#utHatch)"/>
+        <text x="14" y="28" font-size="14" font-weight="700" fill="#fff">Home</text>
+        <text x="14" y="47" font-size="13" fill="rgba(255,255,255,0.85)">$905K</text>
+        <text x="14" y="167" font-size="12.5" font-weight="600" fill="#10182C">Mortgage &#8722;$333K</text>
       </g>
       <g class="nwb">
-        <rect x="169" y="6" width="175" height="154" fill="#1B6B5C"/>
-        <text x="183" y="32" font-size="14" font-weight="700" fill="#fff">Retirement</text>
-        <text x="183" y="52" font-size="13" fill="rgba(255,255,255,0.85)">$310K</text>
+        <rect x="169" y="4" width="175" height="108" fill="#1B6B5C"/>
+        <text x="183" y="28" font-size="14" font-weight="700" fill="#fff">Retirement</text>
+        <text x="183" y="47" font-size="13" fill="rgba(255,255,255,0.85)">$310K</text>
       </g>
       <g class="nwb">
-        <rect x="169" y="164" width="104" height="104" fill="#04B477"/>
-        <text x="183" y="190" font-size="14" font-weight="700" fill="#fff">Brokerage</text>
-        <text x="183" y="210" font-size="13" fill="rgba(255,255,255,0.85)">$150K</text>
+        <rect x="169" y="116" width="104" height="72" fill="#04B477"/>
+        <text x="183" y="140" font-size="14" font-weight="700" fill="#fff">Brokerage</text>
+        <text x="183" y="158" font-size="13" fill="rgba(255,255,255,0.85)">$150K</text>
       </g>
       <g class="nwb">
-        <rect x="277" y="164" width="67" height="104" fill="#9BD9C1"/>
-        <text x="288" y="190" font-size="13.5" font-weight="700" fill="#10182C">Cash</text>
-        <text x="288" y="209" font-size="12.5" fill="#10182C" opacity="0.75">$107K</text>
+        <rect x="277" y="116" width="67" height="72" fill="#9BD9C1"/>
+        <text x="288" y="140" font-size="13.5" font-weight="700" fill="#10182C">Cash</text>
+        <text x="288" y="158" font-size="12.5" fill="#10182C" opacity="0.75">$107K</text>
       </g>
     </svg>
     <div class="myours-side">
-      <div class="mfig-sub" style="margin-top:0">Net worth today</div>
-      <div class="mfig" style="margin-top:4px">$1.14M</div>
-      <div class="myours-hr"></div>
-      <p class="myours-note">Everything you own, minus the $333K left on the house.</p>
-      <div class="myours-delta">&#9650; $8,200 since January</div>
+      <div class="myours-l">
+        <div class="mfig-sub" style="margin-top:0">Net worth today</div>
+        <div class="mfig" style="margin-top:4px">$1.14M</div>
+      </div>
+      <div class="myours-r">
+        <p class="myours-note">Everything you own, minus the $333K left on the house.</p>
+        <div class="myours-delta">&#9650; $8,200 since January</div>
+      </div>
     </div>
   </div>
 
-  <div class="mplan-stats3" id="mtodayStats3" style="margin-top:14px">
-    <div class="mstat3" data-msx="spend" role="button" tabindex="0"><div class="lab">Spending</div><div class="fig">$8,850</div><div class="sub"><span class="dn">&#9660; $120</span><span class="since">since last visit</span></div></div>
-    <div class="mstat3" data-msx="income" role="button" tabindex="0"><div class="lab">Income</div><div class="fig">$12,300</div><div class="sub"><span class="up">&#9650; $85</span><span class="since">since last visit</span></div></div>
-    <div class="mstat3" data-msx="savings" role="button" tabindex="0"><div class="lab">Savings</div><div class="fig">$106,750</div><div class="sub"><span class="up">&#9650; $1,070</span><span class="since">since last visit</span></div></div>
+  <div class="mplan-stats3" id="mtodayStats3" style="margin-top:14px; grid-template-columns:1fr 1fr">
+    <div class="mstat3" data-msx="spend" role="button" tabindex="0"><div class="lab">Spending</div><div class="fig">$8,850</div><div class="sub"><span class="dn">&#9660; $120</span></div></div>
+    <div class="mstat3" data-msx="savings" role="button" tabindex="0"><div class="lab">Savings</div><div class="fig">$106,750</div><div class="sub"><span class="up">&#9650; $1,070</span></div></div>
   </div>
 
   <div id="todayScore"></div>
