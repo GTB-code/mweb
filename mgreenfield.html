@@ -460,6 +460,10 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 /* the Plan list is led by the Plan Score card, which provides its own separation —
    drop the top hairline so it doesn't read as a stray line above the widget */
 #mlistPlan{ border-top:0; margin-top:20px; }
+/* Today: air between the 3 stat blocks and the Plan Score widget */
+#todayScore .mps{ margin-top:26px; }
+/* Home: air between the net-worth graph and the Plan Score widget */
+#homeScore .mps{ margin-top:26px; }
 .mrow{ display:flex; align-items:center; gap:12px; width:100%; text-align:left; background:none; border:0;
   border-bottom:1px solid var(--hairline); padding:17px 2px; font-family:inherit; cursor:pointer; }
 .mrow:active{ background:#FAFBFC; }
@@ -485,8 +489,8 @@ body.pushed .msub{ transform:translateX(0); }
 .msub-title{ font-size:33px; font-weight:700; letter-spacing:-0.4px; }
 .msub-sub{ font-size:18.5px; color:var(--text-secondary); margin-top:5px; line-height:1.45; }
 /* eyebrow + large headline for Vault / Profile, matching the tab pattern */
-.msub-eye{ font-size:20px; font-weight:600; color:var(--ink); }
-.msub-hl{ font-size:35px; line-height:1.15; font-weight:500; letter-spacing:-0.3px; margin-top:8px; }
+.msub-eye{ font-size:19px; font-weight:600; color:var(--text-secondary); margin-top:18px; }
+.msub-hl{ font-size:33px; line-height:1.14; font-weight:500; letter-spacing:-0.3px; margin-top:10px; }
 .msub-hl em{ font-style:italic; color:var(--green-cta); }
 .msub-hl2{ font-size:18.5px; color:var(--text-secondary); margin-top:10px; line-height:1.55; }
 .mbucket{ margin-top:40px; }
@@ -609,15 +613,15 @@ body.pushed .msub{ transform:translateX(0); }
 .mscore-mini .mscore-s{ font-size:14px; }
 /* ===== interactive Plan Score widget (pills + ring, echoes desktop) ===== */
 .mps{ border:1px solid var(--hairline); border-radius:18px; padding:18px 16px 16px; margin:8px 0 4px; }
-.mps-txt{ min-width:0; }
-.mps-t{ font-size:18px; font-weight:600; color:var(--ink); letter-spacing:-0.2px; }
+.mps-row{ display:flex; align-items:center; gap:14px; }
+.mps-t{ flex:none; white-space:nowrap; font-size:18px; font-weight:600; color:var(--ink); letter-spacing:-0.2px; }
 .mps-t .mps-num{ color:var(--green-cta); font-variant-numeric:tabular-nums; }
-.mps-s{ font-size:14.5px; color:var(--text-secondary); line-height:1.4; margin-top:2px; }
-/* horizontal progress bar (replaces the ring) */
-.mps-bar{ height:10px; border-radius:999px; background:#E7E9EC; overflow:hidden; margin-top:14px; }
+.mps-s{ font-size:14.5px; color:var(--text-secondary); line-height:1.4; margin-top:10px; }
+/* horizontal progress bar, inline with the title for a slim profile */
+.mps-bar{ flex:1; height:9px; border-radius:999px; background:#E7E9EC; overflow:hidden; }
 .mps-bar i{ display:block; height:100%; border-radius:999px; background:var(--green-cta); width:0;
   transform-origin:left; transition:width 1.0s cubic-bezier(0.22,1,0.36,1); }
-.mps-pills{ display:flex; gap:8px; margin:24px -16px 0; padding:2px 16px 2px; overflow-x:auto;
+.mps-pills{ display:flex; gap:8px; margin:12px -16px 0; padding:2px 16px 2px; overflow-x:auto;
   -webkit-overflow-scrolling:touch; scrollbar-width:none; }
 .mps-pills::-webkit-scrollbar{ display:none; }
 .mps-pill{ flex:none; display:inline-flex; align-items:center; gap:8px; height:38px; padding:0 14px;
@@ -647,20 +651,6 @@ body.pushed .msub{ transform:translateX(0); }
 .mps-pill.done .mps-chk path{ stroke-dashoffset:0; transition:stroke-dashoffset 560ms cubic-bezier(0.22,1,0.36,1) 200ms; }
 .mps-pill.done .mps-pts{ display:none; }
 
-/* ===== compact sticky Plan Score bar: hidden at the top, reveals as you scroll ===== */
-.mps-sticky{ position:fixed; top:calc(74px + env(safe-area-inset-top)); left:50%; transform:translateX(-50%) translateY(-8px);
-  width:calc(100% - 36px); max-width:444px; z-index:55; display:none; align-items:center; gap:12px;
-  padding:9px 15px; background:var(--white); border:1px solid var(--hairline); border-radius:999px;
-  opacity:0; pointer-events:none; transition:opacity .28s var(--push-ease), transform .28s var(--push-ease); cursor:pointer; }
-.mps-sticky-t{ font-size:14.5px; font-weight:600; color:var(--ink); white-space:nowrap; flex:none; }
-.mps-sticky-t .mps-sticky-num{ color:var(--green-cta); font-variant-numeric:tabular-nums; }
-.mps-sticky-bar{ flex:1; height:7px; border-radius:999px; background:#E7E9EC; overflow:hidden; }
-.mps-sticky-bar i{ display:block; height:100%; border-radius:999px; background:var(--green-cta); width:0;
-  transition:width .7s cubic-bezier(0.22,1,0.36,1); }
-body.show-score-bar .mps-sticky{ display:flex; }
-body.show-score-bar.score-bar-in .mps-sticky{ opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0); }
-body.pushed .mps-sticky{ opacity:0; pointer-events:none; transform:translateX(-50%) translateY(-8px); }
-
 /* ===== quest mode: the widget docks at the top and stays put while the
    section slides up underneath it, exactly like the desktop's pinned column ===== */
 .qmode{ position:fixed; inset:0; margin:0 auto; width:100%; max-width:480px; z-index:66;
@@ -675,9 +665,8 @@ body.quest-mode .qdock{ transform:translateY(0); opacity:1; }
 .qdock-back{ display:inline-flex; align-items:center; gap:2px; background:none; border:0; font-family:inherit;
   font-size:17px; font-weight:500; color:var(--ink); cursor:pointer; padding:6px 10px 6px 0; margin-left:-4px; }
 .qdock-count{ font-size:14.5px; color:var(--text-tertiary); font-variant-numeric:tabular-nums; }
-.qdock .mps{ border:0; border-radius:0; padding:4px 0 16px; margin:0; }
-.qdock .mps-bar{ margin-top:12px; }
-.qdock .mps-pills{ margin:14px -18px 0; padding:2px 18px 2px; }
+.qdock .mps{ border:0; border-radius:0; padding:6px 0 16px; margin:0; }
+.qdock .mps-pills{ margin:12px -18px 0; padding:2px 18px 2px; }
 .qbody{ flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; overscroll-behavior:contain;
   padding:24px 18px calc(44px + env(safe-area-inset-bottom));
   transform:translateY(30px); opacity:0; transition:transform .36s var(--push-ease) .05s, opacity .36s var(--push-ease) .05s; }
@@ -698,7 +687,6 @@ body.quest-mode .qbody{ transform:translateY(0); opacity:1; }
 /* quest-mode chrome: the app nav and sticky bar step aside */
 body.quest-mode .mnav{ opacity:0; pointer-events:none; transform:translateX(-50%) translateY(20px); transition:opacity .2s ease, transform .2s ease; }
 body.quest-mode .mnav-fade{ opacity:0; transition:opacity .2s ease; }
-body.quest-mode .mps-sticky{ opacity:0; pointer-events:none; }
 
 /* the score number pulses when it ticks, the bar brightens */
 .mps-num.tick{ display:inline-block; animation:mps-tick .5s cubic-bezier(0.34,1.3,0.64,1); }
@@ -948,11 +936,6 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
   </span>
 </header>
 
-<div class="mps-sticky" id="mpsSticky" role="button" tabindex="0" aria-label="Plan Score, jump to details">
-  <span class="mps-sticky-t">Plan Score <span class="mps-sticky-num">0</span></span>
-  <span class="mps-sticky-bar"><i></i></span>
-</div>
-
 <main class="mroot" id="mroot">
 <div class="mtab" id="tabHome">
   <div class="mgreet meye" id="mhGreet">Good afternoon, Marshall</div>
@@ -990,6 +973,8 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       <text x="352" y="142.9" font-size="11" fill="#9AA0AE" text-anchor="end">Age 99</text>
     </svg>
   </button>
+
+  <div id="homeScore"></div>
 
   <section class="mh-sec">
     <div class="mh-sec-head"><span class="mh-sec-t" style="color:var(--green-cta)">Your next best moves</span></div>
@@ -1085,7 +1070,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
   </div>
 
   <div id="todayScore"></div>
-  <div class="mplan-seclabel" style="margin:40px 2px -6px">Everything you have</div>
+  <div class="mplan-seclabel" style="margin:40px 2px -6px">My money</div>
   <div class="mlist" id="mlist"></div>
 </div>
 
@@ -1099,9 +1084,6 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     <button class="mlens" type="button" data-lens="retirement" role="tab" aria-selected="false">Retirement</button>
     <button class="mlens" type="button" data-lens="tax" role="tab" aria-selected="false">Tax Strategy</button>
   </div>
-
-  <!-- 3 stat cards, like desktop -->
-  <div class="mplan-stats3" id="mplanStats3"></div>
 
   <section class="mcard mplan-card">
     <div class="mplan-chead">
@@ -1129,6 +1111,9 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     </div>
     <div class="mplan-chips" id="mplanChips"></div>
   </section>
+
+  <!-- 3 stat cards, like desktop, now under the portfolio card -->
+  <div class="mplan-stats3" id="mplanStats3"></div>
 
 
   <div class="mlist" id="mlistPlan"></div>
@@ -1370,7 +1355,36 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       body: bucket('Recurring expenses', '', 'Add a recurring expense')+
             bucket('One-time expenses', acct('Kitchen remodel','2027 &middot; one-time','$38,000'),'Add a one-time expense')+
             bucket('Medical expenses before 65', acct('Health insurance bridge','Until Medicare at 65','$1,180'),'Add a pre-65 medical expense')+
-            bucket('Long-term care', acct('Long-term care reserve','Planned from age 82','$6,500'),'Add a long-term care expense') }
+            bucket('Long-term care', acct('Long-term care reserve','Planned from age 82','$6,500'),'Add a long-term care expense') },
+    { key:'flows', t:'Money Flows', s:'How money moves in and out over time', amt:'$3,450/mo',
+      body: bucket('Monthly contributions',
+              acct('Roth IRA, Marshall','Monthly transfer','$2,400')+
+              acct('Taxable brokerage','Monthly transfer','$1,050'),'Add a money flow') },
+    { key:'withdrawal', t:'Withdrawal Strategy', s:'The order accounts are drawn down in retirement', amt:'3 stages',
+      body: bucket('Drawdown order',
+              acct('1. Taxable brokerage','Spent first, keeps taxes low','$150,000')+
+              acct('2. Tax-deferred','401(k) and IRA accounts next','$310,000')+
+              acct('3. Roth','Spent last, grows tax-free','Tax-free'),'Adjust the order') },
+    { key:'taxplan', t:'Tax Planning', s:'Conversions, brackets, and lifetime taxes', amt:'$61,000',
+      body: bucket('Roth conversion plan',
+              acct('Annual conversion','2029 through 2034','$17,800')+
+              acct('Target bracket','Filling the 12% band','$106,750'),'Add a strategy')+
+            bucket('Tax picture',
+              acct('Effective rate, this year','Federal and state','19.4%')+
+              acct('Lifetime rate if unchanged','Projected','23.1%'),'Add a detail') },
+    { key:'estate', t:'Estate Planning', s:'Wills, trusts, and beneficiaries', amt:'Reviewed 2025',
+      body: bucket('Documents',
+              acct('Living trust','Hartwell Family Trust','2025')+
+              acct('Will and estate plan','Both spouses','2025'),'Add a document')+
+            bucket('Beneficiaries',
+              acct('Retirement accounts','Each other, then children','Set')+
+              acct('Term life policy, Lily','Renews September','Set'),'Review beneficiaries') },
+    { key:'rates', t:'Rate Assumptions', s:'Growth, inflation, and returns behind the math', amt:'6.0%',
+      body: bucket('Assumptions',
+              acct('Rate of return','Portfolio, optimistic','6.0%')+
+              acct('Average return','Portfolio, average case','5.4%')+
+              acct('Inflation','General prices','2.5%')+
+              acct('Home appreciation','Real estate','3.0%'),'Edit assumptions') }
   ];
 
   var CHEV='<span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span>';
@@ -1379,7 +1393,9 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       '<span class="mrow-txt"><span class="mrow-t">'+s.t+'</span><span class="mrow-s" style="display:block">'+s.s+'</span></span>'+
       '<span class="mrow-amt">'+s.amt+'</span>'+CHEV+'</button>';
   }
-  var ROWS_HTML=SECTIONS.map(rowFor).join('');
+  // Today's "Everything you have" keeps the core five; the Plan page carries the full desktop set
+  var ROWS_HTML=['assets','debts','income','home','expenses'].map(function(k){
+    return rowFor(SECTIONS.find(function(x){ return x.key===k; })); }).join('');
   document.getElementById('mlist').innerHTML=ROWS_HTML;
   document.getElementById('mlistPlan').innerHTML=ROWS_HTML;
   /* build the Plan section list for a given lens: a heading + the relevant sections */
@@ -1409,14 +1425,6 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     { id:'balances', label:'Balances',           pts:5,  done:true,  go:'assets'   }
   ];
   function psScore(){ return PS_TASKS.filter(function(t){return t.done;}).reduce(function(a,t){return a+t.pts;},0); }
-  // paint the compact sticky bar to the current score (instant; used on tab entry)
-  function updateStickyScore(){
-    var s=document.getElementById('mpsSticky'); if(!s) return;
-    var sc=psScore();
-    var num=s.querySelector('.mps-sticky-num'), bar=s.querySelector('.mps-sticky-bar i');
-    if(num) num.textContent=String(sc);
-    if(bar) bar.style.width=sc+'%';
-  }
   var questActive=null;   // the step currently open in quest mode
   var questOrigin='home';  // the tab to land on when quest mode closes
 
@@ -1435,8 +1443,8 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       : '<div class="mps-alldone">Nicely done. Your plan is <b>fully built</b>, and every projection on this page rests on real inputs.</div>';
     el.innerHTML=
       '<div class="mps">'+
-        '<div class="mps-txt"><div class="mps-t">Plan Score <span class="mps-num">0</span></div>'+(sub?'<div class="mps-s">'+sub+'</div>':'')+'</div>'+
-        '<div class="mps-bar"><i></i></div>'+
+        '<div class="mps-row"><div class="mps-t">Plan Score <span class="mps-num">0</span></div><div class="mps-bar"><i></i></div></div>'+
+        (sub?'<div class="mps-s">'+sub+'</div>':'')+
         pills+
       '</div>';
     // animate the bar width + count the number up to the current earned score
@@ -1461,17 +1469,6 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         num.textContent=Math.round(before+(after-before)*e); if(p<1) requestAnimationFrame(step); }
       requestAnimationFrame(step);
     });
-    // the compact sticky bar ticks in lockstep
-    var st=document.getElementById('mpsSticky');
-    if(st){
-      var sbar=st.querySelector('.mps-sticky-bar i'), snum=st.querySelector('.mps-sticky-num');
-      if(sbar) sbar.style.width=after+'%';
-      if(snum){
-        if(reduce){ snum.textContent=String(after); }
-        else { var s0=null; function tick(ts){ if(!s0)s0=ts; var p=Math.min(1,(ts-s0)/700); var e=1-Math.pow(1-p,3);
-          snum.textContent=Math.round(before+(after-before)*e); if(p<1) requestAnimationFrame(tick); } requestAnimationFrame(tick); }
-      }
-    }
   }
 
   // the "+N" that rises off a completed pill
@@ -1701,8 +1698,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     var sc=psScore();
     var open=PS_TASKS.filter(function(t){return !t.done;});
     w.innerHTML='<div class="mps">'+
-      '<div class="mps-txt"><div class="mps-t">Plan Score <span class="mps-num">'+sc+'</span></div></div>'+
-      '<div class="mps-bar"><i style="width:'+sc+'%"></i></div>'+
+      '<div class="mps-row"><div class="mps-t">Plan Score <span class="mps-num">'+sc+'</span></div><div class="mps-bar"><i style="width:'+sc+'%"></i></div></div>'+
       (open.length ? '<div class="mps-pills">'+open.map(psPillHTML).join('')+'</div>'
                    : '<div class="mps-alldone">Nicely done. Your plan is <b>fully built</b>.</div>')+
     '</div>';
@@ -1761,7 +1757,6 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     document.getElementById('qmode').setAttribute('aria-hidden','true');
     // nothing stays armed after leaving; every widget already carries the new score
     document.querySelectorAll('.mps-pill.armed').forEach(function(p){ p.classList.remove('armed'); });
-    updateStickyScore();
   }
   document.querySelector('.qdock-back').addEventListener('click', exitQuest);
   // two-phase save on the section's own Save button, then the celebration runs
@@ -1815,8 +1810,6 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         if(y<=12){ setMini(false); }
         else if(y>last+4 && y>72){ setMini(true); }
         else if(y<last-4){ setMini(false); }
-        // the compact score bar reveals once past a threshold, tucks away near the top
-        document.body.classList.toggle('score-bar-in', y>96);
         last=y;
       }, {passive:true});
     }
@@ -1852,11 +1845,6 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     });
     window.scrollTo(0,0);
     setNav(t);
-    // the compact score bar follows the three score-bearing tabs, starting tucked away
-    var showBar=(t==='home'||t==='today'||t==='plan');
-    document.body.classList.toggle('show-score-bar', showBar);
-    document.body.classList.remove('score-bar-in');
-    if(showBar) updateStickyScore();
     document.body.classList.toggle('ai-tab', t==='ai');
     if(t==='ai') enterAI();
     if(t==='plan'){ drawPlanChart(); if(window.__hintLenses) setTimeout(window.__hintLenses, 120); }
@@ -1941,6 +1929,29 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       if(s.animate) s.animate([{opacity:0, transform:'translateY(10px)'},{opacity:1, transform:'none'}],
         {duration:420, delay:140+i*90, easing:'cubic-bezier(0.22,1,0.36,1)', fill:'backwards'});
     });
+    buildPlanScore(document.getElementById('homeScore'));
+    setTimeout(hintHomePills, 550);
+  }
+  // on first load, the pill row slides in from a few pills over so it reads as scrollable
+  var pillsHinted=false;
+  function hintHomePills(){
+    if(pillsHinted) return;
+    var row=document.querySelector('#homeScore .mps-pills'); if(!row) return;
+    var max=row.scrollWidth-row.clientWidth;
+    if(max<24){ pillsHinted=true; return; }
+    pillsHinted=true;
+    if(reduce){ row.scrollLeft=0; return; }
+    var start=Math.min(max, 230);
+    row.scrollLeft=start;
+    var t0=null;
+    function ease(p){ return 1-Math.pow(1-p,3); }
+    function frame(ts){
+      if(!t0) t0=ts;
+      var p=Math.min(1,(ts-t0)/900);
+      row.scrollLeft=start*(1-ease(p));
+      if(p<1){ requestAnimationFrame(frame); } else { row.scrollLeft=0; }
+    }
+    requestAnimationFrame(frame);
   }
   function drawPlanChart(){
     var line=document.getElementById('pcLine'); if(!line) return;
@@ -2284,19 +2295,6 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     fixHeadlines();
     setTimeout(drawHome, 350);
     document.getElementById('mhViz').addEventListener('click', function(){ activateTab('plan'); });
-    // compact sticky score bar: painted on boot, tap jumps to the full widget
-    document.body.classList.add('show-score-bar');
-    updateStickyScore();
-    (function(){
-      var st=document.getElementById('mpsSticky'); if(!st) return;
-      function jump(){
-        if(activeTab==='home') return;   // Home carries the score in the bar alone
-        var el=document.getElementById(activeTab==='today' ? 'todayScore' : 'planScore');
-        if(el) el.scrollIntoView({behavior: reduce?'auto':'smooth', block:'center'});
-      }
-      st.addEventListener('click', jump);
-      st.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); jump(); } });
-    })();
     var gh=document.getElementById('mhGreet');
     var hh=new Date().getHours();
     gh.textContent=(hh<12?'Good morning':hh<18?'Good afternoon':'Good evening')+', Marshall';
@@ -2335,28 +2333,28 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         hl:'Retire in <em class="mhl-em">8 years</em> on <em class="mhl-gold">$7,200</em> a month.',
         dd:'Portfolio',
         stats:[['Confidence','87%','Monte Carlo +','conf'],['Fire number','$2.16M','50% funded','fire'],['Funds depleted','2099','Age 82 &middot; 12 yrs','depleted']],
-        chips:[['Surplus/mo','$3,450'],['Portfolio','$1.09M'],['Savings rate','28%']],
-        secKeys:['assets','debts','income','home','expenses'], secHeading:'Your full picture'
+        chips:[['Portfolio','$1.09M'],['Savings rate','28%']],
+        secKeys:['assets','debts','income','home','expenses','flows','withdrawal','taxplan','estate','rates'], secHeading:'Future money'
       },
       fl:{
         hl:'Saving <em class="mhl-gold">28%</em>, growing into <em class="mhl-em">freedom.</em>',
         dd:'Net worth',
         stats:[['Net worth','$1.14M','Assets &minus; debts'],['Surplus','$3,450','After expenses'],['Savings rate','28%','Above target']],
-        chips:[['Income/mo','$12,300'],['Spending/mo','$8,850'],['Into Roth','$2,400'],['Into taxable','$1,050']],
+        chips:[['Income/mo','$12,300'],['Spending/mo','$8,850']],
         secKeys:['income','expenses','assets'], secHeading:'What drives your surplus'
       },
       retirement:{
         hl:'<em class="mhl-gold">$1.14M</em> working toward your <em class="mhl-em">retirement.</em>',
         dd:'Retirement income',
         stats:[['Success','87%','Monte Carlo +'],['To retirement','7 yrs','Dec 2028'],['Safe spending','$8,400','per month']],
-        chips:[['SS at 70','$3,940'],['Withdrawals','$3,100'],['Pension','$1,360'],['Total/mo','$8,400']],
+        chips:[['SS at 70','$3,940'],['Withdrawals','$3,100']],
         secKeys:['assets','income','expenses'], secHeading:'What funds retirement'
       },
       tax:{
         hl:'One conversion saves <em class="mhl-gold">$430</em> a <em class="mhl-em">month.</em>',
         dd:'Lifetime taxes',
         stats:[['Effective rate','19.4%','This year'],['Lifetime rate','23.1%','Projected'],['Lifetime tax','$648K','If unchanged']],
-        chips:[['12% bracket','$106,750'],['Convert/yr','~$17,800'],['Windows','6 yrs'],['Tax saved','$61,000']],
+        chips:[['Tax saved','$61,000'],['Convert/yr','~$17,800']],
         secKeys:['assets','income'], secHeading:'What the strategy works on'
       }
     };
