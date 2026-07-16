@@ -202,6 +202,77 @@ body.mq-pay-mode .mq-topskip{ display:block; }
 .mq-done-ring svg{ width:44px; height:44px; }
 .mq-done-t{ font-size:28px; font-weight:600; letter-spacing:-0.5px; }
 .mq-done-s{ font-size:16px; color:var(--text-secondary); line-height:1.55; margin-top:12px; max-width:30ch; margin-left:auto; margin-right:auto; }
+
+/* ===== chat-based onboarding: Boldin AI fills the plan in conversationally ===== */
+.mchat{ position:fixed; inset:0; z-index:100; background:#FFFFFF; display:flex; flex-direction:column;
+  transform:translateY(100%); transition:transform .4s var(--push-ease); }
+.mchat.on{ transform:translateY(0); }
+.mchat[hidden]{ display:none; }
+@media (prefers-reduced-motion: reduce){ .mchat{ transition:none; } }
+.mc-top{ flex:none; display:flex; align-items:center; gap:10px; padding:calc(14px + env(safe-area-inset-top)) 18px 12px; }
+.mc-back{ width:36px; height:36px; flex:none; margin-left:-8px; border-radius:999px; background:none; border:0; color:var(--ink);
+  display:flex; align-items:center; justify-content:center; cursor:pointer; }
+.mc-back:active{ background:#F2F3F5; }
+.mc-title{ display:flex; align-items:center; gap:8px; font-size:18px; font-weight:600; letter-spacing:-0.2px; }
+.mc-title .mc-star{ display:inline-flex; color:var(--green); }
+.mc-title .mc-star svg{ width:17px; height:17px; }
+.mc-mode{ margin-left:auto; font-size:14px; color:var(--text-tertiary); }
+/* the live plan panel: eight fields that fill in as the chat goes */
+.mc-fields{ flex:none; margin:2px 18px 0; border:1px solid var(--hairline); border-radius:16px; padding:12px 14px 13px; }
+.mc-fhead{ display:flex; align-items:center; justify-content:space-between; margin-bottom:9px; }
+.mc-fhead .t{ font-size:14px; font-weight:600; color:var(--ink); }
+.mc-fhead .c{ font-size:13.5px; color:var(--text-tertiary); font-variant-numeric:tabular-nums; }
+.mc-fgrid{ display:grid; grid-template-columns:1fr 1fr; gap:8px 14px; }
+.mc-f{ min-width:0; display:flex; align-items:baseline; gap:7px; }
+.mc-f .l{ font-size:13px; color:var(--text-tertiary); white-space:nowrap; }
+.mc-f .v{ font-size:14.5px; font-weight:600; color:#C4C8CF; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  font-variant-numeric:tabular-nums; min-width:0; }
+.mc-f.set .v{ color:var(--ink); }
+.mc-f.flash{ animation:mc-flash 1.3s cubic-bezier(0.33,0,0.2,1); border-radius:8px; }
+@keyframes mc-flash{ 0%{ background:transparent; } 18%{ background:var(--mint); } 55%{ background:var(--mint); } 100%{ background:transparent; } }
+/* the conversation */
+.mc-thread{ flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; overscroll-behavior:contain; padding:20px 18px 10px; }
+.mb{ display:flex; align-items:flex-end; gap:8px; margin-bottom:14px; animation:mb-in .26s cubic-bezier(0.22,1,0.36,1); }
+@keyframes mb-in{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:none; } }
+@media (prefers-reduced-motion: reduce){ .mb{ animation:none; } }
+.mb-ava{ width:26px; height:26px; flex:none; border-radius:999px; background:var(--mint); color:var(--green-cta);
+  display:flex; align-items:center; justify-content:center; }
+.mb-ava svg{ width:13px; height:13px; }
+.mb-t{ max-width:78%; padding:11px 15px; border-radius:17px 17px 17px 5px; background:#F4F5F6; color:var(--ink);
+  font-size:16.5px; line-height:1.5; }
+.mb.me{ justify-content:flex-end; }
+.mb.me .mb-t{ border-radius:17px 17px 5px 17px; background:var(--green-cta); color:#FFFFFF; }
+.mb .dots{ display:inline-flex; gap:4px; padding:15px 16px; border-radius:17px 17px 17px 5px; background:#F4F5F6; }
+.mb .dots i{ width:6px; height:6px; border-radius:999px; background:#B9BEC7; animation:mc-dot 1.1s ease-in-out infinite; }
+.mb .dots i:nth-child(2){ animation-delay:.15s; } .mb .dots i:nth-child(3){ animation-delay:.3s; }
+@keyframes mc-dot{ 0%,60%,100%{ transform:translateY(0); opacity:.55; } 30%{ transform:translateY(-4px); opacity:1; } }
+/* the in-chat finish CTA */
+.mc-cta{ display:flex; align-items:center; justify-content:center; gap:8px; width:100%; height:56px; margin:4px 0 10px;
+  border:0; border-radius:999px; background:var(--green-cta); color:#FFFFFF; font-family:inherit; font-size:18px; font-weight:600; cursor:pointer;
+  animation:mb-in .3s cubic-bezier(0.22,1,0.36,1); }
+.mc-cta:active{ background:#0B5F3D; }
+/* quick replies + input */
+.mc-inbar{ flex:none; border-top:1px solid #F1F2F4; padding:10px 18px calc(14px + env(safe-area-inset-bottom)); }
+.mc-chips{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:10px; }
+.mc-chips:empty{ display:none; }
+.mc-chip{ border:1px solid var(--hairline); background:#FFFFFF; border-radius:999px; padding:9px 15px;
+  font-family:inherit; font-size:15.5px; font-weight:500; color:var(--ink); cursor:pointer; animation:mb-in .26s cubic-bezier(0.22,1,0.36,1) backwards; }
+.mc-chip:active{ background:#F4FBF7; border-color:#BFE8D6; }
+.mc-inrow{ display:flex; align-items:center; gap:9px; }
+.mc-input{ flex:1; height:48px; border:1px solid var(--hairline); border-radius:999px; background:#FAFAFB; padding:0 18px;
+  font-family:inherit; font-size:16.5px; color:var(--ink); outline:none; }
+.mc-input:focus{ border-color:#BFC9D4; background:#FFFFFF; }
+.mc-input:disabled{ opacity:.55; }
+.mc-send{ width:48px; height:48px; flex:none; border-radius:999px; border:0; background:var(--green-cta); color:#FFFFFF;
+  display:flex; align-items:center; justify-content:center; cursor:pointer; transition:opacity .15s ease; }
+.mc-send:active{ background:#0B5F3D; }
+.mc-send:disabled{ opacity:.35; pointer-events:none; }
+/* secondary entry on the landing page */
+.mx-ctachat{ display:flex; align-items:center; justify-content:center; gap:9px; margin:12px auto 0; height:54px; padding:0 24px;
+  border:1px solid var(--hairline); border-radius:999px; background:#FFFFFF; font-family:inherit; font-size:16.5px; font-weight:600;
+  color:var(--ink); cursor:pointer; }
+.mx-ctachat:active{ background:#F7FCFA; }
+.mx-ctachat svg{ width:16px; height:16px; color:var(--green); }
 /* the Boldin Plus paywall roadblock (mirrors desktop PlannerPlus trial) */
 .mq-pay{ padding:0; }
 .mq-pay-badge{ display:inline-block; font-size:16px; font-weight:700; letter-spacing:0.03em; color:var(--green-cta); background:var(--mint); border-radius:999px; padding:8px 16px; }
@@ -1187,7 +1258,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       <path d="M151.176 31.6057C151.176 23.4153 156.899 17.5505 164.844 17.5505C167.706 17.5505 170.271 18.4102 172.344 19.9268V7.69177H179.597V33.982L183.643 44.8519H176.192L172.787 35.7012V42.5773C171.258 44.4479 167.607 45.6106 164.103 45.6106C156.653 45.6102 151.176 39.7455 151.176 31.6057ZM165.584 38.6838C169.58 38.6838 172.491 35.7008 172.491 31.6057C172.491 27.5107 169.58 24.5275 165.584 24.5275C161.587 24.5275 158.676 27.5105 158.676 31.6057C158.676 35.7009 161.587 38.6838 165.584 38.6838Z" fill="#10182C"/>
       <path d="M190.451 6.68054C191.344 6.68552 192.216 6.9617 192.956 7.47415C193.695 7.98661 194.27 8.71233 194.607 9.55954C194.945 10.4067 195.029 11.3374 194.85 12.2338C194.671 13.1302 194.237 13.9521 193.602 14.5955C192.967 15.2389 192.16 15.675 191.284 15.8486C190.407 16.0222 189.5 15.9255 188.676 15.5708C187.853 15.216 187.151 14.6192 186.659 13.8556C186.167 13.0921 185.907 12.1962 185.912 11.2813C185.914 10.6734 186.034 10.0721 186.263 9.51156C186.493 8.95108 186.828 8.44253 187.249 8.01509C187.671 7.58766 188.171 7.24974 188.721 7.02072C189.27 6.79171 189.858 6.6761 190.451 6.68054ZM186.8 18.5618H194.054V44.8518H186.8V18.5618Z" fill="#10182C"/>
       <path d="M199.481 18.5617H206.735V21.7467C208.363 18.966 210.929 17.5504 214.481 17.5504C220.6 17.5504 223.807 21.7467 223.807 29.7854V44.8518H216.554V30.8471C216.554 26.2463 215.271 24.4263 212.063 24.4263C208.56 24.4263 206.735 26.954 206.735 31.0493V44.8516H199.481V18.5617Z" fill="#10182C"/>
-    </svg></span><div class="mx-top-r"><button class="mx-signin" type="button" data-toast="Sign in lands next in the mobile build">Sign in</button><button class="mx-close" id="mxClose" type="button" aria-label="Back to app"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div></div><div class="mx-wrap"><section class="mx-hero"><span class="mx-eyebrow">Retirement planning, reimagined</span><h1 class="mx-h1">Confidence you <em>can see.</em></h1><p class="mx-lede">Build the whole picture of your retirement in one place, and watch a single number tell you if you are on track.</p><button class="mx-cta" type="button" data-toast="Signup lands next in the mobile build">Get started for free</button><span class="mx-proof"><b>&#9733;&#9733;&#9733;&#9733;&#9733;</b> 4.8 &#183; 5,295 reviews &#183; no credit card</span><div class="mx-viz"><svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-label="A retirement plan growing over time"><defs><linearGradient id="mxLine" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0D3F4A"/><stop offset="52%" stop-color="#0E794E"/><stop offset="80%" stop-color="#04B477"/><stop offset="100%" stop-color="#04B477"/></linearGradient><linearGradient id="mxArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#04B477" stop-opacity="0.26"/><stop offset="62%" stop-color="#04B477" stop-opacity="0.07"/><stop offset="100%" stop-color="#04B477" stop-opacity="0"/></linearGradient><radialGradient id="mxHalo"><stop offset="0%" stop-color="#FBBD04" stop-opacity="0.42"/><stop offset="100%" stop-color="#FBBD04" stop-opacity="0"/></radialGradient></defs><path id="mxAreaP" d="M8,150 C 60,138 100,120 140,94 C 180,68 216,46 252,40 C 278,36 300,46 320,62 C 334,74 346,86 352,98 L352,176 L8,176 Z" fill="url(#mxArea)" opacity="0"/><path id="mxLineP" d="M8,150 C 60,138 100,120 140,94 C 180,68 216,46 252,40 C 278,36 300,46 320,62 C 334,74 346,86 352,98" fill="none" stroke="url(#mxLine)" stroke-width="3.2" stroke-linecap="round" pathLength="1"/><line x1="8" y1="176" x2="352" y2="176" stroke="#E7E9EC" stroke-width="1.5"/><g id="mxPt" opacity="0"><line x1="252" y1="46" x2="252" y2="176" stroke="#E7E9EC" stroke-width="1.2" stroke-dasharray="3 4"/><g class="mx-halo" style="transform-box:fill-box; transform-origin:center;"><circle cx="252" cy="40" r="22" fill="url(#mxHalo)"/></g><circle cx="252" cy="40" r="6.5" fill="#FBBD04" stroke="#FFFFFF" stroke-width="2.5"/><text x="252" y="20" font-size="13" font-weight="700" fill="#0E794E" text-anchor="middle">Peak $2.16M &#183; 2056</text></g><text x="8" y="194" font-size="11.5" fill="#9AA0AE">Today</text><text x="352" y="194" font-size="11.5" fill="#9AA0AE" text-anchor="end">Age 99</text></svg></div></section><section class="mx-sec"><div class="mx-sec-eyebrow">How it works</div><h2 class="mx-sec-h">Your plan, in three steps.</h2><div class="mx-steps"><div class="mx-step"><span class="mx-step-n">1</span><div><div class="mx-step-t">Add your real numbers</div><div class="mx-step-s">Accounts, income, home, and what you spend. Link them or type them in, once.</div></div></div><div class="mx-step"><span class="mx-step-n">2</span><div><div class="mx-step-t">See your confidence score</div><div class="mx-step-s">A Monte Carlo engine runs thousands of futures and gives you one honest number.</div></div></div><div class="mx-step"><span class="mx-step-n">3</span><div><div class="mx-step-t">Find your best moves</div><div class="mx-step-s">Social Security timing, Roth windows, withdrawals. See what lifts the score most.</div></div></div></div></section><section class="mx-sec"><div class="mx-sec-eyebrow">What you get</div><h2 class="mx-sec-h">Everything in one honest place.</h2><div class="mx-feats"><div class="mx-feat"><span class="mx-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg></span><div class="mx-feat-t">The Plan Score</div><div class="mx-feat-s">One number, stress-tested against thousands of market scenarios, updated as your life changes.</div></div><div class="mx-feat"><span class="mx-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg></span><div class="mx-feat-t">Tax strategy</div><div class="mx-feat-s">Roth conversions, withdrawal order, and the low-bracket windows most people miss.</div></div><div class="mx-feat"><span class="mx-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 8l7-5 7 5"/></svg></span><div class="mx-feat-t">Social Security timing</div><div class="mx-feat-s">See exactly what waiting to 70 is worth, down to the dollar, for your situation.</div></div></div></section><section class="mx-sec"><div class="mx-sec-eyebrow">Real people</div><h2 class="mx-sec-h">The software runs the math. People help you trust it.</h2><div class="mx-serv"><div class="mx-serv-card"><span class="mx-serv-ava" style="background:#0D3F4A">RO</span><div><div class="mx-serv-t">Talk to a fiduciary advisor</div><div class="mx-serv-s">Flat-fee CFP&#174; professionals who work from your exact plan. Advice, never a sales pitch.</div><span class="mx-serv-l" data-toast="Advisor intro lands next in the mobile build">Meet Boldin Advisors <svg viewBox="0 0 24 24" fill="none" width="13" height="13"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div><div class="mx-serv-card"><span class="mx-serv-ava" style="background:#0E794E">DP</span><div><div class="mx-serv-t">Work with a coach</div><div class="mx-serv-s">Eight-week cohorts that turn the plan into habits and keep your momentum.</div><span class="mx-serv-l" data-toast="Coaching lands next in the mobile build">Explore coaching <svg viewBox="0 0 24 24" fill="none" width="13" height="13"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div></div></section><section class="mx-sec"><div class="mx-stats"><div><div class="mx-stat-n">$60B+</div><div class="mx-stat-l">planned on Boldin</div></div><div><div class="mx-stat-n">200K+</div><div class="mx-stat-l">households</div></div><div><div class="mx-stat-n">4.8&#9733;</div><div class="mx-stat-l">5,295 reviews</div></div></div></section><section class="mx-sec"><div class="mx-sec-eyebrow">Loved by planners</div><h2 class="mx-sec-h">People finally feel in control.</h2><div class="mx-voices"><div><div class="mx-q">&#8220;We stopped arguing about money the week we could both see the same plan.&#8221;</div><div class="mx-who"><span class="mh-ava t">D&amp;B</span><span class="mx-meta"><b>Diane &amp; Bob</b>Tucson &#183; retired 2024</span></div></div><div><div class="mx-q">&#8220;I used to check the market every morning. Now I check my confidence score. A much calmer habit.&#8221;</div><div class="mx-who"><span class="mh-ava g">P</span><span class="mx-meta"><b>Priya</b>Sacramento &#183; retiring 2027</span></div></div><div><div class="mx-q">&#8220;Boldin found a Roth window my old advisor never mentioned. One afternoon paid for itself.&#8221;</div><div class="mx-who"><span class="mh-ava" style="background:#5B8A72">T</span><span class="mx-meta"><b>Tom</b>Grand Rapids &#183; planning since 2022</span></div></div></div><div class="mx-comm"><span class="mx-faces"><i class="f1" style="background:#0D3F4A">D</i><i class="f2" style="background:#0E794E">P</i><i class="f3" style="background:#5B8A72">T</i><i class="f4" style="background:#FBBD04;color:#10182C">+</i></span><span class="mx-meta" style="font-size:15px">Join 8,200 planners comparing notes in the Boldin community.</span></div></section><section class="mx-sec"><div class="mx-note"><span class="mh-ava t" style="width:46px;height:46px;font-size:15px">S</span><div><p class="mx-note-p">We started Boldin because retirement math felt like a test nobody had studied for. It should feel like your life, thought through.</p><div class="mx-note-a">Steve, founder of Boldin</div></div></div></section><section class="mx-sec" style="border-top:0"><div class="mx-final"><div class="mx-final-t">Your future is worth an honest look.</div><div class="mx-final-s">A few real numbers are all it takes. Free to start, and your first plan takes minutes.</div><button class="mx-cta" type="button" data-toast="Signup lands next in the mobile build">Get started for free</button></div></section><footer class="mx-foot"><span class="brand"><svg viewBox="0 0 225 54" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Boldin">
+    </svg></span><div class="mx-top-r"><button class="mx-signin" type="button" data-toast="Sign in lands next in the mobile build">Sign in</button><button class="mx-close" id="mxClose" type="button" aria-label="Back to app"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div></div><div class="mx-wrap"><section class="mx-hero"><span class="mx-eyebrow">Retirement planning, reimagined</span><h1 class="mx-h1">Confidence you <em>can see.</em></h1><p class="mx-lede">Build the whole picture of your retirement in one place, and watch a single number tell you if you are on track.</p><button class="mx-cta" type="button" data-toast="Signup lands next in the mobile build">Get started for free</button><button class="mx-ctachat" type="button"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg>Set up by chat with Boldin AI</button><span class="mx-proof"><b>&#9733;&#9733;&#9733;&#9733;&#9733;</b> 4.8 &#183; 5,295 reviews &#183; no credit card</span><div class="mx-viz"><svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-label="A retirement plan growing over time"><defs><linearGradient id="mxLine" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0D3F4A"/><stop offset="52%" stop-color="#0E794E"/><stop offset="80%" stop-color="#04B477"/><stop offset="100%" stop-color="#04B477"/></linearGradient><linearGradient id="mxArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#04B477" stop-opacity="0.26"/><stop offset="62%" stop-color="#04B477" stop-opacity="0.07"/><stop offset="100%" stop-color="#04B477" stop-opacity="0"/></linearGradient><radialGradient id="mxHalo"><stop offset="0%" stop-color="#FBBD04" stop-opacity="0.42"/><stop offset="100%" stop-color="#FBBD04" stop-opacity="0"/></radialGradient></defs><path id="mxAreaP" d="M8,150 C 60,138 100,120 140,94 C 180,68 216,46 252,40 C 278,36 300,46 320,62 C 334,74 346,86 352,98 L352,176 L8,176 Z" fill="url(#mxArea)" opacity="0"/><path id="mxLineP" d="M8,150 C 60,138 100,120 140,94 C 180,68 216,46 252,40 C 278,36 300,46 320,62 C 334,74 346,86 352,98" fill="none" stroke="url(#mxLine)" stroke-width="3.2" stroke-linecap="round" pathLength="1"/><line x1="8" y1="176" x2="352" y2="176" stroke="#E7E9EC" stroke-width="1.5"/><g id="mxPt" opacity="0"><line x1="252" y1="46" x2="252" y2="176" stroke="#E7E9EC" stroke-width="1.2" stroke-dasharray="3 4"/><g class="mx-halo" style="transform-box:fill-box; transform-origin:center;"><circle cx="252" cy="40" r="22" fill="url(#mxHalo)"/></g><circle cx="252" cy="40" r="6.5" fill="#FBBD04" stroke="#FFFFFF" stroke-width="2.5"/><text x="252" y="20" font-size="13" font-weight="700" fill="#0E794E" text-anchor="middle">Peak $2.16M &#183; 2056</text></g><text x="8" y="194" font-size="11.5" fill="#9AA0AE">Today</text><text x="352" y="194" font-size="11.5" fill="#9AA0AE" text-anchor="end">Age 99</text></svg></div></section><section class="mx-sec"><div class="mx-sec-eyebrow">How it works</div><h2 class="mx-sec-h">Your plan, in three steps.</h2><div class="mx-steps"><div class="mx-step"><span class="mx-step-n">1</span><div><div class="mx-step-t">Add your real numbers</div><div class="mx-step-s">Accounts, income, home, and what you spend. Link them or type them in, once.</div></div></div><div class="mx-step"><span class="mx-step-n">2</span><div><div class="mx-step-t">See your confidence score</div><div class="mx-step-s">A Monte Carlo engine runs thousands of futures and gives you one honest number.</div></div></div><div class="mx-step"><span class="mx-step-n">3</span><div><div class="mx-step-t">Find your best moves</div><div class="mx-step-s">Social Security timing, Roth windows, withdrawals. See what lifts the score most.</div></div></div></div></section><section class="mx-sec"><div class="mx-sec-eyebrow">What you get</div><h2 class="mx-sec-h">Everything in one honest place.</h2><div class="mx-feats"><div class="mx-feat"><span class="mx-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg></span><div class="mx-feat-t">The Plan Score</div><div class="mx-feat-s">One number, stress-tested against thousands of market scenarios, updated as your life changes.</div></div><div class="mx-feat"><span class="mx-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg></span><div class="mx-feat-t">Tax strategy</div><div class="mx-feat-s">Roth conversions, withdrawal order, and the low-bracket windows most people miss.</div></div><div class="mx-feat"><span class="mx-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 8l7-5 7 5"/></svg></span><div class="mx-feat-t">Social Security timing</div><div class="mx-feat-s">See exactly what waiting to 70 is worth, down to the dollar, for your situation.</div></div></div></section><section class="mx-sec"><div class="mx-sec-eyebrow">Real people</div><h2 class="mx-sec-h">The software runs the math. People help you trust it.</h2><div class="mx-serv"><div class="mx-serv-card"><span class="mx-serv-ava" style="background:#0D3F4A">RO</span><div><div class="mx-serv-t">Talk to a fiduciary advisor</div><div class="mx-serv-s">Flat-fee CFP&#174; professionals who work from your exact plan. Advice, never a sales pitch.</div><span class="mx-serv-l" data-toast="Advisor intro lands next in the mobile build">Meet Boldin Advisors <svg viewBox="0 0 24 24" fill="none" width="13" height="13"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div><div class="mx-serv-card"><span class="mx-serv-ava" style="background:#0E794E">DP</span><div><div class="mx-serv-t">Work with a coach</div><div class="mx-serv-s">Eight-week cohorts that turn the plan into habits and keep your momentum.</div><span class="mx-serv-l" data-toast="Coaching lands next in the mobile build">Explore coaching <svg viewBox="0 0 24 24" fill="none" width="13" height="13"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div></div></section><section class="mx-sec"><div class="mx-stats"><div><div class="mx-stat-n">$60B+</div><div class="mx-stat-l">planned on Boldin</div></div><div><div class="mx-stat-n">200K+</div><div class="mx-stat-l">households</div></div><div><div class="mx-stat-n">4.8&#9733;</div><div class="mx-stat-l">5,295 reviews</div></div></div></section><section class="mx-sec"><div class="mx-sec-eyebrow">Loved by planners</div><h2 class="mx-sec-h">People finally feel in control.</h2><div class="mx-voices"><div><div class="mx-q">&#8220;We stopped arguing about money the week we could both see the same plan.&#8221;</div><div class="mx-who"><span class="mh-ava t">D&amp;B</span><span class="mx-meta"><b>Diane &amp; Bob</b>Tucson &#183; retired 2024</span></div></div><div><div class="mx-q">&#8220;I used to check the market every morning. Now I check my confidence score. A much calmer habit.&#8221;</div><div class="mx-who"><span class="mh-ava g">P</span><span class="mx-meta"><b>Priya</b>Sacramento &#183; retiring 2027</span></div></div><div><div class="mx-q">&#8220;Boldin found a Roth window my old advisor never mentioned. One afternoon paid for itself.&#8221;</div><div class="mx-who"><span class="mh-ava" style="background:#5B8A72">T</span><span class="mx-meta"><b>Tom</b>Grand Rapids &#183; planning since 2022</span></div></div></div><div class="mx-comm"><span class="mx-faces"><i class="f1" style="background:#0D3F4A">D</i><i class="f2" style="background:#0E794E">P</i><i class="f3" style="background:#5B8A72">T</i><i class="f4" style="background:#FBBD04;color:#10182C">+</i></span><span class="mx-meta" style="font-size:15px">Join 8,200 planners comparing notes in the Boldin community.</span></div></section><section class="mx-sec"><div class="mx-note"><span class="mh-ava t" style="width:46px;height:46px;font-size:15px">S</span><div><p class="mx-note-p">We started Boldin because retirement math felt like a test nobody had studied for. It should feel like your life, thought through.</p><div class="mx-note-a">Steve, founder of Boldin</div></div></div></section><section class="mx-sec" style="border-top:0"><div class="mx-final"><div class="mx-final-t">Your future is worth an honest look.</div><div class="mx-final-s">A few real numbers are all it takes. Free to start, and your first plan takes minutes.</div><button class="mx-cta" type="button" data-toast="Signup lands next in the mobile build">Get started for free</button><button class="mx-ctachat" type="button"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg>Set up by chat with Boldin AI</button></div></section><footer class="mx-foot"><span class="brand"><svg viewBox="0 0 225 54" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Boldin">
       <path d="M30.5987 20.6816C17.612 20.6816 6.9557 31.1933 6.33866 44.612L6.32775 44.8512H10.1104L10.1219 44.6352C10.3913 39.4179 12.5222 34.4839 16.1096 30.7711C17.9734 28.834 20.1878 27.2877 22.6289 26.2186C25.1492 25.1199 27.8599 24.5536 30.5988 24.5536C33.3377 24.5536 36.0485 25.1199 38.5688 26.2186C41.0101 27.2879 43.2246 28.8344 45.0885 30.7717C48.676 34.4844 50.8068 39.4184 51.076 44.6358L51.0876 44.8518H54.8698L54.859 44.6126C54.242 31.1933 43.5856 20.6816 30.5987 20.6816ZM27.4672 30.3775C19.7343 30.3775 13.2762 36.6286 12.7646 44.6089L12.7491 44.8522H16.5345L16.5516 44.643C16.772 41.977 17.8977 39.4746 19.7327 37.5712C20.7424 36.5195 21.9463 35.6843 23.2742 35.1142C24.6021 34.5441 26.0274 34.2505 27.4672 34.2505C28.9069 34.2505 30.3323 34.5441 31.6602 35.1142C32.9881 35.6843 34.192 36.5195 35.2017 37.5712C37.0366 39.4747 38.1622 41.9771 38.3827 44.643L38.3998 44.8522H42.1852L42.1698 44.6089C41.6581 36.6286 35.1999 30.3775 27.4672 30.3775ZM71.9549 44.6173C71.7153 35.0041 67.8201 25.867 61.0997 19.1546C54.3793 12.4421 45.3656 8.6853 35.9805 8.6853C26.5955 8.6853 17.5817 12.4421 10.8614 19.1546C4.14097 25.867 0.245712 35.0041 0.00619139 44.6173L0 44.8518H3.78055L3.78718 44.63C4.02446 36.043 7.52031 27.8893 13.5318 21.9015C19.5434 15.9137 27.5967 12.5639 35.9805 12.5639C44.3643 12.5639 52.4177 15.9137 58.4292 21.9015C64.4408 27.8893 67.9366 36.043 68.1739 44.63L68.1804 44.8518H71.9609L71.9549 44.6173Z" fill="#04B477"/>
       <path d="M80.2627 11.3701H93.1105C99.4678 11.3701 103.914 14.5132 103.914 20.7084C103.914 23.214 102.446 25.9017 100.223 27.177C103.069 28.4069 105.114 31.5501 105.114 34.739C105.114 41.2531 100.802 44.8518 93.6883 44.8518H80.2627V11.3701ZM92.9825 24.3702C95.3802 24.3702 96.6399 23.2043 96.6399 21.1221C96.6399 19.1649 95.2982 17.9573 93.0637 17.9573H87.5372V24.3705L92.9825 24.3702ZM93.7639 38.2316C96.4872 38.2316 97.7472 36.7738 97.7472 34.6497C97.7472 32.5256 96.2026 31.1098 94.0483 31.1098H87.5858V38.2316H93.7639Z" fill="#10182C"/>
       <path d="M107.903 31.6056C107.903 23.5163 114.071 17.5504 122.163 17.5504C130.255 17.5504 136.423 23.5163 136.423 31.6056C136.423 39.6444 130.255 45.6103 122.163 45.6103C114.071 45.6103 107.903 39.6442 107.903 31.6056ZM122.163 38.6837C126.16 38.6837 129.071 35.7007 129.071 31.6056C129.071 27.5105 126.16 24.5274 122.163 24.5274C118.166 24.5274 115.255 27.5104 115.255 31.6056C115.255 35.7008 118.167 38.6837 122.163 38.6837Z" fill="#10182C"/>
@@ -1205,6 +1276,24 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       <path d="M190.451 6.68054C191.344 6.68552 192.216 6.9617 192.956 7.47415C193.695 7.98661 194.27 8.71233 194.607 9.55954C194.945 10.4067 195.029 11.3374 194.85 12.2338C194.671 13.1302 194.237 13.9521 193.602 14.5955C192.967 15.2389 192.16 15.675 191.284 15.8486C190.407 16.0222 189.5 15.9255 188.676 15.5708C187.853 15.216 187.151 14.6192 186.659 13.8556C186.167 13.0921 185.907 12.1962 185.912 11.2813C185.914 10.6734 186.034 10.0721 186.263 9.51156C186.493 8.95108 186.828 8.44253 187.249 8.01509C187.671 7.58766 188.171 7.24974 188.721 7.02072C189.27 6.79171 189.858 6.6761 190.451 6.68054ZM186.8 18.5618H194.054V44.8518H186.8V18.5618Z" fill="#10182C"/>
       <path d="M199.481 18.5617H206.735V21.7467C208.363 18.966 210.929 17.5504 214.481 17.5504C220.6 17.5504 223.807 21.7467 223.807 29.7854V44.8518H216.554V30.8471C216.554 26.2463 215.271 24.4263 212.063 24.4263C208.56 24.4263 206.735 26.954 206.735 31.0493V44.8516H199.481V18.5617Z" fill="#10182C"/>
     </svg></span><div class="mq-prog"><i id="mqProg" style="width:0%"></i></div><span class="mq-step-n" id="mqStepN">1 / 8</span><button class="mq-topskip" id="mqTopSkip" type="button">Skip</button></div><div class="mq-body" id="mqBody"></div><div class="mq-foot" id="mqFoot"><button class="mq-next" id="mqNext" type="button">Continue</button></div></div>
+
+<!-- ===== Boldin AI chat onboarding: the conversational twin of the field intake ===== -->
+<div class="mchat" id="mchat" hidden>
+  <div class="mc-top">
+    <button class="mc-back" id="mcBack" type="button" aria-label="Back"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5.5L8.5 12l6.5 6.5"/></svg></button>
+    <div class="mc-title"><span class="mc-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg></span>Boldin AI</div>
+    <span class="mc-mode">Plan setup</span>
+  </div>
+  <div class="mc-fields" id="mcFields"></div>
+  <div class="mc-thread" id="mcThread" aria-live="polite"></div>
+  <div class="mc-inbar">
+    <div class="mc-chips" id="mcChips"></div>
+    <div class="mc-inrow">
+      <input class="mc-input" id="mcInput" type="text" placeholder="Type your answer&#8230;" autocomplete="off"/>
+      <button class="mc-send" id="mcSend" type="button" aria-label="Send"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M6 12l6-6 6 6"/></svg></button>
+    </div>
+  </div>
+</div>
 <div class="msx" id="msx" hidden>
   <div class="msx-scrim" id="msxScrim"></div>
   <div class="msx-sheet" role="dialog" aria-modal="true" id="msxSheet"></div>
@@ -2220,6 +2309,187 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     mindex.addEventListener('click', function(e){ if(e.target.closest('.mx-cta')){ e.stopPropagation(); open(); } });
     /* also from the landing header "Get started"? there is only Sign in there; leave as is */
     window.__openIntake=open;
+    /* the chat flow lands on the same Boldin Plus paywall, so the two onboardings converge */
+    window.__openPaywall=function(){ done=true; idx=STEPS.length-1; mq.hidden=false; void mq.offsetWidth; mq.classList.add('on'); document.body.style.overflow='hidden'; render(); };
+  })();
+
+  /* ===== Boldin AI chat onboarding: same eight fields, conversational ===== */
+  (function(){
+    var mchat=document.getElementById('mchat'), thread=document.getElementById('mcThread'),
+        fieldsEl=document.getElementById('mcFields'), chipsEl=document.getElementById('mcChips'),
+        input=document.getElementById('mcInput'), sendBtn=document.getElementById('mcSend'),
+        backBtn=document.getElementById('mcBack'), mindex=document.getElementById('mindex');
+    var STAR='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg>';
+    var FIELDS=[ ['intent','Goal'], ['stage','Stage'], ['retireAge','Retire at'], ['zip','Zip code'],
+                 ['income','Income'], ['savings','Savings'], ['pension','Pension'], ['home','Home'] ];
+    function money(t){
+      t=String(t).toLowerCase().replace(/[$,\s]/g,'');
+      var m=t.match(/^(\d+(?:\.\d+)?)(k|m)?/); if(!m) return null;
+      var n=parseFloat(m[1]); if(isNaN(n)) return null;
+      if(m[2]==='m') n*=1000000; else if(m[2]==='k') n*=1000; else if(n<1000) n*=1000;
+      return Math.round(n);
+    }
+    function fmt(n){ return '$'+n.toLocaleString('en-US'); }
+    var SCRIPT=[
+      { key:'intent', ask:'First, what brings you to Boldin?',
+        chips:[['See if I\u2019m on track','On track'],['When can I retire?','Retire date'],['Lower my taxes','Lower taxes'],['Get organized','Get organized']],
+        parse:function(t){ return t.trim()? t.trim() : null; },
+        ack:function(v){ return 'Good goal. Everything I show you will be tuned to that.'; },
+        clarify:'No wrong answers here. In a few words, what are you hoping Boldin helps with?' },
+      { key:'stage', ask:'Where are you in the journey?',
+        chips:[['Retirement is years off','Years away'],['Retirement is close','Close'],['Recently retired','Recently retired'],['Retired a while','Retired a while']],
+        parse:function(t){ return t.trim()? t.trim() : null; },
+        ack:function(v){ return 'Got it. That sets your defaults, nothing is locked in.'; },
+        clarify:'Roughly, are you still working, close to retiring, or already retired?' },
+      { key:'retireAge', ask:'At what age would you like to retire? A guess is fine.',
+        chips:[['62','62'],['65','65'],['67','67'],['70','70']],
+        parse:function(t){ var m=String(t).match(/\d{2}/); if(!m) return null; var n=parseInt(m[0],10); return (n>=50 && n<=80)? String(n) : null; },
+        ack:function(v){ return v+' it is. I\u2019ll test the plan against that date.'; },
+        clarify:'Just a number works, anywhere from 50 to 80. When would you like to stop?' },
+      { key:'zip', ask:'What zip code do you call home? It shapes taxes and cost of living.',
+        chips:[],
+        parse:function(t){ var m=String(t).match(/\b\d{5}\b/); return m? m[0] : null; },
+        ack:function(v){ return 'Thanks. Cost of living and state taxes, accounted for.'; },
+        clarify:'A five-digit zip is all I need, like 94103.' },
+      { key:'income', ask:'About how much comes in each month, before taxes? Ballpark is perfect.',
+        chips:[['About $8,000','8000'],['About $12,000','12000'],['$15,000+','15000']],
+        parse:money,
+        ack:function(v){ return fmt(v)+' a month coming in. Writing that down.'; },
+        clarify:'A rough monthly number works, like 9,500 or 12k.', fmt:function(v){ return fmt(v); }, disp:function(v){ return fmt(v)+'/mo'; } },
+      { key:'savings', ask:'And roughly how much is saved for retirement so far, across everything?',
+        chips:[['Around $100K','100k'],['Around $500K','500k'],['$1M or more','1m']],
+        parse:money,
+        ack:function(v){ return fmt(v)+' saved. That\u2019s real progress, whatever the headlines say.'; },
+        clarify:'Ballpark is fine, like 250k or 1.2m. Retirement accounts, brokerage, cash, all of it.', fmt:function(v){ return fmt(v); }, disp:function(v){ return fmt(v); } },
+      { key:'pension', ask:'Will a pension pay you anything in retirement?',
+        chips:[['Yes','Yes'],['No','No'],['Not sure','Not sure']],
+        parse:function(t){ t=t.toLowerCase(); if(/\by(es|ep|eah)?\b/.test(t)) return 'Yes'; if(/\bno(pe)?\b/.test(t)) return 'No'; if(/sure|maybe|know/.test(t)) return 'Not sure'; return null; },
+        ack:function(v){ return v==='Yes' ? 'Nice, guaranteed income does a lot of quiet work in a plan.' : 'Noted. The portfolio and Social Security will carry the plan.'; },
+        clarify:'A simple yes, no, or not sure is perfect.' },
+      { key:'home', ask:'Last one. Do you own your home?',
+        chips:[['Own it outright','Own outright'],['Own, with a mortgage','Own with mortgage'],['I rent','Rent']],
+        parse:function(t){ t=t.toLowerCase(); if(/rent/.test(t)) return 'Rent'; if(/outright|paid/.test(t)) return 'Own outright'; if(/mortgage|own|yes/.test(t)) return 'Own with mortgage'; return null; },
+        ack:function(v){ return 'Perfect, that\u2019s everything I need.'; },
+        clarify:'Do you own it outright, own with a mortgage, or rent?',
+        disp:function(v){ return v==='Own with mortgage' ? 'Mortgage' : v; } }
+    ];
+    var qi=0, busy=false, answers={}, setCount=0, openedOnce=false;
+    function busySet(v){ busy=v; mchat.classList.toggle('mc-busy', v); sendBtn.disabled=v; }
+    function buildFields(){
+      setCount=0;
+      fieldsEl.innerHTML='<div class="mc-fhead"><span class="t">Your plan</span><span class="c" id="mcCount">0 of '+FIELDS.length+'</span></div>'+
+        '<div class="mc-fgrid">'+FIELDS.map(function(f){
+          return '<div class="mc-f" data-f="'+f[0]+'"><span class="l">'+f[1]+'</span><span class="v">&ndash;</span></div>'; }).join('')+'</div>';
+    }
+    function setField(key, val){
+      var f=fieldsEl.querySelector('.mc-f[data-f="'+key+'"]'); if(!f) return;
+      if(!f.classList.contains('set')) setCount++;
+      f.querySelector('.v').textContent=val;
+      f.classList.add('set'); f.classList.remove('flash'); void f.offsetWidth; f.classList.add('flash');
+      var c=document.getElementById('mcCount'); if(c) c.textContent=setCount+' of '+FIELDS.length;
+    }
+    function scrollDown(){ thread.scrollTop=thread.scrollHeight; }
+    function aiSay(text, cb){
+      var w=document.createElement('div'); w.className='mb ai';
+      w.innerHTML='<span class="mb-ava">'+STAR+'</span><span class="dots"><i></i><i></i><i></i></span>';
+      thread.appendChild(w); scrollDown();
+      var wait=reduce?0:Math.min(500+text.length*9, 1500);
+      setTimeout(function(){
+        w.innerHTML='<span class="mb-ava">'+STAR+'</span><div class="mb-t">'+text+'</div>';
+        scrollDown(); if(cb) setTimeout(cb, reduce?0:220);
+      }, wait);
+    }
+    function userSay(text){
+      var w=document.createElement('div'); w.className='mb me';
+      var t=document.createElement('div'); t.className='mb-t'; t.textContent=text;
+      w.appendChild(t); thread.appendChild(w); scrollDown();
+    }
+    function setChips(step){
+      chipsEl.innerHTML='';
+      if(!step || !step.chips || !step.chips.length) return;
+      step.chips.forEach(function(c,i){
+        var b=document.createElement('button'); b.type='button'; b.className='mc-chip';
+        b.textContent=c[0]; b.dataset.v=c[1]; b.style.animationDelay=(i*0.05)+'s';
+        chipsEl.appendChild(b);
+      });
+    }
+    function askCurrent(){
+      var s=SCRIPT[qi];
+      aiSay(s.ask, function(){ setChips(s); busySet(false); });
+    }
+    function fieldValue(s, v){
+      if(s.disp) return s.disp(v);
+      return String(v);
+    }
+    function handleAnswer(raw, display){
+      if(busy) return; busySet(true);
+      setChips(null); input.value='';
+      userSay(display!==undefined? display : raw);
+      var s=SCRIPT[qi];
+      var v=s.parse? s.parse(String(raw)) : String(raw);
+      if(v===null || v===undefined || v===''){
+        aiSay(s.clarify, function(){ setChips(s); busySet(false); });
+        return;
+      }
+      answers[s.key]=v;
+      setTimeout(function(){ setField(s.key, fieldValue(s,v)); }, reduce?0:520);
+      aiSay(s.ack(v), function(){
+        qi++;
+        if(qi < SCRIPT.length){ askCurrent(); }
+        else { finish(); }
+      });
+    }
+    function finish(){
+      var age=answers.retireAge||'your target age';
+      var parts=[];
+      if(answers.income) parts.push(fmt(answers.income)+' a month coming in');
+      if(answers.savings) parts.push(fmt(answers.savings)+' already saved');
+      var line='So: retiring around '+age+(parts.length? ', with '+parts.join(' and ') : '')+'. That\u2019s a real starting picture.';
+      aiSay(line, function(){
+        aiSay('Give me a moment and I\u2019ll turn it into your plan, with a confidence score and your next best moves\u2026', function(){
+          var b=document.createElement('button'); b.type='button'; b.className='mc-cta'; b.id='mcSeePlan';
+          b.innerHTML='See my plan <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>';
+          thread.appendChild(b); scrollDown();
+          input.disabled=true; busySet(true);
+        });
+      });
+    }
+    function openChat(){
+      qi=0; answers={}; openedOnce=true;
+      thread.innerHTML=''; chipsEl.innerHTML='';
+      input.value=''; input.disabled=false;
+      busySet(true);
+      buildFields();
+      mchat.hidden=false; void mchat.offsetWidth; mchat.classList.add('on');
+      document.body.style.overflow='hidden';
+      setTimeout(function(){
+        aiSay('Hi, I\u2019m Boldin AI. Eight quick questions and I\u2019ll build your starter plan while we talk. No wrong answers.', function(){ askCurrent(); });
+      }, reduce?0:420);
+    }
+    function closeChat(){
+      mchat.classList.remove('on'); document.body.style.overflow='hidden'; /* landing page stays locked beneath */
+      setTimeout(function(){ mchat.hidden=true; }, reduce?0:400);
+    }
+    /* send actions */
+    function sendTyped(){ var t=input.value.trim(); if(!t || busy) return; handleAnswer(t); }
+    sendBtn.addEventListener('click', sendTyped);
+    input.addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); sendTyped(); } });
+    chipsEl.addEventListener('click', function(e){
+      var c=e.target.closest('.mc-chip'); if(!c || busy) return;
+      handleAnswer(c.dataset.v, c.textContent);
+    });
+    thread.addEventListener('click', function(e){
+      if(!e.target.closest('#mcSeePlan')) return;
+      closeChat();
+      setTimeout(function(){ if(window.__openPaywall) window.__openPaywall(); }, reduce?0:180);
+    });
+    backBtn.addEventListener('click', closeChat);
+    /* launch from the landing page */
+    if(mindex){ mindex.addEventListener('click', function(e){
+      var b=e.target.closest('.mx-ctachat'); if(!b) return;
+      e.stopPropagation(); openChat();
+    }); }
+    window.__openChat=openChat;
   })();
 
   /* ===== Vault + Profile, from the top bar ===== */
