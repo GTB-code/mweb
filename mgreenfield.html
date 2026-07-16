@@ -436,6 +436,8 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 /* chips row */
 .mplan-chips{ display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:8px; margin-top:8px; padding-top:10px; border-top:1px solid #F1F2F4; }
 .mchip4{ min-width:0; }
+.mchip4[role="button"]{ cursor:pointer; border-radius:12px; margin:-6px -8px; padding:6px 8px; transition:background .15s ease; }
+.mchip4[role="button"]:active{ background:#F4F5F6; }
 .mchip4 .lab{ font-size:14px; color:var(--text-tertiary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .mchip4 .val{ font:600 20px 'DM Sans',sans-serif; letter-spacing:-0.3px; margin-top:0px; font-variant-numeric:tabular-nums; }
 /* boost your confidence card */
@@ -1105,7 +1107,6 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         </g>
       </svg>
     </div>
-    <div class="mplan-chips" id="mplanChips"></div>
   </section>
 
   <!-- 3 stat cards, like desktop, now under the portfolio card -->
@@ -2329,28 +2330,28 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         hl:'Retire in <em class="mhl-em">8 years</em> on <em class="mhl-gold">$7,200</em> a month.',
         dd:'Portfolio',
         stats:[['Confidence','87%','Monte Carlo +','conf'],['Funds depleted','2099','Age 82 &middot; 12 yrs','depleted']],
-        chips:[['Portfolio','$1.09M'],['Savings rate','28%']],
+        chips:[['Portfolio','$1.09M','cx_portfolio'],['Savings rate','28%','cx_savingsrate']],
         secKeys:['assets','debts','income','home','expenses','flows','withdrawal','taxplan','estate','rates'], secHeading:'Future money'
       },
       fl:{
         hl:'Saving <em class="mhl-gold">28%</em>, growing into <em class="mhl-em">freedom.</em>',
         dd:'Net worth',
         stats:[['Surplus','$3,450','After expenses'],['Savings rate','28%','Above target']],
-        chips:[['Income/mo','$12,300'],['Spending/mo','$8,850']],
+        chips:[['Income/mo','$12,300','cx_income'],['Spending/mo','$8,850','cx_spending']],
         secKeys:['income','expenses','assets'], secHeading:'What drives your surplus'
       },
       retirement:{
         hl:'<em class="mhl-gold">$1.14M</em> working toward your <em class="mhl-em">retirement.</em>',
         dd:'Retirement income',
         stats:[['Success','87%','Monte Carlo +'],['Safe spending','$8,400','per month']],
-        chips:[['SS at 70','$3,940'],['Withdrawals','$3,100']],
+        chips:[['SS at 70','$3,940','cx_ss'],['Withdrawals','$3,100','cx_withdrawals']],
         secKeys:['assets','income','expenses'], secHeading:'What funds retirement'
       },
       tax:{
         hl:'One conversion saves <em class="mhl-gold">$430</em> a <em class="mhl-em">month.</em>',
         dd:'Lifetime taxes',
         stats:[['Effective rate','19.4%','This year'],['Lifetime tax','$648K','If unchanged']],
-        chips:[['Tax saved','$61,000'],['Convert/yr','~$17,800']],
+        chips:[['Tax saved','$61,000','cx_taxsaved'],['Convert/yr','~$17,800','cx_convert']],
         secKeys:['assets','income'], secHeading:'What the strategy works on'
       }
     };
@@ -2373,7 +2374,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     }
     function renderChips(L){
       chipsEl.style.gridTemplateColumns='repeat('+L.chips.length+', 1fr)';
-      chipsEl.innerHTML=L.chips.map(function(c){ return '<div class="mchip4"><div class="lab">'+c[0]+'</div><div class="val">'+c[1]+'</div></div>'; }).join('');
+      chipsEl.innerHTML=L.chips.map(function(c){ return '<div class="mchip4"'+(c[2]?' data-msx="'+c[2]+'" role="button" tabindex="0"':'')+'><div class="lab">'+c[0]+'</div><div class="val">'+c[1]+'</div></div>'; }).join('');
       stagger([].slice.call(chipsEl.children),4);
     }
     function renderSections(L){
@@ -2384,7 +2385,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     function apply(lens, animate){
       var L=LENS[lens]; if(!L) return;
       ddl.textContent=L.dd;
-      renderStats(L); renderChips(L); renderSections(L);
+      renderStats(L); renderSections(L);
       if(reduce || !animate){ hl.innerHTML=L.hl; noOrphans(hl); return; }
       hl.classList.add('hl-sw');
       setTimeout(function(){ hl.innerHTML=L.hl; noOrphans(hl); hl.classList.remove('hl-sw'); }, 180);
@@ -2426,6 +2427,70 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
   /* ===== stat detail modal — mirrors the desktop sx-modal ===== */
   (function(){
     var SX={
+      cx_portfolio:{ label:'Portfolio', fig:'$1.09M',
+        pts:[1002,1010,1022,1034,1028,1046,1058,1066,1074,1082,1086,1090], fmt:'moneyK',
+        sub:'Everything invested and working: retirement, brokerage, and cash.',
+        note:'Up about 9% across the year, most of it market growth on top of steady contributions.',
+        opps:{t:'Shift idle cash into the market', g:'+$59 / mo', s:'<b>$18,300</b> earning 0.4% could be compounding with the rest of the portfolio.'},
+        risks:{t:'Sequence risk in the first years', s:'A downturn right at retirement matters more than the same drop later. The first five years carry the most weight.'},
+        decide:{t:'Glide path into retirement', s:'Trimming equities from <b>72% to 60%</b> by 2028 trades a little growth for a smoother first decade.'},
+        step:{t:'Review the allocation in your plan', act:'plan'} },
+      cx_savingsrate:{ label:'Savings rate', fig:'28%',
+        pts:[24,24,25,25,24,26,26,27,27,28,28,28], fmt:'pct',
+        sub:'Of every dollar that comes in, 28 cents is saved. Well above the 15% rule of thumb.',
+        note:'A steady climb. The March bump is Lily\u2019s extra shift flowing straight to savings.',
+        opps:{t:'Direct the next raise to savings', g:'+2 pts', s:'Banking Marshall\u2019s next raise instead of spending it lifts the rate toward <b>30%</b>.'},
+        risks:{t:'Lifestyle creep', s:'Spending that drifts up with income is the quiet way a strong rate slips back toward average.'},
+        decide:{t:'Roth versus taxable for the surplus', s:'Where the saved dollars land changes the tax bill in retirement more than the rate itself.'},
+        step:{t:'See where the surplus goes in Money Flows', act:'plan'} },
+      cx_income:{ label:'Monthly income', fig:'$12,300',
+        pts:[12215,12215,12215,12223,12215,12234,12215,12215,12300,12300,12300,12300], fmt:'money',
+        sub:'Salary, Lily\u2019s part-time, and dividends, steady as a metronome.',
+        note:'The March step is Lily\u2019s extra shift. Everything else is the quiet metronome of salary.',
+        opps:{t:'Capture the full 401(k) match', g:'+$85 / mo', s:'You leave <b>$1,020 a year</b> of match unclaimed. It is the highest-yield dollar available.'},
+        risks:{t:'Single-employer concentration', s:'<b>72%</b> of income is Marshall\u2019s paycheck. A 2027 layoff moves retirement by roughly <b>19 months</b>.'},
+        decide:{t:'When Lily scales back', s:'Her part-time income is <b>$1,385 a month</b>. Deciding when it stops shapes the bridge years.'},
+        step:{t:'Model claiming ages side by side', act:'plan'} },
+      cx_spending:{ label:'Monthly spending', fig:'$8,850',
+        pts:[8990,8930,8905,8880,8970,8860,8845,8850,8850,8850,8850,8850], fmt:'money',
+        sub:'Essentials and the good extras. About 72% of it is non-negotiable.',
+        note:'Flat and predictable. The early dips were one-off, not a new habit.',
+        opps:{t:'Trim the like-to-spend slice', g:'+$180 / mo', s:'The <b>28%</b> discretionary layer is where small, painless cuts compound the fastest.'},
+        risks:{t:'Pre-Medicare healthcare', s:'The <b>$1,180 a month</b> insurance bridge until 65 is the line most likely to surprise you.'},
+        decide:{t:'Must-spend versus like-to-spend', s:'Setting the floor at <b>$5,191</b> versus <b>$6,323</b> swings your Fire number by <b>$340K</b>.'},
+        step:{t:'Split the budget in the Detailed Budgeter', act:'optimize'} },
+      cx_ss:{ label:'Social Security at 70', fig:'$3,940',
+        pts:[3180,3260,3350,3440,3530,3620,3710,3760,3820,3880,3910,3940], fmt:'money',
+        sub:'The monthly check if Marshall waits until 70. The one guaranteed 8% raise in America.',
+        note:'Every year of patience from 62 adds roughly 8%. This line is that patience, drawn out.',
+        opps:{t:'Bridge with the portfolio, wait on the check', g:'+$760 / mo', s:'Spending down other accounts first to delay to 70 lifts the check from <b>$3,180 to $3,940</b>, for life.'},
+        risks:{t:'Longevity cuts both ways', s:'Waiting wins if either spouse lives past about 82. The survivor keeps the larger check.'},
+        decide:{t:'Claim at 67 or 70', s:'Three years of patience is a permanent <b>24%</b> raise on the largest inflation-protected income you have.'},
+        step:{t:'Compare claiming ages in your plan', act:'plan'} },
+      cx_withdrawals:{ label:'Monthly withdrawals', fig:'$3,100',
+        pts:[0,0,0,0,0,0,0,0,2600,2800,2950,3100], fmt:'money',
+        sub:'What the portfolio pays you each month once work income stops in 2028.',
+        note:'Zero today, phasing in at retirement. The order accounts are tapped is what keeps taxes low.',
+        opps:{t:'Draw taxable first', g:'lower lifetime tax', s:'Spending the <b>$150K</b> brokerage before touching tax-deferred keeps you in the 12% band longer.'},
+        risks:{t:'Withdrawing in a down year', s:'Pulling from stocks after a drop locks in the loss. A cash buffer lets you wait it out.'},
+        decide:{t:'Fixed dollar or percent of portfolio', s:'A flexible rate protects the balance in bad years; a fixed amount protects your lifestyle.'},
+        step:{t:'Set the drawdown order in Withdrawal Strategy', act:'plan'} },
+      cx_taxsaved:{ label:'Lifetime tax saved', fig:'$61,000',
+        pts:[0,6,13,21,29,37,44,50,54,57,59,61], fmt:'money',
+        sub:'What the Roth conversion plan keeps in your pocket versus doing nothing.',
+        note:'Each year of filling the low bracket now avoids a higher rate during the RMD years.',
+        opps:{t:'Convert to the top of the 12% band', g:'+$61K kept', s:'Filling the bracket to <b>$106,750</b> each year from 2029 to 2034 is where the savings come from.'},
+        risks:{t:'IRMAA and the conversion ceiling', s:'Convert too much in one year and Medicare premiums step up. The band has a top as well as a bottom.'},
+        decide:{t:'How aggressively to convert', s:'Bigger conversions save more tax but raise this year\u2019s bill. The plan balances the two.'},
+        step:{t:'Tune the conversion in Tax Planning', act:'plan'} },
+      cx_convert:{ label:'Roth conversion / yr', fig:'~$17,800',
+        pts:[0,17800,17800,17800,17800,17800,0,0,0,0,0,0], fmt:'money',
+        sub:'The amount moved from tax-deferred to Roth each year, 2029 through 2034.',
+        note:'Sized to fill the 12% bracket without spilling into the next one. Six windows, then done.',
+        opps:{t:'Use the full low-bracket window', s:'The gap between retiring and RMDs at 73 is the cheapest time you will ever convert.'},
+        risks:{t:'The window closes at RMD age', s:'Once required distributions begin, they fill the low bracket for you and the room disappears.'},
+        decide:{t:'Convert evenly or front-load', s:'Front-loading converts more before markets grow the balance; even keeps each year\u2019s tax predictable.'},
+        step:{t:'Set the conversion schedule in Tax Planning', act:'plan'} },
       conf:{ label:'Confidence', fig:'87%',
         pts:[79,80,81,82,80,82,83,84,85,86,86,87], fmt:'pct',
         sub:'87 of every 100 simulated futures end with money left over.',
@@ -2480,6 +2545,9 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       var r=Math.round(v*10)/10;
       if(fmt==='pct') return r+'%';
       if(fmt==='year') return String(Math.round(v));
+      if(fmt==='moneyK'){ // v is in thousands
+        return v>=1000 ? '$'+(v/1000).toFixed(2).replace(/\.?0+$/,'')+'M' : '$'+Math.round(v)+'K';
+      }
       return '$'+Math.round(v).toLocaleString('en-US');
     }
     function chart(d){
@@ -2542,10 +2610,15 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       modal.classList.remove('on'); document.body.style.overflow='';
       setTimeout(function(){ modal.hidden=true; sheet.innerHTML=''; }, reduce?0:380);
     }
-    /* clicks on the 3 stat cards */
+    /* clicks on the stat cards and the chips under the graph */
     document.addEventListener('click', function(e){
-      var c=e.target.closest('.mstat3[data-msx]'); if(!c) return;
+      var c=e.target.closest('.mstat3[data-msx], .mchip4[data-msx]'); if(!c) return;
       open(c.dataset.msx);
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key!=='Enter' && e.key!==' ') return;
+      var c=e.target.closest && e.target.closest('.mchip4[data-msx], .mstat3[data-msx]'); if(!c) return;
+      e.preventDefault(); open(c.dataset.msx);
     });
     scrim.addEventListener('click', close);
     sheet.addEventListener('click', function(e){ if(e.target.closest('[data-msx-close]')) close(); });
