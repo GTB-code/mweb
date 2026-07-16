@@ -418,7 +418,7 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 .mh-faces .f1{ background:var(--teal); } .mh-faces .f2{ background:#0E794E; } .mh-faces .f3{ background:#5B8A72; }
 .mh-faces .f4{ background:#FBBD04; color:#10182C; }
 /* ===== Optimize tab ===== *//* ===== Optimize tab ===== */
-/* the $412K, decomposed */
+/* the $314K, decomposed */
 .mop-stack{ margin-top:22px; }
 .mop-bar{ display:flex; gap:3px; height:16px; border-radius:9px; overflow:hidden; }
 .mop-bar i{ display:block; height:100%; border-radius:3px; }
@@ -430,11 +430,11 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 /* the featured move */
 .mop-card.mop-hero{ display:block; text-align:left; border:0; background:#F2FBF7; border-radius:20px; padding:24px 19px 22px; }
 .mop-card.mop-hero:active{ background:#E7F7F0; transform:scale(.99); }
-.mop-hero-top{ display:flex; flex-direction:column; align-items:flex-start; gap:7px; }
-.mop-hero-t{ display:inline-flex; align-items:center; gap:8px; font-size:23px; font-weight:700; color:var(--ink); }
-.mop-hero-val{ font:800 29px 'DM Sans',sans-serif; letter-spacing:-0.7px; color:var(--green-cta); font-variant-numeric:tabular-nums; white-space:nowrap; }
-.mop-hero-val i{ font-style:normal; font:600 15px 'DM Sans',sans-serif; color:var(--text-secondary); margin-left:3px; letter-spacing:0; }
-.mop-hero-s{ display:block; font-size:17.5px; color:#33413C; line-height:1.55; margin-top:11px; max-width:32ch; }
+.mop-hero-top{ display:flex; flex-direction:column; align-items:flex-start; gap:3px; }
+.mop-hero-t{ display:inline-flex; align-items:center; gap:8px; font-size:21px; font-weight:700; color:var(--ink); }
+.mop-hero-val{ font:700 21px 'DM Sans',sans-serif; letter-spacing:-0.3px; color:var(--green-cta); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.mop-hero-val i{ font-style:normal; font:500 17px 'DM Sans',sans-serif; color:var(--text-secondary); margin-left:4px; letter-spacing:0; }
+.mop-hero-s{ display:block; font-size:17px; color:#33413C; line-height:1.55; margin-top:10px; max-width:34ch; }
 .mop-hero-cta{ display:flex; align-items:center; gap:12px; margin-top:19px; }
 .mop-go{ display:inline-flex; align-items:center; gap:8px; background:#0E794E; color:#FFFFFF; border-radius:999px; padding:13px 21px; font-size:17px; font-weight:600; white-space:nowrap; }
 .mop-hero:active .mop-go{ background:#0B5F3D; }
@@ -518,6 +518,7 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 .mstat3 .sub .up{ color:var(--green-cta); font-weight:600; }
 .mstat3 .sub .dn{ color:var(--text-tertiary); font-weight:600; }
 .mstat3 .sub .since{ display:block; font-size:11px; color:var(--text-tertiary); font-weight:500; margin-top:2px; }
+#mtodayStats3 .mstat3 .lab, #mplanStats3 .mstat3 .lab{ white-space:normal; line-height:1.25; min-height:2.5em; }
 /* What's already yours: the desktop net-worth block mosaic, restacked for mobile */
 .myours{ border-radius:14px; overflow:hidden; cursor:pointer; transition:transform .15s ease; }
 .myours:active{ transform:scale(.99); }
@@ -1228,9 +1229,10 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     </svg>
   </div>
 
-  <div class="mplan-stats3" id="mtodayStats3" style="margin-top:16px; grid-template-columns:1fr 1fr">
-    <div class="mstat3" data-msx="spend" role="button" tabindex="0"><div class="lab">Spending</div><div class="fig">$8,850</div><div class="sub"><span class="dn">&#9660; $120</span></div></div>
-    <div class="mstat3" data-msx="savings" role="button" tabindex="0"><div class="lab">Savings</div><div class="fig">$106,750</div><div class="sub"><span class="up">&#9650; $1,070</span></div></div>
+  <div class="mplan-stats3" id="mtodayStats3" style="margin-top:16px">
+    <div class="mstat3" data-msx="toretire" role="button" tabindex="0"><div class="lab">Years to retirement</div><div class="fig">2.4</div><div class="sub">Dec 2028</div></div>
+    <div class="mstat3" data-msx="workincome" role="button" tabindex="0"><div class="lab">Work income</div><div class="fig">$12,300</div><div class="sub">per month</div></div>
+    <div class="mstat3" data-msx="savingsopp" role="button" tabindex="0"><div class="lab">Savings opportunity</div><div class="fig">$3,450</div><div class="sub">every month</div></div>
   </div>
 
   <div id="todayScore"></div>
@@ -1284,20 +1286,18 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
 
 <div class="mtab" id="tabOptimize" hidden>
   <div class="mgreet meye">Optimize</div>
-  <h1 class="mhl">There is still <em class="mhl-em">$412,000</em> on the <em class="mhl-gold">table.</em></h1>
-  <p class="msubhead msubhead-opt">The same life, funded better. Five moves, ranked by payoff.</p>
+  <h1 class="mhl">There is still <em class="mhl-em">$314,000</em> on the <em class="mhl-gold">table.</em></h1>
+  <p class="msubhead msubhead-opt">The same life, funded better.</p>
 
-  <!-- where the $412K lives -->
-  <div class="mop-stack" aria-label="Where the $412,000 comes from">
+  <!-- where the $314K lives -->
+  <div class="mop-stack" aria-label="Where the $314,000 comes from">
     <div class="mop-bar">
-      <i style="width:52%; background:#0D3F4A"></i>
-      <i style="width:24%; background:#1B6B5C"></i>
-      <i style="width:15%; background:#04B477"></i>
-      <i style="width:9%; background:#9BD9C1"></i>
+      <i style="width:68%; background:#0D3F4A"></i>
+      <i style="width:19%; background:#04B477"></i>
+      <i style="width:13%; background:#9BD9C1"></i>
     </div>
     <div class="mop-legend">
       <span><i style="background:#0D3F4A"></i>Claim timing $214K</span>
-      <span><i style="background:#1B6B5C"></i>Withdrawal order $98K</span>
       <span><i style="background:#04B477"></i>Tax windows $61K</span>
       <span><i style="background:#9BD9C1"></i>Rebalance $39K</span>
     </div>
@@ -1306,9 +1306,9 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
   <div class="mop-cards" id="mopCards">
     <div class="mplan-seclabel" style="margin:14px 2px 0">Your next best move</div>
     <button class="mop-card mop-hero" type="button" data-op="ss">
-      <span class="mop-hero-top"><span class="mop-hero-t">Social Security <i class="mop-alert">1</i></span><span class="mop-hero-val">+$760<i>/mo for life</i></span></span>
+      <span class="mop-hero-top"><span class="mop-hero-t">Social Security</span><span class="mop-hero-val">+$760<i>/mo for life</i></span></span>
       <span class="mop-hero-s">The one guaranteed 8% raise. Waiting to 70 lifts every check.</span>
-      <span class="mop-hero-cta"><span class="mop-go">Claim it right <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span><em>2 minutes, one decision</em></span>
+      <span class="mop-hero-cta"><span class="mop-go">Claim it right <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></span>
     </button>
 
     <div class="mplan-seclabel" style="margin:16px 2px 0">Then, in order</div>
@@ -2766,28 +2766,28 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       snapshot:{
         hl:'Retire in <em class="mhl-em">8 years</em> on <em class="mhl-gold">$7,200</em> a month.',
         dd:'Portfolio',
-        stats:[['Confidence','87%','Monte Carlo +','conf'],['Funds depleted','2099','Age 82 &middot; 12 yrs','depleted']],
+        stats:[['Net worth','$1.14M','&#9650; $8,200','nw'],['Asset allocation','72 / 28','2.4% off target','alloc'],['Debt to assets','23%','Falling yearly','dta']],
         chips:[['Portfolio','$1.09M','cx_portfolio'],['Savings rate','28%','cx_savingsrate']],
         secKeys:['assets','debts','income','home','expenses','flows','withdrawal','taxplan','estate','rates'], secHeading:'Future money'
       },
       fl:{
         hl:'Saving <em class="mhl-gold">28%</em>, growing into <em class="mhl-em">freedom.</em>',
         dd:'Net worth',
-        stats:[['Surplus','$3,450','After expenses','surplus'],['Savings rate','28%','Above target','cx_savingsrate']],
+        stats:[['Savings rate','28%','Above target','cx_savingsrate'],['Debt-to-income','15%','Mortgage only','dti'],['Cashflow','+$3,450','per month','cashflow']],
         chips:[['Income/mo','$12,300','cx_income'],['Spending/mo','$8,850','cx_spending']],
         secKeys:['assets','debts','income','home','expenses','flows','withdrawal','taxplan','estate','rates'], secHeading:'Future money'
       },
       retirement:{
         hl:'<em class="mhl-gold">$1.14M</em> working toward your <em class="mhl-em">retirement.</em>',
         dd:'Retirement income',
-        stats:[['Success','87%','Monte Carlo +','success'],['Safe spending','$8,400','per month','safespend']],
+        stats:[['Chance of success','87%','870 in 1,000','success'],['Safe spending target','$8,400','per month','safespend'],['Vision board','5 goals','Dreams, priced','vision']],
         chips:[['SS at 70','$3,940','cx_ss'],['Withdrawals','$3,100','cx_withdrawals']],
         secKeys:['assets','debts','income','home','expenses','flows','withdrawal','taxplan','estate','rates'], secHeading:'Future money'
       },
       tax:{
         hl:'One conversion saves <em class="mhl-gold">$430</em> a <em class="mhl-em">month.</em>',
         dd:'Lifetime taxes',
-        stats:[['Effective rate','19.4%','This year','effrate'],['Lifetime tax','$648K','If unchanged','lifetax']],
+        stats:[['Filing status','Joint','Married, joint','filing'],['Lifetime tax rate','23.1%','Average to 99','ltr'],['Lifetime taxes paid','$648K','&#9660; $61K saved','lifetax']],
         chips:[['Tax saved','$61,000','cx_taxsaved'],['Convert/yr','~$17,800','cx_convert']],
         secKeys:['assets','debts','income','home','expenses','flows','withdrawal','taxplan','estate','rates'], secHeading:'Future money'
       }
@@ -2886,6 +2886,62 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         decide:{t:'Claim at 67, or hold to 70', s:'The 2035 start at <b>$3,940</b> is the plan. Claiming early moves the whole right half of this timeline down.'},
         step:{t:'Stress-test the timeline against a 2028 bear', act:'plan'},
         ask:'Ask Boldin AI about your timeline&#8230;' },
+      dti:{ label:'Debt-to-income', fig:'15%',
+        pts:[16.2,16.1,16.0,15.9,15.8,15.7,15.6,15.5,15.4,15.3,15.2,15.1], fmt:'pct',
+        sub:'Of every income dollar, 15 cents services debt. All of it the mortgage.',
+        note:'Lenders start worrying at 36%. You are at 15 and drifting lower every month.',
+        opps:{t:'Headroom, if ever needed', g:'optionality', s:'At <b>15%</b> you could bridge a surprise with a HELOC without straining the plan. An option to hold, not use.'},
+        risks:{t:'The ratio changes shape in 2028', s:'When paychecks stop, the same <b>$1,860</b> payment is measured against portfolio income instead of salary.'},
+        decide:{t:'Enter retirement with it, or without', s:'Clearing the mortgage before 2028 trades <b>$333K</b> of assets for a payment-free start. The score can price both.'},
+        step:{t:'Model a payoff before the date', act:'plan'} },
+      cashflow:{ label:'Cashflow', fig:'+$3,450',
+        pts:[3310,3350,3305,3380,3360,3410,3390,3430,3450,3450,3450,3450], fmt:'money',
+        sub:'$12,300 in, $8,850 out. The plan runs green every month.',
+        note:'Positive all year. In 2028 the sign flips by design, and the portfolio takes over the paying.',
+        opps:{t:'Name every dollar of the gap', g:'+$100K', s:'Unassigned surplus leaks. A standing transfer of <b>$3,450</b> on payday is worth about $100K by retirement.'},
+        risks:{t:'The December effect', s:'Holidays and property taxes land in the same month. One planned month of red is fine; a surprise one is not.'},
+        decide:{t:'How much buffer is enough', s:'<b>$107K</b> of cash is over two years of expenses. Some of that comfort could be compounding instead.'},
+        step:{t:'Open Money Flows', act:'plan'} },
+      alloc:{ label:'Asset allocation', fig:'72 / 28',
+        pts:[70,70.2,70.5,70.9,70.7,71.1,71.3,71.5,71.6,71.8,71.9,72], fmt:'pct',
+        sub:'Stocks to bonds, across every account. The target is 70 / 30.',
+        note:'Markets did the drifting, not you. 2.4% above target is one rebalance away from fixed.',
+        opps:{t:'One rebalance, one glide path', g:'+$39K', s:'Resetting to <b>70 / 30</b> now and gliding to <b>60 / 40</b> by 2028 is worth about $39K of risk-adjusted value.'},
+        risks:{t:'Drift compounds quietly', s:'One more good year pushes you to <b>74%</b> stocks right as retirement starts. That is risk you never chose.'},
+        decide:{t:'Sell winners, or steer new money', s:'Rebalance today, or point new savings at bonds and let the mix walk back. Both work; the timing differs.'},
+        step:{t:'Run the rebalance with Boldin AI', act:'optimize'} },
+      dta:{ label:'Debt to assets', fig:'23%',
+        pts:[26.4,26.1,25.8,25.5,25.2,24.9,24.6,24.2,23.9,23.6,23.3,23.0], fmt:'pct',
+        sub:'For every dollar you own, 23 cents is owed. Nearly all of it the 3.1% mortgage.',
+        note:'Falling about a point a year as the mortgage amortizes and the assets grow.',
+        opps:{t:'Let the 3.1% ride', g:'+2.9% spread', s:'Debt this cheap loses to a portfolio earning <b>6%</b>. Left alone, the ratio retires itself by 2046.'},
+        risks:{t:'Ratios jump in bear markets', s:'A 25% drawdown lifts this to about <b>30%</b> overnight, without a dollar of new borrowing.'},
+        decide:{t:'Carry the mortgage into retirement', s:'The payment runs about <b>$1,860</b> a month to 2046. Comfort and math can disagree; decide which wins.'},
+        step:{t:'Model an early payoff against the score', act:'plan'} },
+      toretire:{ label:'Years to retirement', fig:'2.4 yrs',
+        pts:[3.5,3.4,3.3,3.2,3.1,3.0,2.9,2.8,2.7,2.6,2.5,2.4], fmt:'yrs',
+        sub:'December 2028. Marshall is 63, and the paychecks stop on your terms.',
+        note:'A countdown you control. Every extra month worked is one more month of surplus and one less funded from savings.',
+        opps:{t:'2027 is on the table', g:'still funded', s:'Moving the date a year earlier keeps the plan funded to <b>96</b> with <b>$6,900</b> a month of safe spending.'},
+        risks:{t:'Sequence risk at the handoff', s:'A bear market in the first two retired years matters more than any other stretch. The date sets the exposure.'},
+        decide:{t:'A date, or a number', s:'Retire when the calendar says <b>Dec 2028</b>, or when the portfolio says ready. Pick which trigger rules.'},
+        step:{t:'Test earlier dates against the score', act:'plan'} },
+      workincome:{ label:'Work income', fig:'$12,300',
+        pts:[12215,12215,12215,12223,12215,12234,12215,12215,12300,12300,12300,12300], fmt:'money',
+        sub:'What working still brings in each month, before taxes.',
+        note:'Every month of this funds life without touching the portfolio. That is the whole bridge to 2028.',
+        opps:{t:'Capture the full 401(k) match', g:'+$85 / mo', s:'About <b>$1,020</b> a year of match goes unclaimed. It is the highest-yield dollar available anywhere.'},
+        risks:{t:'One employer, most of the income', s:'<b>72%</b> is Marshall\u2019s paycheck. A 2027 layoff moves the retirement date by roughly 19 months.'},
+        decide:{t:'When Lily scales back', s:'Her <b>$1,385</b> a month shapes the bridge years. When it stops is a plan input, not a surprise.'},
+        step:{t:'Model income ending on different dates', act:'plan'} },
+      savingsopp:{ label:'Savings opportunity', fig:'$3,450',
+        pts:[3310,3350,3305,3380,3360,3410,3390,3430,3450,3450,3450,3450], fmt:'money',
+        sub:'The monthly surplus you could route to retirement savings before 2028.',
+        note:'About 29 paychecks left. Routed fully, that is roughly $100K more at the retirement starting line.',
+        opps:{t:'Automate the transfer', g:'+$100K', s:'A standing move of <b>$3,450</b> on payday beats twelve good intentions a year.'},
+        risks:{t:'Idle cash drag', s:'<b>$18,300</b> sits at 0.4% while inflation runs 2.5%. Parked is not the same as safe.'},
+        decide:{t:'Pre-tax, Roth, or brokerage', s:'Where the next dollar lands decides its tax bill in 2035. The coming 12% windows favor Roth.'},
+        step:{t:'Set up the automatic transfer', act:'today'} },
       surplus:{ label:'Monthly surplus', fig:'$3,450',
         pts:[3310,3350,3305,3380,3360,3410,3390,3430,3450,3450,3450,3450], fmt:'money',
         sub:'What is left each month after the $8,850 of spending.',
@@ -2894,7 +2950,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         risks:{t:'Lifestyle creep eats surpluses', s:'Spending that drifts up with income is how a <b>28%</b> savings rate slides back to average.'},
         decide:{t:'Brokerage, Roth, or the mortgage', s:'Each surplus dollar can compound at <b>6%</b>, grow tax-free, or retire <b>3.1%</b> debt. The order matters.'},
         step:{t:'Split the surplus in Money Flows', act:'plan'} },
-      success:{ label:'Success rate', fig:'87%',
+      success:{ label:'Chance of success', fig:'87%',
         pts:[82,82,83,83,84,84,85,85,86,86,87,87], fmt:'pct',
         sub:'Of 1,000 simulated futures, 870 end with money left over.',
         note:'Up five points this year. Every linked account and steady month nudges it higher.',
@@ -2902,7 +2958,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         risks:{t:'The other 13% lives early', s:'Most failing futures fail from a bear market in the first five years, not the last twenty.'},
         decide:{t:'What counts as safe enough', s:'<b>87%</b> is comfortably green. Chasing 99% costs lifestyle today for tail risk that flexibility already covers.'},
         step:{t:'Stress-test a 2028 bear market', act:'plan'} },
-      safespend:{ label:'Safe spending', fig:'$8,400',
+      safespend:{ label:'Safe spending target', fig:'$8,400',
         pts:[8150,8180,8210,8230,8260,8290,8310,8330,8350,8370,8390,8400], fmt:'money',
         sub:'The monthly spend the plan can hold to 99, in 87% of futures.',
         note:'You live at $8,850 today; guardrails open up once Social Security starts. The gap is margin.',
@@ -2910,6 +2966,15 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         risks:{t:'Healthcare before 65', s:'The <b>$1,180</b> a month bridge premium lives inside this number. It ends at Medicare in 2030.'},
         decide:{t:'Spend to the line, or bank the gap', s:'Living <b>$450</b> under the safe line is a choice. Both answers are right; make it on purpose.'},
         step:{t:'Set the spending level in the plan', act:'plan'} },
+      vision:{ label:'Vision board', fig:'5 goals',
+        sub:'What the money is actually for. Numbers fund a life, not a chart.',
+        note:'Every goal here has a year and most have a price. That is what makes them plans instead of wishes.',
+        comp:[['Portugal, slow travel','2029','#04B477'],['The lake cabin search','2030','#0D3F4A'],['Grandkids&#8217; college boost','2032','#1B6B5C'],['Lily&#8217;s pottery studio','2029','#FBBD04'],['Giving, done together','ongoing','#9BD9C1']],
+        compLabel:'Pinned to the board',
+        opps:{t:'Fund the first goal now', g:'$9,800', s:'Portugal is <b>$9,800</b> all-in for two months. Three paychecks of surplus cover it without touching the plan.'},
+        risks:{t:'Unpriced dreams drift', s:'A goal without a number quietly becomes a regret. The cabin still needs a price tag before 2030.'},
+        decide:{t:'Which goal headlines 2029', s:'The first retired year sets the tone. Portugal, the cabin search, or the studio build. Pick the opener.'},
+        step:{t:'Pin a new goal to the board', act:'today'} },
       effrate:{ label:'Effective tax rate', fig:'19.4%',
         pts:[21.2,21.0,20.8,20.7,20.5,20.3,20.1,19.9,19.8,19.6,19.5,19.4], fmt:'pct',
         sub:'Of every dollar that came in this year, 19.4 cents went to tax.',
@@ -2918,7 +2983,24 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         risks:{t:'RMDs push the rate back up', s:'Untouched tax-deferred balances mean required withdrawals at <b>73</b>, taxed at whatever rates exist then.'},
         decide:{t:'Pay a little now, or more later', s:'Conversions raise this year\u2019s rate on purpose to cut the lifetime <b>23.1%</b> projection.'},
         step:{t:'Open the Roth plan in Tax Planning', act:'plan'} },
-      lifetax:{ label:'Lifetime tax', fig:'$648K',
+      filing:{ label:'Filing status', fig:'Joint',
+        sub:'Married, filing jointly. The widest brackets the tax code offers.',
+        note:'Every conversion window and bracket line in this plan is drawn for a joint return.',
+        comp:[['Standard deduction','doubled','#04B477'],['The 12% band','widest','#1B6B5C'],['Roth window room','$17,800 / yr','#0D3F4A'],['Survivor filing','single, later','#FBBD04']],
+        compLabel:'What joint filing shapes',
+        opps:{t:'Fill the joint 12% band', g:'$61K', s:'The joint band fits about <b>$17,800</b> of conversions a year through 2034. Half that room disappears on a single return.'},
+        risks:{t:'The survivor files single', s:'One day one of you files alone, with narrower brackets and the same RMDs. It is the quiet reason to convert early.'},
+        decide:{t:'Whose accounts convert first', s:'Converting the older spouse\u2019s IRA first softens the survivor\u2019s math. The order is a choice, not an accident.'},
+        step:{t:'Review the survivor scenario', act:'plan'} },
+      ltr:{ label:'Lifetime tax rate', fig:'23.1%',
+        pts:[25.3,25.1,24.9,24.6,24.4,24.2,24.0,23.8,23.6,23.4,23.2,23.1], fmt:'pct',
+        sub:'The average rate across every dollar from today to age 99.',
+        note:'Higher than this year\u2019s 19.4% because the RMD years are in it. Lower than it was, because the plan is.',
+        opps:{t:'Every point is real money', g:'&minus;2.2 pts', s:'The conversion plan already cut the lifetime rate by <b>2.2 points</b>. Withdrawal order can shave more.'},
+        risks:{t:'Law risk cuts both ways', s:'Brackets sunset and shift. A rate this long is a forecast the plan re-runs monthly, not a promise.'},
+        decide:{t:'Smooth it, or ride the spikes', s:'A flat rate is not the goal. Paying <b>12%</b> on purpose now to avoid <b>24%</b> later is.'},
+        step:{t:'See the rate, year by year', act:'plan'} },
+      lifetax:{ label:'Lifetime taxes paid', fig:'$648K',
         pts:[709,703,698,692,687,681,675,669,663,657,652,648], fmt:'moneyK',
         sub:'Every tax dollar the plan expects you to pay, from today to 99.',
         note:'Down $61K since the conversion plan went in. If unchanged means if you change nothing more.',
@@ -3056,12 +3138,14 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       var r=Math.round(v*10)/10;
       if(fmt==='pct') return r+'%';
       if(fmt==='year') return String(Math.round(v));
+      if(fmt==='yrs') return r+' yrs';
       if(fmt==='moneyK'){ // v is in thousands
         return v>=1000 ? '$'+(v/1000).toFixed(2).replace(/\.?0+$/,'')+'M' : '$'+Math.round(v)+'K';
       }
       return '$'+Math.round(v).toLocaleString('en-US');
     }
     function chart(d){
+      if(!d.pts) return '';
       var W=356,H=150,padL=10,padR=52,padT=14,padB=26;
       var iw=W-padL-padR, ih=H-padT-padB, pts=d.pts;
       var min=Math.min.apply(null,pts), max=Math.max.apply(null,pts);
@@ -3094,7 +3178,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     }
     function sec(label, it, numbered){ return '<div class="msx-sec"><div class="msx-sec-label">'+label+'</div>'+item(it,numbered)+'</div>'; }
     function build(d){
-      var compH = d.comp ? '<div class="msx-sec"><div class="msx-sec-label">What it is made of</div><div class="msx-comp">'+
+      var compH = d.comp ? '<div class="msx-sec"><div class="msx-sec-label">'+(d.compLabel||'What it is made of')+'</div><div class="msx-comp">'+
         d.comp.map(function(c){ return '<div class="msx-comp-row"><i style="background:'+c[2]+'"></i><span class="l">'+c[0]+'</span><span class="v">'+c[1]+'</span></div>'; }).join('')+'</div></div>' : '';
       var cmpH = d.compare ? '<div class="msx-sec"><div class="msx-sec-label">How you compare</div>'+
         '<div class="msx-cmp"><div class="msx-cmp-row"><span class="l">'+d.compare.youLab+'</span><span class="bar"><i class="you" style="width:'+d.compare.youW+'%"></i></span><span class="v">'+d.compare.you+'</span></div>'+
