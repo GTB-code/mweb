@@ -523,15 +523,11 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
   gap:10px; margin-right:-16px; padding-right:16px; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
 #mtodayStats3::-webkit-scrollbar, #mplanStats3::-webkit-scrollbar{ display:none; }
 #mtodayStats3 .mstat3, #mplanStats3 .mstat3{ flex:0 0 calc((100% - 4px)/2.45); scroll-snap-align:start;
-  padding:14px 14px 12px; animation:mstat-in 1.05s cubic-bezier(0.16,1,0.3,1) backwards; will-change:transform,opacity; }
-#mtodayStats3 .mstat3:nth-child(1), #mplanStats3 .mstat3:nth-child(1){ animation-delay:.08s; }
-#mtodayStats3 .mstat3:nth-child(2), #mplanStats3 .mstat3:nth-child(2){ animation-delay:.22s; }
-#mtodayStats3 .mstat3:nth-child(3), #mplanStats3 .mstat3:nth-child(3){ animation-delay:.36s; }
-@keyframes mstat-in{
-  0%{ opacity:0; transform:translateX(64px); }
-  55%{ opacity:1; }
-  100%{ opacity:1; transform:none; }
-}
+  padding:14px 14px 12px; animation:mstat-in .9s ease-out backwards; }
+#mtodayStats3 .mstat3:nth-child(1), #mplanStats3 .mstat3:nth-child(1){ animation-delay:.05s; }
+#mtodayStats3 .mstat3:nth-child(2), #mplanStats3 .mstat3:nth-child(2){ animation-delay:.14s; }
+#mtodayStats3 .mstat3:nth-child(3), #mplanStats3 .mstat3:nth-child(3){ animation-delay:.23s; }
+@keyframes mstat-in{ from{ opacity:0; } to{ opacity:1; } }
 @media (prefers-reduced-motion: reduce){ #mtodayStats3 .mstat3, #mplanStats3 .mstat3{ animation:none; } }
 #mtodayStats3 .mstat3 .lab, #mplanStats3 .mstat3 .lab{ white-space:normal; line-height:1.3; font-size:14.5px; }
 #mtodayStats3 .mstat3 .fig, #mplanStats3 .mstat3 .fig{ font-size:24px; margin-top:4px; }
@@ -565,7 +561,6 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 @keyframes mstat-demo{ 0%,100%{ transform:none; } 45%{ transform:scale(0.986); } }
 @keyframes mstat-ring{ 0%,100%{ opacity:0; } 45%{ opacity:.55; } }
 @media (prefers-reduced-motion: reduce){ .mstat3.demo, .mstat3.demo::before{ animation:none !important; } }
-.mstat3-hint{ font-size:13.5px; color:var(--text-tertiary); margin:9px 2px 0; }
 /* the what-if slider: drag a new retirement date, see the ghost future */
 .msx-try-read{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin:4px 0 8px; }
 .msx-try-read b{ font:700 20px 'DM Sans',sans-serif; letter-spacing:-0.3px; color:var(--ink); font-variant-numeric:tabular-nums; }
@@ -1291,7 +1286,6 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     <div class="mstat3" data-msx="workincome" role="button" tabindex="0"><div class="lab">Work income</div><div class="fig">$12,300</div><div class="sub">per month</div></div>
     <div class="mstat3" data-msx="savingsopp" role="button" tabindex="0"><div class="lab">Save more</div><div class="fig">$3,450</div><div class="sub">every month</div></div>
   </div>
-  <div class="mstat3-hint">Tap any card. The full story is one touch away.</div>
 
   <div id="todayScore"></div>
   <div class="mplan-seclabel" style="margin:40px 2px -6px">My money</div>
@@ -1337,7 +1331,6 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
 
   <!-- 3 stat cards, like desktop, now under the portfolio card -->
   <div class="mplan-stats3" id="mplanStats3"></div>
-      <div class="mstat3-hint">Tap any card. The full story is one touch away.</div>
 
 
   <div class="mlist" id="mlistPlan"></div>
@@ -1714,6 +1707,31 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
   }
   /* the pill row glides in from the right and settles on the optical-balance
      offset (42px: H under P, a sliver of circle at the card edge) */
+  /* the carousel arrives with one easy motion: the row drifts left to right and stops */
+  function glideCards(id){
+    var row=document.getElementById(id); if(!row || !row.clientWidth) return;
+    var max=row.scrollWidth-row.clientWidth; if(max<10) return;
+    var tk=(row.__cgTok||0)+1; row.__cgTok=tk;
+    if(reduce){ row.scrollLeft=0; return; }
+    /* snap points would yank the row back mid-glide; suspend them for the ride */
+    row.style.scrollSnapType='none';
+    var start=Math.min(max, 92);
+    row.scrollLeft=start;
+    setTimeout(function(){
+      if(row.__cgTok!==tk){ row.style.scrollSnapType=''; return; }
+      var t0=null;
+      function ease(p){ return 1-Math.pow(1-p,3); }
+      function frame(ts){
+        if(row.__cgTok!==tk){ row.style.scrollSnapType=''; return; }
+        if(!t0) t0=ts;
+        var p=Math.min(1,(ts-t0)/1200);
+        row.scrollLeft=start*(1-ease(p));
+        if(p<1) requestAnimationFrame(frame);
+        else { row.scrollLeft=0; row.style.scrollSnapType=''; }
+      }
+      requestAnimationFrame(frame);
+    }, 420);
+  }
   /* once per visit, the first carousel card taps itself so members know the doors open */
   var DEMO_SEEN={};
   function demoTap(id){
@@ -2134,10 +2152,11 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     setNav(t);
     document.body.classList.toggle('ai-tab', t==='ai');
     if(t==='ai') enterAI();
-    if(t==='plan'){ drawPlanChart(); glidePills(document.getElementById('planScore')); if(window.__hintLenses) setTimeout(window.__hintLenses, 120); }
+    if(t==='plan'){ drawPlanChart(); glideCards('mplanStats3'); glidePills(document.getElementById('planScore')); if(window.__hintLenses) setTimeout(window.__hintLenses, 120); }
     if(t==='home') drawHome();
     if(t==='today'){
       buildPlanScore(document.getElementById('todayScore'));
+      glideCards('mtodayStats3');
       demoTap('mtodayStats3');
     }
     if(t==='optimize' && !reduce){
@@ -2883,6 +2902,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       stats3.style.gridTemplateColumns='repeat('+L.stats.length+', 1fr)';
       stats3.innerHTML=L.stats.map(function(s){ return '<div class="mstat3"'+(s[3]?' data-msx="'+s[3]+'" role="button" tabindex="0"':'')+'><div class="lab">'+s[0]+'</div><div class="fig">'+s[1]+'</div><div class="sub">'+s[2]+'</div></div>'; }).join('');
       stagger([].slice.call(stats3.children));
+      glideCards('mplanStats3');
       demoTap('mplanStats3');
     }
     function renderChips(L){
