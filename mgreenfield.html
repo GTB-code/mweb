@@ -583,6 +583,10 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
   background:linear-gradient(90deg, #0E794E var(--p,33.3%), #E7E9EC var(--p,33.3%)); }
 #tryRange::-moz-range-thumb{ width:24px; height:24px; border-radius:999px; background:#FFFFFF; border:3px solid #0E794E; }
 .msx-try-cap{ font-size:14px; color:var(--text-tertiary); margin-top:4px; line-height:1.45; }
+.msx-try-cta{ display:inline-flex; align-items:center; justify-content:center; margin-top:12px; height:38px; padding:0 18px; border:none; border-radius:999px; background:#0E794E; color:#fff; font-family:inherit; font-size:14.5px; font-weight:600; cursor:pointer; opacity:0; transform:translateY(6px); pointer-events:none; transition:opacity .3s ease, transform .3s ease, background .2s ease; }
+.msx-try-cta.show{ opacity:1; transform:none; pointer-events:auto; }
+.msx-try-cta:active{ background:#0A5D3B; }
+.msx-try-cta.done{ background:var(--mint); color:var(--green-cta); }
 /* the chart range filter */
 .msx-fseg{ display:flex; gap:7px; margin:16px 0 0; }
 .msx-fseg button{ flex:1; height:38px; border-radius:999px; border:1px solid var(--hairline); background:#FFFFFF;
@@ -3277,7 +3281,8 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
           '<text x="348" y="164" font-size="13" fill="#9AA0AE" text-anchor="end">Age 99</text>'+
         '</svg>'+
         '<div class="msx-try-slide"><span>'+tcfg.left+'</span><input type="range" id="tryRange" min="'+tcfg.min+'" max="'+tcfg.max+'" step="'+tcfg.step+'" value="'+tcfg.def+'" aria-label="'+tcfg.secLabel+'"><span>'+tcfg.right+'</span></div>'+
-        '<div class="msx-try-cap">'+tcfg.cap+'</div></div>' : '';
+        '<div class="msx-try-cap">'+tcfg.cap+'</div>'+
+        '<button type="button" class="msx-try-cta" id="tryCta">Update my plan</button></div>' : '';
       var askPh = (typeof d.ask==='string') ? d.ask : 'Ask Boldin AI about your '+d.label.toLowerCase()+'&#8230;';
       var askH = '<div class="msx-ask"><input class="msx-ask-in" id="msxAskIn" type="text" placeholder="'+askPh+'" autocomplete="off"><button class="msx-ask-go" id="msxAskGo" type="button" aria-label="Ask"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M6 12l6-6 6 6"/></svg></button></div>';
       return '<div class="msx-grip"></div>'+
@@ -3484,6 +3489,11 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       chip.textContent=r.chip[0]; chip.className='msx-try-chip'+(r.chip[1]?' '+r.chip[1]:'');
       var el=document.getElementById('tryRange');
       if(el) el.style.setProperty('--p', (((v-cfg.min)/(cfg.max-cfg.min))*100).toFixed(1)+'%');
+      var cta=document.getElementById('tryCta');
+      if(cta){
+        if(r.on && tryTouched){ cta.classList.add('show'); cta.classList.remove('done'); cta.textContent='Update my plan'; }
+        else if(!r.on){ cta.classList.remove('show','done'); cta.textContent='Update my plan'; }
+      }
     }
     /* on open, the slider starts on a nearby scenario and glides home to the plan,
        collapsing the ghost into the green line. The motion says: this moves. */
@@ -3494,14 +3504,16 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       s = Math.max(cfg.min, Math.min(cfg.max, s));
       return Math.round(s/cfg.step)*cfg.step;
     }
+    var trySweeping=false, tryTouched=false;
     function trySweep(){
       var cfg=TRYCFG[curKey]; var r=document.getElementById('tryRange');
       if(!cfg || !r) return;
+      trySweeping=true;
       var tk=(r.__swTok||0)+1; r.__swTok=tk;
       var rest=cfg.def, start=parseFloat(r.value);
       if(start===rest) return;
       var stop=false;
-      r.addEventListener('pointerdown', function(){ stop=true; }, {once:true});
+      r.addEventListener('pointerdown', function(){ stop=true; trySweeping=false; }, {once:true});
       setTimeout(function(){
         if(stop || r.__swTok!==tk || !document.body.contains(r)) return;
         var t0=null, D=1250;
@@ -3514,7 +3526,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
           v=Math.round(v/cfg.step)*cfg.step;
           r.value=v; tryUpdate(v);
           if(p<1) requestAnimationFrame(frame);
-          else { r.value=rest; tryUpdate(rest); }
+          else { r.value=rest; trySweeping=false; tryUpdate(rest); }
         }
         requestAnimationFrame(frame);
       }, 1150);
@@ -3535,6 +3547,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       modal.hidden=false; void modal.offsetWidth; modal.classList.add('on');
       document.body.style.overflow='hidden';
       drawIn(false);
+      tryTouched=false;
       if(d.try){
         var tcfg0=TRYCFG[curKey];
         var v0 = reduce ? tcfg0.def : trySweepStart(tcfg0);
@@ -3581,7 +3594,16 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     /* the what-if slider drives the ghost line live */
     sheet.addEventListener('input', function(e){
       var r=e.target.closest('#tryRange'); if(!r) return;
+      trySweeping=false; tryTouched=true; /* a real drag is the only thing that reveals the CTA */
       tryUpdate(parseFloat(r.value)||0);
+    });
+    /* Update my plan: confirm, then settle back to the plan */
+    sheet.addEventListener('click', function(e){
+      var cta=e.target.closest('#tryCta'); if(!cta) return;
+      if(cta.classList.contains('done')) return;
+      cta.classList.add('done');
+      cta.textContent='Plan updated \u2713';
+      if(navigator.vibrate) { try{ navigator.vibrate(12); }catch(_){} }
     });
     /* the ask row hands the question to Boldin AI on the AI tab */
     function askAI(){
