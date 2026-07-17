@@ -553,6 +553,19 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 .msx-cmp-row .bar i.you{ background:var(--green-cta); }
 .msx-cmp-row .v{ flex:none; font-size:14.5px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums; }
 .msx-cmp-cap{ font-size:13.5px; color:var(--text-tertiary); margin-top:2px; }
+/* the 3-block carousel: every card is a door; a chevron says so, and one card taps itself */
+#mtodayStats3 .mstat3, #mplanStats3 .mstat3{ position:relative; }
+#mtodayStats3 .mstat3::after, #mplanStats3 .mstat3::after{ content:''; position:absolute; top:11px; right:10px;
+  width:13px; height:13px; pointer-events:none; opacity:.8;
+  background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M9 6l6 6-6 6' stroke='%23A6ACB8' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+#mtodayStats3 .mstat3::before, #mplanStats3 .mstat3::before{ content:''; position:absolute; inset:-3px;
+  border-radius:17px; border:2.5px solid #FBBD04; opacity:0; pointer-events:none; }
+.mstat3.demo{ animation:mstat-demo .95s cubic-bezier(0.3,0.7,0.4,1) !important; }
+.mstat3.demo::before{ animation:mstat-ring 1.05s ease-out; }
+@keyframes mstat-demo{ 0%,100%{ transform:none; } 32%{ transform:scale(0.962); } 62%{ transform:scale(1.006); } }
+@keyframes mstat-ring{ 0%{ opacity:0; transform:scale(0.97); } 28%{ opacity:.95; } 100%{ opacity:0; transform:scale(1.04); } }
+@media (prefers-reduced-motion: reduce){ .mstat3.demo, .mstat3.demo::before{ animation:none !important; } }
+.mstat3-hint{ font-size:13.5px; color:var(--text-tertiary); margin:9px 2px 0; }
 /* the what-if slider: drag a new retirement date, see the ghost future */
 .msx-try-read{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin:4px 0 8px; }
 .msx-try-read b{ font:700 20px 'DM Sans',sans-serif; letter-spacing:-0.3px; color:var(--ink); font-variant-numeric:tabular-nums; }
@@ -1278,6 +1291,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     <div class="mstat3" data-msx="workincome" role="button" tabindex="0"><div class="lab">Work income</div><div class="fig">$12,300</div><div class="sub">per month</div></div>
     <div class="mstat3" data-msx="savingsopp" role="button" tabindex="0"><div class="lab">Save more</div><div class="fig">$3,450</div><div class="sub">every month</div></div>
   </div>
+  <div class="mstat3-hint">Tap any card. The full story is one touch away.</div>
 
   <div id="todayScore"></div>
   <div class="mplan-seclabel" style="margin:40px 2px -6px">My money</div>
@@ -1323,6 +1337,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
 
   <!-- 3 stat cards, like desktop, now under the portfolio card -->
   <div class="mplan-stats3" id="mplanStats3"></div>
+      <div class="mstat3-hint">Tap any card. The full story is one touch away.</div>
 
 
   <div class="mlist" id="mlistPlan"></div>
@@ -1699,6 +1714,17 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
   }
   /* the pill row glides in from the right and settles on the optical-balance
      offset (42px: H under P, a sliver of circle at the card edge) */
+  /* once per visit, the first carousel card taps itself so members know the doors open */
+  var DEMO_SEEN={};
+  function demoTap(id){
+    if(DEMO_SEEN[id] || reduce) return;
+    var c=document.querySelector('#'+id+' .mstat3'); if(!c) return;
+    DEMO_SEEN[id]=1;
+    setTimeout(function(){
+      c.classList.add('demo');
+      setTimeout(function(){ c.classList.remove('demo'); }, 1150);
+    }, 1550);
+  }
   function glidePills(el){
     var row = el && el.querySelector('.mps-pills'); if(!row || !row.clientWidth) return;
     var max=row.scrollWidth-row.clientWidth;
@@ -2112,6 +2138,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     if(t==='home') drawHome();
     if(t==='today'){
       buildPlanScore(document.getElementById('todayScore'));
+      demoTap('mtodayStats3');
     }
     if(t==='optimize' && !reduce){
       document.querySelectorAll('.mop-card').forEach(function(c,i){
@@ -2856,6 +2883,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       stats3.style.gridTemplateColumns='repeat('+L.stats.length+', 1fr)';
       stats3.innerHTML=L.stats.map(function(s){ return '<div class="mstat3"'+(s[3]?' data-msx="'+s[3]+'" role="button" tabindex="0"':'')+'><div class="lab">'+s[0]+'</div><div class="fig">'+s[1]+'</div><div class="sub">'+s[2]+'</div></div>'; }).join('');
       stagger([].slice.call(stats3.children));
+      demoTap('mplanStats3');
     }
     function renderChips(L){
       chipsEl.style.gridTemplateColumns='repeat('+L.chips.length+', 1fr)';
