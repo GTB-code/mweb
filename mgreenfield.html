@@ -3492,6 +3492,40 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       var el=document.getElementById('tryRange');
       if(el) el.style.setProperty('--p', (((v-cfg.min)/(cfg.max-cfg.min))*100).toFixed(1)+'%');
     }
+    /* on open, the slider starts on a nearby scenario and glides home to the plan,
+       collapsing the ghost into the green line. The motion says: this moves. */
+    function trySweepStart(cfg){
+      var span=cfg.max-cfg.min;
+      var dir = (cfg.max-cfg.def >= cfg.def-cfg.min) ? 1 : -1;
+      var s = cfg.def + dir*span*0.45;
+      s = Math.max(cfg.min, Math.min(cfg.max, s));
+      return Math.round(s/cfg.step)*cfg.step;
+    }
+    function trySweep(){
+      var cfg=TRYCFG[curKey]; var r=document.getElementById('tryRange');
+      if(!cfg || !r) return;
+      var tk=(r.__swTok||0)+1; r.__swTok=tk;
+      var rest=cfg.def, start=parseFloat(r.value);
+      if(start===rest) return;
+      var stop=false;
+      r.addEventListener('pointerdown', function(){ stop=true; }, {once:true});
+      setTimeout(function(){
+        if(stop || r.__swTok!==tk || !document.body.contains(r)) return;
+        var t0=null, D=1250;
+        function ease(p){ return 1-Math.pow(1-p,3); }
+        function frame(ts){
+          if(stop || r.__swTok!==tk || !document.body.contains(r)) return;
+          if(!t0) t0=ts;
+          var p=Math.min(1,(ts-t0)/D);
+          var v=start+(rest-start)*ease(p);
+          v=Math.round(v/cfg.step)*cfg.step;
+          r.value=v; tryUpdate(v);
+          if(p<1) requestAnimationFrame(frame);
+          else { r.value=rest; tryUpdate(rest); }
+        }
+        requestAnimationFrame(frame);
+      }, 1150);
+    }
     function drawIn(fast){
       if(reduce) return;
       var line=sheet.querySelector('.msx-line'), area=sheet.querySelector('.msx-area');
@@ -3509,7 +3543,11 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       document.body.style.overflow='hidden';
       drawIn(false);
       if(d.try){
-        tryUpdate(TRYCFG[curKey].def);
+        var tcfg0=TRYCFG[curKey];
+        var v0 = reduce ? tcfg0.def : trySweepStart(tcfg0);
+        var rr=document.getElementById('tryRange'); if(rr) rr.value=v0;
+        tryUpdate(v0);
+        if(!reduce) trySweep();
         if(!reduce){
           var tb=document.getElementById('tryBase');
           if(tb && tb.animate){
