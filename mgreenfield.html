@@ -2934,7 +2934,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         decide:{t:'Claim at 67, or hold to 70', s:'The 2035 start at <b>$3,940</b> is the plan. Claiming early moves the whole right half of this timeline down.'},
         step:{t:'Stress-test the timeline against a 2028 bear', act:'plan'},
         ask:'Ask Boldin AI about your timeline&#8230;' },
-      dti:{ label:'Debt-to-income', fig:'15%',
+      dti:{ label:'Debt-to-income', fig:'15%', try:true,
         pts:[16.2,16.1,16.0,15.9,15.8,15.7,15.6,15.5,15.4,15.3,15.2,15.1], fmt:'pct', proj:[15,15,16,21,20,20,19,0,0,0,0,0,0,0],
         sub:'Of every income dollar, 15 cents services debt. All of it the mortgage.',
         note:'Lenders start worrying at 36%. You are at 15 and drifting lower every month.',
@@ -2942,7 +2942,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         risks:{t:'The ratio changes shape in 2028', s:'When paychecks stop, the same <b>$1,860</b> payment is measured against portfolio income instead of salary.'},
         decide:{t:'Enter retirement with it, or without', s:'Clearing the mortgage before 2028 trades <b>$333K</b> of assets for a payment-free start. The score can price both.'},
         step:{t:'Model a payoff before the date', act:'plan'} },
-      cashflow:{ label:'Cashflow', fig:'+$3,450',
+      cashflow:{ label:'Cashflow', fig:'+$3,450', try:true,
         pts:[3310,3350,3305,3380,3360,3410,3390,3430,3450,3450,3450,3450], fmt:'money', proj:[3450,3490,3520,-5400,-5250,-5100,-4950,-950,-900,-880,-860,-840,-820,-800],
         sub:'$12,300 in, $8,850 out. The plan runs green every month.',
         note:'Positive all year. In 2028 the sign flips by design, and the portfolio takes over the paying.',
@@ -2950,7 +2950,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         risks:{t:'The December effect', s:'Holidays and property taxes land in the same month. One planned month of red is fine; a surprise one is not.'},
         decide:{t:'How much buffer is enough', s:'<b>$107K</b> of cash is over two years of expenses. Some of that comfort could be compounding instead.'},
         step:{t:'Open Money Flows', act:'plan'} },
-      alloc:{ label:'Asset allocation', fig:'72 / 28',
+      alloc:{ label:'Asset allocation', fig:'72 / 28', try:true,
         pts:[70,70.2,70.5,70.9,70.7,71.1,71.3,71.5,71.6,71.8,71.9,72], fmt:'pct', proj:[72,70,64,60,60,59,58,57,56,55,55,54,54,53],
         sub:'Stocks to bonds, across every account. The target is 70 / 30.',
         note:'Markets did the drifting, not you. 2.4% above target is one rebalance away from fixed.',
@@ -2958,7 +2958,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         risks:{t:'Drift compounds quietly', s:'One more good year pushes you to <b>74%</b> stocks right as retirement starts. That is risk you never chose.'},
         decide:{t:'Sell winners, or steer new money', s:'Rebalance today, or point new savings at bonds and let the mix walk back. Both work; the timing differs.'},
         step:{t:'Run the rebalance with Boldin AI', act:'optimize'} },
-      dta:{ label:'Debt to assets', fig:'23%',
+      dta:{ label:'Debt to assets', fig:'23%', try:true,
         pts:[26.4,26.1,25.8,25.5,25.2,24.9,24.6,24.2,23.9,23.6,23.3,23.0], fmt:'pct', proj:[23,21,19.5,18,16,14,11,8,5,2,0,0,0,0],
         sub:'For every dollar you own, 23 cents is owed. Nearly all of it the 3.1% mortgage.',
         note:'Falling about a point a year as the mortgage amortizes and the assets grow.',
@@ -2973,7 +2973,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         risks:{t:'Sequence risk at the handoff', s:'A bear market in the first two retired years matters more than any other stretch. The date sets the exposure.'},
         decide:{t:'A date, or a number', s:'Retire when the calendar says <b>Dec 2028</b>, or when the portfolio says ready. Pick which trigger rules.'},
         step:{t:'Test earlier dates against the score', act:'plan'}, ask:'Ask Boldin AI about your date&#8230;' },
-      workincome:{ label:'Work income', fig:'$12,300',
+      workincome:{ label:'Work income', fig:'$12,300', try:true,
         pts:[12215,12215,12215,12223,12215,12234,12215,12215,12300,12300,12300,12300], fmt:'money',
         sub:'What working still brings in each month, before taxes.',
         note:'Every month of this funds life without touching the portfolio. That is the whole bridge to 2028.',
@@ -2981,7 +2981,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         risks:{t:'One employer, most of the income', s:'<b>72%</b> is Marshall\u2019s paycheck. A 2027 layoff moves the retirement date by roughly 19 months.'},
         decide:{t:'When Lily scales back', s:'Her <b>$1,385</b> a month shapes the bridge years. When it stops is a plan input, not a surprise.'},
         step:{t:'Model income ending on different dates', act:'plan'}, ask:'Ask Boldin AI about your income&#8230;' },
-      savingsopp:{ label:'Savings opportunity', fig:'$3,450',
+      savingsopp:{ label:'Savings opportunity', fig:'$3,450', try:true,
         pts:[3310,3350,3305,3380,3360,3410,3390,3430,3450,3450,3450,3450], fmt:'money',
         sub:'The monthly surplus you could route to retirement savings before 2028.',
         note:'About 29 paychecks left. Routed fully, that is roughly $100K more at the retirement starting line.',
@@ -3039,7 +3039,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         risks:{t:'The survivor files single', s:'One day one of you files alone, with narrower brackets and the same RMDs. It is the quiet reason to convert early.'},
         decide:{t:'Whose accounts convert first', s:'Converting the older spouse\u2019s IRA first softens the survivor\u2019s math. The order is a choice, not an accident.'},
         step:{t:'Review the survivor scenario', act:'plan'} },
-      ltr:{ label:'Lifetime tax rate', fig:'23.1%',
+      ltr:{ label:'Lifetime tax rate', fig:'23.1%', try:true,
         pts:[25.3,25.1,24.9,24.6,24.4,24.2,24.0,23.8,23.6,23.4,23.2,23.1], fmt:'pct', proj:[23.1,23.0,22.8,22.6,22.5,22.4,22.3,22.2,22.1,22.0,22.0,21.9,21.9,21.9],
         sub:'The average rate across every dollar from today to age 99.',
         note:'Higher than this year\u2019s 19.4% because the RMD years are in it. Lower than it was, because the plan is.',
@@ -3055,7 +3055,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         risks:{t:'One number, many laws', s:'This assumes today\u2019s brackets. Sunsets and new law move it; the plan re-runs it monthly.'},
         decide:{t:'Optimize household, or lifetime', s:'Some moves cut your taxes but raise the survivor\u2019s. The plan prices both before it recommends.'},
         step:{t:'See the year-by-year tax line', act:'plan'} },
-      nw:{ label:'Net worth', fig:'$1.14M',
+      nw:{ label:'Net worth', fig:'$1.14M', try:true,
         pts:[1096,1099,1103,1101,1106,1112,1118,1126,1132,1134,1137,1140], fmt:'moneyK', proj:[1140,1250,1380,1520,1670,1830,2000,2160,2320,2450,2540,2580,2560,2490],
         sub:'Everything you own, minus the $333K left on the house.',
         note:'Up $8,200 since January, and the spring dip already healed. Boring is winning.',
@@ -3075,7 +3075,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         risks:{t:'Sequence risk in the first years', s:'A downturn right at retirement matters more than the same drop later. The first five years carry the most weight.'},
         decide:{t:'Glide path into retirement', s:'Trimming equities from <b>72% to 60%</b> by 2028 trades a little growth for a smoother first decade.'},
         step:{t:'Review the allocation in your plan', act:'plan'} },
-      cx_savingsrate:{ label:'Savings rate', fig:'28%',
+      cx_savingsrate:{ label:'Savings rate', fig:'28%', try:true,
         pts:[24,24,25,25,24,26,26,27,27,28,28,28], fmt:'pct', proj:[28,29,30,0,0,0,0,0,0,0,0,0,0,0],
         sub:'Of every dollar that comes in, 28 cents is saved. Well above the 15% rule of thumb.',
         note:'A steady climb. The March bump is Lily\u2019s extra shift flowing straight to savings.',
@@ -3323,6 +3323,107 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
             stats:'lifetime taxes $'+total+'K &middot; saved $'+Math.max(0,709-total)+'K',
             chip: v===17800?['your plan','']:(diff>=0?['\u2212$'+diff+'K of tax','up']:['+$'+Math.abs(diff)+'K of tax','dn']),
             k: (total/648 - 1), kFlat:true, spread:Math.min(1, Math.abs(v-17800)/12000 + 0.25), on:v!==17800 };
+        } },
+      nw:{ secLabel:'Try a savings level', min:0, max:5000, step:50, def:3450,
+        left:'$0', right:'$5,000', cap:'Slide what you save each month. The dotted line is that future.',
+        base:[1140,1250,1380,1520,1670,1830,2000,2160,2320,2450,2540,2580,2560,2490], ymax:3400,
+        calc:function(v){
+          var d=v-3450;
+          var k=d*0.00011;
+          var peak=(2.58*(1+k)).toFixed(2);
+          var funded = d>=0 ? 99 : Math.round(99 + d/1000*1.8);
+          return { big:'$'+v.toLocaleString('en-US')+' /mo',
+            stats:'peak $'+peak+'M &middot; funded to '+funded,
+            chip: d===0?['your surplus today','']:(d>0?['+$'+d.toLocaleString('en-US')+' /mo saved','up']:['\u2212$'+Math.abs(d).toLocaleString('en-US')+' /mo saved','dn']),
+            k:k, spread:Math.min(1, Math.abs(d)/2200 + 0.25), on:d!==0 };
+        } },
+      alloc:{ secLabel:'Try a different mix', min:40, max:90, step:1, def:72,
+        left:'40 / 60', right:'90 / 10', cap:'Slide the stock share. The fan is the risk you take on.',
+        base:[566,640,720,800,930,1080,1240,1420,1600,1780,1950,2090,2160,2100], ymax:2900,
+        calc:function(v){
+          var d=v-72;
+          var k=d*0.0055;
+          var peak=(2.16*(1+k)).toFixed(2);
+          var succ=Math.round(87 - Math.max(0,d)*0.3 - Math.max(0,65-v)*0.35);
+          return { big:v+' / '+(100-v),
+            stats:'peak $'+peak+'M &middot; '+succ+'% success',
+            chip: d===0?['your mix today','']:(d>0?['+'+d+'% in stocks','dn']:['\u2212'+Math.abs(d)+'% in stocks','up']),
+            k:k, spread:Math.min(1, 0.12 + v/95), on:d!==0 };
+        } },
+      dta:{ secLabel:'Try extra payments', min:0, max:2000, step:50, def:0,
+        left:'$0', right:'$2,000', cap:'Slide extra toward the 3.1% mortgage. The dotted line is that future.',
+        base:[23,21,19.5,18,16,14,11,8,5,2,0,0,0,0], ymax:28, ramp:'flat',
+        calc:function(v){
+          var payoff=2046 - Math.round((v/2000)*7);
+          var saved=Math.round((v/2000)*48);
+          return { big:'+$'+v.toLocaleString('en-US')+' /mo',
+            stats:'paid off '+payoff+' &middot; $'+saved+'K interest saved',
+            chip: v===0?['your plan','']:[(2046-payoff)+' years sooner','up'],
+            k:-(v/2000)*0.5, spread:Math.min(1, v/2600 + 0.2), on:v!==0 };
+        } },
+      cx_savingsrate:{ secLabel:'Try a savings rate', min:10, max:40, step:1, def:28,
+        left:'10%', right:'40%', cap:'Slide the share of income you save. The dotted line is that future.',
+        base:[28,29,30,0,0,0,0,0,0,0,0,0,0,0], ymax:46, ramp:'flat',
+        calc:function(v){
+          var d=v-28;
+          var mo=Math.round(v/100*12300);
+          var by28=Math.round(d/100*12300*29/1000);
+          return { big:v+'%',
+            stats:'$'+mo.toLocaleString('en-US')+' a month &middot; '+(d>=0?'+':'\u2212')+'$'+Math.abs(by28)+'K by 2028',
+            chip: d===0?['your rate today','']:(d>0?['+$'+Math.round(d/100*12300).toLocaleString('en-US')+' /mo','up']:['\u2212$'+Math.abs(Math.round(d/100*12300)).toLocaleString('en-US')+' /mo','dn']),
+            k:d/28, spread:Math.min(1, Math.abs(d)/22 + 0.2), on:d!==0 };
+        } },
+      dti:{ secLabel:'Try extra payments', min:0, max:2000, step:50, def:0,
+        left:'$0', right:'$2,000', cap:'Slide extra toward the debt. The dotted line is that future.',
+        base:[15,15,16,21,20,20,19,0,0,0,0,0,0,0], ymax:26, ramp:'flat',
+        calc:function(v){
+          var payoff=2046 - Math.round((v/2000)*7);
+          var peak=Math.round(21 - (v/2000)*6);
+          return { big:'+$'+v.toLocaleString('en-US')+' /mo',
+            stats:'ratio peaks at '+peak+'% &middot; debt-free '+payoff,
+            chip: v===0?['your plan','']:[(2046-payoff)+' years sooner','up'],
+            k:-(v/2000)*0.45, spread:Math.min(1, v/2600 + 0.2), on:v!==0 };
+        } },
+      cashflow:{ secLabel:'Try a spending level', min:7400, max:9800, step:50, def:8850,
+        left:'$7,400', right:'$9,800', cap:'Slide your monthly spending. The dotted line is that future.',
+        base:[3450,3490,3520,-5400,-5250,-5100,-4950,-950,-900,-880,-860,-840,-820,-800], ymin:-6800, ymax:4600, mode:'add',
+        calc:function(v){
+          var d=v-8850;
+          return { big:'$'+v.toLocaleString('en-US'),
+            stats:'surplus $'+(3450-d).toLocaleString('en-US')+' &middot; bridge \u2212$'+(5400+d).toLocaleString('en-US')+' /mo',
+            chip: d===0?['your spending','']:(d<0?['+$'+Math.abs(d).toLocaleString('en-US')+' /mo of green','up']:['\u2212$'+d.toLocaleString('en-US')+' /mo of green','dn']),
+            k:-d, spread:Math.min(1, Math.abs(d)/1500 + 0.25), on:d!==0 };
+        } },
+      ltr:{ secLabel:'Try a conversion level', min:0, max:30000, step:100, def:17800,
+        left:'$0', right:'$30K', cap:'Slide the yearly Roth conversion. The dotted line is that future.',
+        base:[25.3,25.1,24.9,24.6,24.4,24.2,24.0,23.8,23.6,23.4,23.2,23.1,23.1,23.1].slice(0,14), ymin:19, ymax:27, ramp:'flat',
+        calc:function(v){
+          var rate = v<=17800 ? 23.1 + (17800-v)/17800*2.2 : Math.max(21.6, 23.1 - (v-17800)/12200*0.5);
+          var tax=Math.round(648*rate/23.1);
+          return { big:'$'+v.toLocaleString('en-US')+' /yr',
+            stats:'lifetime rate '+rate.toFixed(1)+'% &middot; $'+tax+'K of tax',
+            chip: v===17800?['your plan','']:(rate<23.1?['\u2212'+(23.1-rate).toFixed(1)+' pts','up']:['+'+(rate-23.1).toFixed(1)+' pts','dn']),
+            k:(rate/23.1 - 1), spread:Math.min(1, Math.abs(v-17800)/16000 + 0.2), on:v!==17800 };
+        } },
+      workincome:{ secLabel:'Try Lily\u2019s income', min:0, max:2000, step:25, def:1385,
+        left:'$0', right:'$2,000', cap:'Slide Lily\u2019s part-time income. The dotted line is that future.',
+        base:[12215,12215,12215,12223,12215,12234,12215,12215,12300,12300,12300,12300,12300,12300].slice(0,12), ymin:9000, ymax:14000, mode:'add',
+        calc:function(v){
+          var d=v-1385;
+          return { big:'$'+(12300+d).toLocaleString('en-US'),
+            stats:'Lily $'+v.toLocaleString('en-US')+' &middot; surplus $'+(3450+d).toLocaleString('en-US'),
+            chip: d===0?['Lily today','']:(d>0?['+$'+d.toLocaleString('en-US')+' /mo','up']:['\u2212$'+Math.abs(d).toLocaleString('en-US')+' /mo','dn']),
+            k:d, spread:Math.min(1, Math.abs(d)/1500 + 0.22), on:d!==0 };
+        } },
+      savingsopp:{ secLabel:'Try automating it', min:0, max:3450, step:50, def:0,
+        left:'$0', right:'$3,450', cap:'Slide what moves to savings on payday. The dotted line is what stays idle.',
+        base:[3310,3350,3305,3380,3360,3410,3390,3430,3450,3450,3450,3450], ymin:0, ymax:4200, mode:'add',
+        calc:function(v){
+          var by28=Math.round(v*29/1000);
+          return { big:'$'+v.toLocaleString('en-US')+' on payday',
+            stats:'+$'+by28+'K by 2028 &middot; $'+(3450-v).toLocaleString('en-US')+' left idle',
+            chip: v===0?['nothing automated','dn']:['+$'+by28+'K by 2028','up'],
+            k:-v, spread:Math.min(1, v/3000 + 0.2), on:v!==0 };
         } }
     };
     function tryPt(cfg,i,v){ var W=356,padL=8,padR=10,padT=14,padB=22,H=168;
@@ -3337,12 +3438,16 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       var cfg=TRYCFG[curKey]; if(!cfg) return;
       var r=cfg.calc(v);
       var B=cfg.base, n=B.length, last=n-1;
+      var span=cfg.ymax-(cfg.ymin||0);
       var bpts=B.map(function(x,i){ return tryPt(cfg,i,x); });
-      var sc=B.map(function(x,i){ var t=cfg.kFlat ? Math.min(1,(i/last)*1.6) : (i/last);
-        return Math.max(cfg.ymax*0.03, x*(1+r.k*t)); });
+      var sc=B.map(function(x,i){
+        var t = cfg.ramp==='flat' ? 1 : (cfg.kFlat ? Math.min(1,(i/last)*1.6) : (i/last));
+        if(cfg.mode==='add') return x + r.k*t;
+        return Math.max((cfg.ymin||0)+span*0.03, x*(1+r.k*t)); });
       var gpts=sc.map(function(x,i){ return tryPt(cfg,i,x); });
-      var up=sc.map(function(x,i){ return tryPt(cfg,i, x*(1 + 0.15*(i/last)*r.spread)); });
-      var lo=sc.map(function(x,i){ return tryPt(cfg,i, x*(1 - 0.15*(i/last)*r.spread)); });
+      function fanW(x,i){ return (cfg.mode==='add' ? span*0.055 : Math.abs(x)*0.15)*(i/last)*r.spread; }
+      var up=sc.map(function(x,i){ return tryPt(cfg,i, x+fanW(x,i)); });
+      var lo=sc.map(function(x,i){ return tryPt(cfg,i, x-fanW(x,i)); });
       document.getElementById('tryBase').setAttribute('d', tryPath(bpts));
       document.getElementById('tryGhost').setAttribute('d', tryPath(gpts));
       document.getElementById('tryFan').setAttribute('d', tryPath(up)+' '+lo.slice().reverse().map(function(p){ return 'L'+p[0].toFixed(1)+' '+p[1].toFixed(1); }).join(' ')+' Z');
