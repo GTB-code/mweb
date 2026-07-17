@@ -430,7 +430,7 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 /* the featured move */
 .mop-card.mop-hero{ display:block; text-align:left; border:0; background:#F2FBF7; border-radius:20px; padding:24px 19px 22px; }
 .mop-card.mop-hero:active{ background:#E7F7F0; transform:scale(.99); }
-.mop-hero-top{ display:flex; flex-direction:column; align-items:flex-start; gap:3px; }
+.mop-hero-top{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; }
 .mop-hero-t{ display:inline-flex; align-items:center; gap:8px; font-size:21px; font-weight:700; color:var(--ink); }
 .mop-hero-val{ font:700 21px 'DM Sans',sans-serif; letter-spacing:-0.3px; color:var(--green-cta); font-variant-numeric:tabular-nums; white-space:nowrap; }
 .mop-hero-val i{ font-style:normal; font:500 17px 'DM Sans',sans-serif; color:var(--text-secondary); margin-left:4px; letter-spacing:0; }
@@ -518,7 +518,7 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 .mstat3 .sub .up{ color:var(--green-cta); font-weight:600; }
 .mstat3 .sub .dn{ color:var(--text-tertiary); font-weight:600; }
 .mstat3 .sub .since{ display:block; font-size:11px; color:var(--text-tertiary); font-weight:500; margin-top:2px; }
-#mtodayStats3 .mstat3 .lab, #mplanStats3 .mstat3 .lab{ white-space:normal; line-height:1.25; min-height:2.5em; }
+#mtodayStats3 .mstat3 .lab, #mplanStats3 .mstat3 .lab{ white-space:normal; line-height:1.25; }
 /* What's already yours: the desktop net-worth block mosaic, restacked for mobile */
 .myours{ border-radius:14px; overflow:hidden; cursor:pointer; transition:transform .15s ease; }
 .myours:active{ transform:scale(.99); }
@@ -536,6 +536,11 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 .msx-cmp-row .bar i.you{ background:var(--green-cta); }
 .msx-cmp-row .v{ flex:none; font-size:14.5px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums; }
 .msx-cmp-cap{ font-size:13.5px; color:var(--text-tertiary); margin-top:2px; }
+/* the chart range filter */
+.msx-fseg{ display:flex; gap:7px; margin:16px 0 0; }
+.msx-fseg button{ flex:1; height:38px; border-radius:999px; border:1px solid var(--hairline); background:#FFFFFF;
+  font-family:inherit; font-size:14.5px; font-weight:600; color:var(--text-secondary); cursor:pointer; }
+.msx-fseg button.on{ background:var(--mint); border-color:transparent; color:var(--green-cta); }
 /* the ultimate timeline */
 .msx-tl{ position:relative; padding-top:2px; }
 .msx-tl::before{ content:''; position:absolute; left:5.5px; top:8px; bottom:14px; width:1.5px; background:#EAECEF; }
@@ -1232,7 +1237,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
   <div class="mplan-stats3" id="mtodayStats3" style="margin-top:16px">
     <div class="mstat3" data-msx="toretire" role="button" tabindex="0"><div class="lab">Years to retirement</div><div class="fig">2.4</div><div class="sub">Dec 2028</div></div>
     <div class="mstat3" data-msx="workincome" role="button" tabindex="0"><div class="lab">Work income</div><div class="fig">$12,300</div><div class="sub">per month</div></div>
-    <div class="mstat3" data-msx="savingsopp" role="button" tabindex="0"><div class="lab">Savings opportunity</div><div class="fig">$3,450</div><div class="sub">every month</div></div>
+    <div class="mstat3" data-msx="savingsopp" role="button" tabindex="0"><div class="lab">Opportunity</div><div class="fig">$3,450</div><div class="sub">every month</div></div>
   </div>
 
   <div id="todayScore"></div>
@@ -1306,7 +1311,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
   <div class="mop-cards" id="mopCards">
     <div class="mplan-seclabel" style="margin:14px 2px 0">Your next best move</div>
     <button class="mop-card mop-hero" type="button" data-op="ss">
-      <span class="mop-hero-top"><span class="mop-hero-t">Social Security</span><span class="mop-hero-val">+$760<i>/mo for life</i></span></span>
+      <span class="mop-hero-top"><span class="mop-hero-t">Social Security</span><span class="mop-hero-val">+$760<i>/mo</i></span></span>
       <span class="mop-hero-s">The one guaranteed 8% raise. Waiting to 70 lifts every check.</span>
       <span class="mop-hero-cta"><span class="mop-go">Claim it right <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></span>
     </button>
@@ -2780,7 +2785,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       retirement:{
         hl:'<em class="mhl-gold">$1.14M</em> working toward your <em class="mhl-em">retirement.</em>',
         dd:'Retirement income',
-        stats:[['Chance of success','87%','870 in 1,000','success'],['Safe spending target','$8,400','per month','safespend'],['Vision board','5 goals','Dreams, priced','vision']],
+        stats:[['Chance of success','87%','870 in 1,000','success'],['Safe spending','$8,400','per month','safespend'],['Vision board','5 goals','Dreams, priced','vision']],
         chips:[['SS at 70','$3,940','cx_ss'],['Withdrawals','$3,100','cx_withdrawals']],
         secKeys:['assets','debts','income','home','expenses','flows','withdrawal','taxplan','estate','rates'], secHeading:'Future money'
       },
@@ -2887,7 +2892,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         step:{t:'Stress-test the timeline against a 2028 bear', act:'plan'},
         ask:'Ask Boldin AI about your timeline&#8230;' },
       dti:{ label:'Debt-to-income', fig:'15%',
-        pts:[16.2,16.1,16.0,15.9,15.8,15.7,15.6,15.5,15.4,15.3,15.2,15.1], fmt:'pct',
+        pts:[16.2,16.1,16.0,15.9,15.8,15.7,15.6,15.5,15.4,15.3,15.2,15.1], fmt:'pct', proj:[15,15,16,21,20,20,19,0,0,0,0,0,0,0],
         sub:'Of every income dollar, 15 cents services debt. All of it the mortgage.',
         note:'Lenders start worrying at 36%. You are at 15 and drifting lower every month.',
         opps:{t:'Headroom, if ever needed', g:'optionality', s:'At <b>15%</b> you could bridge a surprise with a HELOC without straining the plan. An option to hold, not use.'},
@@ -2895,7 +2900,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         decide:{t:'Enter retirement with it, or without', s:'Clearing the mortgage before 2028 trades <b>$333K</b> of assets for a payment-free start. The score can price both.'},
         step:{t:'Model a payoff before the date', act:'plan'} },
       cashflow:{ label:'Cashflow', fig:'+$3,450',
-        pts:[3310,3350,3305,3380,3360,3410,3390,3430,3450,3450,3450,3450], fmt:'money',
+        pts:[3310,3350,3305,3380,3360,3410,3390,3430,3450,3450,3450,3450], fmt:'money', proj:[3450,3490,3520,-5400,-5250,-5100,-4950,-950,-900,-880,-860,-840,-820,-800],
         sub:'$12,300 in, $8,850 out. The plan runs green every month.',
         note:'Positive all year. In 2028 the sign flips by design, and the portfolio takes over the paying.',
         opps:{t:'Name every dollar of the gap', g:'+$100K', s:'Unassigned surplus leaks. A standing transfer of <b>$3,450</b> on payday is worth about $100K by retirement.'},
@@ -2903,7 +2908,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         decide:{t:'How much buffer is enough', s:'<b>$107K</b> of cash is over two years of expenses. Some of that comfort could be compounding instead.'},
         step:{t:'Open Money Flows', act:'plan'} },
       alloc:{ label:'Asset allocation', fig:'72 / 28',
-        pts:[70,70.2,70.5,70.9,70.7,71.1,71.3,71.5,71.6,71.8,71.9,72], fmt:'pct',
+        pts:[70,70.2,70.5,70.9,70.7,71.1,71.3,71.5,71.6,71.8,71.9,72], fmt:'pct', proj:[72,70,64,60,60,59,58,57,56,55,55,54,54,53],
         sub:'Stocks to bonds, across every account. The target is 70 / 30.',
         note:'Markets did the drifting, not you. 2.4% above target is one rebalance away from fixed.',
         opps:{t:'One rebalance, one glide path', g:'+$39K', s:'Resetting to <b>70 / 30</b> now and gliding to <b>60 / 40</b> by 2028 is worth about $39K of risk-adjusted value.'},
@@ -2911,7 +2916,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         decide:{t:'Sell winners, or steer new money', s:'Rebalance today, or point new savings at bonds and let the mix walk back. Both work; the timing differs.'},
         step:{t:'Run the rebalance with Boldin AI', act:'optimize'} },
       dta:{ label:'Debt to assets', fig:'23%',
-        pts:[26.4,26.1,25.8,25.5,25.2,24.9,24.6,24.2,23.9,23.6,23.3,23.0], fmt:'pct',
+        pts:[26.4,26.1,25.8,25.5,25.2,24.9,24.6,24.2,23.9,23.6,23.3,23.0], fmt:'pct', proj:[23,21,19.5,18,16,14,11,8,5,2,0,0,0,0],
         sub:'For every dollar you own, 23 cents is owed. Nearly all of it the 3.1% mortgage.',
         note:'Falling about a point a year as the mortgage amortizes and the assets grow.',
         opps:{t:'Let the 3.1% ride', g:'+2.9% spread', s:'Debt this cheap loses to a portfolio earning <b>6%</b>. Left alone, the ratio retires itself by 2046.'},
@@ -2951,7 +2956,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         decide:{t:'Brokerage, Roth, or the mortgage', s:'Each surplus dollar can compound at <b>6%</b>, grow tax-free, or retire <b>3.1%</b> debt. The order matters.'},
         step:{t:'Split the surplus in Money Flows', act:'plan'} },
       success:{ label:'Chance of success', fig:'87%',
-        pts:[82,82,83,83,84,84,85,85,86,86,87,87], fmt:'pct',
+        pts:[82,82,83,83,84,84,85,85,86,86,87,87], fmt:'pct', proj:[87,87,88,88,89,90,91,92,93,94,95,96,97,98],
         sub:'Of 1,000 simulated futures, 870 end with money left over.',
         note:'Up five points this year. Every linked account and steady month nudges it higher.',
         opps:{t:'Delay Social Security to 70', g:'+4 pts', s:'Holding the claim to 70 moves success from <b>87%</b> toward the low 90s. One decision, no new savings.'},
@@ -2959,7 +2964,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         decide:{t:'What counts as safe enough', s:'<b>87%</b> is comfortably green. Chasing 99% costs lifestyle today for tail risk that flexibility already covers.'},
         step:{t:'Stress-test a 2028 bear market', act:'plan'} },
       safespend:{ label:'Safe spending target', fig:'$8,400',
-        pts:[8150,8180,8210,8230,8260,8290,8310,8330,8350,8370,8390,8400], fmt:'money',
+        pts:[8150,8180,8210,8230,8260,8290,8310,8330,8350,8370,8390,8400], fmt:'money', proj:[8400,8460,8520,8600,8700,8800,8900,9000,9100,9200,9300,9400,9500,9600],
         sub:'The monthly spend the plan can hold to 99, in 87% of futures.',
         note:'You live at $8,850 today; guardrails open up once Social Security starts. The gap is margin.',
         opps:{t:'A flexible ceiling beats a fixed one', g:'+$300 / mo', s:'Agreeing to trim <b>10%</b> in down years lets the good years spend about <b>$300</b> more a month.'},
@@ -2993,7 +2998,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         decide:{t:'Whose accounts convert first', s:'Converting the older spouse\u2019s IRA first softens the survivor\u2019s math. The order is a choice, not an accident.'},
         step:{t:'Review the survivor scenario', act:'plan'} },
       ltr:{ label:'Lifetime tax rate', fig:'23.1%',
-        pts:[25.3,25.1,24.9,24.6,24.4,24.2,24.0,23.8,23.6,23.4,23.2,23.1], fmt:'pct',
+        pts:[25.3,25.1,24.9,24.6,24.4,24.2,24.0,23.8,23.6,23.4,23.2,23.1], fmt:'pct', proj:[23.1,23.0,22.8,22.6,22.5,22.4,22.3,22.2,22.1,22.0,22.0,21.9,21.9,21.9],
         sub:'The average rate across every dollar from today to age 99.',
         note:'Higher than this year\u2019s 19.4% because the RMD years are in it. Lower than it was, because the plan is.',
         opps:{t:'Every point is real money', g:'&minus;2.2 pts', s:'The conversion plan already cut the lifetime rate by <b>2.2 points</b>. Withdrawal order can shave more.'},
@@ -3001,7 +3006,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         decide:{t:'Smooth it, or ride the spikes', s:'A flat rate is not the goal. Paying <b>12%</b> on purpose now to avoid <b>24%</b> later is.'},
         step:{t:'See the rate, year by year', act:'plan'} },
       lifetax:{ label:'Lifetime taxes paid', fig:'$648K',
-        pts:[709,703,698,692,687,681,675,669,663,657,652,648], fmt:'moneyK',
+        pts:[709,703,698,692,687,681,675,669,663,657,652,648], fmt:'moneyK', proj:[18,38,58,78,95,115,145,185,245,325,425,520,595,648],
         sub:'Every tax dollar the plan expects you to pay, from today to 99.',
         note:'Down $61K since the conversion plan went in. If unchanged means if you change nothing more.',
         opps:{t:'Withdrawal order is a tax tool', g:'+$98K', s:'Taxable first, tax-deferred second, Roth last keeps you in the low brackets longer.'},
@@ -3009,7 +3014,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         decide:{t:'Optimize household, or lifetime', s:'Some moves cut your taxes but raise the survivor\u2019s. The plan prices both before it recommends.'},
         step:{t:'See the year-by-year tax line', act:'plan'} },
       nw:{ label:'Net worth', fig:'$1.14M',
-        pts:[1096,1099,1103,1101,1106,1112,1118,1126,1132,1134,1137,1140], fmt:'moneyK',
+        pts:[1096,1099,1103,1101,1106,1112,1118,1126,1132,1134,1137,1140], fmt:'moneyK', proj:[1140,1250,1380,1520,1670,1830,2000,2160,2320,2450,2540,2580,2560,2490],
         sub:'Everything you own, minus the $333K left on the house.',
         note:'Up $8,200 since January, and the spring dip already healed. Boring is winning.',
         comp:[['Home','$905K','#0D3F4A'],['Retirement','$310K','#1B6B5C'],['Brokerage','$150K','#04B477'],['Cash','$107K','#9BD9C1'],['Mortgage','&minus;$333K','#8B98A5']],
@@ -3029,7 +3034,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         decide:{t:'Glide path into retirement', s:'Trimming equities from <b>72% to 60%</b> by 2028 trades a little growth for a smoother first decade.'},
         step:{t:'Review the allocation in your plan', act:'plan'} },
       cx_savingsrate:{ label:'Savings rate', fig:'28%',
-        pts:[24,24,25,25,24,26,26,27,27,28,28,28], fmt:'pct',
+        pts:[24,24,25,25,24,26,26,27,27,28,28,28], fmt:'pct', proj:[28,29,30,0,0,0,0,0,0,0,0,0,0,0],
         sub:'Of every dollar that comes in, 28 cents is saved. Well above the 15% rule of thumb.',
         note:'A steady climb. The March bump is Lily\u2019s extra shift flowing straight to savings.',
         opps:{t:'Direct the next raise to savings', g:'+2 pts', s:'Banking Marshall\u2019s next raise instead of spending it lifts the rate toward <b>30%</b>.'},
@@ -3178,6 +3183,15 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     }
     function sec(label, it, numbered){ return '<div class="msx-sec"><div class="msx-sec-label">'+label+'</div>'+item(it,numbered)+'</div>'; }
     function build(d){
+      var r = arguments.length>1 && arguments[1] ? arguments[1] : (d.proj ? 'full' : 'yr');
+      var cd = d;
+      if(d.proj && r!=='yr'){
+        cd = Object.assign({}, d, r==='mid'
+          ? { pts:d.proj.slice(0,5), xlabels:['2026','2030','2035'] }
+          : { pts:d.proj, xlabels:['2026','2045','2064'] });
+      }
+      var fsegH = d.proj ? '<div class="msx-fseg">'+[['yr','This year'],['mid','To 2035'],['full','To age 99']].map(function(o){
+        return '<button type="button" data-r="'+o[0]+'"'+(o[0]===r?' class="on"':'')+'>'+o[1]+'</button>'; }).join('')+'</div>' : '';
       var compH = d.comp ? '<div class="msx-sec"><div class="msx-sec-label">'+(d.compLabel||'What it is made of')+'</div><div class="msx-comp">'+
         d.comp.map(function(c){ return '<div class="msx-comp-row"><i style="background:'+c[2]+'"></i><span class="l">'+c[0]+'</span><span class="v">'+c[1]+'</span></div>'; }).join('')+'</div></div>' : '';
       var cmpH = d.compare ? '<div class="msx-sec"><div class="msx-sec-label">How you compare</div>'+
@@ -3190,7 +3204,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       return '<div class="msx-grip"></div>'+
         '<div class="msx-head"><div><div class="msx-title">'+d.label+'</div><div class="msx-fig">'+d.fig+'</div><div class="msx-sub">'+d.sub+'</div></div>'+
         '<button class="msx-x" aria-label="Close" data-msx-close><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>'+
-        chart(d)+'<div class="msx-note">'+d.note+'</div>'+
+        fsegH+chart(cd)+'<div class="msx-note">'+d.note+'</div>'+
         compH+cmpH+tlH+
         sec('Top opportunities', d.opps, false)+
         sec('Key risks', d.risks, false)+
@@ -3199,18 +3213,22 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         '<span class="msx-learn" data-toast="Learn more lands next in the mobile build">Learn more <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>'+askH;
     }
     var modal=document.getElementById('msx'), sheet=document.getElementById('msxSheet'), scrim=document.getElementById('msxScrim');
+    var curKey=null;
+    function drawIn(fast){
+      if(reduce) return;
+      var line=sheet.querySelector('.msx-line'), area=sheet.querySelector('.msx-area');
+      if(line && line.animate){ line.style.strokeDasharray='1';
+        line.animate([{strokeDashoffset:1},{strokeDashoffset:0}],{duration:fast?550:800,delay:fast?40:220,easing:'cubic-bezier(0.22,1,0.36,1)',fill:'both'});
+        area.animate([{opacity:0},{opacity:1}],{duration:fast?350:500,delay:fast?260:520,easing:'ease',fill:'both'});
+      }
+    }
     function open(key){
       var d=SX[key]; if(!d) return;
+      curKey=key;
       sheet.innerHTML=build(d);
       modal.hidden=false; void modal.offsetWidth; modal.classList.add('on');
       document.body.style.overflow='hidden';
-      if(!reduce){
-        var line=sheet.querySelector('.msx-line'), area=sheet.querySelector('.msx-area');
-        if(line && line.animate){ line.style.strokeDasharray='1';
-          line.animate([{strokeDashoffset:1},{strokeDashoffset:0}],{duration:800,delay:220,easing:'cubic-bezier(0.22,1,0.36,1)',fill:'both'});
-          area.animate([{opacity:0},{opacity:1}],{duration:500,delay:520,easing:'ease',fill:'both'});
-        }
-      }
+      drawIn(false);
     }
     function close(){
       modal.classList.remove('on'); document.body.style.overflow='';
@@ -3228,6 +3246,14 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     });
     scrim.addEventListener('click', close);
     sheet.addEventListener('click', function(e){ if(e.target.closest('[data-msx-close]')) close(); });
+    /* the range filter lets the member customize the chart horizon */
+    sheet.addEventListener('click', function(e){
+      var fb=e.target.closest('.msx-fseg button'); if(!fb || !curKey) return;
+      var keep=sheet.scrollTop;
+      sheet.innerHTML=build(SX[curKey], fb.dataset.r);
+      sheet.scrollTop=keep;
+      drawIn(true);
+    });
     /* the ask row hands the question to Boldin AI on the AI tab */
     function askAI(){
       var inp=document.getElementById('msxAskIn'); if(!inp) return;
