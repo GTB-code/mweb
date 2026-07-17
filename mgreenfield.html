@@ -513,12 +513,13 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 .mplan-stats3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:9px; margin-top:16px; }
 .mstat3{ border:1px solid var(--hairline); border-radius:14px; padding:12px 11px 11px; }
 .mstat3 .lab{ font-size:13px; color:var(--text-tertiary); line-height:1.2; white-space:nowrap; }
-.mstat3 .fig{ font:700 20px 'DM Sans',sans-serif; letter-spacing:-0.6px; margin-top:1px; font-variant-numeric:tabular-nums; white-space:nowrap; }
-.mstat3 .sub{ font-size:13px; margin-top:4px; white-space:nowrap; }
+.mstat3 .fig{ font:700 20px/1.05 'DM Sans',sans-serif; letter-spacing:-0.6px; margin-top:2px; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.mstat3 .sub{ font-size:13px; line-height:1.2; margin-top:3px; white-space:nowrap; }
 .mstat3 .sub .up{ color:var(--green-cta); font-weight:600; }
 .mstat3 .sub .dn{ color:var(--text-tertiary); font-weight:600; }
 .mstat3 .sub .since{ display:block; font-size:11px; color:var(--text-tertiary); font-weight:500; margin-top:2px; }
-#mtodayStats3 .mstat3 .lab, #mplanStats3 .mstat3 .lab{ white-space:normal; line-height:1.25; }
+#mtodayStats3 .mstat3, #mplanStats3 .mstat3{ padding:11px 9px 8px; }
+#mtodayStats3 .mstat3 .lab, #mplanStats3 .mstat3 .lab{ white-space:normal; line-height:1.25; font-size:12.5px; }
 /* What's already yours: the desktop net-worth block mosaic, restacked for mobile */
 .myours{ border-radius:14px; overflow:hidden; cursor:pointer; transition:transform .15s ease; }
 .myours:active{ transform:scale(.99); }
@@ -1235,7 +1236,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
   </div>
 
   <div class="mplan-stats3" id="mtodayStats3" style="margin-top:16px">
-    <div class="mstat3" data-msx="toretire" role="button" tabindex="0"><div class="lab">Years to retirement</div><div class="fig">2.4</div><div class="sub">Dec 2028</div></div>
+    <div class="mstat3" data-msx="toretire" role="button" tabindex="0"><div class="lab">To retirement</div><div class="fig">2.4</div><div class="sub">Dec 2028</div></div>
     <div class="mstat3" data-msx="workincome" role="button" tabindex="0"><div class="lab">Work income</div><div class="fig">$12,300</div><div class="sub">per month</div></div>
     <div class="mstat3" data-msx="savingsopp" role="button" tabindex="0"><div class="lab">Opportunity</div><div class="fig">$3,450</div><div class="sub">every month</div></div>
   </div>
@@ -2930,7 +2931,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         opps:{t:'2027 is on the table', g:'still funded', s:'Moving the date a year earlier keeps the plan funded to <b>96</b> with <b>$6,900</b> a month of safe spending.'},
         risks:{t:'Sequence risk at the handoff', s:'A bear market in the first two retired years matters more than any other stretch. The date sets the exposure.'},
         decide:{t:'A date, or a number', s:'Retire when the calendar says <b>Dec 2028</b>, or when the portfolio says ready. Pick which trigger rules.'},
-        step:{t:'Test earlier dates against the score', act:'plan'} },
+        step:{t:'Test earlier dates against the score', act:'plan'}, ask:'Ask Boldin AI about your date&#8230;' },
       workincome:{ label:'Work income', fig:'$12,300',
         pts:[12215,12215,12215,12223,12215,12234,12215,12215,12300,12300,12300,12300], fmt:'money',
         sub:'What working still brings in each month, before taxes.',
@@ -2938,7 +2939,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         opps:{t:'Capture the full 401(k) match', g:'+$85 / mo', s:'About <b>$1,020</b> a year of match goes unclaimed. It is the highest-yield dollar available anywhere.'},
         risks:{t:'One employer, most of the income', s:'<b>72%</b> is Marshall\u2019s paycheck. A 2027 layoff moves the retirement date by roughly 19 months.'},
         decide:{t:'When Lily scales back', s:'Her <b>$1,385</b> a month shapes the bridge years. When it stops is a plan input, not a surprise.'},
-        step:{t:'Model income ending on different dates', act:'plan'} },
+        step:{t:'Model income ending on different dates', act:'plan'}, ask:'Ask Boldin AI about your income&#8230;' },
       savingsopp:{ label:'Savings opportunity', fig:'$3,450',
         pts:[3310,3350,3305,3380,3360,3410,3390,3430,3450,3450,3450,3450], fmt:'money',
         sub:'The monthly surplus you could route to retirement savings before 2028.',
@@ -2946,7 +2947,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         opps:{t:'Automate the transfer', g:'+$100K', s:'A standing move of <b>$3,450</b> on payday beats twelve good intentions a year.'},
         risks:{t:'Idle cash drag', s:'<b>$18,300</b> sits at 0.4% while inflation runs 2.5%. Parked is not the same as safe.'},
         decide:{t:'Pre-tax, Roth, or brokerage', s:'Where the next dollar lands decides its tax bill in 2035. The coming 12% windows favor Roth.'},
-        step:{t:'Set up the automatic transfer', act:'today'} },
+        step:{t:'Set up the automatic transfer', act:'today'}, ask:'Ask Boldin AI about saving more&#8230;' },
       surplus:{ label:'Monthly surplus', fig:'$3,450',
         pts:[3310,3350,3305,3380,3360,3410,3390,3430,3450,3450,3450,3450], fmt:'money',
         sub:'What is left each month after the $8,850 of spending.',
@@ -3257,7 +3258,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     /* the ask row hands the question to Boldin AI on the AI tab */
     function askAI(){
       var inp=document.getElementById('msxAskIn'); if(!inp) return;
-      var q=inp.value.trim() || 'Explain my net worth';
+      var q=inp.value.trim() || ('Explain my '+((curKey && SX[curKey]) ? SX[curKey].label.toLowerCase() : 'plan'));
       close();
       document.querySelector('.mnav button[data-tab="ai"]').click();
       setTimeout(function(){ if(typeof sendAI==='function') sendAI(q); }, reduce?60:480);
@@ -3454,6 +3455,10 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     { re:/rebalanc|401\s*\(?k|make (the |a )?trade|place (the |an )?order/i, agent:true },
     { re:/timeline|milestone|peak|2056|2099|when.*(retire|medicare|rmd|social)/i,
       a:'The route: retirement December 2028, Roth conversions 2029 through 2034, Medicare in 2030, Social Security at 70 in 2035 at $3,940 a month, RMDs in 2038 already shrunk by the conversions, the mortgage gone in 2046, the portfolio peaking at $2.16M in 2056, and the plan still funded in 2099. The whole right half of that line depends on one decision: holding Social Security to 70.' },
+    { re:/work\s*income|paycheck|salary|12,?300|layoff|laid\s*off|lily.*(work|hours|income)/i,
+      a:'Work brings in $12,300 a month before taxes: about 72% is Marshall\u2019s paycheck, with Lily\u2019s part-time work adding $1,385. Every month of it funds life without touching the portfolio, which is the whole bridge to December 2028. Two things worth attention: about $1,020 a year of 401(k) match is going unclaimed, and the plan should know in advance when Lily wants to scale back.' },
+    { re:/sav(e|ing)|surplus|3,?450|automate|transfer|opportunit/i,
+      a:'You have about $3,450 of surplus every month, and roughly 29 paychecks left before retirement. Routed fully into savings, that is about $100K more at the starting line. The highest-yield move is automating it: a standing transfer on payday into the brokerage, after topping up the 401(k) match. The $18,300 sitting at 0.4% is the other quiet opportunity.' },
     { re:/net\s*worth|worth|1\.14|mosaic|equity/i,
       a:'Your net worth is $1.14M: the $905K home and $567K of investable assets, minus the $333K mortgage at 3.1%. It is up $8,200 since January. About half of it is home equity, which is why the plan leans on the portfolio and Social Security for income, and keeps the house as a later lever, roughly $190K of tappable equity around 75.' },
     { re:/retire.*(year )?earlier|earlier.*retire|2027/i,
