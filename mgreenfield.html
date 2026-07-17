@@ -883,6 +883,15 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 #mtodayStats3 .mstat3:nth-child(1), #mplanStats3 .mstat3:nth-child(1){ animation-delay:.05s; }
 #mtodayStats3 .mstat3:nth-child(2), #mplanStats3 .mstat3:nth-child(2){ animation-delay:.14s; }
 #mtodayStats3 .mstat3:nth-child(3), #mplanStats3 .mstat3:nth-child(3){ animation-delay:.23s; }
+#mtodayStats3 .mstat3:nth-child(4), #mplanStats3 .mstat3:nth-child(4){ animation-delay:.32s; }
+/* upsell cards: a tip from a pro, and a human in your corner */
+.mstat3-up{ display:flex; flex-direction:column; flex-basis:calc(((100% - 4px)/2.45)*2 + 10px) !important; }
+.mstat3-up .tip{ font-size:14px; line-height:1.35; color:var(--ink); margin-top:5px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.mstat3-up .up-cta{ margin-top:auto; padding-top:5px; font-size:13.5px; font-weight:700; color:var(--green-cta); }
+.mstat3-up .up-cta::after{ content:' \2192'; }
+.up-badge{ display:inline-block; margin-left:4px; font-size:10.5px; font-weight:800; background:#FDF3D8; color:#8A6D00; border-radius:6px; padding:1.5px 5px; vertical-align:1px; }
+.mstat3.up-gold{ background:linear-gradient(180deg,#FFFDF6,#FFFFFF); }
+.mstat3.up-teal{ background:linear-gradient(180deg,#F3FBF8,#FFFFFF); }
 @keyframes mstat-in{ from{ opacity:0; } to{ opacity:1; } }
 @media (prefers-reduced-motion: reduce){ #mtodayStats3 .mstat3, #mplanStats3 .mstat3{ animation:none; } }
 #mtodayStats3 .mstat3 .lab, #mplanStats3 .mstat3 .lab{ white-space:normal; line-height:1.3; font-size:14.5px; }
@@ -1038,7 +1047,14 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 .mplan-dd svg{ color:var(--text-secondary); }
 .mplan-filter{ width:34px; height:34px; border-radius:10px; border:1px solid var(--hairline); background:var(--white);
   color:var(--text-secondary); display:flex; align-items:center; justify-content:center; cursor:pointer; }
-.mplan-chart{ margin-top:0; cursor:pointer; border-radius:10px; transition:opacity .15s ease; }
+.mplan-chart{ margin-top:0; cursor:pointer; border-radius:10px; transition:opacity .15s ease, transform .12s ease; }
+.mplan-chart:active{ transform:scale(.992); }
+.mplan-chart svg{ overflow:visible; }
+.pcping{ transform-box:fill-box; transform-origin:center; opacity:0; }
+.pc-hint .pcping{ animation:pc-ping 1.5s ease-out both; }
+.pc-hint #pcPing2{ animation-delay:.85s; }
+@keyframes pc-ping{ 0%{ transform:scale(.32); opacity:.5; } 100%{ transform:scale(1.05); opacity:0; } }
+@media (prefers-reduced-motion: reduce){ .pc-hint .pcping{ animation:none; } }
 .mplan-chart:active{ opacity:.82; }
 .mplan-chart svg{ display:block; width:100%; height:auto; }
 .pcgrid{ stroke:#F1F2F4; stroke-width:1; }
@@ -1713,7 +1729,10 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         <text class="pcax" x="30" y="11" text-anchor="end">$2.5M</text><text class="pcax" x="30" y="30" text-anchor="end">$2M</text><text class="pcax" x="30" y="49" text-anchor="end">$1.5M</text><text class="pcax" x="30" y="68" text-anchor="end">$1M</text><text class="pcax" x="30" y="86" text-anchor="end">$0</text>
         <path id="pcArea" d="M40,78 C 80,73 120,63 170,50 C 220,38 270,23 300,19 C 320,16 340,15 352,15 L352,84 L40,84 Z" fill="url(#pcg)" opacity="0"/>
         <path id="pcLine" d="M40,78 C 80,73 120,63 170,50 C 220,38 270,23 300,19 C 320,16 340,15 352,15" fill="none" stroke="#0E794E" stroke-width="2.4" stroke-linecap="round" pathLength="1"/>
+        <circle class="pcping" id="pcPing1" cx="344" cy="15" r="11" fill="none" stroke="#0E794E" stroke-width="1.5" opacity="0"/>
+        <circle class="pcping" id="pcPing2" cx="344" cy="15" r="11" fill="none" stroke="#0E794E" stroke-width="1.5" opacity="0"/>
         <g id="pcMarks" opacity="0">
+          <circle id="pcDot" cx="344" cy="15" r="3.5" fill="#0E794E"/>
           <text class="pcax" x="40" y="98" text-anchor="start">2026</text>
           <text class="pcax" x="196" y="98" text-anchor="middle">2041</text>
           <text class="pcax" x="352" y="98" text-anchor="end">2057</text>
@@ -2748,9 +2767,23 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     });
     buildPlanScore(document.getElementById('homeScore'));
   }
+  var PC_HINTED=false;
   function drawPlanChart(){
     var line=document.getElementById('pcLine'); if(!line) return;
     var marks=document.getElementById('pcMarks'), area=document.getElementById('pcArea');
+    /* the living end-dot rides the curve wherever the range filter puts it */
+    try{
+      var pcp=line.getPointAtLength(line.getTotalLength()*0.985);
+      ['pcDot','pcPing1','pcPing2'].forEach(function(id){ var el=document.getElementById(id);
+        if(el){ el.setAttribute('cx', pcp.x.toFixed(1)); el.setAttribute('cy', pcp.y.toFixed(1)); } });
+    }catch(_){}
+    /* once per visit, after the page settles, the dot breathes twice: the line is alive, touch it */
+    if(!PC_HINTED && !reduce){
+      PC_HINTED=true;
+      var wrap=document.getElementById('mplanChart');
+      setTimeout(function(){ if(!wrap) return; wrap.classList.add('pc-hint');
+        setTimeout(function(){ wrap.classList.remove('pc-hint'); }, 2600); }, 3050);
+    }
     if(!line.animate || reduce){ area.style.opacity='1'; marks.style.opacity='1'; return; }
     line.style.strokeDasharray='1';
     line.animate([{strokeDashoffset:1},{strokeDashoffset:0}],
@@ -3429,15 +3462,15 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       fl:{
         hl:'Saving <em class="mhl-gold">28%</em>, growing into <em class="mhl-em">freedom.</em>',
         dd:'Net worth',
-        stats:[['Savings rate','28%','Above target','cx_savingsrate'],['Debt-to-income','15%','Mortgage only','dti'],['Cashflow','+$3,450','per month','cashflow']],
-        chips:[['Income/mo','$12,300','cx_income'],['Spending/mo','$8,850','cx_spending']],
+        stats:[['Savings rate','28%','Above target','cx_savingsrate'],['Debt ratio','15%','Mortgage only','dti'],['Cashflow','+$3,450','per month','cashflow']],
+        chips:[['Income/mo','$12,300','cx_income'],['Spending/mo','$8,850','cx_spending']], up:'cfp',
         secKeys:['assets','debts','income','home','expenses','flows','withdrawal','taxplan','estate','rates'], secHeading:'Future money'
       },
       retirement:{
         hl:'<em class="mhl-gold">$1.14M</em> working toward your <em class="mhl-em">retirement.</em>',
         dd:'Retirement income',
         stats:[['Success rate','87%','870 in 1,000','success'],['Safe spending','$8,400','per month','safespend'],['Vision board','5 goals','Dreams, priced','vision']],
-        chips:[['SS at 70','$3,940','cx_ss'],['Withdrawals','$3,100','cx_withdrawals']],
+        chips:[['SS at 70','$3,940','cx_ss'],['Withdrawals','$3,100','cx_withdrawals']], up:'coach',
         secKeys:['assets','debts','income','home','expenses','flows','withdrawal','taxplan','estate','rates'], secHeading:'Future money'
       },
       tax:{
@@ -3460,12 +3493,32 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         [{opacity:0,transform:'translateY('+(dy||6)+'px)'},{opacity:1,transform:'none'}],
         {duration:360,delay:40+i*55,easing:'cubic-bezier(0.22,1,0.36,1)',fill:'backwards'}); });
     }
+    function upCard(kind){
+      if(kind==='cfp') return '<div class="mstat3 mstat3-up up-gold" data-up="cfp" role="button" tabindex="0">'+
+        '<div class="lab">A CFP\u2019s tip <span class="up-badge">P+</span></div>'+
+        '<div class="tip">\u201cAutomate the $3,450 surplus.\u201d</div>'+
+        '<div class="up-cta">Unlock advice</div></div>';
+      return '<div class="mstat3 mstat3-up up-teal" data-up="coach" role="button" tabindex="0">'+
+        '<div class="lab">Coaching</div>'+
+        '<div class="tip">30 minutes with a CFP coach.</div>'+
+        '<div class="up-cta">Book a session</div></div>';
+    }
     function renderStats(L){
       stats3.style.gridTemplateColumns='repeat('+L.stats.length+', 1fr)';
-      stats3.innerHTML=L.stats.map(function(s){ return '<div class="mstat3"'+(s[3]?' data-msx="'+s[3]+'" role="button" tabindex="0"':'')+'><div class="lab">'+s[0]+'</div><div class="fig">'+s[1]+'</div><div class="sub">'+s[2]+'</div></div>'; }).join('');
+      stats3.innerHTML=L.stats.map(function(s){ return '<div class="mstat3"'+(s[3]?' data-msx="'+s[3]+'" role="button" tabindex="0"':'')+'><div class="lab">'+s[0]+'</div><div class="fig">'+s[1]+'</div><div class="sub">'+s[2]+'</div></div>'; }).join('')+(L.up?upCard(L.up):'');
       stagger([].slice.call(stats3.children));
       demoTap('mplanStats3');
     }
+    stats3.addEventListener('click', function(e){
+      var up=e.target.closest('[data-up]'); if(!up) return;
+      if(up.dataset.up==='cfp'){
+        var st=document.getElementById('suTrial');
+        if(st){ st.hidden=false; st.scrollTop=0; window.scrollTo({top:0,behavior:'auto'}); }
+        else toast('PlannerPlus lands next in the mobile build');
+      } else {
+        toast('Booking a coach session lands next in the mobile build');
+      }
+    });
     function renderChips(L){
       chipsEl.style.gridTemplateColumns='repeat('+L.chips.length+', 1fr)';
       chipsEl.innerHTML=L.chips.map(function(c){ return '<div class="mchip4"'+(c[2]?' data-msx="'+c[2]+'" role="button" tabindex="0"':'')+'><div class="lab">'+c[0]+'</div><div class="val">'+c[1]+'</div></div>'; }).join('');
