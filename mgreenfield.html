@@ -519,7 +519,7 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 .mstat3 .sub .dn{ color:var(--text-tertiary); font-weight:600; }
 .mstat3 .sub .since{ display:block; font-size:11px; color:var(--text-tertiary); font-weight:500; margin-top:2px; }
 /* the 3-block widget: a peeking carousel, two cards plus a quarter of the third */
-#mtodayStats3, #mplanStats3{ display:flex; overflow-x:auto; scroll-snap-type:x mandatory;
+#mtodayStats3, #mplanStats3{ display:flex; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory;
   gap:10px; margin-right:-16px; padding-right:16px; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
 #mtodayStats3::-webkit-scrollbar, #mplanStats3::-webkit-scrollbar{ display:none; }
 #mtodayStats3 .mstat3, #mplanStats3 .mstat3{ flex:0 0 calc((100% - 4px)/2.45); scroll-snap-align:start;
@@ -554,8 +554,8 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 #mtodayStats3 .mstat3::after, #mplanStats3 .mstat3::after{ content:''; position:absolute; top:11px; right:10px;
   width:13px; height:13px; pointer-events:none; opacity:.8;
   background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M9 6l6 6-6 6' stroke='%23A6ACB8' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
-#mtodayStats3 .mstat3::before, #mplanStats3 .mstat3::before{ content:''; position:absolute; inset:-3px;
-  border-radius:17px; border:2.5px solid #FBBD04; opacity:0; pointer-events:none; }
+#mtodayStats3 .mstat3::before, #mplanStats3 .mstat3::before{ content:''; position:absolute; inset:0;
+  border-radius:14px; border:2.5px solid #FBBD04; opacity:0; pointer-events:none; }
 .mstat3.demo{ animation:mstat-demo 1.15s ease-in-out !important; }
 .mstat3.demo::before{ animation:mstat-ring 1.15s ease-in-out; }
 @keyframes mstat-demo{ 0%,100%{ transform:none; } 45%{ transform:scale(0.986); } }
@@ -1707,31 +1707,6 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
   }
   /* the pill row glides in from the right and settles on the optical-balance
      offset (42px: H under P, a sliver of circle at the card edge) */
-  /* the carousel arrives with one easy motion: the row drifts left to right and stops */
-  function glideCards(id){
-    var row=document.getElementById(id); if(!row || !row.clientWidth) return;
-    var max=row.scrollWidth-row.clientWidth; if(max<10) return;
-    var tk=(row.__cgTok||0)+1; row.__cgTok=tk;
-    if(reduce){ row.scrollLeft=0; return; }
-    /* snap points would yank the row back mid-glide; suspend them for the ride */
-    row.style.scrollSnapType='none';
-    var start=Math.min(max, 92);
-    row.scrollLeft=start;
-    setTimeout(function(){
-      if(row.__cgTok!==tk){ row.style.scrollSnapType=''; return; }
-      var t0=null;
-      function ease(p){ return 1-Math.pow(1-p,3); }
-      function frame(ts){
-        if(row.__cgTok!==tk){ row.style.scrollSnapType=''; return; }
-        if(!t0) t0=ts;
-        var p=Math.min(1,(ts-t0)/1200);
-        row.scrollLeft=start*(1-ease(p));
-        if(p<1) requestAnimationFrame(frame);
-        else { row.scrollLeft=0; row.style.scrollSnapType=''; }
-      }
-      requestAnimationFrame(frame);
-    }, 420);
-  }
   /* once per visit, the first carousel card taps itself so members know the doors open */
   var DEMO_SEEN={};
   function demoTap(id){
@@ -2152,11 +2127,10 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     setNav(t);
     document.body.classList.toggle('ai-tab', t==='ai');
     if(t==='ai') enterAI();
-    if(t==='plan'){ drawPlanChart(); glideCards('mplanStats3'); glidePills(document.getElementById('planScore')); if(window.__hintLenses) setTimeout(window.__hintLenses, 120); }
+    if(t==='plan'){ drawPlanChart(); glidePills(document.getElementById('planScore')); if(window.__hintLenses) setTimeout(window.__hintLenses, 120); }
     if(t==='home') drawHome();
     if(t==='today'){
       buildPlanScore(document.getElementById('todayScore'));
-      glideCards('mtodayStats3');
       demoTap('mtodayStats3');
     }
     if(t==='optimize' && !reduce){
@@ -2902,7 +2876,6 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       stats3.style.gridTemplateColumns='repeat('+L.stats.length+', 1fr)';
       stats3.innerHTML=L.stats.map(function(s){ return '<div class="mstat3"'+(s[3]?' data-msx="'+s[3]+'" role="button" tabindex="0"':'')+'><div class="lab">'+s[0]+'</div><div class="fig">'+s[1]+'</div><div class="sub">'+s[2]+'</div></div>'; }).join('');
       stagger([].slice.call(stats3.children));
-      glideCards('mplanStats3');
       demoTap('mplanStats3');
     }
     function renderChips(L){
