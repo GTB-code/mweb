@@ -86,13 +86,26 @@ body.pushed .mroot{ transform:translateX(-24%); opacity:.5; pointer-events:none;
 /* registration page (Jayson's signup card, mobile full-screen) */
 .sureg{ position:fixed; inset:0; z-index:97; background:#fff; overflow-y:auto; -webkit-overflow-scrolling:touch; animation:pageIn .3s ease; }
 .sureg[hidden]{ display:none; }
-.sureg-top{ display:flex; align-items:center; justify-content:space-between; height:60px; padding:0 20px; border-bottom:1px solid var(--hairline); position:sticky; top:0; background:#fff; z-index:1; }
+.sureg-top{ display:flex; align-items:center; justify-content:space-between; height:64px; padding:0 20px; position:sticky; top:0; background:#fff; z-index:1; }
 .sureg-top .brand svg{ height:26px; width:auto; display:block; }
 .sureg-back{ background:none; border:none; color:var(--text-secondary); font-size:15px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:5px; padding:6px; }
-.sureg-wrap{ max-width:440px; margin:0 auto; padding:44px 22px 56px; }
+.sureg-wrap{ max-width:440px; margin:0 auto; padding:76px 22px 56px; }
 .su-card{ border:1px solid var(--hairline-strong); border-radius:18px; padding:24px; }
 .su-card-t{ font-size:22px; font-weight:700; color:var(--ink); margin-bottom:18px; letter-spacing:-0.3px; }
-.sureg .su-card .su-cta{ margin-top:24px; margin-bottom:6px; }
+.sureg .su-card .su-cta{ margin-top:28px; margin-bottom:6px; }
+/* registration page: no container outline, senior-friendly sizing (scoped to .sureg) */
+.sureg .su-card{ border:none; padding:8px 0 0; }
+.sureg .su-card-t{ font-size:28px; margin-bottom:24px; }
+.sureg .su-field{ margin-bottom:20px; }
+.sureg .su-field span{ font-size:16px; margin-bottom:9px; }
+.sureg .su-field input{ font-size:19px; min-height:58px; padding:15px 18px; border-radius:12px; }
+.sureg .su-namerow{ gap:14px; }
+.sureg .su-check{ font-size:16px; margin:8px 0 22px; }
+.sureg .su-check input{ width:20px; height:20px; }
+.sureg .su-card .su-cta{ min-height:60px; font-size:20px; }
+.sureg .su-or{ font-size:15px; margin:20px 0; }
+.sureg .su-google{ min-height:60px; font-size:19px; }
+.sureg .su-terms{ font-size:14px; margin-top:18px; }
 .su-google{ display:flex; align-items:center; justify-content:center; gap:10px; width:100%; min-height:52px; background:#fff; border:1px solid var(--hairline-strong); border-radius:999px; font-size:16px; font-weight:600; color:var(--ink); cursor:pointer; font-family:inherit; }
 .su-google:active{ background:#F6F7F8; }
 .su-or{ display:flex; align-items:center; gap:12px; margin:16px 0; color:var(--text-secondary); font-size:13px; }
@@ -422,10 +435,10 @@ body.pushed .mroot{ transform:translateX(-24%); opacity:.5; pointer-events:none;
   border-radius:999px; background:#0E794E; color:#FFFFFF; border:0; font-family:inherit; font-size:17px; font-weight:600;
   cursor:pointer; margin-top:26px; }
 .mx-cta:active{ background:#0B5F3D; transform:scale(.98); }
-.mx-proof{ display:block; margin-top:16px; font-size:14px; color:var(--text-tertiary); }
+.mx-proof{ display:block; margin-top:16px; margin-bottom:12px; font-size:14px; color:var(--text-tertiary); }
 .mx-proof b{ color:#FBBD04; font-weight:600; letter-spacing:1px; }
 /* the hero visual: the confidence ring, echoing the product */
-.mx-viz{ margin:40px 0 4px; }
+.mx-viz{ margin:40px 0 40px; }
 .mx-viz svg{ display:block; width:100%; height:auto; overflow:visible; }
 /* section rhythm */
 .mx-sec{ padding:40px 0; border-top:1px solid #F1F2F4; }
