@@ -553,6 +553,28 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 .msx-cmp-row .bar i.you{ background:var(--green-cta); }
 .msx-cmp-row .v{ flex:none; font-size:14.5px; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums; }
 .msx-cmp-cap{ font-size:13.5px; color:var(--text-tertiary); margin-top:2px; }
+/* the what-if slider: drag a new retirement date, see the ghost future */
+.msx-try-read{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin:4px 0 8px; }
+.msx-try-read b{ font:700 20px 'DM Sans',sans-serif; letter-spacing:-0.3px; color:var(--ink); font-variant-numeric:tabular-nums; }
+.msx-try-stats{ font-size:15px; color:var(--text-secondary); font-variant-numeric:tabular-nums; }
+.msx-try-chip{ margin-left:auto; font-size:13.5px; font-weight:700; border-radius:999px; padding:4px 11px;
+  background:#F2F3F5; color:var(--text-secondary); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.msx-try-chip.up{ background:var(--mint); color:var(--green-cta); }
+.msx-try-chip.dn{ background:#FDF3D8; color:#8A6D00; }
+#trySvg{ display:block; width:100%; height:auto; margin-top:2px; }
+#tryGhost, #tryFan, #tryGhostDot{ transition:opacity .35s ease; }
+.msx-try-slide{ display:flex; align-items:center; gap:12px; margin-top:8px; }
+.msx-try-slide > span{ font-size:13.5px; color:var(--text-tertiary); flex:none; }
+#tryRange{ -webkit-appearance:none; appearance:none; flex:1; height:44px; background:transparent; cursor:pointer; margin:0; }
+#tryRange::-webkit-slider-runnable-track{ height:8px; border-radius:999px;
+  background:linear-gradient(90deg, #0E794E var(--p,33.3%), #E7E9EC var(--p,33.3%)); }
+#tryRange::-webkit-slider-thumb{ -webkit-appearance:none; width:30px; height:30px; margin-top:-11px; border-radius:999px;
+  background:#FFFFFF; border:3px solid #0E794E; transition:transform .12s ease; }
+#tryRange:active::-webkit-slider-thumb{ transform:scale(1.14); }
+#tryRange::-moz-range-track{ height:8px; border-radius:999px;
+  background:linear-gradient(90deg, #0E794E var(--p,33.3%), #E7E9EC var(--p,33.3%)); }
+#tryRange::-moz-range-thumb{ width:24px; height:24px; border-radius:999px; background:#FFFFFF; border:3px solid #0E794E; }
+.msx-try-cap{ font-size:14px; color:var(--text-tertiary); margin-top:4px; line-height:1.45; }
 /* the chart range filter */
 .msx-fseg{ display:flex; gap:7px; margin:16px 0 0; }
 .msx-fseg button{ flex:1; height:38px; border-radius:999px; border:1px solid var(--hairline); background:#FFFFFF;
@@ -1675,6 +1697,29 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
   function psPillHTML(t){
     return '<button class="mps-pill" type="button" data-ps="'+t.id+'"><span class="mps-chk"><svg viewBox="0 0 24 24"><path d="M5.5 12.5l4.2 4.2 9-9.6"/></svg></span>'+t.label+'<span class="mps-pts">+'+t.pts+'</span></button>';
   }
+  /* the pill row glides in from the right and settles on the optical-balance
+     offset (42px: H under P, a sliver of circle at the card edge) */
+  function glidePills(el){
+    var row = el && el.querySelector('.mps-pills'); if(!row || !row.clientWidth) return;
+    var max=row.scrollWidth-row.clientWidth;
+    var rest=Math.min(42, Math.max(0,max));
+    var tk=(row.__glideToken||0)+1; row.__glideToken=tk;
+    if(reduce || max<24){ row.scrollLeft=rest; return; }
+    var start=Math.min(max, rest+200);
+    row.scrollLeft=start;
+    setTimeout(function(){
+      var t0=null;
+      function ease(p){ return 1-Math.pow(1-p,3); }
+      function frame(ts){
+        if(row.__glideToken!==tk) return;
+        if(!t0) t0=ts;
+        var p=Math.min(1,(ts-t0)/950);
+        row.scrollLeft=rest+(start-rest)*(1-ease(p));
+        if(p<1) requestAnimationFrame(frame); else row.scrollLeft=rest;
+      }
+      requestAnimationFrame(frame);
+    }, 430);
+  }
   function buildPlanScore(el){
     if(!el) return;
     var sc=psScore();
@@ -1691,10 +1736,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         (sub?'<div class="mps-s">'+sub+'</div>':'')+
         pills+
       '</div>';
-    /* optical balance: start the pills scrolled so the first label's H sits under the P
-       of Plan Score, leaving just a sliver of the circle peeking at the card edge
-       (pill pad 14 + circle 20 + gap 8 = 42) */
-    var pr=el.querySelector('.mps-pills'); if(pr) pr.scrollLeft=42;
+    glidePills(el);
     // animate the bar width + count the number up to the current earned score
     var bar=el.querySelector('.mps-bar i'), num=el.querySelector('.mps-num');
     if(reduce){ bar.style.width=sc+'%'; num.textContent=String(sc); return; }
@@ -2066,7 +2108,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     setNav(t);
     document.body.classList.toggle('ai-tab', t==='ai');
     if(t==='ai') enterAI();
-    if(t==='plan'){ drawPlanChart(); if(window.__hintLenses) setTimeout(window.__hintLenses, 120); }
+    if(t==='plan'){ drawPlanChart(); glidePills(document.getElementById('planScore')); if(window.__hintLenses) setTimeout(window.__hintLenses, 120); }
     if(t==='home') drawHome();
     if(t==='today'){
       buildPlanScore(document.getElementById('todayScore'));
@@ -2149,28 +2191,6 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         {duration:420, delay:140+i*90, easing:'cubic-bezier(0.22,1,0.36,1)', fill:'backwards'});
     });
     buildPlanScore(document.getElementById('homeScore'));
-    setTimeout(hintHomePills, 550);
-  }
-  // on first load, the pill row slides in from a few pills over so it reads as scrollable
-  var pillsHinted=false;
-  function hintHomePills(){
-    if(pillsHinted) return;
-    var row=document.querySelector('#homeScore .mps-pills'); if(!row) return;
-    var max=row.scrollWidth-row.clientWidth;
-    if(max<24){ pillsHinted=true; return; }
-    pillsHinted=true;
-    if(reduce){ row.scrollLeft=0; return; }
-    var start=Math.min(max, 230);
-    row.scrollLeft=start;
-    var t0=null;
-    function ease(p){ return 1-Math.pow(1-p,3); }
-    function frame(ts){
-      if(!t0) t0=ts;
-      var p=Math.min(1,(ts-t0)/900);
-      row.scrollLeft=start*(1-ease(p));
-      if(p<1){ requestAnimationFrame(frame); } else { row.scrollLeft=0; }
-    }
-    requestAnimationFrame(frame);
   }
   function drawPlanChart(){
     var line=document.getElementById('pcLine'); if(!line) return;
@@ -2946,8 +2966,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         risks:{t:'Ratios jump in bear markets', s:'A 25% drawdown lifts this to about <b>30%</b> overnight, without a dollar of new borrowing.'},
         decide:{t:'Carry the mortgage into retirement', s:'The payment runs about <b>$1,860</b> a month to 2046. Comfort and math can disagree; decide which wins.'},
         step:{t:'Model an early payoff against the score', act:'plan'} },
-      toretire:{ label:'Years to retirement', fig:'2.4 yrs',
-        pts:[3.5,3.4,3.3,3.2,3.1,3.0,2.9,2.8,2.7,2.6,2.5,2.4], fmt:'yrs',
+      toretire:{ label:'Years to retirement', fig:'2.4 yrs', try:true,
         sub:'December 2028. Marshall is 63, and the paychecks stop on your terms.',
         note:'A countdown you control. Every extra month worked is one more month of surplus and one less funded from savings.',
         opps:{t:'2027 is on the table', g:'still funded', s:'Moving the date a year earlier keeps the plan funded to <b>96</b> with <b>$6,900</b> a month of safe spending.'},
@@ -2978,7 +2997,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         risks:{t:'Lifestyle creep eats surpluses', s:'Spending that drifts up with income is how a <b>28%</b> savings rate slides back to average.'},
         decide:{t:'Brokerage, Roth, or the mortgage', s:'Each surplus dollar can compound at <b>6%</b>, grow tax-free, or retire <b>3.1%</b> debt. The order matters.'},
         step:{t:'Split the surplus in Money Flows', act:'plan'} },
-      success:{ label:'Chance of success', fig:'87%',
+      success:{ label:'Chance of success', fig:'87%', try:true,
         pts:[82,82,83,83,84,84,85,85,86,86,87,87], fmt:'pct', proj:[87,87,88,88,89,90,91,92,93,94,95,96,97,98],
         sub:'Of 1,000 simulated futures, 870 end with money left over.',
         note:'Up five points this year. Every linked account and steady month nudges it higher.',
@@ -2986,7 +3005,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         risks:{t:'The other 13% lives early', s:'Most failing futures fail from a bear market in the first five years, not the last twenty.'},
         decide:{t:'What counts as safe enough', s:'<b>87%</b> is comfortably green. Chasing 99% costs lifestyle today for tail risk that flexibility already covers.'},
         step:{t:'Stress-test a 2028 bear market', act:'plan'} },
-      safespend:{ label:'Safe spending target', fig:'$8,400',
+      safespend:{ label:'Safe spending target', fig:'$8,400', try:true,
         pts:[8150,8180,8210,8230,8260,8290,8310,8330,8350,8370,8390,8400], fmt:'money', proj:[8400,8460,8520,8600,8700,8800,8900,9000,9100,9200,9300,9400,9500,9600],
         sub:'The monthly spend the plan can hold to 99, in 87% of futures.',
         note:'You live at $8,850 today; guardrails open up once Social Security starts. The gap is margin.',
@@ -3028,7 +3047,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         risks:{t:'Law risk cuts both ways', s:'Brackets sunset and shift. A rate this long is a forecast the plan re-runs monthly, not a promise.'},
         decide:{t:'Smooth it, or ride the spikes', s:'A flat rate is not the goal. Paying <b>12%</b> on purpose now to avoid <b>24%</b> later is.'},
         step:{t:'See the rate, year by year', act:'plan'} },
-      lifetax:{ label:'Lifetime taxes paid', fig:'$648K',
+      lifetax:{ label:'Lifetime taxes paid', fig:'$648K', try:true,
         pts:[709,703,698,692,687,681,675,669,663,657,652,648], fmt:'moneyK', proj:[18,38,58,78,95,115,145,185,245,325,425,520,595,648],
         sub:'Every tax dollar the plan expects you to pay, from today to 99.',
         note:'Down $61K since the conversion plan went in. If unchanged means if you change nothing more.',
@@ -3224,12 +3243,26 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         '<div class="msx-cmp-cap">'+d.compare.cap+'</div></div></div>' : '';
       var tlH = d.timeline ? '<div class="msx-sec"><div class="msx-sec-label">The milestones</div><div class="msx-tl">'+
         d.timeline.map(function(m){ return '<div class="msx-tl-row"><span class="msx-tl-dot" style="background:'+m[0]+'"></span><div class="msx-tl-body"><div class="msx-tl-when">'+m[1]+'</div><div class="msx-tl-t">'+m[2]+'</div><div class="msx-tl-s">'+m[3]+'</div></div></div>'; }).join('')+'</div></div>' : '';
+      var tcfg = d.try ? TRYCFG[curKey] : null;
+      var tryH = tcfg ? '<div class="msx-sec msx-try"><div class="msx-sec-label">'+tcfg.secLabel+'</div>'+
+        '<div class="msx-try-read"><b id="tryDate"></b><span class="msx-try-stats" id="tryStats"></span><span class="msx-try-chip" id="tryChip"></span></div>'+
+        '<svg id="trySvg" viewBox="0 0 356 168" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-label="Your plan versus the date you are trying">'+
+          '<path id="tryFan" fill="#04B477" opacity="0.12" d=""></path>'+
+          '<path id="tryBase" fill="none" stroke="#0E794E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d=""></path>'+
+          '<path id="tryGhost" fill="none" stroke="#0D3F4A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 9" opacity="0" d=""></path>'+
+          '<circle id="tryBaseDot" r="3.5" fill="#0E794E"></circle>'+
+          '<circle id="tryGhostDot" r="3.5" fill="#FFFFFF" stroke="#0D3F4A" stroke-width="2" opacity="0"></circle>'+
+          '<text x="8" y="164" font-size="13" fill="#9AA0AE">2026</text>'+
+          '<text x="348" y="164" font-size="13" fill="#9AA0AE" text-anchor="end">Age 99</text>'+
+        '</svg>'+
+        '<div class="msx-try-slide"><span>'+tcfg.left+'</span><input type="range" id="tryRange" min="'+tcfg.min+'" max="'+tcfg.max+'" step="'+tcfg.step+'" value="'+tcfg.def+'" aria-label="'+tcfg.secLabel+'"><span>'+tcfg.right+'</span></div>'+
+        '<div class="msx-try-cap">'+tcfg.cap+'</div></div>' : '';
       var askPh = (typeof d.ask==='string') ? d.ask : 'Ask Boldin AI about your '+d.label.toLowerCase()+'&#8230;';
       var askH = '<div class="msx-ask"><input class="msx-ask-in" id="msxAskIn" type="text" placeholder="'+askPh+'" autocomplete="off"><button class="msx-ask-go" id="msxAskGo" type="button" aria-label="Ask"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M6 12l6-6 6 6"/></svg></button></div>';
       return '<div class="msx-grip"></div>'+
         '<div class="msx-head"><div><div class="msx-title">'+d.label+'</div><div class="msx-fig">'+d.fig+'</div><div class="msx-sub">'+d.sub+'</div></div>'+
         '<button class="msx-x" aria-label="Close" data-msx-close><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>'+
-        fsegH+chart(cd)+'<div class="msx-note">'+d.note+'</div>'+
+        tryH+(d.try?'':fsegH+chart(cd))+'<div class="msx-note">'+d.note+'</div>'+
         compH+cmpH+tlH+
         sec('Top opportunities', d.opps, false)+
         sec('Key risks', d.risks, false)+
@@ -3239,6 +3272,93 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     }
     var modal=document.getElementById('msx'), sheet=document.getElementById('msxSheet'), scrim=document.getElementById('msxScrim');
     var curKey=null, closeTimer=null;
+    /* the what-if engine: one slider, one ghost future, per-modal physics */
+    var PORT=[566,640,720,800,930,1080,1240,1420,1600,1780,1950,2090,2160,2100];
+    var TRYCFG={
+      toretire:{ secLabel:'Try a different date', min:-18, max:36, step:1, def:0,
+        left:'2027', right:'2031', cap:'Slide to move the date. The dotted line is that future.',
+        base:PORT, ymax:2600,
+        calc:function(m){
+          var MO=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+          var dt=new Date(2028, 11+m, 1);
+          var safe=Math.round(m<0 ? 8400+m*125 : 8400+m*70);
+          var funded=m<0 ? Math.round(99+m*0.25) : 99;
+          var k = m<0 ? m*0.0125 : m*0.0072;
+          return { big: MO[dt.getMonth()]+' '+dt.getFullYear(),
+            stats:'funded to '+funded+' &middot; $'+safe.toLocaleString('en-US')+' a month',
+            chip: m===0?['your plan','']:(m<0?['\u2212$'+(8400-safe).toLocaleString('en-US')+' /mo','dn']:['+$'+(safe-8400).toLocaleString('en-US')+' /mo','up']),
+            k:k, spread:Math.min(1, Math.abs(m)/14 + 0.25), on:m!==0 };
+        } },
+      success:{ secLabel:'Try a claiming age', min:62, max:70, step:1, def:70,
+        left:'62', right:'70', cap:'Slide to claim Social Security earlier. The dotted line is that future.',
+        base:[87,87,88,88,89,90,91,92,93,94,95,96,97,98], ymin:58, ymax:100,
+        calc:function(v){
+          var d=70-v;
+          var succ=Math.round(87 - d*1.1);
+          var check=3940 - d*212;
+          return { big:'Age '+v,
+            stats:succ+'% success &middot; $'+check.toLocaleString('en-US')+' a month',
+            chip: d===0?['your plan','']:['\u2212$'+(3940-check).toLocaleString('en-US')+' /mo for life','dn'],
+            k: -(d*0.014), spread:Math.min(1, d/6 + 0.25), on:d!==0 };
+        } },
+      safespend:{ secLabel:'Try a spending level', min:7400, max:9800, step:50, def:8850,
+        left:'$7,400', right:'$9,800', cap:'Slide to live richer or leaner. The dotted line is that future.',
+        base:PORT, ymax:2600,
+        calc:function(v){
+          var d=v-8850;
+          var funded = d>0 ? Math.round(99 - d/1000*3.2) : 99;
+          var succ = Math.max(60, Math.min(99, Math.round(87 - d/1000*6)));
+          return { big:'$'+v.toLocaleString('en-US'),
+            stats:'funded to '+funded+' &middot; '+succ+'% success',
+            chip: d===0?['your life today','']:(d>0?['+$'+d.toLocaleString('en-US')+' /mo of living','dn']:['\u2212$'+Math.abs(d).toLocaleString('en-US')+' /mo, banked','up']),
+            k: -(d/1000)*0.11, spread:Math.min(1, Math.abs(d)/1400 + 0.25), on:d!==0 };
+        } },
+      lifetax:{ secLabel:'Try a conversion level', min:0, max:30000, step:100, def:17800,
+        left:'$0', right:'$30K', cap:'Slide the yearly Roth conversion. The dotted line is that future.',
+        base:[18,38,58,78,95,115,145,185,245,325,425,520,595,648], ymax:820,
+        calc:function(v){
+          var total = v<=17800 ? Math.round(709 - 61*(v/17800)) : Math.round(648 + (v-17800)/1000*0.9);
+          var diff = 648 - total;
+          return { big:'$'+v.toLocaleString('en-US')+' /yr',
+            stats:'lifetime taxes $'+total+'K &middot; saved $'+Math.max(0,709-total)+'K',
+            chip: v===17800?['your plan','']:(diff>=0?['\u2212$'+diff+'K of tax','up']:['+$'+Math.abs(diff)+'K of tax','dn']),
+            k: (total/648 - 1), kFlat:true, spread:Math.min(1, Math.abs(v-17800)/12000 + 0.25), on:v!==17800 };
+        } }
+    };
+    function tryPt(cfg,i,v){ var W=356,padL=8,padR=10,padT=14,padB=22,H=168;
+      var x=padL + i*(W-padL-padR)/(cfg.base.length-1);
+      var y0=cfg.ymin||0;
+      var y=(H-padB) - Math.max(0,Math.min(1, (v-y0)/(cfg.ymax-y0)))*(H-padB-padT);
+      return [x,y];
+    }
+    function tryPath(pts){ return pts.map(function(p,i){ return (i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1); }).join(' '); }
+    function tryUpdate(v){
+      var svg=document.getElementById('trySvg'); if(!svg) return;
+      var cfg=TRYCFG[curKey]; if(!cfg) return;
+      var r=cfg.calc(v);
+      var B=cfg.base, n=B.length, last=n-1;
+      var bpts=B.map(function(x,i){ return tryPt(cfg,i,x); });
+      var sc=B.map(function(x,i){ var t=cfg.kFlat ? Math.min(1,(i/last)*1.6) : (i/last);
+        return Math.max(cfg.ymax*0.03, x*(1+r.k*t)); });
+      var gpts=sc.map(function(x,i){ return tryPt(cfg,i,x); });
+      var up=sc.map(function(x,i){ return tryPt(cfg,i, x*(1 + 0.15*(i/last)*r.spread)); });
+      var lo=sc.map(function(x,i){ return tryPt(cfg,i, x*(1 - 0.15*(i/last)*r.spread)); });
+      document.getElementById('tryBase').setAttribute('d', tryPath(bpts));
+      document.getElementById('tryGhost').setAttribute('d', tryPath(gpts));
+      document.getElementById('tryFan').setAttribute('d', tryPath(up)+' '+lo.slice().reverse().map(function(p){ return 'L'+p[0].toFixed(1)+' '+p[1].toFixed(1); }).join(' ')+' Z');
+      var bd=document.getElementById('tryBaseDot'); bd.setAttribute('cx',bpts[last][0]); bd.setAttribute('cy',bpts[last][1]);
+      var gd=document.getElementById('tryGhostDot'); gd.setAttribute('cx',gpts[last][0]); gd.setAttribute('cy',gpts[last][1]);
+      document.getElementById('tryGhost').style.opacity = r.on?'0.85':'0';
+      document.getElementById('tryFan').style.opacity = r.on?'0.12':'0';
+      gd.style.opacity = r.on?'1':'0';
+      document.getElementById('tryDate').textContent = '';
+      document.getElementById('tryDate').innerHTML = r.big;
+      document.getElementById('tryStats').innerHTML = r.stats;
+      var chip=document.getElementById('tryChip');
+      chip.textContent=r.chip[0]; chip.className='msx-try-chip'+(r.chip[1]?' '+r.chip[1]:'');
+      var el=document.getElementById('tryRange');
+      if(el) el.style.setProperty('--p', (((v-cfg.min)/(cfg.max-cfg.min))*100).toFixed(1)+'%');
+    }
     function drawIn(fast){
       if(reduce) return;
       var line=sheet.querySelector('.msx-line'), area=sheet.querySelector('.msx-area');
@@ -3255,6 +3375,19 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       modal.hidden=false; void modal.offsetWidth; modal.classList.add('on');
       document.body.style.overflow='hidden';
       drawIn(false);
+      if(d.try){
+        tryUpdate(TRYCFG[curKey].def);
+        if(!reduce){
+          var tb=document.getElementById('tryBase');
+          if(tb && tb.animate){
+            tb.setAttribute('pathLength','1'); tb.style.strokeDasharray='1';
+            tb.animate([{strokeDashoffset:1},{strokeDashoffset:0}],
+              {duration:850,delay:220,easing:'cubic-bezier(0.22,1,0.36,1)',fill:'both'});
+            var bd=document.getElementById('tryBaseDot');
+            if(bd && bd.animate) bd.animate([{opacity:0},{opacity:1}],{duration:300,delay:900,easing:'ease',fill:'both'});
+          }
+        }
+      }
     }
     function close(){
       modal.classList.remove('on'); document.body.style.overflow='';
@@ -3279,6 +3412,12 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       sheet.innerHTML=build(SX[curKey], fb.dataset.r);
       sheet.scrollTop=keep;
       drawIn(true);
+      if(SX[curKey].try) tryUpdate(TRYCFG[curKey].def);
+    });
+    /* the what-if slider drives the ghost line live */
+    sheet.addEventListener('input', function(e){
+      var r=e.target.closest('#tryRange'); if(!r) return;
+      tryUpdate(parseFloat(r.value)||0);
     });
     /* the ask row hands the question to Boldin AI on the AI tab */
     function askAI(){
