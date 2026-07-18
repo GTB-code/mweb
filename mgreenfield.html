@@ -1480,15 +1480,19 @@ body.ai-tab .mai-bar2{ display:flex; }
 /* ===== the hamburger menu ===== */
 /* the scrim behind the slide-over */
 .mmenu-scrim{ position:fixed; inset:0; z-index:84; background:rgba(16,24,44,0.32);
-  opacity:0; pointer-events:none; transition:opacity .32s var(--push-ease); }
-body.menu-open .mmenu-scrim{ opacity:1; pointer-events:auto; }
+  opacity:0; visibility:hidden; pointer-events:none;
+  transition:opacity .32s var(--push-ease), visibility 0s .32s; }
+body.menu-open .mmenu-scrim{ opacity:1; visibility:visible; pointer-events:auto;
+  transition:opacity .32s var(--push-ease); }
 /* the drawer slides in from the right, full height, like an iOS sheet */
 .mmenu{ position:fixed; top:0; right:0; height:100%; width:82%; max-width:340px; z-index:85;
   background:var(--white); box-sizing:border-box;
   padding:calc(20px + env(safe-area-inset-top)) 14px calc(20px + env(safe-area-inset-bottom));
-  transform:translateX(100%); transition:transform .34s var(--push-ease);
+  transform:translateX(100%); visibility:hidden;
+  transition:transform .34s var(--push-ease), visibility 0s .34s;
   display:flex; flex-direction:column; overflow-y:auto; -webkit-overflow-scrolling:touch; }
-body.menu-open .mmenu{ transform:translateX(0); }
+body.menu-open .mmenu{ transform:translateX(0); visibility:visible;
+  transition:transform .34s var(--push-ease); }
 .mmenu-hd{ display:flex; align-items:center; justify-content:space-between; padding:2px 8px 12px; }
 .mmenu-title{ font-size:22px; font-weight:700; letter-spacing:-0.3px; }
 .mmenu-close{ width:38px; height:38px; flex:none; border-radius:999px; background:#F2F3F5; border:0; color:var(--ink);
@@ -1646,9 +1650,8 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
 @media (prefers-reduced-motion: reduce){ .mnav .mai-spk .sp-body, .mnav .mai-spk .sp-tw{ animation:none; } .mnav .mai-spk .sp-tw{ opacity:.9; } }
 
 /* the fade behind the nav: content scrolls away beneath it */
-.mnav-fade{ position:fixed; left:50%; bottom:0; width:100%; max-width:480px;
+.mnav-fade{ position:fixed; left:0; right:0; margin:0 auto; bottom:0; width:100%; max-width:480px;
   height:calc(96px + env(safe-area-inset-bottom)); z-index:68; pointer-events:none;
-  transform:translateX(-50%) translateZ(0);
   /* solid white from the bottom up to (height - 24px), then a 24px feather to transparent */
   background:linear-gradient(to top, #FFFFFF 0%, #FFFFFF calc(100% - 24px), rgba(255,255,255,0) 100%); }
 /* a real, tall solid-white block (not a box-shadow) extending far below the viewport,
