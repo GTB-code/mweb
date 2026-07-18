@@ -1392,18 +1392,21 @@ body.quest-mode .mnav-fade{ opacity:0; transition:opacity .2s ease; }
 /* ===== the AI tab ===== */
 .mtab-ai{ display:flex; flex-direction:column; min-height:calc(100dvh - 260px); }
 .mtab-ai[hidden]{ display:none; }
-.mai-title{ display:flex; align-items:center; gap:9px; }
+.mai-eyet{ display:inline-flex; align-items:center; gap:3px; }
+.mai-eyet .mai-spark{ position:relative; top:-6px; }
+.mai-eyet .mai-spark svg{ width:13px; height:13px; }
 .mai-spark{ color:var(--green); display:inline-flex; animation:msparkle 3.2s ease-in-out infinite; }
-.mai-new{ display:none; align-items:center; gap:5px; margin-left:auto; align-self:center;
-  border:1px solid var(--hairline); background:var(--white); border-radius:999px; padding:7px 13px;
+.mai-new{ display:none; align-items:center; gap:5px; align-self:center;
+  border:1px solid var(--hairline); background:var(--white); border-radius:999px; padding:5px 13px;
   font-family:inherit; font-size:15px; font-weight:600; color:var(--green-cta); cursor:pointer; }
 .mai-new:active{ background:#F7FCFA; transform:scale(.97); }
 body.ai-live .mai-new{ display:inline-flex; }
-.mai-livebar{ display:none; align-items:center; justify-content:space-between; min-height:40px; }
+.mai-eyerow{ display:flex; align-items:center; justify-content:space-between; }
+.mai-livebar{ display:none; align-items:center; gap:12px; }
 body.ai-live .mai-livebar{ display:flex; }
 body.ai-live .mai-title{ display:none; }
 .mai-back{ display:inline-flex; align-items:center; gap:2px; background:none; border:0; font-family:inherit;
-  font-size:17px; font-weight:500; color:var(--ink); cursor:pointer; padding:6px 10px 6px 0; margin-left:-4px; }
+  font-size:16px; font-weight:500; color:var(--ink); cursor:pointer; padding:2px 8px 2px 0; }
 @keyframes msparkle{ 0%,100%{ transform:scale(1) rotate(0deg); opacity:1; } 50%{ transform:scale(1.12) rotate(8deg); opacity:.85; } }
 .mai-recents{ margin-top:24px; }
 .mai-rec-label{ font-size:14.5px; font-weight:600; color:var(--text-tertiary); margin-bottom:4px; }
@@ -1628,13 +1631,13 @@ body.pushed .mnav-fade{ opacity:0; transition:opacity .2s ease; }
 .mnav .mai-spk .sp-tw3{ animation:mnav-tw 2.8s ease-in-out infinite; animation-delay:-1.8s; }
 @keyframes mnav-aura{
   0%{ filter:drop-shadow(0 0 0px rgba(95,168,240,0)); }
-  50%{ filter:drop-shadow(0 0 5px rgba(95,168,240,.8)); }
+  50%{ filter:drop-shadow(0 0 6px rgba(95,168,240,.9)); }
   100%{ filter:drop-shadow(0 0 0px rgba(95,168,240,0)); }
 }
 @keyframes mnav-tw{
-  0%,100%{ opacity:0; transform:scale(0.4); }
-  45%{ opacity:1; transform:scale(1.15); }
-  75%{ opacity:.4; transform:scale(0.85); }
+  0%,100%{ opacity:.3; transform:scale(0.6); }
+  45%{ opacity:1; transform:scale(1.3); }
+  75%{ opacity:.55; transform:scale(0.9); }
 }
 body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animation:none; }
 body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
@@ -1923,12 +1926,8 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
 
 <div class="mtab mtab-ai" id="tabAI" hidden>
   <div class="mai-hero">
-    <div class="mai-livebar">
-      <button class="mai-back" id="maiBack" type="button"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5.5L8.5 12l6.5 6.5"/></svg>Back</button>
-      <button class="mai-new" id="maiNew" type="button"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>New chat</button>
-    </div>
-    <h1 class="mhl mai-title">Ask anything <span class="mai-spark"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6z"/></svg></span></h1>
-    <p class="msubhead mai-sub">AI grounded in your plan, not the open web.</p>
+    <div class="mgreet meye mai-eyerow"><span class="mai-eyet">Ask Anything <span class="mai-spark"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6z"/></svg></span></span><span class="mai-livebar"><button class="mai-back" id="maiBack" type="button"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5.5L8.5 12l6.5 6.5"/></svg>Back</button><button class="mai-new" id="maiNew" type="button"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>New chat</button></span></div>
+    <h1 class="mhl mai-title">AI grounded in <em class="mhl-em">your plan</em>, not the <em class="mhl-gold">open web.</em></h1>
   </div>
 
   <div class="mai-recents" id="maiRecents">
@@ -2216,7 +2215,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
   <button data-tab="today" aria-label="Today"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor"><path d="M3.5 3.5h17a1.5 1.5 0 0 1 1.5 1.5v14a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 19V5a1.5 1.5 0 0 1 1.5-1.5z" opacity=".95"/><path d="M12 6.4c.45 0 .8.35.8.8v.5c1 .25 1.7.9 1.85 1.9h-1.5c-.12-.5-.6-.8-1.25-.8-.75 0-1.25.38-1.25.9 0 .4.35.63 1.15.87l.9.26c1.35.38 2.1 1 2.1 2.12 0 1.1-.85 1.85-2 2.1v.55a.8.8 0 0 1-1.6 0v-.55c-1.1-.25-1.95-1-2.1-2.1h1.6c.13.6.6.9 1.35.9.75 0 1.25-.35 1.25-.87 0-.4-.35-.63-1.15-.87l-.95-.28c-1.25-.36-2-.98-2-2.08 0-1 .8-1.72 1.9-1.97v-.5c0-.45.35-.8.8-.8z" fill="#F4F5F2"/></svg></button>
   <button data-tab="plan" aria-label="Plan"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.2l1.2 1.2 2-2.2M4 12l1.2 1.2 2-2.2M4 17.8l1.2 1.2 2-2.2M11 6.4h9M11 12h9M11 17.6h9"/></svg></button>
   <button data-tab="optimize" aria-label="Optimize"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor"><path d="M14.5 2.2 4.2 13.6c-.5.55-.13 1.4.6 1.4h4.2l-1.6 6.5c-.2.82.85 1.35 1.4.7l10.3-11.4c.5-.55.13-1.4-.6-1.4h-4.2l1.6-6.5c.2-.82-.85-1.35-1.4-.7z"/></svg></button>
-  <button data-tab="ai" aria-label="Boldin AI"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor" class="mai-spk"><path class="sp-body" d="M12 1.6l1.9 7.6 7.6 1.9-7.6 1.9L12 20.6l-1.9-7.6L2.5 11.1l7.6-1.9z"/><g class="sp-stars"><path class="sp-tw sp-tw1" d="M20 2.8l.55 2.15 2.15.55-2.15.55L20 8.2l-.55-2.15L17.3 5.5l2.15-.55z"/><path class="sp-tw sp-tw2" d="M4 15.5l.42 1.68 1.68.42-1.68.42L4 19.7l-.42-1.68L1.9 17.6l1.68-.42z"/><path class="sp-tw sp-tw3" d="M20.5 17l.35 1.4 1.4.35-1.4.35L20.5 20.5l-.35-1.4L18.75 18.75l1.4-.35z"/></g></svg></button>
+  <button data-tab="ai" aria-label="Boldin AI"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor" class="mai-spk"><path class="sp-body" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M12 2.4l1.8 7 7 1.8-7 1.8-1.8 7-1.8-7-7-1.8 7-1.8z"/><g class="sp-stars"><path class="sp-tw sp-tw1" d="M20 2.3L20.85 4.65 23.2 5.5 20.85 6.35 20 8.7 19.15 6.35 16.8 5.5 19.15 4.65Z"/><path class="sp-tw sp-tw2" d="M4 14.8L4.78 16.82 6.8 17.6 4.78 18.38 4 20.4 3.22 18.38 1.2 17.6 3.22 16.82Z"/><path class="sp-tw sp-tw3" d="M20.5 16.2L21.2 18.05 23.05 18.75 21.2 19.45 20.5 21.3 19.8 19.45 17.95 18.75 19.8 18.05Z"/></g></svg></button>
 </nav>
 
 <div class="mtoast" id="mtoast"></div>
@@ -2273,7 +2272,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     }
   }
   function fixHeadlines(root){
-    (root||document).querySelectorAll('.mhl:not(.mai-title), .msub-hl, .mx-h1, .mx-sec-h, .mx-final-t').forEach(noOrphans);
+    (root||document).querySelectorAll('.mhl, .msub-hl, .mx-h1, .mx-sec-h, .mx-final-t').forEach(noOrphans);
   }
 
 
