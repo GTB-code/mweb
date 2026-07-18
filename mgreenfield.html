@@ -31,11 +31,11 @@ body{ font-family:var(--font); background:var(--white); color:var(--ink);
   transition:opacity .26s var(--push-ease); }
 body.pushed .mtop{ opacity:0; pointer-events:none; }
 .mtop .brand{ display:flex; align-items:center; }
-.mtop .brand svg{ display:block; height:32px; width:auto; }
+.mtop .brand svg{ display:block; height:35px; width:auto; }
 .mtop .mright{ display:flex; align-items:center; gap:10px; }
-.mtop .mico{ width:42px; height:42px; border-radius:999px; display:flex; align-items:center; justify-content:center;
+.mtop .mico{ width:46px; height:46px; border-radius:999px; display:flex; align-items:center; justify-content:center;
   color:#6E7480; background:var(--white); border:1px solid var(--hairline); }
-.mtop .mico svg{ width:23px; height:23px; }
+.mtop .mico svg{ width:24px; height:24px; }
 .mtop .mava{ width:42px; height:42px; border-radius:999px; background:var(--white); color:#6E7480;
   border:1px solid var(--hairline); display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:600; }
 
@@ -900,6 +900,36 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 .mlrn-txt{ flex:1; min-width:0; }
 .mlrn-t{ display:block; font-size:17px; font-weight:700; color:var(--ink); line-height:1.25; }
 .mlrn-s{ display:block; font-size:14px; color:var(--text-secondary); margin-top:3px; line-height:1.4; }
+/* the mix as Boldin arches (the desktop optimize animation, at home on mobile) */
+.msx-arches{ margin:8px 0 2px; }
+.msx-arches svg{ display:block; width:100%; height:auto; overflow:visible; }
+/* the holdings list: tickers behind the buckets */
+.mhold-row{ display:flex; align-items:center; gap:11px; width:100%; padding:13px 2px; border-bottom:1px solid var(--hairline); cursor:pointer; }
+.mhold-row:last-child{ border-bottom:0; }
+.mhold-row:active{ background:#FAFBFB; }
+.mh-dot{ flex:none; width:11px; height:11px; border-radius:999px; }
+.mh-txt{ flex:1; min-width:0; display:flex; flex-direction:column; }
+.mh-tk{ font-size:15.5px; font-weight:700; color:var(--ink); letter-spacing:0.2px; }
+.mh-nm{ font-size:13px; color:var(--text-secondary); margin-top:1.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.mh-num{ flex:none; display:flex; flex-direction:column; align-items:flex-end; }
+.mh-amt{ font-size:15.5px; font-weight:600; color:var(--ink); font-variant-numeric:tabular-nums; }
+.mh-pct{ font-size:12.5px; color:var(--text-tertiary); margin-top:1.5px; font-variant-numeric:tabular-nums; }
+.mh-edit{ flex:none; color:var(--text-tertiary); display:flex; padding-left:2px; }
+.mhold-row.mh-new{ animation:mtl-in 1.2s ease; border-radius:12px; }
+.mh-remove{ display:block; width:100%; background:none; border:0; color:#B4231F; font-size:14.5px; font-weight:600; font-family:inherit; cursor:pointer; padding:12px 0 2px; }
+/* the five decision lenses: allocate risk and opportunity, not just assets */
+.mlens5-cap{ font-size:14px; color:var(--text-secondary); line-height:1.55; margin:-2px 0 14px; }
+.mlens5-row{ display:flex; align-items:center; gap:12px; padding:9px 0; }
+.l5-t{ flex:0 0 132px; font-size:14.5px; font-weight:600; color:var(--ink); }
+.l5-bar{ flex:1; height:8px; border-radius:999px; background:#EFF1F3; overflow:hidden; }
+.l5-bar i{ display:block; height:100%; border-radius:999px; background:linear-gradient(90deg,#0D3F4A,#04B477); }
+.l5-v{ flex:0 0 60px; text-align:right; font-size:13px; font-weight:700; color:var(--green-cta); }
+.l5-v.warn{ color:#8A6D00; }
+/* the cofounder's memo, typeset as the pull-quote it is */
+.msx-memo{ border-left:3px solid var(--mint); padding:2px 2px 2px 16px; }
+.msx-memo p{ font-size:15px; line-height:1.62; color:var(--text-secondary); margin:0 0 14px; }
+.msx-memo p b{ color:var(--ink); font-weight:600; }
+.msx-memo .memo-att{ font-size:13.5px; font-weight:600; color:var(--text-tertiary); margin-top:4px; }
 /* milestone dots on the timeline chart */
 .msx-mdots circle{ opacity:0; animation:mdot-in .4s ease forwards; animation-delay:calc(.6s + var(--i)*0.07s); }
 @keyframes mdot-in{ to{ opacity:1; } }
@@ -1118,11 +1148,12 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 .mps-l{ font-size:14px; color:var(--text-tertiary); }
 /* the section list: rows push detail pages */
 .mlist{ margin-top:26px; border-top:1px solid var(--hairline); }
+#mlist{ border-top:0; margin-top:14px; }
 /* the Plan list is led by the Plan Score card, which provides its own separation —
    drop the top hairline so it doesn't read as a stray line above the widget */
 #mlistPlan{ border-top:0; margin-top:22px; }
 /* Today: air between the 3 stat blocks and the Plan Score widget */
-#todayScore .mps{ margin-top:14px; }
+#todayScore .mps{ margin-top:22px; }
 /* Home: air between the net-worth graph and the Plan Score widget */
 #homeScore .mps{ margin-top:50px; }
 .mrow{ display:flex; align-items:center; gap:12px; width:100%; text-align:left; background:none; border:0;
@@ -1466,6 +1497,15 @@ body.menu-open .mmenu{ transform:translateX(0); }
 .mmenu-sp{ flex:1; }
 .mmenu-out{ color:#B4231F; }
 .mmenu-out svg{ color:#B4231F; }
+.mmenu-prof{ display:flex; align-items:center; gap:13px; width:100%; text-align:left; background:none; border:0;
+  padding:16px 10px; margin:16px 0 14px; border-radius:14px; font-family:inherit; cursor:pointer; }
+.mmenu-prof:active{ background:#F6F7F8; }
+.mmenu-prof .pava{ width:46px; height:46px; border-radius:999px; background:var(--teal,#0D3F4A); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:700; flex:none; }
+.mmenu-prof .ptxt{ display:flex; flex-direction:column; min-width:0; }
+.mmenu-prof .pnm{ font-size:16.5px; font-weight:700; color:var(--ink); }
+.mmenu-prof .psb{ font-size:13.5px; color:var(--text-secondary); margin-top:2.5px; }
+.mmenu-prof .pchev{ margin-left:auto; color:var(--text-tertiary); display:flex; }
 @media (prefers-reduced-motion: reduce){ .mmenu, .mmenu-scrim{ transition:none; } }
 /* ===== the stat detail modal (mirrors desktop sx-modal) ===== */
 .msx{ position:fixed; inset:0; z-index:90; }
@@ -1638,7 +1678,6 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
   </span>
   <span class="mright">
     <button class="mico" aria-label="File vault"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3.5" y="4.5" width="17" height="15" rx="3"/><circle cx="12" cy="12" r="3.2"/><path d="M12 10.4v1.6l1.1 1.1" stroke-linecap="round"/></svg></button>
-    <span class="mava">ML</span>
     <button class="mico" aria-label="More"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg></button>
   </span>
 </header>
@@ -1768,7 +1807,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
   </div>
 
   <div id="todayScore"></div>
-  <div class="mplan-seclabel" style="margin:40px 2px -6px">My money</div>
+  <div class="mplan-seclabel" style="margin:24px 2px -6px">My money</div>
   <div class="mlist" id="mlist"></div>
 </div>
 
@@ -2143,6 +2182,11 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
   <button class="mmenu-row" type="button" data-toast="Community lands next in the mobile build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="3"/><circle cx="16.5" cy="10.5" r="2.4"/><path d="M3.5 19c.9-2.9 2.9-4.4 5.5-4.4s4.6 1.5 5.5 4.4M15.5 15.4c2 .3 3.5 1.6 4.3 3.6"/></svg>Community</button>
   <button class="mmenu-row" type="button" data-toast="Help center lands next in the mobile build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.2a2.5 2.5 0 0 1 4.9.7c0 1.6-2.4 2-2.4 3.3"/><circle cx="12" cy="16.6" r=".4" fill="currentColor"/></svg>Help center</button>
   <div class="mmenu-sp"></div>
+  <button class="mmenu-prof" id="mmenuProf" type="button" aria-label="Your profile">
+    <span class="pava">ML</span>
+    <span class="ptxt"><span class="pnm">Marshall &amp; Lily</span><span class="psb">Profile &amp; household settings</span></span>
+    <span class="pchev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span>
+  </button>
   <div class="mmenu-div"></div>
   <button class="mmenu-row" type="button" data-toast="Release notes land next in the mobile build"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V9z"/><path d="M13 3v6h6M9 13h6M9 16.5h4"/></svg>Release notes</button>
   <button class="mmenu-row mmenu-out" type="button" data-toast="Signed out, in the full product"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4"/><path d="M10 8l-4 4 4 4M6 12h10"/></svg>Log out</button>
@@ -3566,10 +3610,6 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     /* leaving the Vault closes the camera too */
     document.getElementById('mback').addEventListener('click', closeCam);
   })();
-  var ava=document.querySelector('.mtop .mava');
-  ava.style.cursor='pointer';
-  ava.setAttribute('role','button'); ava.setAttribute('tabindex','0'); ava.setAttribute('aria-label','Your profile');
-  ava.addEventListener('click', function(){ push(PROFILE_HTML, false); });
 
   /* the hamburger opens an iOS-style slide-over drawer */
   (function(){
@@ -3584,6 +3624,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     document.getElementById('mmenuClose').addEventListener('click', closeMenu);
     document.getElementById('mmenuScrim').addEventListener('click', closeMenu);
     menu.addEventListener('click', function(e){
+      if(e.target.closest('#mmenuProf')){ closeMenu(); push(PROFILE_HTML, false); return; }
       if(e.target.closest('.mmenu-row')) closeMenu();   /* the global toast handler shows the message */
     });
   })();
@@ -3818,14 +3859,28 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         risks:{t:'The December effect', s:'Holidays and property taxes land in the same month. One planned month of red is fine; a surprise one is not.'},
         decide:{t:'How much buffer is enough', s:'<b>$107K</b> of cash is over two years of expenses. Some of that comfort could be compounding instead.'},
         step:{t:'Open Money Flows', act:'plan'} },
-      alloc:{ label:'Asset allocation', fig:'72 / 28', try:true,
+      alloc:{ label:'Asset allocation', fig:'72 / 28', try:true, holdings:true,
         pts:[70,70.2,70.5,70.9,70.7,71.1,71.3,71.5,71.6,71.8,71.9,72], fmt:'pct', proj:[72,70,64,60,60,59,58,57,56,55,55,54,54,53],
         sub:'Stocks to bonds, across every account. The target is 70 / 30.',
         note:'Markets did the drifting, not you. 2.4% above target is one rebalance away from fixed.',
         opps:{t:'One rebalance, one glide path', g:'+$39K', s:'Resetting to <b>70 / 30</b> now and gliding to <b>60 / 40</b> by 2028 is worth about $39K of risk-adjusted value.'},
         risks:{t:'Drift compounds quietly', s:'One more good year pushes you to <b>74%</b> stocks right as retirement starts. That is risk you never chose.'},
         decide:{t:'Sell winners, or steer new money', s:'Rebalance today, or point new savings at bonds and let the mix walk back. Both work; the timing differs.'},
-        step:{t:'Run the rebalance with Boldin AI', act:'optimize'} },
+        step:{t:'Run the rebalance with Boldin AI', act:'optimize'},
+        lensesLabel:'Where this is going',
+        lensesCap:'&#8220;What do I own?&#8221; is answered above. The question that matters next: am I invested right for my goals, my timeline, my life? Five lenses, coming to this page:',
+        lenses:[['Concentration',18,'Low'],['Stability',62,'Solid'],['Growth',58,'On plan'],['Income',54,'Building'],['Downside protection',47,'Review','warn']],
+        memoLabel:'The north star',
+        memo:'<p>Assets has the potential to be one of the most important things we&#8217;ve ever built, and the foundation you&#8217;ve laid is thoughtful and real. Please don&#8217;t let anything below slow you down. I&#8217;m sharing it because I care about this one deeply, not because I want to redirect it.</p>'+
+          '<p>I like the simplicity of starting with the classification of equities, bonds, cash, and other. It&#8217;s familiar and understandable. But, it is less than what Empower and others already show. Not only is it not quite enough, I think that we have a real opportunity to go further and to drive meaning. We have a real opportunity to drive clarity, confidence, and decision making around investments.</p>'+
+          '<p>And, there&#8217;s a real difference between helping someone answer &#8220;what do I own?&#8221; and <b>&#8220;am I invested appropriately for my goals, my timeline, my life?&#8221;</b> The second question is the one people actually have.</p>'+
+          '<p>Every time I tell someone Boldin does DIY retirement planning, the first thing they ask is &#8220;so you tell me how to invest?&#8221; That&#8217;s the unmet need, and it&#8217;s not answered by telling someone to hold X% equities.</p>'+
+          '<p>My favorite way to see why the basic buckets fall short: picture 100% Vanguard Total World against 100% NVIDIA. Both are &#8220;100% equities.&#8221; Technically true, practically nothing alike. Same with &#8220;other,&#8221; which could be gold, crypto, commodities, options &#8212; wildly different purposes and risk.</p>'+
+          '<p>We&#8217;re a planning and decision making company, not a brokerage. Brokerages organize investments. We are helping the user organize and make decisions.</p>'+
+          '<p>So the question I want us to keep asking is: what decision are we helping the user make? Maybe that eventually means our own way of thinking about a portfolio: concentration, stability, growth, income, downside protection.</p>'+
+          '<p><b>We want to help people allocate risk and opportunity, not just allocate assets.</b> I don&#8217;t know exactly how to do that yet, I just want us to keep the question alive.</p>'+
+          '<p>We win by helping ordinary people understand their money well enough to make better decisions and feel genuinely more confident about their future and I&#8217;m sharing it because I think this team is exactly the one that can innovate and build it.</p>'+
+          '<div class="memo-att">From our cofounder</div>' },
       dta:{ label:'Debt to assets', fig:'23%', try:true,
         pts:[26.4,26.1,25.8,25.5,25.2,24.9,24.6,24.2,23.9,23.6,23.3,23.0], fmt:'pct', proj:[23,21,19.5,18,16,14,11,8,5,2,0,0,0,0],
         sub:'For every dollar you own, 23 cents is owed. Nearly all of it the 3.1% mortgage.',
@@ -4119,6 +4174,23 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
           '<div class="mtl-field"><label>How much</label><div class="mtl-amt"><i>$</i><input type="text" id="mtlAmt" inputmode="numeric" autocomplete="off"></div></div>'+
           '<button class="mtl-go" id="mtlGo" type="button">Add to my timeline</button>'+
         '</div>' : '';
+      var holdH = d.holdings ? '<div class="msx-sec" id="mholdSec"><div class="msx-sec-label">What you own</div>'+
+        '<div class="mhold" id="mholdList"></div>'+
+        '<button class="mtl-add" type="button" id="mhAdd">+ Add a holding</button>'+
+        '<div class="mtl-cap">Tickers, funds, cash. The buckets above are built from these.</div>'+
+        '<div class="mtl-form" id="mhForm" hidden>'+
+          '<button class="mtl-x" id="mhX" type="button">Cancel</button>'+
+          '<div class="mtl-field"><label>Ticker</label><input type="text" id="mhTk" autocomplete="off" autocapitalize="characters" placeholder="VTI"></div>'+
+          '<div class="mtl-field"><label>Name</label><input type="text" id="mhNm" autocomplete="off" placeholder="Vanguard Total Stock Market"></div>'+
+          '<div class="mtl-field"><label>What kind?</label><div class="mtl-types" id="mhTypes"></div></div>'+
+          '<div class="mtl-field"><label>Amount</label><div class="mtl-amt"><i>$</i><input type="text" id="mhAmt" inputmode="numeric" autocomplete="off" placeholder="25,000"></div></div>'+
+          '<button class="mtl-go" id="mhGo" type="button">Save holding</button>'+
+          '<button class="mh-remove" id="mhRm" type="button" hidden>Remove this holding</button>'+
+        '</div></div>' : '';
+      var lensH = d.lenses ? '<div class="msx-sec"><div class="msx-sec-label">'+(d.lensesLabel||'Where this is going')+'</div>'+
+        (d.lensesCap?'<div class="mlens5-cap">'+d.lensesCap+'</div>':'')+
+        '<div class="mlens5">'+d.lenses.map(function(l){ return '<div class="mlens5-row"><span class="l5-t">'+l[0]+'</span><span class="l5-bar"><i style="width:'+l[1]+'%"></i></span><span class="l5-v'+(l[3]?' '+l[3]:'')+'">'+l[2]+'</span></div>'; }).join('')+'</div></div>' : '';
+      var memoH = d.memo ? '<div class="msx-sec"><div class="msx-sec-label">'+(d.memoLabel||'The north star')+'</div><div class="msx-memo">'+d.memo+'</div></div>' : '';
       var artH = d.articles ? '<div class="msx-sec"><div class="msx-sec-label">'+(d.articlesLabel||'Inside the playbook')+'</div><div class="mlrn">'+
         d.articles.map(function(a){ return '<button class="mlrn-row" type="button" data-toast="The full article lands next in the mobile build"><span class="mlrn-ic">'+a[2]+'</span><span class="mlrn-txt"><span class="mlrn-t">'+a[0]+'</span><span class="mlrn-s">'+a[1]+'</span></span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>'; }).join('')+'</div></div>' : '';
       var tlH = d.timeline ? '<div class="msx-sec"><div class="msx-sec-label">The milestones</div><div class="msx-tl">'+
@@ -4126,7 +4198,8 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       var tcfg = d.try ? TRYCFG[curKey] : null;
       var tryH = tcfg ? '<div class="msx-sec msx-try"><div class="msx-sec-label">'+tcfg.secLabel+'</div>'+
         '<div class="msx-try-read"><b id="tryDate"></b><span class="msx-try-stats" id="tryStats"></span><span class="msx-try-chip" id="tryChip"></span></div>'+
-        '<svg id="trySvg" viewBox="0 0 356 168" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-label="Your plan versus the date you are trying">'+
+        (tcfg.arches?'<div class="msx-arches" id="msxArches"></div>':'')+
+        '<svg id="trySvg"'+(tcfg.arches?' style="display:none"':'')+' viewBox="0 0 356 168" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-label="Your plan versus the date you are trying">'+
           '<path id="tryFan" fill="#04B477" opacity="0.12" d=""></path>'+
           '<path id="tryBase" fill="none" stroke="#0E794E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d=""></path>'+
           '<path id="tryGhost" fill="none" stroke="#0D3F4A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 9" opacity="0" d=""></path>'+
@@ -4144,12 +4217,13 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         '<div class="msx-head"><div><div class="msx-title">'+d.label+'</div><div class="msx-fig">'+d.fig+'</div><div class="msx-sub">'+d.sub+'</div></div>'+
         '<button class="msx-x" aria-label="Close" data-msx-close><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>'+
         tryH+(d.try?'':(d.pts?fsegH+chart(cd):''))+'<div class="msx-note">'+d.note+'</div>'+
-        addH+artH+
+        addH+artH+holdH+
         compH+cmpH+tlH+
         (d.opps?sec('Top opportunities', d.opps, false):'')+
         (d.risks?sec('Key risks', d.risks, false):'')+
         (d.decide?sec('Key decisions', d.decide, false):'')+
         (d.step?sec('Suggested next steps', d.step, true):'')+
+        lensH+memoH+
         askH;
     }
     var modal=document.getElementById('msx'), sheet=document.getElementById('msxSheet'), scrim=document.getElementById('msxScrim');
@@ -4219,7 +4293,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
             chip: d===0?['your surplus today','']:(d>0?['+$'+d.toLocaleString('en-US')+' /mo saved','up']:['\u2212$'+Math.abs(d).toLocaleString('en-US')+' /mo saved','dn']),
             k:k, spread:Math.min(1, Math.abs(d)/2200 + 0.25), on:d!==0 };
         } },
-      alloc:{ secLabel:'Try a different mix', min:40, max:90, step:1, def:72,
+      alloc:{ secLabel:'Try a different mix', arches:true, min:40, max:90, step:1, def:72,
         left:'40 / 60', right:'90 / 10', cap:'Slide the stock share. The fan is the risk you take on.',
         base:[566,640,720,800,930,1080,1240,1420,1600,1780,1950,2090,2160,2100], ymax:2900,
         calc:function(v){
@@ -4345,6 +4419,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       chip.textContent=r.chip[0]; chip.className='msx-try-chip'+(r.chip[1]?' '+r.chip[1]:'');
       var el=document.getElementById('tryRange');
       if(el) el.style.setProperty('--p', (((v-cfg.min)/(cfg.max-cfg.min))*100).toFixed(1)+'%');
+      if(cfg.arches && tryTouched) drawArches(v, false);
       var cta=document.getElementById('tryCta');
       if(cta){
         if(r.on && tryTouched){ cta.classList.add('show'); cta.classList.remove('done'); cta.textContent='Update my plan'; }
@@ -4401,6 +4476,8 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       curKey=key;
       sheet.innerHTML=build(d);
       if(key==='tl') tlChartDots();
+      if(TRYCFG[key] && TRYCFG[key].arches) drawArches(null, true);
+      if(SX[key] && SX[key].holdings) mhRender();
       modal.hidden=false; void modal.offsetWidth; modal.classList.add('on');
       document.body.style.overflow='hidden';
       drawIn(false);
@@ -4489,6 +4566,96 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       });
       svg.appendChild(g);
     }
+    /* the holdings behind the buckets: every ticker, editable */
+    var HOLD=[
+      {tk:'VTI',  nm:'Vanguard Total Stock Market', cls:'st', amt:98400},
+      {tk:'VXUS', nm:'Vanguard Total International', cls:'st', amt:41300},
+      {tk:'NVDA', nm:'NVIDIA Corp', cls:'st', amt:15700},
+      {tk:'FXAIX',nm:'Fidelity 500 Index', cls:'st', amt:10000},
+      {tk:'BND',  nm:'Vanguard Total Bond Market', cls:'bd', amt:43900},
+      {tk:'CASH', nm:'Ally &amp; Marcus sweep', cls:'ca', amt:20450}
+    ];
+    var HCLS={ st:{n:'Stocks',c:'#0D3F4A'}, bd:{n:'Bonds',c:'#04B477'}, ca:{n:'Cash',c:'#9FDFC6'} };
+    function holdTotal(){ return HOLD.reduce(function(s,x){ return s+x.amt; },0); }
+    function holdMix(){
+      var t=holdTotal()||1, st=0;
+      HOLD.forEach(function(x){ if(x.cls==='st') st+=x.amt; });
+      var p=Math.round(st/t*100); return [p,100-p];
+    }
+    function holdRows(){
+      var t=holdTotal();
+      return HOLD.map(function(x,i){
+        return '<div class="mhold-row" data-hi="'+i+'" role="button" tabindex="0">'+
+          '<span class="mh-dot" style="background:'+HCLS[x.cls].c+'"></span>'+
+          '<span class="mh-txt"><span class="mh-tk">'+x.tk+'</span><span class="mh-nm">'+x.nm+'</span></span>'+
+          '<span class="mh-num"><span class="mh-amt">$'+x.amt.toLocaleString('en-US')+'</span><span class="mh-pct">'+Math.round(x.amt/t*100)+'%</span></span>'+
+          '<span class="mh-edit" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3.5l3.5 3.5L8 19.5 3.5 20.5 4.5 16z"/></svg></span>'+
+        '</div>';
+      }).join('');
+    }
+    var MH={ i:null, cls:'st' };
+    function mhRender(){ var el=document.getElementById('mholdList'); if(el) el.innerHTML=holdRows(); }
+    function mhChips(){
+      var box=document.getElementById('mhTypes'); if(!box) return;
+      box.innerHTML=Object.keys(HCLS).map(function(k){
+        return '<button type="button" data-hc="'+k+'"'+(k===MH.cls?' class="on"':'')+'>'+HCLS[k].n+'</button>'; }).join('');
+    }
+    function mhOpenForm(i){
+      MH.i=i; MH.cls = (i==null) ? 'st' : HOLD[i].cls;
+      var f=document.getElementById('mhForm'), a=document.getElementById('mhAdd');
+      var tk=document.getElementById('mhTk'), nm=document.getElementById('mhNm'), am=document.getElementById('mhAmt'), rm=document.getElementById('mhRm');
+      if(i==null){ tk.value=''; nm.value=''; am.value=''; rm.hidden=true; }
+      else{ tk.value=HOLD[i].tk; nm.value=HOLD[i].nm.replace(/&amp;/g,'&'); am.value=HOLD[i].amt.toLocaleString('en-US'); rm.hidden=false; }
+      mhChips(); f.hidden=false; if(a) a.style.display='none';
+      f.scrollIntoView({block:'center', behavior:reduce?'auto':'smooth'});
+    }
+    function mhCloseForm(){
+      var f=document.getElementById('mhForm'), a=document.getElementById('mhAdd');
+      if(f) f.hidden=true; if(a) a.style.display='';
+    }
+    function mhAfterChange(flashTk){
+      mhRender(); drawArches(null,false);
+      if(flashTk){ var rows=document.querySelectorAll('.mhold-row');
+        for(var i=0;i<rows.length;i++){ if(rows[i].querySelector('.mh-tk').textContent===flashTk){ rows[i].classList.add('mh-new'); break; } } }
+      if(typeof toast==='function') toast('Mix updated \u2713');
+      if(navigator.vibrate){ try{ navigator.vibrate(10); }catch(_){} }
+    }
+    function drawArches(tried, animate){
+      /* the mix as Boldin arches, straight from the desktop optimize page: today outside, the plan inside */
+      var el=document.getElementById('msxArches'); if(!el) return;
+      var W=356,H=158,cx=178,cy=136,R1=112,sw1=22,R2=84,sw2=16;
+      var mix=holdMix();
+      var cur=[{n:'Stocks',v:mix[0],c:'#0D3F4A'},{n:'Bonds',v:mix[1],c:'#04B477'}];
+      var inner=(tried==null)?{vals:[70,30],lbl:'The plan'}:{vals:[tried,100-tried],lbl:'Trying'};
+      function rad(a){ return a*Math.PI/180; }
+      function pt(r,a){ return [cx+r*Math.cos(rad(a)), cy-r*Math.sin(rad(a))]; }
+      function seg(r,a0,a1){ var p0=pt(r,a0),p1=pt(r,a1); return 'M'+p0[0].toFixed(1)+' '+p0[1].toFixed(1)+' A'+r+' '+r+' 0 0 1 '+p1[0].toFixed(1)+' '+p1[1].toFixed(1); }
+      function arch(vals,r,swid,alpha){
+        var a=180,out='';
+        vals.forEach(function(v,i){ var span=v/100*180;
+          out+='<path class="alo-arc" d="'+seg(r,a,a-span)+'" fill="none" stroke="'+cur[i].c+'" stroke-opacity="'+alpha+'" stroke-width="'+swid+'" pathLength="1"/>';
+          a-=span; });
+        return out;
+      }
+      var labels='', a0=180;
+      cur.forEach(function(c){ var m=a0-c.v/100*90; a0-=c.v/100*180;
+        var p=pt(R1+sw1/2+13,m); var anch=m>112?'end':(m<68?'start':'middle');
+        labels+='<text x="'+p[0].toFixed(1)+'" y="'+(p[1]+4).toFixed(1)+'" font-size="12.5" font-weight="700" fill="#10182C" text-anchor="'+anch+'">'+c.n+' '+c.v+'%</text>'; });
+      var t=pt(R1,180), q=pt(R2,180);
+      el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-label="Your mix today and the plan, as Boldin arches">'+
+        arch([cur[0].v,cur[1].v],R1,sw1,1)+arch(inner.vals,R2,sw2,0.62)+
+        '<text x="'+t[0]+'" y="'+(cy+16)+'" font-size="11.5" fill="#6E7687" text-anchor="middle">Today</text>'+
+        '<text x="'+(2*cx-q[0])+'" y="'+(cy+16)+'" font-size="11.5" fill="#0E794E" font-weight="600" text-anchor="middle">'+inner.lbl+'</text>'+
+        '<text x="'+cx+'" y="'+(cy-34)+'" font-size="23" font-weight="600" fill="#10182C" text-anchor="middle" letter-spacing="-0.5">$'+holdTotal().toLocaleString('en-US')+'</text>'+
+        '<text x="'+cx+'" y="'+(cy-16)+'" font-size="11.5" fill="#6E7687" text-anchor="middle">invested today</text>'+
+        labels+'</svg>';
+      if(animate && !reduce){
+        el.querySelectorAll('.alo-arc').forEach(function(p,i){
+          p.style.strokeDasharray='1'; p.style.strokeDashoffset='1';
+          setTimeout(function(){ p.style.transition='stroke-dashoffset 650ms cubic-bezier(0.4,0,0.2,1)'; p.style.strokeDashoffset='0'; }, 80+i*70);
+        });
+      }
+    }
     function mtlYearLabel(){
       var y=document.getElementById('mtlYear'), l=document.getElementById('mtlYearL');
       if(!y || !l) return;
@@ -4496,6 +4663,26 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       l.innerHTML=yr+' &middot; Marshall '+(yr-1965);
     }
     sheet.addEventListener('click', function(e){
+      if(e.target.closest('#mhAdd')){ mhOpenForm(null); return; }
+      if(e.target.closest('#mhX')){ mhCloseForm(); return; }
+      var hc=e.target.closest('#mhTypes button');
+      if(hc){ MH.cls=hc.dataset.hc; mhChips(); return; }
+      if(e.target.closest('#mhGo')){
+        var tk=(document.getElementById('mhTk').value.trim().toUpperCase())||'VTI';
+        var nm=document.getElementById('mhNm').value.trim()||'New holding';
+        var amt=parseInt(document.getElementById('mhAmt').value.replace(/[^0-9]/g,''),10)||25000;
+        var rec={tk:tk, nm:nm.replace(/&/g,'&amp;'), cls:MH.cls, amt:amt};
+        if(MH.i==null) HOLD.push(rec); else HOLD[MH.i]=rec;
+        mhCloseForm(); mhAfterChange(tk);
+        return;
+      }
+      if(e.target.closest('#mhRm')){
+        if(MH.i!=null) HOLD.splice(MH.i,1);
+        mhCloseForm(); mhAfterChange(null);
+        return;
+      }
+      var hr=e.target.closest('.mhold-row');
+      if(hr){ mhOpenForm(parseInt(hr.dataset.hi,10)); return; }
       if(e.target.closest('#mtlAdd')){
         var f=document.getElementById('mtlForm'), b=document.getElementById('mtlAdd');
         f.hidden=false; b.style.display='none'; mtlChips(); mtlYearLabel(); return;
@@ -4531,6 +4718,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     });
     sheet.addEventListener('input', function(e){
       if(e.target.id==='mtlYear') mtlYearLabel();
+      if(e.target.id==='mhTk') e.target.value=e.target.value.toUpperCase();
     });
     /* the range filter lets the member customize the chart horizon */
     sheet.addEventListener('click', function(e){
