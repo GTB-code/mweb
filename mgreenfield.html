@@ -900,6 +900,10 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 .mlrn-txt{ flex:1; min-width:0; }
 .mlrn-t{ display:block; font-size:17px; font-weight:700; color:var(--ink); line-height:1.25; }
 .mlrn-s{ display:block; font-size:14px; color:var(--text-secondary); margin-top:3px; line-height:1.4; }
+/* milestone dots on the timeline chart */
+.msx-mdots circle{ opacity:0; animation:mdot-in .4s ease forwards; animation-delay:calc(.6s + var(--i)*0.07s); }
+@keyframes mdot-in{ to{ opacity:1; } }
+@media (prefers-reduced-motion: reduce){ .msx-mdots circle{ animation:none; opacity:1; } }
 /* upsell cards: a tip from a pro, and a human in your corner */
 .mstat3-up{ display:flex; flex-direction:column; flex-basis:calc(((100% - 4px)/2.45)*2 + 10px) !important; }
 .mstat3-up .tip{ font-size:14px; line-height:1.35; color:var(--ink); margin-top:5px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
@@ -4396,6 +4400,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       clearTimeout(closeTimer); /* a quick re-open must not be wiped by the previous close */
       curKey=key;
       sheet.innerHTML=build(d);
+      if(key==='tl') tlChartDots();
       modal.hidden=false; void modal.offsetWidth; modal.classList.add('on');
       document.body.style.overflow='hidden';
       drawIn(false);
@@ -4457,6 +4462,33 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       if(n) n.placeholder=t.ph;
       if(a) a.placeholder=t.amt;
     }
+    function tlChartDots(){
+      /* every milestone, mapped onto the green line at its date: the route at a glance */
+      if(curKey!=='tl') return;
+      var svg=sheet.querySelector('.msx-chart svg'); var line=svg && svg.querySelector('.msx-line');
+      if(!svg || !line) return;
+      var old=svg.querySelector('.msx-mdots'); if(old) old.remove();
+      var X0=10, X1=304, Y0=2026, Y1=2057;
+      var g=document.createElementNS('http://www.w3.org/2000/svg','g');
+      g.setAttribute('class','msx-mdots');
+      var L=line.getTotalLength();
+      SX.tl.timeline.forEach(function(m,i){
+        var ym=(m[1]||'').match(/(19|20)\d{2}/); if(!ym) return;
+        var yr=Math.max(Y0, Math.min(Y1, parseInt(ym[0],10)));
+        var tx=X0+(yr-Y0)/(Y1-Y0)*(X1-X0);
+        var lo=0, hi=L;
+        for(var k=0;k<18;k++){ var mid=(lo+hi)/2; if(line.getPointAtLength(mid).x<tx) lo=mid; else hi=mid; }
+        var p=line.getPointAtLength((lo+hi)/2);
+        var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+        c.setAttribute('cx',p.x.toFixed(1)); c.setAttribute('cy',p.y.toFixed(1));
+        c.setAttribute('r', m[4]?'5':'4');
+        c.setAttribute('fill', m[0]);
+        c.setAttribute('stroke','#fff'); c.setAttribute('stroke-width','1.8');
+        c.style.setProperty('--i', i);
+        g.appendChild(c);
+      });
+      svg.appendChild(g);
+    }
     function mtlYearLabel(){
       var y=document.getElementById('mtlYear'), l=document.getElementById('mtlYearL');
       if(!y || !l) return;
@@ -4485,6 +4517,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         for(var i=0;i<TL.length;i++){ var m=(TL[i][1]||'').match(/(19|20)\d{2}/); if(m && parseInt(m[0],10)>yr){ idx=i; break; } }
         TL.splice(idx,0,row);
         sheet.innerHTML=build(SX[curKey]);
+        tlChartDots();
         drawIn(true);
         setTimeout(function(){
           var rows=sheet.querySelectorAll('.msx-tl-row.mine');
