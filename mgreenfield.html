@@ -1832,7 +1832,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
 
   <section class="mcard mplan-card">
     <div class="mplan-chead">
-      <button class="mplan-dd" type="button" id="mplanDD"><span id="mplanDDl">Portfolio</span><svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="mplan-dd" type="button" id="mplanDD"><span id="mplanDDl">Journey</span><svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <button class="mplan-filter" type="button" id="mplanFilter" aria-label="Filters" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M4 6h16M7 12h10M10 18h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
     <div class="msx-fseg mplan-fseg" id="mplanFseg" hidden>
@@ -3683,7 +3683,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     var LENS={
       snapshot:{
         hl:'Retire in <em class="mhl-em">8 years</em> on <em class="mhl-gold">$7,200</em> a month.',
-        dd:'Portfolio',
+        dd:'Journey',
         stats:[['Net worth','$1.14M','&#9650; $8,200','nw'],['Asset allocation','72 / 28','2.4% off target','alloc'],['Debt to assets','23%','Falling yearly','dta']],
         chips:[['Portfolio','$1.09M','cx_portfolio'],['Savings rate','28%','cx_savingsrate']],
         secKeys:['assets','debts','income','home','expenses','flows','withdrawal','taxplan','estate','rates'], secHeading:'Future money'
@@ -3786,7 +3786,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       p.scrollIntoView({behavior: reduce?'auto':'smooth', inline:'center', block:'nearest'});
       apply(p.dataset.lens, true);
     });
-    document.getElementById('mplanDD').addEventListener('click', function(){ toast('Portfolio views land next in the mobile build'); });
+    document.getElementById('mplanDD').addEventListener('click', function(){ toast('Journey views land next in the mobile build'); });
     apply('snapshot', false);
     window.__applyLens=apply;
 
