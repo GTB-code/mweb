@@ -917,7 +917,8 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 .mh-pct{ font-size:12.5px; color:var(--text-tertiary); margin-top:1.5px; font-variant-numeric:tabular-nums; }
 .mh-edit{ flex:none; color:var(--text-tertiary); display:flex; padding-left:2px; }
 .mhold-row.mh-new{ animation:mtl-in 1.2s ease; border-radius:12px; }
-.mh-remove{ display:block; width:100%; background:none; border:0; color:#B4231F; font-size:14.5px; font-weight:600; font-family:inherit; cursor:pointer; padding:12px 0 2px; }
+.mhold-nb{ border-bottom-color:transparent; }
+.mh-medit .mtl-types{ margin-top:2px; }
 /* the five decision lenses: allocate risk and opportunity, not just assets */
 .mlens5-cap{ font-size:14px; color:var(--text-secondary); line-height:1.55; margin:-2px 0 14px; }
 .mlens5-row{ display:flex; align-items:center; gap:12px; padding:9px 0; }
@@ -4185,16 +4186,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       var holdH = d.holdings ? '<div class="msx-sec" id="mholdSec"><div class="msx-sec-label">What you own</div>'+
         '<div class="mhold" id="mholdList"></div>'+
         '<button class="mtl-add" type="button" id="mhAdd">+ Add a holding</button>'+
-        '<div class="mtl-cap">Tickers, funds, cash. The buckets above are built from these.</div>'+
-        '<div class="mtl-form" id="mhForm" hidden>'+
-          '<button class="mtl-x" id="mhX" type="button">Cancel</button>'+
-          '<div class="mtl-field"><label>Ticker</label><input type="text" id="mhTk" autocomplete="off" autocapitalize="characters" placeholder="VTI"></div>'+
-          '<div class="mtl-field"><label>Name</label><input type="text" id="mhNm" autocomplete="off" placeholder="Vanguard Total Stock Market"></div>'+
-          '<div class="mtl-field"><label>What kind?</label><div class="mtl-types" id="mhTypes"></div></div>'+
-          '<div class="mtl-field"><label>Amount</label><div class="mtl-amt"><i>$</i><input type="text" id="mhAmt" inputmode="numeric" autocomplete="off" placeholder="25,000"></div></div>'+
-          '<button class="mtl-go" id="mhGo" type="button">Save holding</button>'+
-          '<button class="mh-remove" id="mhRm" type="button" hidden>Remove this holding</button>'+
-        '</div></div>' : '';
+        '<div class="mtl-cap">Tickers, funds, cash. The buckets above are built from these.</div></div>' : '';
       var lensH = d.lenses ? '<div class="msx-sec"><div class="msx-sec-label">'+(d.lensesLabel||'Where this is going')+'</div>'+
         (d.lensesCap?'<div class="mlens5-cap">'+d.lensesCap+'</div>':'')+
         '<div class="mlens5">'+d.lenses.map(function(l){ return '<div class="mlens5-row"><span class="l5-t">'+l[0]+'</span><span class="l5-bar"><i style="width:'+l[1]+'%"></i></span><span class="l5-v'+(l[3]?' '+l[3]:'')+'">'+l[2]+'</span></div>'; }).join('')+'</div></div>' : '';
@@ -4601,25 +4593,93 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         '</div>';
       }).join('');
     }
-    var MH={ i:null, cls:'st' };
     function mhRender(){ var el=document.getElementById('mholdList'); if(el) el.innerHTML=holdRows(); }
-    function mhChips(){
-      var box=document.getElementById('mhTypes'); if(!box) return;
-      box.innerHTML=Object.keys(HCLS).map(function(k){
-        return '<button type="button" data-hc="'+k+'"'+(k===MH.cls?' class="on"':'')+'>'+HCLS[k].n+'</button>'; }).join('');
+    var MH_EASE='cubic-bezier(0.22,1,0.36,1)';
+    function mhBuildEd(i){
+      var isNew=(i==null);
+      var x=isNew?{tk:'',nm:'',cls:'st',amt:0}:HOLD[i];
+      var w=document.createElement('div'); w.className='medit mh-medit'; w.dataset.hi=isNew?'':String(i);
+      var kinds=Object.keys(HCLS).map(function(k){
+        return '<button type="button" data-hc="'+k+'"'+(k===x.cls?' class="on"':'')+'>'+HCLS[k].n+'</button>'; }).join('');
+      var kebab=isNew?'':'<div class="medit-kebab-wrap">'+
+        '<button class="medit-kebab" type="button" aria-label="More options" aria-haspopup="true" aria-expanded="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg></button>'+
+        '<div class="medit-menu" role="menu" hidden><button class="medit-menu-item medit-menu-delete" type="button" role="menuitem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>Delete</button></div>'+
+      '</div>';
+      w.innerHTML='<div class="medit-card">'+
+        '<div class="medit-head"><div class="medit-t">'+(isNew?'New holding':x.tk)+'</div>'+
+        '<div class="medit-actions">'+kebab+
+          '<button class="medit-x" type="button" aria-label="Close"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>'+
+        '</div></div>'+
+        '<div class="mf"><label>Ticker</label><input class="mf-tk" type="text" autocapitalize="characters" autocomplete="off" value="'+x.tk+'" placeholder="VTI"></div>'+
+        '<div class="mf"><label>Name</label><input class="mf-nm" type="text" autocomplete="off" value="'+x.nm.replace(/&amp;/g,'&').replace(/"/g,'&quot;')+'" placeholder="Vanguard Total Stock Market"></div>'+
+        '<div class="mf"><label>What kind?</label><div class="mtl-types mh-kinds">'+kinds+'</div></div>'+
+        '<div class="mf"><label>Amount</label><input class="mf-amt" type="text" inputmode="numeric" autocomplete="off" value="'+(x.amt?x.amt.toLocaleString('en-US'):'')+'" placeholder="25,000"></div>'+
+        '<button class="medit-save" type="button">Save</button></div>';
+      return w;
     }
-    function mhOpenForm(i){
-      MH.i=i; MH.cls = (i==null) ? 'st' : HOLD[i].cls;
-      var f=document.getElementById('mhForm'), a=document.getElementById('mhAdd');
-      var tk=document.getElementById('mhTk'), nm=document.getElementById('mhNm'), am=document.getElementById('mhAmt'), rm=document.getElementById('mhRm');
-      if(i==null){ tk.value=''; nm.value=''; am.value=''; rm.hidden=true; }
-      else{ tk.value=HOLD[i].tk; nm.value=HOLD[i].nm.replace(/&amp;/g,'&'); am.value=HOLD[i].amt.toLocaleString('en-US'); rm.hidden=false; }
-      mhChips(); f.hidden=false; if(a) a.style.display='none';
-      f.scrollIntoView({block:'center', behavior:reduce?'auto':'smooth'});
+    function mhGrow(ed, fromH){
+      var hh=ed.scrollHeight;
+      if(!reduce && ed.animate){
+        ed.style.overflow='hidden';
+        ed.animate([{height:fromH+'px'},{height:hh+'px'}],{duration:360,easing:MH_EASE,fill:'both'})
+          .finished.then(function(){ ed.style.height='auto'; ed.style.overflow=''; });
+        ed.querySelector('.medit-card').animate(
+          [{opacity:0.3, transform:'translateY(10px)'},{opacity:1, transform:'translateY(0)'}],
+          {duration:360,easing:MH_EASE});
+      }
     }
-    function mhCloseForm(){
-      var f=document.getElementById('mhForm'), a=document.getElementById('mhAdd');
-      if(f) f.hidden=true; if(a) a.style.display='';
+    function mhInlineOpen(i){
+      var list=document.getElementById('mholdList'); if(!list) return;
+      var already=document.querySelector('#mholdSec .mh-medit'); if(already) mhCancel(already);
+      var ed=mhBuildEd(i);
+      if(i==null){
+        var rows=list.querySelectorAll('.mhold-row'); var lastR=rows[rows.length-1];
+        if(lastR) lastR.classList.add('mhold-nb');
+        list.appendChild(ed);
+        var a=document.getElementById('mhAdd'); if(a) a.style.display='none';
+        mhGrow(ed, 0);
+        ed.querySelector('.mf-tk').focus();
+      } else {
+        var row=list.querySelector('.mhold-row[data-hi="'+i+'"]'); if(!row || row.dataset.editing) return;
+        row.dataset.editing='1';
+        var pv=row.previousElementSibling;
+        if(pv && pv.classList && pv.classList.contains('mhold-row')) pv.classList.add('mhold-nb');
+        row.after(ed);
+        var rh=row.offsetHeight; row.style.display='none';
+        mhGrow(ed, rh);
+        ed.querySelector('.mf-amt').focus();
+      }
+    }
+    function mhCancel(ed){
+      var prev=ed.previousElementSibling;
+      var wasEdit=!!(prev && prev.classList && prev.classList.contains('mhold-row') && prev.dataset.editing);
+      function done(){
+        ed.remove();
+        if(wasEdit){ prev.style.display=''; delete prev.dataset.editing; }
+        var list=document.getElementById('mholdList');
+        if(list) list.querySelectorAll('.mhold-nb').forEach(function(r){ r.classList.remove('mhold-nb'); });
+        var a=document.getElementById('mhAdd'); if(a) a.style.display='';
+      }
+      if(!reduce && ed.animate){
+        ed.style.overflow='hidden';
+        ed.animate([{height:ed.offsetHeight+'px',opacity:1},{height:(wasEdit?66:0)+'px',opacity:0.15}],
+          {duration:300,easing:MH_EASE,fill:'both'}).finished.then(done);
+      } else done();
+    }
+    function mhSave(ed){
+      var i = ed.dataset.hi==='' ? null : parseInt(ed.dataset.hi,10);
+      var tk=(ed.querySelector('.mf-tk').value.trim().toUpperCase()) || (i!=null?HOLD[i].tk:'VTI');
+      var nmv=ed.querySelector('.mf-nm').value.trim() || (i!=null?HOLD[i].nm.replace(/&amp;/g,'&'):'New holding');
+      var kb=ed.querySelector('.mh-kinds .on'); var cls=kb?kb.dataset.hc:'st';
+      var av=parseInt(ed.querySelector('.mf-amt').value.replace(/[^0-9]/g,''),10);
+      var amt=isNaN(av) ? (i!=null?HOLD[i].amt:25000) : av;
+      var rec={tk:tk, nm:nmv.replace(/&/g,'&amp;'), cls:cls, amt:amt};
+      if(i==null) HOLD.push(rec); else HOLD[i]=rec;
+      var card=ed.querySelector('.medit-card');
+      function fin(){ var a=document.getElementById('mhAdd'); if(a) a.style.display=''; mhAfterChange(tk); }
+      if(!reduce && card.animate){
+        card.animate([{opacity:1},{opacity:0.2}],{duration:200,easing:MH_EASE}).finished.then(fin);
+      } else fin();
     }
     function mhAfterChange(flashTk){
       mhRender(); drawArches(null,false);
@@ -4671,26 +4731,32 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       l.innerHTML=yr+' &middot; Marshall '+(yr-1965);
     }
     sheet.addEventListener('click', function(e){
-      if(e.target.closest('#mhAdd')){ mhOpenForm(null); return; }
-      if(e.target.closest('#mhX')){ mhCloseForm(); return; }
-      var hc=e.target.closest('#mhTypes button');
-      if(hc){ MH.cls=hc.dataset.hc; mhChips(); return; }
-      if(e.target.closest('#mhGo')){
-        var tk=(document.getElementById('mhTk').value.trim().toUpperCase())||'VTI';
-        var nm=document.getElementById('mhNm').value.trim()||'New holding';
-        var amt=parseInt(document.getElementById('mhAmt').value.replace(/[^0-9]/g,''),10)||25000;
-        var rec={tk:tk, nm:nm.replace(/&/g,'&amp;'), cls:MH.cls, amt:amt};
-        if(MH.i==null) HOLD.push(rec); else HOLD[MH.i]=rec;
-        mhCloseForm(); mhAfterChange(tk);
-        return;
-      }
-      if(e.target.closest('#mhRm')){
-        if(MH.i!=null) HOLD.splice(MH.i,1);
-        mhCloseForm(); mhAfterChange(null);
-        return;
-      }
+      if(e.target.closest('#mhAdd')){ mhInlineOpen(null); e.stopPropagation(); return; }
       var hr=e.target.closest('.mhold-row');
-      if(hr){ mhOpenForm(parseInt(hr.dataset.hi,10)); return; }
+      if(hr && !hr.dataset.editing){ mhInlineOpen(parseInt(hr.dataset.hi,10)); e.stopPropagation(); return; }
+      if(e.target.closest('#mholdSec')){
+        var kc=e.target.closest('.mh-kinds button');
+        if(kc){ kc.parentElement.querySelectorAll('button').forEach(function(b){ b.classList.remove('on'); });
+          kc.classList.add('on'); e.stopPropagation(); return; }
+        var kb=e.target.closest('.medit-kebab');
+        if(kb){ var mn=kb.parentElement.querySelector('.medit-menu'); var wo=mn.hidden;
+          document.querySelectorAll('#mholdSec .medit-menu').forEach(function(m){ m.hidden=true; });
+          mn.hidden=!wo; kb.setAttribute('aria-expanded', wo?'true':'false');
+          e.stopPropagation(); return; }
+        var dl=e.target.closest('.medit-menu-delete');
+        if(dl){ var edD=dl.closest('.medit'); var iD=edD.dataset.hi;
+          if(!reduce && edD.animate){
+            edD.style.overflow='hidden';
+            edD.animate([{height:edD.offsetHeight+'px',opacity:1},{height:'0px',opacity:0}],
+              {duration:300,easing:MH_EASE,fill:'both'}).finished.then(function(){
+                if(iD!=='') HOLD.splice(parseInt(iD,10),1); mhAfterChange(null); });
+          } else { if(iD!=='') HOLD.splice(parseInt(iD,10),1); mhAfterChange(null); }
+          e.stopPropagation(); return; }
+        var sx=e.target.closest('.medit-save');
+        if(sx){ mhSave(sx.closest('.medit')); e.stopPropagation(); return; }
+        var xx=e.target.closest('.medit-x');
+        if(xx){ mhCancel(xx.closest('.medit')); e.stopPropagation(); return; }
+      }
       if(e.target.closest('#mtlAdd')){
         var f=document.getElementById('mtlForm'), b=document.getElementById('mtlAdd');
         f.hidden=false; b.style.display='none'; mtlChips(); mtlYearLabel(); return;
@@ -4726,7 +4792,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     });
     sheet.addEventListener('input', function(e){
       if(e.target.id==='mtlYear') mtlYearLabel();
-      if(e.target.id==='mhTk') e.target.value=e.target.value.toUpperCase();
+      if(e.target.classList && e.target.classList.contains('mf-tk')) e.target.value=e.target.value.toUpperCase();
     });
     /* the range filter lets the member customize the chart horizon */
     sheet.addEventListener('click', function(e){
