@@ -879,6 +879,8 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 #mtodayStats3, #mplanStats3{ display:flex; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory;
   gap:10px; margin-right:-16px; padding-right:16px; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
 #mtodayStats3::-webkit-scrollbar, #mplanStats3::-webkit-scrollbar{ display:none; }
+#mtodayStats3.fade-more, #mplanStats3.fade-more{ -webkit-mask-image:linear-gradient(90deg, #000 calc(100% - 48px), transparent 100%);
+  mask-image:linear-gradient(90deg, #000 calc(100% - 48px), transparent 100%); }
 #mtodayStats3 .mstat3, #mplanStats3 .mstat3{ flex:0 0 calc((100% - 4px)/2.45); scroll-snap-align:start;
   padding:14px 14px 12px; animation:mstat-in .9s ease-out backwards; }
 #mtodayStats3 .mstat3:nth-child(1), #mplanStats3 .mstat3:nth-child(1){ animation-delay:.05s; }
@@ -936,6 +938,22 @@ body.vault-open .msub-body{ padding-bottom:calc(110px + env(safe-area-inset-bott
 .msx-mdots circle{ opacity:0; animation:mdot-in .4s ease forwards; animation-delay:calc(.6s + var(--i)*0.07s); }
 @keyframes mdot-in{ to{ opacity:1; } }
 @media (prefers-reduced-motion: reduce){ .msx-mdots circle{ animation:none; opacity:1; } }
+/* the Boldin program on the timeline: the guided years */
+.mtl-prog{ display:flex; align-items:baseline; gap:9px; flex-wrap:wrap; margin:0 0 14px 27px; }
+.mtl-prog-badge{ font-size:12px; font-weight:800; letter-spacing:.2px; color:#0E794E; background:#E7F6EF; border-radius:999px; padding:4.5px 12px; }
+.mtl-prog-sub{ font-size:12.5px; color:var(--text-tertiary); }
+.msx-tl-row.in-program{ background:linear-gradient(90deg, #F3FBF7 0%, rgba(243,251,247,0) 74%); border-radius:14px; margin-left:-9px; padding-left:9px; }
+/* milestone action items: agency, sized for thumbs */
+.mtl-act{ margin-top:10px; display:inline-flex; align-items:center; gap:9px; border:1px solid var(--hairline); border-radius:999px;
+  min-height:44px; padding:9px 15px 9px 12px; background:#fff; cursor:pointer; font-family:inherit; text-align:left;
+  transition:background .2s ease, border-color .2s ease; }
+.mtl-act .ic{ flex:none; width:18px; height:18px; display:inline-flex; align-items:center; justify-content:center; color:#0E794E; }
+.mtl-act .ic .ck{ display:none; }
+.mtl-act .t{ font-size:14px; font-weight:600; color:var(--ink); line-height:1.3; }
+.mtl-act .tag{ flex:none; font-size:12px; font-weight:800; color:#0E794E; letter-spacing:.2px; }
+.mtl-act.done{ background:#E7F6EF; border-color:#BFE8D6; }
+.mtl-act.done .ic .pl{ display:none; }
+.mtl-act.done .ic .ck{ display:block; }
 /* upsell cards: a tip from a pro, and a human in your corner */
 .mstat3-up{ display:flex; flex-direction:column; flex-basis:calc(((100% - 4px)/2.45)*2 + 10px) !important; }
 .mstat3-up .tip{ font-size:14px; line-height:1.35; color:var(--ink); margin-top:5px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
@@ -3826,12 +3844,12 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
         sub:'Every milestone in one place, from today to a plan that outlives the plan.',
         note:'The portfolio crests at $2.16M in 2056, by design. Everything below is the route.',
         timeline:[
-          ['#04B477','2026 &middot; Marshall 61, Lily 59','Today','Net worth $1.14M, confidence 87. The starting line is already strong.'],
-          ['#FBBD04','December 2028 &middot; Marshall 63','Retirement day','Work income stops. The portfolio starts paying $3,100 a month, in the right order.'],
-          ['#1B6B5C','2029','The first Roth window','Convert about $17,800 to the top of the 12% band. Six Decembers like this save $61,000.'],
-          ['#04B477','2030 &middot; Marshall 65','Medicare arrives','The $1,180 a month insurance bridge ends. Spending gets a permanent haircut.'],
+          ['#04B477','2026 &middot; Marshall 61, Lily 59','Today','Net worth $1.14M, confidence 87. The starting line is already strong.',0,'Give the $3,450 surplus a job'],
+          ['#FBBD04','December 2028 &middot; Marshall 63','Retirement day','Work income stops. The portfolio starts paying $3,100 a month, in the right order.',0,'Set the withdrawal order'],
+          ['#1B6B5C','2029','The first Roth window','Convert about $17,800 to the top of the 12% band. Six Decembers like this save $61,000.',0,'Pencil in the December conversion'],
+          ['#04B477','2030 &middot; Marshall 65','Medicare arrives','The $1,180 a month insurance bridge ends. Spending gets a permanent haircut.',0,'Set an enrollment reminder for fall 2029'],
           ['#1B6B5C','2034','The last conversion window','The low-bracket years close. The tax savings are locked in for good.'],
-          ['#0E794E','2035 &middot; Marshall 70','Social Security, claimed right','$3,940 a month for life. Three years of patience became a 24% raise.'],
+          ['#0E794E','2035 &middot; Marshall 70','Social Security, claimed right','$3,940 a month for life. Three years of patience became a 24% raise.',0,'Lock the age-70 claiming plan'],
           ['#9BD9C1','2038 &middot; Marshall 73','RMDs begin, already tamed','Required withdrawals start, shrunk by the conversions of the early thirties.'],
           ['#0D3F4A','2046','The house is yours outright','The 3.1% mortgage retires. $905K of value with zero debt against it.'],
           ['#FBBD04','2056','The peak: $2.16M','The portfolio crests. From here the plan spends down by design, not by accident.'],
@@ -4194,7 +4212,10 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       var artH = d.articles ? '<div class="msx-sec"><div class="msx-sec-label">'+(d.articlesLabel||'Inside the playbook')+'</div><div class="mlrn">'+
         d.articles.map(function(a){ return '<button class="mlrn-row" type="button" data-toast="The full article lands next in the mobile build"><span class="mlrn-ic">'+a[2]+'</span><span class="mlrn-txt"><span class="mlrn-t">'+a[0]+'</span><span class="mlrn-s">'+a[1]+'</span></span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>'; }).join('')+'</div></div>' : '';
       var tlH = d.timeline ? '<div class="msx-sec"><div class="msx-sec-label">The milestones</div><div class="msx-tl">'+
-        d.timeline.map(function(m){ return '<div class="msx-tl-row'+(m[4]?' mine':'')+'"><span class="msx-tl-dot" style="background:'+m[0]+'"></span><div class="msx-tl-body"><div class="msx-tl-when">'+m[1]+'</div><div class="msx-tl-t">'+m[2]+(m[4]?'<span class="mtl-tag">Yours</span>':'')+'</div><div class="msx-tl-s">'+m[3]+'</div></div></div>'; }).join('')+'</div></div>' : '';
+        '<div class="mtl-prog"><span class="mtl-prog-badge">The Boldin program</span><span class="mtl-prog-sub">2026 to 2029 &middot; walked together</span></div>'+
+        d.timeline.map(function(m, mi){
+          var act=m[5] ? '<button type="button" class="mtl-act"><span class="ic"><svg class="pl" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8.5v7M8.5 12h7"/></svg><svg class="ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span class="t">'+m[5]+'</span><span class="tag">Add to plan</span></button>' : '';
+          return '<div class="msx-tl-row'+(m[4]?' mine':'')+(mi<3?' in-program':'')+'"><span class="msx-tl-dot" style="background:'+m[0]+'"></span><div class="msx-tl-body"><div class="msx-tl-when">'+m[1]+'</div><div class="msx-tl-t">'+m[2]+(m[4]?'<span class="mtl-tag">Yours</span>':'')+'</div><div class="msx-tl-s">'+m[3]+'</div>'+act+'</div></div>'; }).join('')+'</div></div>' : '';
       var tcfg = d.try ? TRYCFG[curKey] : null;
       var tryH = tcfg ? '<div class="msx-sec msx-try"><div class="msx-sec-label">'+tcfg.secLabel+'</div>'+
         '<div class="msx-try-read"><b id="tryDate"></b><span class="msx-try-stats" id="tryStats"></span><span class="msx-try-chip" id="tryChip"></span></div>'+
@@ -4545,7 +4566,29 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
       var svg=sheet.querySelector('.msx-chart svg'); var line=svg && svg.querySelector('.msx-line');
       if(!svg || !line) return;
       var old=svg.querySelector('.msx-mdots'); if(old) old.remove();
+      var oldp=svg.querySelector('.msx-prog'); if(oldp) oldp.remove();
       var X0=10, X1=304, Y0=2026, Y1=2057;
+      /* the program band: today through 2029, shaded on the chart */
+      var pvb=svg.viewBox.baseVal;
+      var pg2=document.createElementNS('http://www.w3.org/2000/svg','g'); pg2.setAttribute('class','msx-prog');
+      var band=document.createElementNS('http://www.w3.org/2000/svg','rect');
+      band.setAttribute('x',X0); band.setAttribute('y',20); band.setAttribute('rx',5);
+      band.setAttribute('width',((2029-Y0)/(Y1-Y0)*(X1-X0)).toFixed(1));
+      band.setAttribute('height',Math.max(30, pvb.height-46));
+      band.setAttribute('fill','#04B477'); band.setAttribute('fill-opacity','0.08');
+      var blab=document.createElementNS('http://www.w3.org/2000/svg','text');
+      blab.setAttribute('x',X0+1); blab.setAttribute('y',14); blab.setAttribute('font-size','9.5');
+      blab.setAttribute('font-weight','800'); blab.setAttribute('fill','#0E794E');
+      blab.textContent='The Boldin program';
+      pg2.appendChild(band); svg.insertBefore(pg2, svg.firstChild); svg.appendChild(blab);
+      if(!sheet.dataset.mtlActWired){
+        sheet.dataset.mtlActWired='1';
+        sheet.addEventListener('click', function(e){
+          var a=e.target.closest('.mtl-act'); if(!a) return;
+          var on=a.classList.toggle('done');
+          a.querySelector('.tag').textContent = on ? 'In your plan' : 'Add to plan';
+        });
+      }
       var g=document.createElementNS('http://www.w3.org/2000/svg','g');
       g.setAttribute('class','msx-mdots');
       var L=line.getTotalLength();
@@ -4830,6 +4873,15 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     /* the Plan graph opens the ultimate timeline */
     var planChart=document.getElementById('mplanChart');
     if(planChart){
+      /* soft right edge on the today and plan carousels */
+      ['mtodayStats3','mplanStats3'].forEach(function(id){
+        var sc=document.getElementById(id); if(!sc) return;
+        function upd(){ sc.classList.toggle('fade-more', sc.scrollWidth - sc.clientWidth - sc.scrollLeft > 6); }
+        sc.addEventListener('scroll', upd, {passive:true});
+        if(window.ResizeObserver) new ResizeObserver(upd).observe(sc);
+        if(window.MutationObserver) new MutationObserver(upd).observe(sc, {childList:true});
+        upd();
+      });
       planChart.addEventListener('click', function(){ open('tl'); });
       planChart.addEventListener('keydown', function(e){ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); open('tl'); } });
     }
