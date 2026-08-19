@@ -1410,6 +1410,51 @@ body.quest-mode .mnav-fade{ opacity:0; transition:opacity .2s ease; }
 .mps-bar.pulse i{ animation:mps-barp .8s ease; }
 /* confetti for the moment every step is done */
 .mps-confetti{ position:fixed; left:0; top:0; z-index:130; pointer-events:none; }
+/* ===== Financial Independence, mobile ===== */
+.mop-fire{ display:block; width:100%; text-align:left; background:var(--white); border:1px solid var(--hairline); border-radius:18px; padding:18px; margin:14px 0 2px; cursor:pointer; }
+.mop-fire:active{ background:#FAFCFB; }
+.mfi-top{ display:flex; align-items:center; gap:10px; }
+.mfi-t{ font-size:19px; font-weight:700; color:var(--ink); }
+.mfi-new{ font-size:12px; font-weight:700; color:var(--green-cta); background:var(--mint); border-radius:999px; padding:3px 9px; }
+.mfi-s{ display:block; font-size:15.5px; color:var(--text-secondary); line-height:1.5; margin-top:7px; }
+.mfi-go{ display:inline-flex; align-items:center; gap:7px; margin-top:12px; color:var(--green-cta); font-size:16px; font-weight:700; }
+.mfi-green{ color:#0E794E; font-style:italic; }
+.mfi-gold{ color:#FBBD04; font-style:normal; }
+.mfi-hero, .mfi-card, .mfi-free{ border:1px solid var(--hairline); border-radius:18px; padding:18px; background:var(--white); }
+.mfi-hero{ margin-top:18px; }
+.mfi-k{ font-size:14px; font-weight:600; color:var(--text-tertiary); display:flex; justify-content:space-between; align-items:center; }
+.mfi-chip{ font-size:12.5px; font-weight:700; color:var(--green-cta); background:var(--mint); border-radius:999px; padding:4px 10px; }
+#mfiNum{ margin-top:8px; }
+.mfi-prog{ height:8px; border-radius:999px; background:#F0F1F3; overflow:hidden; margin-top:14px; }
+.mfi-prog i{ display:block; height:100%; background:var(--green-cta); border-radius:999px; transition:width .8s cubic-bezier(0.22,1,0.36,1); }
+.mfi-caps{ display:flex; justify-content:space-between; font-size:13px; color:var(--text-tertiary); margin-top:7px; font-variant-numeric:tabular-nums; }
+.mfi-line{ font-size:15.5px; color:var(--text-secondary); margin-top:12px; line-height:1.5; }
+.mfi-try{ font-size:14px; font-weight:700; color:var(--green-cta); margin:0 2px 10px; }
+.mfi-flav{ display:flex; gap:10px; overflow-x:auto; scroll-snap-type:x mandatory; padding:2px 2px 8px; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+.mfi-flav::-webkit-scrollbar{ display:none; }
+.mfc{ flex:none; scroll-snap-align:start; min-width:122px; text-align:left; background:var(--white); border:1px solid var(--hairline); border-radius:14px; padding:12px 14px; }
+.mfc .nm{ display:block; font-size:15px; font-weight:700; color:var(--ink); }
+.mfc .amt{ display:block; font-size:16px; font-weight:700; color:var(--ink); margin-top:3px; font-variant-numeric:tabular-nums; }
+.mfc .when{ display:block; font-size:12.5px; color:var(--text-secondary); margin-top:2px; white-space:nowrap; }
+.mfc.sel{ border-color:var(--green-cta); background:#F4FBF8; }
+.mfc.info{ opacity:0.78; }
+.mfc .got{ color:var(--green-cta); font-weight:700; }
+.mfl-row{ margin-top:4px; }
+.mfl-row + .mfl-row{ margin-top:16px; }
+.mfl-row label{ display:flex; justify-content:space-between; font-size:15.5px; font-weight:600; color:var(--ink); }
+.mfl-row label span{ color:var(--green-cta); font-variant-numeric:tabular-nums; }
+.mfl-row input[type=range]{ width:100%; margin-top:8px; accent-color:#0E794E; height:44px; }
+.mfi-secret{ font-size:14.5px; color:var(--text-secondary); line-height:1.5; margin-top:16px; border-top:1px solid var(--hairline); padding-top:13px; }
+.mfw-row{ display:flex; justify-content:space-between; align-items:center; gap:12px; padding:13px 0; border-bottom:1px solid var(--hairline); }
+.mfw-row:first-child{ padding-top:0; }
+.mfw-row:last-of-type{ border-bottom:0; }
+.mfw-l{ display:block; font-size:16px; font-weight:600; color:var(--ink); }
+.mfw-sub{ display:block; font-size:13.5px; color:var(--text-secondary); margin-top:2px; line-height:1.45; }
+.mfw-chip{ flex:none; font-size:13px; font-weight:700; color:var(--green-cta); background:var(--mint); border-radius:999px; padding:5px 11px; white-space:nowrap; }
+.mfi-adv{ display:flex; justify-content:space-between; align-items:center; gap:12px; border-top:1px solid var(--hairline); padding-top:14px; margin-top:2px; }
+.mfi-book{ color:var(--green-cta); font-weight:700; font-size:16px; white-space:nowrap; background:none; border:none; padding:10px 0; cursor:pointer; }
+.mfi-days{ font:700 40px 'DM Sans',sans-serif; color:var(--ink); letter-spacing:-1px; font-variant-numeric:tabular-nums; }
+.mfi-free-sub{ font-size:15.5px; color:var(--text-secondary); line-height:1.55; margin-top:8px; }
 /* ===== AI screen ===== */
 /* ===== the AI tab ===== */
 .mtab-ai{ display:flex; flex-direction:column; min-height:calc(100dvh - 260px); }
@@ -1919,6 +1964,11 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
   </div>
 
   <div class="mop-cards" id="mopCards">
+    <button class="mop-card mop-fire" type="button" data-op="fire">
+      <span class="mfi-top"><span class="mfi-t">Financial independence</span><span class="mfi-new">New</span></span>
+      <span class="mfi-s">The day work becomes optional. Your number, your date, and the levers that move it.</span>
+      <span class="mfi-go">See your FIRE number <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+    </button>
     <div class="mplan-seclabel" style="margin:14px 2px 0">Your next best move</div>
     <button class="mop-card mop-hero" type="button" data-op="ss">
       <span class="mop-hero-top"><span class="mop-hero-t">Social Security</span><span class="mop-hero-val">+$760<i>/mo</i></span></span>
@@ -2467,8 +2517,9 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
     glidePills(el);
     // animate the bar width + count the number up to the current earned score
     var bar=el.querySelector('.mps-bar i'), num=el.querySelector('.mps-num');
+    if(!bar||!num) return;
     if(reduce){ bar.style.width=sc+'%'; num.textContent=String(sc); return; }
-    bar.style.width='0%'; void bar.offsetWidth;
+    bar.style.width='0%'; void bar.getBoundingClientRect();
     setTimeout(function(){ bar.style.width=sc+'%'; }, 140);
     var t0=null; function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/950); var e=1-Math.pow(1-p,3);
       num.textContent=Math.round(sc*e); if(p<1) requestAnimationFrame(step); }
@@ -3112,7 +3163,140 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
 
   /* ===== Optimize: detail pages ===== */
   var ARROW='<svg viewBox="0 0 24 24" fill="none" width="13" height="13"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  
+  /* ===== Financial Independence, mobile: same engine as desktop, thumb-first ===== */
+  var MFI={ port:1140000, pmt:3450, r:5.8, spend:8850, ss:3940 };
+  var MFI_T0=new Date(2026,6,1), MFI_SSD=new Date(2035,11,1), MFI_HZ=new Date(2059,5,1);
+  var MFI_MOS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var MFI_DOW=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  function mfiMoney(n){ return '$'+Math.round(n).toLocaleString('en-US'); }
+  function mfiK(n){ return n>=1e6 ? '$'+(n/1e6).toFixed(n%1e6<5e4?0:2).replace(/\.00$/,'')+'M' : '$'+Math.round(n/1e3)+'K'; }
+  function mfiMdiff(a,b){ return (a.getFullYear()-b.getFullYear())*12 + (a.getMonth()-b.getMonth()); }
+  function mfiSolve(spend, pmt, r){
+    var p=MFI.port, rm=r/1200;
+    for(var i=0;i<600;i++){
+      var d=new Date(MFI_T0.getFullYear(), MFI_T0.getMonth()+i, 1);
+      var until=Math.max(0, mfiMdiff(MFI_SSD, d));
+      var target=(spend-MFI.ss)*300 + until*MFI.ss;
+      if(p>=target) return { num:Math.round(target), date:d, got:i===0 };
+      p=p*(1+rm)+pmt;
+    }
+    return { num:(spend-MFI.ss)*300, date:null, got:false };
+  }
+  function mfiReach(amount){
+    var p=MFI.port, rm=MFI.r/1200;
+    if(p>=amount) return { got:true };
+    for(var i=1;i<600;i++){
+      p=p*(1+rm)+MFI.pmt;
+      if(p>=amount){ var d=new Date(MFI_T0.getFullYear(), MFI_T0.getMonth()+i, 1); return { got:false, year:d.getFullYear(), date:d }; }
+    }
+    return { got:false, year:null, date:null };
+  }
+  var MFI_BASE=mfiSolve(MFI.spend, MFI.pmt, MFI.r);
+  var MFI_DAYS=Math.round((MFI_HZ-MFI_BASE.date)/864e5);
+  function mfiHtml(){
+    var fi=MFI_BASE.date, pct=Math.min(100, Math.round(MFI.port/MFI_BASE.num*100));
+    var yrs=Math.round((fi-MFI_T0)/(365.25*864e5));
+    var flavs=[
+      { nm:'Lean', amt:1000000 }, { coast:true }, { you:true },
+      { nm:'Chubby', amt:3750000 }, { nm:'Fat', amt:5000000 }
+    ];
+    var chips=flavs.map(function(f){
+      if(f.you) return '<button class="mfc you sel" type="button" data-amt="'+MFI_BASE.num+'" data-nm="Yours"><span class="nm">Yours</span><span class="amt">'+mfiK(MFI_BASE.num)+'</span><span class="when">'+MFI_MOS[fi.getMonth()].slice(0,3)+' '+fi.getFullYear()+'</span></button>';
+      if(f.coast){ var c=Math.min(99, Math.round(MFI.port/(MFI_BASE.num/Math.pow(1+MFI.r/100, yrs))*100));
+        return '<div class="mfc info"><span class="nm">Coast</span><span class="amt">'+c+'% there</span><span class="when">Growth nearly carries you</span></div>'; }
+      var r=mfiReach(f.amt);
+      var when=r.got ? '<span class="got">Already yours &#10003;</span>' : (r.year ? 'Around '+r.year : 'Beyond this plan');
+      return '<button class="mfc" type="button" data-amt="'+f.amt+'" data-nm="'+f.nm+'"><span class="nm">'+f.nm+'</span><span class="amt">'+mfiK(f.amt)+'</span><span class="when">'+when+'</span></button>';
+    }).join('');
+    function mo(alt){ var a=mfiSolve(alt[0],alt[1],alt[2]).date; return a&&MFI_BASE.date ? Math.max(0, Math.round(mfiMdiff(MFI_BASE.date, a))) : 0; }
+    var fast=[
+      ['Cut $500 of monthly spending','It counts twice: less to need, more saved.', mo([MFI.spend-500, MFI.pmt, MFI.r])],
+      ['Max the super catch-up, 60 to 63','An extra $35,750 a year while the window is open.', mo([MFI.spend, MFI.pmt+2979, MFI.r])],
+      ['Save $500 more each month','Skip the creep; the date moves quietly.', mo([MFI.spend, MFI.pmt+500, MFI.r])]
+    ].map(function(r){
+      return '<div class="mfw-row"><span><span class="mfw-l">'+r[0]+'</span><span class="mfw-sub">'+r[1]+'</span></span><span class="mfw-chip">'+r[2]+(r[2]===1?' month':' months')+' sooner</span></div>';
+    }).join('');
+    return '<div class="msub-title">Financial independence</div>'+
+      '<div class="msub-sub">The day <em class="mfi-green">work</em> becomes <em class="mfi-gold">optional</em>.</div>'+
+      '<div class="mfi-hero"><div class="mfi-k">Your FIRE number <span class="mfi-chip" id="mfiChip">'+pct+'% there</span></div>'+
+        '<div class="mo-fig g" id="mfiNum">'+mfiMoney(MFI_BASE.num)+'</div>'+
+        '<div class="mfi-prog"><i id="mfiBar" style="width:'+pct+'%"></i></div>'+
+        '<div class="mfi-caps"><span>'+mfiK(MFI.port)+' today</span><span id="mfiTarget">'+mfiK(MFI_BASE.num)+'</span></div>'+
+        '<div class="mfi-line" id="mfiLine">Crossing <b>'+MFI_MOS[fi.getMonth()]+' '+fi.getDate()+', '+fi.getFullYear()+'</b> &middot; a '+MFI_DOW[fi.getDay()]+' &middot; '+yrs+' years away</div></div>'+
+      '<div class="mplan-seclabel">The flavors, priced for your household</div>'+
+      '<div class="mfi-try">Tap one to try it on</div>'+
+      '<div class="mfi-flav" id="mfiFlav">'+chips+'</div>'+
+      '<div class="mplan-seclabel">The levers</div>'+
+      '<div class="mfi-try">Every gauge above follows</div>'+
+      '<div class="mfi-card">'+
+        '<div class="mfl-row"><label>Monthly spending later<span id="mfiSpV">'+mfiMoney(MFI.spend)+'</span></label><input type="range" id="mfiSp" min="6000" max="12000" step="50" value="'+MFI.spend+'"></div>'+
+        '<div class="mfl-row"><label>Monthly saving now<span id="mfiSvV">'+mfiMoney(MFI.pmt)+'</span></label><input type="range" id="mfiSv" min="1000" max="6000" step="50" value="'+MFI.pmt+'"></div>'+
+        '<div class="mfl-row"><label>Growth<span id="mfiGrV">'+MFI.r.toFixed(1)+'%</span></label><input type="range" id="mfiGr" min="4" max="8" step="0.1" value="'+MFI.r+'"></div>'+
+        '<div class="mfi-secret"><b>The quiet secret:</b> a dollar of spending cut moves your date about twice as far as a dollar saved.</div>'+
+      '</div>'+
+      '<div class="mplan-seclabel">Ways to get there faster</div>'+
+      '<div class="mfi-card">'+fast+
+        '<div class="mfi-adv"><span><span class="mfw-l">Prefer a human?</span><span class="mfw-sub">Pressure test it with a Boldin advisor.</span></span><button class="mfi-book" type="button" data-toast="Advisor booking, in the full product">Book time &#8599;</button></div>'+
+      '</div>'+
+      '<div class="mplan-seclabel">What the number buys</div>'+
+      '<div class="mfi-free" id="mfiFree" role="button" tabindex="0">'+
+        '<div class="mfi-days" id="mfiDays">'+MFI_DAYS.toLocaleString('en-US')+'</div>'+
+        '<div class="mfi-free-sub" id="mfiFreeSub">mornings that answer to no one, from independence to Lily&rsquo;s ninety-second year. <b>Tap for another way to count it.</b></div>'+
+      '</div>';
+  }
+  function fireBind(root){
+    var num=root.querySelector('#mfiNum'), chip=root.querySelector('#mfiChip'), bar=root.querySelector('#mfiBar'),
+        cap=root.querySelector('#mfiTarget'), line=root.querySelector('#mfiLine');
+    function tween(el, target){
+      var from=parseFloat(el.textContent.replace(/[^0-9.]/g,''))||0, t0=performance.now(), D=600;
+      (function tk(t){ var q=Math.min(1,(t-t0)/D), e=1-Math.pow(1-q,3);
+        el.textContent='$'+Math.round(from+(target-from)*e).toLocaleString('en-US');
+        if(q<1) requestAnimationFrame(tk); })(t0);
+    }
+    function paint(n, date, got, label){
+      tween(num, n);
+      var p=Math.min(100, Math.round(MFI.port/n*100));
+      chip.textContent=p+'% there'; bar.style.width=p+'%'; cap.textContent=mfiK(n);
+      var tag = label && label!=='Base case' ? '<b>'+label+'</b> &middot; ' : '';
+      if(got) line.innerHTML=tag+'<b>Already crossed.</b> You could stop today at this spend.';
+      else if(date){ var yrs=Math.round((date-MFI_T0)/(365.25*864e5));
+        line.innerHTML=tag+'Crossing <b>'+MFI_MOS[date.getMonth()]+' '+date.getDate()+', '+date.getFullYear()+'</b> &middot; a '+MFI_DOW[date.getDay()]+' &middot; '+(yrs<1?'under a year':yrs+' years')+' away'; }
+      else line.innerHTML=tag+'Beyond this plan&rsquo;s horizon at the current pace.';
+    }
+    var taps=[].slice.call(root.querySelectorAll('.mfc[data-amt]'));
+    taps.forEach(function(t){ t.addEventListener('click', function(){
+      taps.forEach(function(x){ x.classList.toggle('sel', +x.dataset.amt===+t.dataset.amt); });
+      var amt=+t.dataset.amt, r=mfiReach(amt), base=Math.abs(amt-MFI_BASE.num)<1;
+      paint(amt, base?MFI_BASE.date:(r.date||null), !base && r.got, base?'Base case':t.dataset.nm);
+      if(t.dataset.nm==='Lean' && r.got && typeof psConfetti==='function') psConfetti();
+    }); });
+    var S=function(id){ return root.querySelector('#'+id); };
+    function lever(){
+      var sp=+S('mfiSp').value, sv=+S('mfiSv').value, gr=+S('mfiGr').value;
+      S('mfiSpV').textContent=mfiMoney(sp); S('mfiSvV').textContent=mfiMoney(sv); S('mfiGrV').textContent=gr.toFixed(1)+'%';
+      var r=mfiSolve(sp, sv, gr);
+      var base = sp===MFI.spend && sv===MFI.pmt && Math.abs(gr-MFI.r)<0.05;
+      paint(r.num, r.date, false, base?'Base case':'Custom levers');
+      taps.forEach(function(x){ x.classList.toggle('sel', base && +x.dataset.amt===MFI_BASE.num); });
+    }
+    ['mfiSp','mfiSv','mfiGr'].forEach(function(id){ S(id).addEventListener('input', lever); });
+    var units=[
+      [MFI_DAYS, 'mornings that answer to no one, from independence to Lily&rsquo;s ninety-second year.'],
+      [Math.round(MFI_DAYS/7), 'slow Tuesdays, which everyone knows are the best ones.'],
+      [Math.round(MFI_DAYS/365.25), 'whole summers. Every single one of them yours.']
+    ], ui=0;
+    S('mfiFree').addEventListener('click', function(){
+      ui=(ui+1)%units.length;
+      var d=S('mfiDays'), from=parseFloat(d.textContent.replace(/[^0-9]/g,''))||0, n=units[ui][0], t0=performance.now(), D=480;
+      (function tk(t){ var q=Math.min(1,(t-t0)/D), e=1-Math.pow(1-q,3);
+        d.textContent=Math.round(from+(n-from)*e).toLocaleString('en-US');
+        if(q<1) requestAnimationFrame(tk); })(t0);
+      S('mfiFreeSub').innerHTML=units[ui][1]+' <b>Tap for another way to count it.</b>';
+    });
+  }
   var OPT={
+    fire: mfiHtml(),
     ss:'<div class="msub-title">Social Security</div><div class="msub-sub">The one guaranteed 8% raise in America.</div>'+
       '<div class="mo-hero"><div class="mo-fig g">+$760</div><div class="mo-fig-sub">a month for life, by waiting to 70</div></div>'+
       '<div class="mss-rows">'+
@@ -3159,6 +3343,7 @@ body.ai-tab .mnav .mai-spk .sp-tw{ opacity:1; }
   document.getElementById('mopCards').addEventListener('click', function(e){
     var c=e.target.closest('.mop-card'); if(!c) return;
     push(OPT[c.dataset.op], false);
+    if(c.dataset.op==='fire') fireBind(subBody);
     if(!reduce) setTimeout(function(){
       subBody.querySelectorAll('.mo-sbar.mo-anim i').forEach(function(bar,i){
         if(bar.animate) bar.animate([{transform:'scaleX(0)'},{transform:'scaleX(1)'}],
