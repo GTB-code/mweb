@@ -803,10 +803,12 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
   <h1 class="mhl mhl-plan" id="planHl">Retire in <em class="mhl-em">8 years</em> on <em class="mhl-gold">$7,200</em> a month.</h1>
   <p class="msubhead msubhead-plan">Monte Carlo, run on your real numbers.</p>
   <div class="mlens-row" role="tablist" aria-label="My Plans lenses">
-    <button class="mlens on" type="button" data-lens="snapshot" role="tab" aria-selected="true">SnapShot</button>
-    <button class="mlens" type="button" data-lens="fl" role="tab" aria-selected="false">Financial Life</button>
+    <button class="mlens on" type="button" data-lens="snapshot" role="tab" aria-selected="true">Start here</button>
+    <button class="mlens" type="button" data-lens="fl" role="tab" aria-selected="false">Budgeting</button>
     <button class="mlens" type="button" data-lens="retirement" role="tab" aria-selected="false">Retirement</button>
-    <button class="mlens" type="button" data-lens="tax" role="tab" aria-selected="false">Tax Strategy</button>
+    <button class="mlens" type="button" data-lens="invest" role="tab" aria-selected="false">Investments</button>
+    <button class="mlens" type="button" data-lens="tax" role="tab" aria-selected="false">Taxes</button>
+    <button class="mlens" type="button" data-lens="estate" role="tab" aria-selected="false">Estate planning</button>
   </div>
 
   <!-- 3 stat cards, like desktop -->
@@ -1454,6 +1456,28 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
         levers:[['Convert to the top of the 12% bracket','&minus;$61,000',100],['Start with 2029 before it closes','&minus;$10,200',52],['Coordinate with Medicare IRMAA','avoid surcharge',35]],
         cta:'Plan your conversions',
         secKeys:['assets','income'], secHeading:'What the strategy works on'
+      },
+      invest:{
+        hl:'<em class="mhl-gold">7 points</em> more stock than your <em class="mhl-em">target.</em>',
+        dd:'Allocation',
+        stats:[['Stocks today','62%','Target 55%'],['Invested','$755K','14 accounts'],['Pre-tax share','74%','Never taxed']],
+        chips:[['Above target','$53K'],['Linked','11 of 14'],['Taxable lasts to','2044'],['Rebalanced','2 yrs ago']],
+        boostT:'Bring the mix back to target', badge:'7 pts over',
+        boostSub:'Extra stock mattered less while you were saving. It matters most in the years around retiring, when a drop has no time to recover.',
+        levers:[['Rebalance the brokerage to 55/45','&minus;7 pts risk',100],['Set a bond glide-path to 2039','steadier drawdown',60],['Turn on auto-rebalance','once a year',35]],
+        cta:'Review your allocation',
+        secKeys:['assets','income'], secHeading:'What you are invested in'
+      },
+      estate:{
+        hl:'About <em class="mhl-gold">$2.01M</em> to leave, and <em class="mhl-em">two documents</em> to fix.',
+        dd:'Estate',
+        stats:[['Likely estate','$2.01M','At 92, incl. home'],['Legacy goal','$1M','Met in 77%'],['Heirs\u2019 tax','$168K','On pre-tax money']],
+        chips:[['Documents','2 missing'],['Beneficiaries','1 stale'],['Pre-tax share','74%'],['Home equity','$905K']],
+        boostT:'Two documents, one afternoon', badge:'2 missing',
+        boostSub:'The money side is in good shape. The paperwork decides who acts for you and who inherits.',
+        levers:[['Add a healthcare directive','who acts for you',100],['Update the IRA beneficiary','who inherits',85],['Convert early to cut the heirs\u2019 tax','&minus;$168K',50]],
+        cta:'Check your documents',
+        secKeys:['assets','home','debts'], secHeading:'What makes up your estate'
       }
     };
     var row=document.querySelector('.mlens-row'); if(!row) return;
