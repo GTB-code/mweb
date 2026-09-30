@@ -186,6 +186,35 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .ml-badge.maybe{ background:#FFF6D6; color:#8A6A00; }
 .ml-badge.dark{ background:var(--teal); color:#FFFFFF; }
 .ml-quiz{ font-size:15.5px; margin-top:12px; }
+/* Prism summary: your plan, up to the peak */
+.mplan-chart{ cursor:pointer; }
+.msum-note{ font-size:16.5px; line-height:1.5; color:var(--text-secondary); margin-top:10px; min-height:1.5em; transition:opacity .18s ease; }
+.msum-note.sw{ opacity:0; }
+.msum-chips{ display:flex; gap:8px; margin-top:16px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;
+  margin-left:-18px; margin-right:-18px; padding:0 18px 2px; }
+.msum-chips::-webkit-scrollbar{ display:none; }
+.msum-chip{ flex:none; border:1px solid var(--hairline); background:var(--white); border-radius:999px; padding:9px 15px;
+  font-family:inherit; font-size:15px; font-weight:500; color:var(--text-secondary); cursor:pointer;
+  transition:background .2s ease, color .2s ease, border-color .2s ease; }
+.msum-chip.on{ background:var(--teal); border-color:var(--teal); color:#FFFFFF; font-weight:600; }
+.msum-plot{ margin-top:14px; }
+.msum-plot svg{ display:block; width:100%; height:auto; }
+.msum-readout{ display:flex; justify-content:space-between; font:500 12.5px 'DM Sans',sans-serif; color:var(--text-tertiary); margin-top:6px; font-variant-numeric:tabular-nums; }
+.msum-rhead{ display:flex; align-items:center; gap:8px; margin-top:28px; font-size:19px; font-weight:600; letter-spacing:-0.2px; }
+.msum-rhead svg{ color:#FBBD04; }
+.msum-route{ margin-top:6px; }
+.mrt{ display:flex; gap:13px; padding:15px 0; border-bottom:1px solid var(--hairline); transition:opacity .25s ease; }
+.mrt:last-child{ border-bottom:0; }
+.mrt.out{ opacity:.38; }
+.mrt.lit .mrt-t{ color:var(--green-cta); }
+.mrt-dot{ flex:none; width:12px; height:12px; border-radius:50%; margin-top:6px; border:2px solid var(--white); box-shadow:0 0 0 1.5px currentColor; }
+.mrt-bd{ flex:1; min-width:0; }
+.mrt-d{ font:500 13px 'DM Sans',sans-serif; color:var(--text-tertiary); }
+.mrt-t{ font-size:17px; font-weight:600; line-height:1.3; margin-top:2px; }
+.mrt-s{ font-size:15px; color:var(--text-secondary); line-height:1.5; margin-top:4px; }
+.mrt-ask{ display:inline-flex; align-items:center; gap:6px; margin-top:9px; border:0; background:var(--mint); color:var(--green-cta);
+  border-radius:999px; padding:6px 11px; font-family:inherit; font-size:13.5px; font-weight:600; cursor:pointer; }
+.mrt-ask svg{ color:#C08A00; }
 /* Explore your plan: six chapters, each a lite page */
 .mxp-label{ margin-top:30px; }
 .mxp-list{ margin-top:0; border-top:0; }
@@ -803,7 +832,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
   <h1 class="mhl mhl-plan" id="planHl">Retire in <em class="mhl-em">8 years</em> on <em class="mhl-gold">$7,200</em> a month.</h1>
   <p class="msubhead msubhead-plan">Monte Carlo, run on your real numbers.</p>
   <div class="mlens-row" role="tablist" aria-label="My Plans lenses">
-    <button class="mlens on" type="button" data-lens="snapshot" role="tab" aria-selected="true">Start here</button>
+    <button class="mlens on" type="button" data-lens="snapshot" role="tab" aria-selected="true">Summary</button>
     <button class="mlens" type="button" data-lens="fl" role="tab" aria-selected="false">Budgeting</button>
     <button class="mlens" type="button" data-lens="retirement" role="tab" aria-selected="false">Retirement</button>
     <button class="mlens" type="button" data-lens="invest" role="tab" aria-selected="false">Investments</button>
@@ -819,7 +848,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
       <button class="mplan-dd" type="button" id="mplanDD"><span id="mplanDDl">Portfolio</span><svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <button class="mplan-filter" type="button" aria-label="Filters" data-toast="Filters land next in the mobile build"><svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M4 6h16M7 12h10M10 18h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
-    <div class="mplan-chart">
+    <div class="mplan-chart" id="mplanChart" role="button" tabindex="0" aria-label="Open your plan, up to the peak">
       <svg viewBox="0 0 356 176" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-label="Projected portfolio value">
         <defs>
           <linearGradient id="pcg" x1="0" y1="0" x2="0" y2="1">
@@ -1660,8 +1689,8 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     function head(eye,hl,sub){ return '<div class="mxp-eye">'+eye+'</div><h2 class="mxp-hl">'+hl+'</h2><p class="mxp-sub">'+sub+'</p>'; }
 
     var CH=[
-      { id:'first', t:'Start here', q:'Am I on track?', chip:['yes','87% on track'],
-        body: head('Start here','You\u2019re on track to retire on schedule and spend <em>$9,583 a month</em>.','Where you stand, what is working, and what could knock it off course.')
+      { id:'first', t:'Summary', q:'Am I on track?', chip:['yes','87% on track'],
+        body: head('Summary','You\u2019re on track to retire on schedule and spend <em>$9,583 a month</em>.','Where you stand, what is working, and what could knock it off course.')
           +insight('Everything here is steady except one stretch: the <b>four years from 2037 to 2041</b>, after work stops and before either Social Security check starts. That window decides most of your odds.')
           +items('Key strengths',[
             ['good','You save 17% of pay and still have $25k a year left over','Room to save more now, or to fund the early retirement years.','Budgeting'],
@@ -1710,6 +1739,103 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     list.addEventListener('click', function(e){
       var b=e.target.closest('[data-xp]'); if(!b) return;
       openChapter(b.dataset.xp);
+    });
+  })();
+
+  /* ===== Prism summary: the desktop's "Your plan, up to the peak." as a pushed page ===== */
+  (function(){
+    var Y0=2026, Y1=2056;
+    var UP=[567,640,720,810,900,1000,1110,1230,1360,1500,1650,1800,1930,2050,2130,2160];
+    var PTS=UP.map(function(v,i){ return {y:Y0+i*(Y1-Y0)/(UP.length-1), v:v*1000}; });
+    function valueAt(yr){ for(var k=1;k<PTS.length;k++){ if(PTS[k].y>=yr){ var a=PTS[k-1],b=PTS[k],t=(yr-a.y)/(b.y-a.y||1); return a.v+(b.v-a.v)*t; } } return PTS[PTS.length-1].v; }
+    function money(v){ return v>=1e6 ? '$'+(v/1e6).toFixed(2).replace(/\.?0+$/,'')+'M' : '$'+Math.round(v/1000)+'K'; }
+    var SPANS={ all:[Y0,Y1], soon:[Y0,2031], ret:[Y0,2029], decade:[2029,2039], forties:[2040,2050], peak:[2046,Y1] };
+    var NOTES={
+      all:'Thirty years, one line. $567K today, $2.16M at the peak.',
+      soon:'Five years of heavy lifting. The rest compounds.',
+      ret:'Three years from the last paycheck you will ever need.',
+      decade:'Ten years not working, and the balance climbs anyway.',
+      forties:'Twenty years retired, and still growing.',
+      peak:'The last climb to $2.16M. Every dollar of it was a choice.'
+    };
+    var CHIPS=[['all','All'],['soon','5 years'],['ret','To retirement'],['decade','First decade'],['forties','The 2040s'],['peak','To the peak']];
+    /* the route: same milestones as desktop, one question each */
+    var XTL=[
+      ['#04B477',2026,'2026 &middot; Marshall 61, Lily 59','Today','Net worth $1.14M, confidence 87. The starting line is already strong.','Where should the surplus go?'],
+      ['#9BD9C1',2027,'2027 &middot; Marshall 62','The door you should not walk through','Social Security opens at 62. Claiming now would lock in about 30% less, for life. The hardest year is the one you do nothing in.','What does waiting really buy?'],
+      ['#1B6B5C',2028,'2028 &middot; the year Medicare is watching','The two-year look-back starts','Medicare prices your 2030 premiums off your 2028 tax return. Anything you convert this year shows up as a bigger bill two years later.','Will this raise my premiums?'],
+      ['#FBBD04',2028.95,'December 2028 &middot; Marshall 63','Retirement day','Work income stops. The portfolio starts paying $3,100 a month, in the right order.','What order should I withdraw in?'],
+      ['#0E794E',2029,'2029','The first Roth window','Convert about $17,800 to the top of the 12% band. Six Decembers like this save $61,000.','How much should I convert?'],
+      ['#1B6B5C',2029.5,'2029 &middot; the bridge years','Your subsidy and your conversion collide','Buying your own insurance until 65 means every converted dollar counts as income too. Convert too much and the premium help vanishes.','How much can I convert safely?'],
+      ['#04B477',2030,'2030 &middot; Marshall 65','Medicare arrives','The $1,180 a month insurance bridge ends. Spending gets a permanent haircut.','What changes at Medicare?'],
+      ['#9BD9C1',2032,'2032 &middot; Lily 65','The second retirement','Lily stops four years after you do. Two incomes become one, and the withdrawal order has to be rewritten around it.','How does Lily\u2019s date change this?'],
+      ['#0D3F4A',2033,'2033','Social Security\u2019s own deadline','The trust fund is projected to fall short around here. Your plan already assumes a trim, which is why it still holds.','What if benefits get cut?'],
+      ['#1B6B5C',2034,'2034','The last conversion window','The low-bracket years close. The tax savings are locked in for good.','What if I skip these years?'],
+      ['#0E794E',2035,'2035 &middot; Marshall 70','Social Security, claimed right','$3,940 a month for life. Three years of patience became a 24% raise.','Is waiting until 70 still right?'],
+      ['#9BD9C1',2036,'2036 &middot; Marshall 70&frac12;','Charity gets a tax-free door','From here you can send money straight from the IRA to a cause and skip the tax entirely. Almost nobody remembers this one.','Should I give from the IRA?'],
+      ['#9BD9C1',2038,'2038 &middot; Marshall 73','RMDs begin, already tamed','Required withdrawals start, shrunk by the conversions of the early thirties.','How big will my RMDs be?'],
+      ['#0D3F4A',2041,'2041','The bracket nobody plans for','If one of you outlives the other, the survivor keeps most of the income and files single. The same money, taxed harder.','What happens if one of us dies?'],
+      ['#1B6B5C',2045,'2045 &middot; Marshall 80','The care years, already priced in','Most long-term care need starts in the eighties. Three years of it sits in the plan so it never becomes a crisis decision.','Can the plan absorb care costs?'],
+      ['#0D3F4A',2046,'2046','The house is yours outright','The 3.1% mortgage retires. $905K of value with zero debt against it.','Should I pay it off sooner?'],
+      ['#FBBD04',2056,'2056','The peak: $2.16M','The portfolio crests. From here the plan spends down by design, not by accident.','What happens after the peak?'],
+      ['#04B477',2056,'2099','Still funded','The plan carries past 99 with money left over. That is the whole point.','Will the money really last?']
+    ];
+    var SPARK='<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6z"/></svg>';
+    var lo=Y0, hi=Y1, active='all';
+
+    function chart(lo,hi){
+      var W=344, H=200, PL=6, PR=6, top=26, base=168;
+      var X=function(y){ return PL+(y-lo)/(hi-lo)*(W-PL-PR); };
+      var vmax=valueAt(hi)*1.08, vmin=Math.max(0, valueAt(lo)*0.85);
+      var Y=function(v){ return base-(v-vmin)/(vmax-vmin)*(base-top); };
+      var pts=[{y:lo,v:valueAt(lo)}].concat(PTS.filter(function(p){ return p.y>lo && p.y<hi; })).concat([{y:hi,v:valueAt(hi)}]);
+      var d=pts.map(function(p,i){ return (i?'L':'M')+X(p.y).toFixed(1)+','+Y(p.v).toFixed(1); }).join(' ');
+      var area=d+' L'+X(hi).toFixed(1)+','+base+' L'+X(lo).toFixed(1)+','+base+' Z';
+      var out='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-label="Projected net worth, '+Math.round(lo)+' to '+Math.round(hi)+'">'
+        +'<defs><linearGradient id="msumA" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#04B477" stop-opacity=".26"/><stop offset="100%" stop-color="#04B477" stop-opacity="0"/></linearGradient></defs>'
+        +'<path d="'+area+'" fill="url(#msumA)"/>'
+        +'<path d="'+d+'" fill="none" stroke="#0E794E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>'
+        +'<line x1="'+PL+'" y1="'+base+'" x2="'+(W-PR)+'" y2="'+base+'" stroke="#E7E9EC" stroke-width="1.2"/>';
+      /* retirement marker */
+      if(2028.95>=lo && 2028.95<=hi){ var rx=X(2028.95); out+='<line x1="'+rx.toFixed(1)+'" y1="'+top+'" x2="'+rx.toFixed(1)+'" y2="'+base+'" stroke="#C4C8CF" stroke-width="1.2" stroke-dasharray="3 4"/>'
+        +'<text x="'+rx.toFixed(1)+'" y="'+(top-10)+'" font-size="11" font-weight="600" fill="#0E794E" text-anchor="middle">Retire</text>'; }
+      /* milestone dots, one per route row that falls in the window */
+      var order=XTL.map(function(m,i){ return i; }).sort(function(a,b){ return (XTL[a][0]==='#FBBD04')-(XTL[b][0]==='#FBBD04'); });
+      order.forEach(function(i){ var m=XTL[i]; var y=m[1]; if(y<lo||y>hi) return; var x=X(y), yy=Y(valueAt(y));
+        out+='<circle class="msum-dot" data-mi="'+i+'" cx="'+x.toFixed(1)+'" cy="'+yy.toFixed(1)+'" r="'+(m[0]==='#FBBD04'?6:4.5)+'" fill="'+m[0]+'" stroke="#FFFFFF" stroke-width="2"/>'; });
+      out+='<text x="'+PL+'" y="'+(base+20)+'" font-size="11" fill="#9AA0AE">'+Math.round(lo)+' &#183; '+money(valueAt(lo))+'</text>'
+        +'<text x="'+(W-PR)+'" y="'+(base+20)+'" font-size="11" fill="#9AA0AE" text-anchor="end">'+Math.round(hi)+' &#183; '+money(valueAt(hi))+'</text></svg>';
+      return out;
+    }
+    function html(){
+      return '<div class="msub-title">Your plan, up to the <em class="mhl-em" style="font-style:italic">peak.</em></div>'
+        +'<p class="msum-note" id="msumNote">'+NOTES.all+'</p>'
+        +'<div class="msum-chips" id="msumChips">'+CHIPS.map(function(c){ return '<button class="msum-chip'+(c[0]==='all'?' on':'')+'" type="button" data-span="'+c[0]+'">'+c[1]+'</button>'; }).join('')+'</div>'
+        +'<div class="msum-plot" id="msumPlot">'+chart(Y0,Y1)+'</div>'
+        +'<div class="msum-rhead">The route '+SPARK.replace('width="12" height="12"','width="18" height="18"')+'</div>'
+        +'<div class="msum-route" id="msumRoute">'+XTL.map(function(m,i){
+          return '<div class="mrt" data-mi="'+i+'" data-y="'+m[1]+'"><span class="mrt-dot" style="background:'+m[0]+';color:'+m[0]+'"></span><div class="mrt-bd"><div class="mrt-d">'+m[2]+'</div><div class="mrt-t">'+m[3]+'</div><div class="mrt-s">'+m[4]+'</div>'
+            +'<button class="mrt-ask" type="button" data-q="'+m[5]+'">'+SPARK+m[5]+'</button></div></div>'; }).join('')+'</div>';
+    }
+    function setSpan(key){
+      var r=SPANS[key]; lo=r[0]; hi=r[1]; active=key;
+      var body=document.getElementById('msubBody');
+      body.querySelectorAll('.msum-chip').forEach(function(c){ c.classList.toggle('on', c.dataset.span===key); });
+      var note=body.querySelector('#msumNote');
+      if(note){ note.classList.add('sw'); setTimeout(function(){ note.textContent=NOTES[key]; note.classList.remove('sw'); }, 180); }
+      body.querySelector('#msumPlot').innerHTML=chart(lo,hi);
+      body.querySelectorAll('.mrt').forEach(function(r){ var y=+r.dataset.y; r.classList.toggle('out', y<Math.floor(lo)||y>Math.ceil(hi)); });
+    }
+    function openSummary(){ push(html(), false); lo=Y0; hi=Y1; active='all'; }
+    document.getElementById('mplanChart').addEventListener('click', openSummary);
+    document.getElementById('mplanChart').addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openSummary(); } });
+    document.getElementById('msubBody').addEventListener('click', function(e){
+      var chip=e.target.closest('.msum-chip'); if(chip){ setSpan(chip.dataset.span); chip.scrollIntoView({behavior: reduce?'auto':'smooth', inline:'center', block:'nearest'}); return; }
+      var ask=e.target.closest('.mrt-ask'); if(ask){ toast('Boldin AI answers this next in the mobile build'); return; }
+      var dot=e.target.closest('.msum-dot'); if(dot){
+        var row=document.querySelector('#msumRoute .mrt[data-mi="'+dot.dataset.mi+'"]'); if(!row) return;
+        document.querySelectorAll('#msumRoute .mrt').forEach(function(r){ r.classList.toggle('lit', r===row); });
+        row.scrollIntoView({behavior: reduce?'auto':'smooth', block:'center'}); return; }
     });
   })();
 
