@@ -186,6 +186,36 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .ml-badge.maybe{ background:#FFF6D6; color:#8A6A00; }
 .ml-badge.dark{ background:var(--teal); color:#FFFFFF; }
 .ml-quiz{ font-size:15.5px; margin-top:12px; }
+/* Explore your plan: six chapters, each a lite page */
+.mxp-label{ margin-top:30px; }
+.mxp-list{ margin-top:0; border-top:0; }
+.mxp-list .mrow-s{ display:block; }
+.ml-badge.crit{ background:#FBE9E7; color:#B3261E; }
+.mxp-eye{ font-size:13px; font-weight:600; color:var(--green-cta); text-transform:uppercase; letter-spacing:.6px; margin-top:6px; }
+.mxp-hl{ font-size:27px; line-height:1.18; font-weight:500; letter-spacing:-0.3px; margin-top:8px; }
+.mxp-hl em{ font-style:normal; color:var(--green-cta); }
+.mxp-sub{ font-size:16.5px; line-height:1.5; color:var(--text-secondary); margin-top:10px; }
+.mxp-insight{ display:flex; gap:11px; align-items:flex-start; margin-top:20px; padding:15px 16px; border-radius:14px; background:var(--mint); }
+.mxp-insight svg{ flex:none; margin-top:2px; }
+.mxp-insight p{ font-size:16px; line-height:1.5; }
+.mxp-insight b{ font-weight:600; }
+.mxp-stats{ display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-top:18px; }
+.mxp-stat{ border:1px solid var(--hairline); border-radius:14px; padding:12px 13px; min-width:0; }
+.mxp-stat .k{ font-size:13px; color:var(--text-secondary); line-height:1.25; }
+.mxp-stat .v{ font:700 22px 'DM Sans',sans-serif; letter-spacing:-0.6px; margin-top:4px; font-variant-numeric:tabular-nums; }
+.mxp-stat .d{ font-size:12.5px; color:var(--text-tertiary); line-height:1.4; margin-top:3px; }
+.mxp-h{ font-size:16.5px; font-weight:600; color:var(--text-secondary); margin:26px 0 4px; }
+.mxp-item{ display:flex; gap:11px; align-items:flex-start; padding:12px 0; border-bottom:1px solid var(--hairline); }
+.mxp-item:last-child{ border-bottom:0; }
+.mxp-item .ic{ flex:none; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-top:1px; }
+.mxp-item .ic.good{ background:var(--mint); color:var(--green-cta); }
+.mxp-item .ic.warn{ background:#FFF4D6; color:#9A6B00; }
+.mxp-item .ic.crit{ background:#FBE9E7; color:#B3261E; }
+.mxp-item .t{ font-size:16.5px; font-weight:600; line-height:1.35; }
+.mxp-item .s{ font-size:14.5px; color:var(--text-secondary); line-height:1.45; margin-top:2px; }
+.mxp-item .tag{ display:inline-block; font-size:12.5px; color:var(--text-tertiary); margin-top:4px; }
+.mxp-qs .mrow{ padding:14px 2px; }
+.mxp-qs .mrow-t{ font-size:16.5px; font-weight:500; }
 .ml-viz{ display:block; width:100%; margin-top:16px; background:none; border:0; padding:0; font-family:inherit; cursor:pointer; }
 .ml-viz svg{ display:block; width:100%; height:auto; }
 .ml-viz:active{ transform:scale(.995); }
@@ -814,6 +844,9 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
   <section class="mcard mplan-boost" id="mplanBoost"></section>
 
   <div class="mlist" id="mlistPlan"></div>
+
+  <div class="mplan-seclabel mxp-label">Explore your plan</div>
+  <div class="mlist mxp-list" id="mxpList"></div>
 </div>
 
 <div class="mtab" id="tabOptimize" hidden>
@@ -1581,6 +1614,70 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     scrim.addEventListener('click', close);
     sheet.addEventListener('click', function(e){ if(e.target.closest('[data-msx-close]')) close(); });
     window.__openStat=open;
+  })();
+
+  /* ===== Explore your plan: the desktop's six chapters, one lite page each ===== */
+  (function(){
+    var SPARK='<svg width="18" height="18" viewBox="0 0 24 24" fill="#C08A00"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg>';
+    var IC={
+      good:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      warn:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 7v6M12 16.5v.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>',
+      crit:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 7l10 10M17 7L7 17" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>'
+    };
+    function insight(t){ return '<div class="mxp-insight">'+SPARK+'<p>'+t+'</p></div>'; }
+    function stats(a){ return '<div class="mxp-stats">'+a.map(function(x){ return '<div class="mxp-stat"><div class="k">'+x[0]+'</div><div class="v">'+x[1]+'</div>'+(x[2]?'<div class="d">'+x[2]+'</div>':'')+'</div>'; }).join('')+'</div>'; }
+    function items(h,a){ return '<div class="mxp-h">'+h+'</div>'+a.map(function(x){ return '<div class="mxp-item"><span class="ic '+x[0]+'">'+IC[x[0]]+'</span><span><span class="t" style="display:block">'+x[1]+'</span><span class="s" style="display:block">'+x[2]+'</span>'+(x[3]?'<span class="tag">'+x[3]+'</span>':'')+'</span></div>'; }).join(''); }
+    function qs(a){ return '<div class="mxp-h">Go deeper</div><div class="mlist mxp-qs" style="margin-top:0;border-top:0">'+a.map(function(q){ return '<button class="mrow" type="button" data-toast="This chart lands next in the mobile build"><span class="mrow-txt"><span class="mrow-t">'+q+'</span></span>'+CHEV+'</button>'; }).join('')+'</div>'; }
+    function head(eye,hl,sub){ return '<div class="mxp-eye">'+eye+'</div><h2 class="mxp-hl">'+hl+'</h2><p class="mxp-sub">'+sub+'</p>'; }
+
+    var CH=[
+      { id:'first', t:'Start here', q:'Am I on track?', chip:['yes','87% on track'],
+        body: head('Start here','You\u2019re on track to retire on schedule and spend <em>$9,583 a month</em>.','Where you stand, what is working, and what could knock it off course.')
+          +insight('Everything here is steady except one stretch: the <b>four years from 2037 to 2041</b>, after work stops and before either Social Security check starts. That window decides most of your odds.')
+          +items('Key strengths',[
+            ['good','You save 17% of pay and still have $25k a year left over','Room to save more now, or to fund the early retirement years.','Budgeting'],
+            ['good','Social Security will cover 56% of your retirement spending','Guaranteed, inflation-adjusted income for life once both benefits start in 2041.','Retirement'],
+            ['good','Your mortgage is paid off in 2035, before you retire','You go into retirement with no debt payments.','Budgeting']])
+          +items('Key risks',[
+            ['warn','The bridge years, 2037\u20132041, lean hardest on savings','Withdrawals peak near $92k in 2039, and taxable savings are gone by 2044.','Retirement'],
+            ['warn','74% of your savings has never been taxed','Required distributions start in 2047, and your heirs inherit the tax bill on what is left.','Taxes'],
+            ['crit','No healthcare directive, and your IRA beneficiary is out of date','Both are quick fixes, and they decide who acts for you and who inherits.','Estate planning']])
+          +qs(['How will my net worth change over time?']) },
+      { id:'budget', t:'Budgeting', q:'Where does my money come from and go?', chip:['yes','$25k/yr left over'],
+        body: head('Budgeting','Where does your money come from, and where does it go?','Where the money goes today, and what changes when the paychecks stop.')
+          +insight('Today your paychecks cover everything with <b>$2,105 a month</b> spare. The shape of this page changes completely in 2037: the same spending, none of the income.')
+          +stats([['Income this year','$210k','two paychecks'],['Spending','$120k','$10,017/mo incl. mortgage'],['Saving rate','17%','into 401(k)s and Roth IRAs'],['Left over','$25k','after everything']])
+          +qs(['Where does my money go this year?','What are my income and expenses over time?','Which years run a surplus or a gap?','How does spending change in retirement?']) },
+      { id:'retire', t:'Retirement', q:'Will my money last?', chip:['maybe','Watch 2037\u20132041'],
+        body: head('Retirement','Will your money last as long as you do?','How the plan holds up in good markets and bad, and what moves your odds.')
+          +insight('The plan fails in the same place every time it fails: early. <b>Timing beats sacrifice.</b> Waiting to claim Social Security does more for your odds than cutting $958 a month of spending.')
+          +stats([['Chance of success','87%','of 1,000 market histories'],['Bridge years','2037\u201341','before Social Security starts'],['Peak withdrawal','$92k','in 2039'],['Taxable runs out','2044','then pre-tax carries the load']])
+          +qs(['What is the range of outcomes for my savings?','How will my income pay for retirement?','What would raise my odds?','When should we claim Social Security?']) },
+      { id:'invest', t:'Investments', q:'Am I invested for what\u2019s ahead?', chip:['maybe','7 pts above target'],
+        body: head('Investments','Are you invested the right way for what\u2019s ahead?','Your mix against your target, and how a bad market at the wrong time lands.')
+          +insight('You are <b>7 points above your stock target</b>. That mattered less while you were saving; it matters most in the four years around retiring, when a drop has no time to recover.')
+          +stats([['Stocks today','62%','your target is 55%'],['Above target by','7 pts','about $53k more in stocks'],['Invested today','$755k','14 accounts, 11 linked'],['Pre-tax share','74%','401(k)s and traditional IRA']])
+          +qs(['How am I invested today?','Does my mix match my target?','Where does my money sit, by tax treatment?','Which accounts will I draw from, and when?','What if the market drops the year I retire?']) },
+      { id:'tax', t:'Taxes', q:'Am I paying more tax than I need to?', chip:['yes','$171k opportunity'],
+        body: head('Taxes','Are you paying more tax than you need to?','The brackets you sit in year by year, and what converting early would change.')
+          +insight('Between 2037 and 2056 your taxable income all but disappears before required distributions begin. <b>That window is the cheapest tax you will ever pay</b> on money that has never been taxed.')
+          +stats([['Lifetime federal tax','$630k','income tax and IRMAA'],['Largest RMD','$81k','a year, from 2047'],['Heirs\u2019 tax bill','$168k','on inherited pre-tax money at 24%'],['Converting early saves','$171k','after-tax, for your heirs']])
+          +qs(['What is my marginal tax bracket each year?','How much tax will I pay each year?','How large will my required distributions be?','Could a Roth conversion leave me better off?']) },
+      { id:'estate', t:'Estate planning', q:'What will I leave, and to whom?', chip:['crit','2 documents missing'],
+        body: head('Estate planning','What will you leave, and to whom?','What your estate is worth, who it goes to, and which documents are missing.')
+          +insight('The money side of your estate is in good shape. <b>The paperwork is not.</b> Two documents decide who acts for you and who inherits, and both are an afternoon\u2019s work.')
+          +stats([['Likely estate at 92','$2.01M','median markets, incl. home'],['Legacy goal','$1M','met in 77% of simulations'],['Heirs\u2019 tax on pre-tax money','$168k','at an assumed 24% rate'],['Documents missing','2','healthcare directive, IRA beneficiary']])
+          +qs(['Are my documents and beneficiaries in place?','How much am I likely to leave?','What kind of money will my heirs inherit?']) }
+    ];
+    var list=document.getElementById('mxpList');
+    list.innerHTML=CH.map(function(c){
+      return '<button class="mrow" type="button" data-xp="'+c.id+'"><span class="mrow-txt"><span class="mrow-t">'+c.t+'</span><span class="mrow-s">'+c.q+'</span></span><span class="ml-badge '+c.chip[0]+'">'+c.chip[1]+'</span>'+CHEV+'</button>';
+    }).join('');
+    list.addEventListener('click', function(e){
+      var b=e.target.closest('[data-xp]'); if(!b) return;
+      var c=CH.find(function(x){ return x.id===b.dataset.xp; }); if(!c) return;
+      push(c.body, false);
+    });
   })();
 
   /* ===== the Chase row opens an inline field editor, desktop-smooth ===== */
