@@ -1524,11 +1524,16 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
       hl.classList.add('hl-sw');
       setTimeout(function(){ hl.innerHTML=L.hl; hl.classList.remove('hl-sw'); }, 180);
     }
+    var TO_CHAPTER={snapshot:'first', fl:'budget', retirement:'retire', invest:'invest', tax:'tax', estate:'estate'};
     row.addEventListener('click', function(e){
-      var p=e.target.closest('.mlens'); if(!p || p.classList.contains('on')) return;
-      row.querySelectorAll('.mlens').forEach(function(x){ x.classList.toggle('on', x===p); x.setAttribute('aria-selected', x===p?'true':'false'); });
-      p.scrollIntoView({behavior: reduce?'auto':'smooth', inline:'center', block:'nearest'});
-      apply(p.dataset.lens, true);
+      var p=e.target.closest('.mlens'); if(!p) return;
+      if(!p.classList.contains('on')){
+        row.querySelectorAll('.mlens').forEach(function(x){ x.classList.toggle('on', x===p); x.setAttribute('aria-selected', x===p?'true':'false'); });
+        p.scrollIntoView({behavior: reduce?'auto':'smooth', inline:'center', block:'nearest'});
+        apply(p.dataset.lens, false);
+      }
+      /* the pill opens the matching Explore your plan page */
+      if(window.__openChapter) window.__openChapter(TO_CHAPTER[p.dataset.lens]);
     });
     document.getElementById('mplanDD').addEventListener('click', function(){ toast('Portfolio views land next in the mobile build'); });
     apply('snapshot', false);
@@ -1697,10 +1702,14 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     list.innerHTML=CH.map(function(c){
       return '<button class="mrow" type="button" data-xp="'+c.id+'"><span class="mrow-txt"><span class="mrow-t">'+c.t+'</span><span class="mrow-s">'+c.q+'</span></span><span class="ml-badge '+c.chip[0]+'">'+c.chip[1]+'</span>'+CHEV+'</button>';
     }).join('');
+    function openChapter(id){
+      var c=CH.find(function(x){ return x.id===id; }); if(!c) return;
+      push(c.body, false);
+    }
+    window.__openChapter=openChapter;
     list.addEventListener('click', function(e){
       var b=e.target.closest('[data-xp]'); if(!b) return;
-      var c=CH.find(function(x){ return x.id===b.dataset.xp; }); if(!c) return;
-      push(c.body, false);
+      openChapter(b.dataset.xp);
     });
   })();
 
