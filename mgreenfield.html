@@ -186,6 +186,83 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .ml-badge.maybe{ background:#FFF6D6; color:#8A6A00; }
 .ml-badge.dark{ background:var(--teal); color:#FFFFFF; }
 .ml-quiz{ font-size:15.5px; margin-top:12px; }
+/* home destination pages */
+.mhp-hero{ margin-top:18px; }
+.mhp-hl{ font-size:27px; line-height:1.18; font-weight:500; letter-spacing:-0.3px; }
+.mhp-hl em{ font-style:normal; color:var(--green-cta); }
+.mhp-hl .gold{ color:#C08A00; }
+.mhp-sub{ font-size:16.5px; line-height:1.5; color:var(--text-secondary); margin-top:10px; }
+.mhp-cmp{ display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:10px; margin-top:18px; border:1px solid var(--hairline); border-radius:16px; padding:16px; }
+.mhp-cmp .k{ font-size:13px; color:var(--text-tertiary); }
+.mhp-cmp .v{ font:700 30px 'DM Sans',sans-serif; letter-spacing:-1px; margin-top:2px; font-variant-numeric:tabular-nums; }
+.mhp-cmp .v.g{ color:var(--green-cta); }
+.mhp-cmp .arrow{ color:#C4C8CF; }
+.mhp-cta{ display:flex; align-items:center; justify-content:center; width:100%; height:52px; margin-top:20px; border-radius:999px;
+  background:var(--green-cta); color:#FFFFFF; border:0; font-family:inherit; font-size:17px; font-weight:600; cursor:pointer; }
+.mhp-cta:active{ background:#0B5F3D; transform:scale(.99); }
+.mhp-cta.ghost{ background:var(--white); color:var(--green-cta); border:1px solid var(--hairline); margin-top:10px; }
+.mhp-bars{ margin-top:18px; display:flex; flex-direction:column; gap:12px; }
+.mhp-bar .top{ display:flex; justify-content:space-between; font-size:14.5px; margin-bottom:6px; }
+.mhp-bar .top b{ font:700 14.5px 'DM Sans',sans-serif; color:var(--green-cta); }
+.mhp-bar .tr{ height:8px; border-radius:99px; background:#EEF0F2; overflow:hidden; }
+.mhp-bar .tr i{ display:block; height:100%; border-radius:99px; background:var(--green); }
+.mhp-bar.base .tr i{ background:var(--teal); }
+.mhp-bar.base .top b{ color:var(--text-secondary); }
+/* checkup */
+.mck{ display:flex; gap:12px; padding:15px 0; border-bottom:1px solid var(--hairline); }
+.mck:last-child{ border-bottom:0; }
+.mck .ic{ flex:none; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-top:1px; }
+.mck .ic.warn{ background:#FFF4D6; color:#9A6B00; } .mck .ic.crit{ background:#FBE9E7; color:#B3261E; } .mck .ic.good{ background:var(--mint); color:var(--green-cta); }
+.mck .t{ font-size:17px; font-weight:600; line-height:1.3; }
+.mck .s{ font-size:15px; color:var(--text-secondary); line-height:1.5; margin-top:3px; }
+.mck .fix{ display:inline-flex; align-items:center; gap:5px; margin-top:8px; font-size:15px; font-weight:600; color:var(--green-cta); cursor:pointer; background:none; border:0; padding:0; font-family:inherit; }
+/* stress test sliders */
+.mst{ margin-top:20px; display:flex; flex-direction:column; gap:16px; }
+.mst-row label{ display:flex; justify-content:space-between; font-size:15px; font-weight:500; color:var(--text-secondary); margin-bottom:8px; }
+.mst-row label b{ font:600 15px 'DM Sans',sans-serif; color:var(--ink); font-variant-numeric:tabular-nums; }
+.mst-row input[type=range]{ -webkit-appearance:none; appearance:none; width:100%; height:6px; border-radius:99px; background:#E7E9EC; outline:0; }
+.mst-row input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; width:26px; height:26px; border-radius:50%; background:#FFFFFF; border:2px solid var(--green-cta); box-shadow:0 1px 4px rgba(16,24,44,.18); }
+.mst-row input[type=range]::-moz-range-thumb{ width:26px; height:26px; border-radius:50%; background:#FFFFFF; border:2px solid var(--green-cta); }
+.mst-card{ margin-top:18px; border-radius:14px; padding:14px 16px; background:var(--mint); }
+.mst-card.dn{ background:#FFF4D6; }
+.mst-card .t{ font-size:16.5px; font-weight:600; }
+.mst-card .s{ font-size:15px; line-height:1.5; color:var(--text-secondary); margin-top:4px; }
+.mst-presets{ display:flex; gap:8px; margin-top:14px; overflow-x:auto; scrollbar-width:none; margin-left:-18px; margin-right:-18px; padding:0 18px 2px; }
+.mst-presets::-webkit-scrollbar{ display:none; }
+/* advisory */
+.madv-tier{ border:1px solid var(--hairline); border-radius:18px; padding:18px 16px; margin-top:14px; }
+.madv-tier.hi{ border-color:var(--teal); }
+.madv-tier .nm{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; }
+.madv-tier .nm b{ font-size:19px; font-weight:600; }
+.madv-tier .nm span{ font:600 15px 'DM Sans',sans-serif; color:var(--green-cta); white-space:nowrap; }
+.madv-tier .s{ font-size:15px; color:var(--text-secondary); line-height:1.5; margin-top:6px; }
+.madv-tier ul{ list-style:none; margin-top:12px; display:flex; flex-direction:column; gap:8px; }
+.madv-tier li{ display:flex; gap:9px; font-size:15px; line-height:1.45; }
+.madv-tier li svg{ flex:none; margin-top:3px; color:var(--green-cta); }
+.madv-people{ display:flex; gap:11px; margin-top:14px; overflow-x:auto; scrollbar-width:none; margin-left:-18px; margin-right:-18px; padding:0 18px 4px; }
+.madv-people::-webkit-scrollbar{ display:none; }
+.madv-p{ flex:none; width:150px; border:1px solid var(--hairline); border-radius:16px; padding:14px; text-align:left; font-family:inherit; background:var(--white); cursor:pointer; }
+.madv-p .mh-ava{ width:42px; height:42px; font-size:16px; }
+.madv-p b{ display:block; font-size:16.5px; font-weight:600; margin-top:10px; }
+.madv-p i{ display:block; font-style:normal; font-size:13.5px; color:var(--text-tertiary); margin-top:2px; line-height:1.35; }
+/* quiz */
+.mqz-q{ font-size:19px; font-weight:600; letter-spacing:-0.2px; margin-top:22px; }
+.mqz-opts{ display:flex; flex-direction:column; gap:9px; margin-top:12px; }
+.mqz-o{ text-align:left; width:100%; border:1px solid var(--hairline); border-radius:14px; background:var(--white); padding:14px 15px; font-family:inherit; font-size:16px; cursor:pointer; }
+.mqz-o.on{ border-color:var(--green-cta); background:#F7FCFA; font-weight:600; }
+.mqz-step{ font:500 13px 'DM Sans',sans-serif; color:var(--text-tertiary); margin-top:18px; letter-spacing:.4px; text-transform:uppercase; }
+/* insight pages */
+.mins-rows{ margin-top:10px; }
+.mins-row{ display:flex; align-items:center; gap:10px; padding:12px 0; border-bottom:1px solid var(--hairline); }
+.mins-row:last-child{ border-bottom:0; }
+.mins-row .dot{ width:10px; height:10px; border-radius:3px; flex:none; }
+.mins-row .n{ flex:1; font-size:16px; font-weight:500; }
+.mins-row .v{ font:600 16px 'DM Sans',sans-serif; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.mins-row .c{ flex:none; font-size:12.5px; color:var(--text-tertiary); white-space:nowrap; }
+.mins-row .c.ok{ color:var(--green-cta); font-weight:600; }
+.mins-cap{ font-size:15.5px; line-height:1.5; color:var(--text-secondary); margin-top:12px; }
+.mins-cap b{ color:var(--ink); font-weight:600; }
+.mins-asks{ display:flex; flex-direction:column; gap:8px; margin-top:12px; }
 /* Prism summary: your plan, up to the peak */
 .mplan-chart{ cursor:pointer; }
 .msum-note{ font-size:16.5px; line-height:1.5; color:var(--text-secondary); margin-top:10px; min-height:1.5em; transition:opacity .18s ease; }
@@ -741,32 +818,32 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     <p class="ml-p">Three moves lift your <b>87%</b> chance of success the most.</p>
     <div class="mlist ml-list">
       <button class="mrow ml-row" type="button" data-go="opt-ss"><span class="mrow-txt"><span class="mrow-t">Delay Social Security to 70</span></span><span class="mrow-amt g">+6 &rarr; 93%</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
-      <button class="mrow ml-row" type="button" data-go="tab:plan"><span class="mrow-txt"><span class="mrow-t">Trim spending $400/mo for 5 years</span></span><span class="mrow-amt g">+4 &rarr; 91%</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
-      <button class="mrow ml-row" type="button" data-go="tab:plan"><span class="mrow-txt"><span class="mrow-t">Work through age 64, not 62</span></span><span class="mrow-amt g">+3 &rarr; 90%</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
-      <button class="mrow ml-row" type="button" data-go="tab:optimize"><span class="mrow-txt"><span class="mrow-t">Retirement checkup</span><span class="mrow-s" style="display:block">Four things worth a second look</span></span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
-      <button class="mrow ml-row" type="button" data-go="tab:plan"><span class="mrow-txt"><span class="mrow-t">Stress test your plan</span><span class="mrow-s" style="display:block">A 2008-style drop takes you to 71%</span></span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
+      <button class="mrow ml-row" type="button" data-go="hm:trim"><span class="mrow-txt"><span class="mrow-t">Trim spending $400/mo for 5 years</span></span><span class="mrow-amt g">+4 &rarr; 91%</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
+      <button class="mrow ml-row" type="button" data-go="hm:work"><span class="mrow-txt"><span class="mrow-t">Work through age 64, not 62</span></span><span class="mrow-amt g">+3 &rarr; 90%</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
+      <button class="mrow ml-row" type="button" data-go="hm:checkup"><span class="mrow-txt"><span class="mrow-t">Retirement checkup</span><span class="mrow-s" style="display:block">Four things worth a second look</span></span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
+      <button class="mrow ml-row" type="button" data-go="hm:stress"><span class="mrow-txt"><span class="mrow-t">Stress test your plan</span><span class="mrow-s" style="display:block">A 2008-style drop takes you to 71%</span></span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
     </div>
   </section>
 
   <!-- 04 Get support -->
   <section class="mh-sec ml-sec">
-    <div class="mh-sec-head"><span class="ml-eye"><b>04</b>Get support</span><a class="ml-more" data-toast="Advisory lands next in the mobile build">Compare <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M9 5.5l6.5 6.5L9 18.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+    <div class="mh-sec-head"><span class="ml-eye"><b>04</b>Get support</span><a class="ml-more" data-go="hm:advisory">Compare <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M9 5.5l6.5 6.5L9 18.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
     <div class="mlist ml-list">
-      <button class="mrow ml-row" type="button" data-go="toast:Community lands next in the mobile build"><span class="mrow-txt"><span class="mrow-t">Community &amp; classes</span><span class="mrow-s" style="display:block">Live events and free classes</span></span><span class="mrow-amt ">Free</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
-      <button class="mrow ml-row" type="button" data-go="toast:Coaching signup lands next in the mobile build"><span class="mrow-txt"><span class="mrow-t">1:1 coaching</span><span class="mrow-s" style="display:block">An hour with a Boldin expert</span></span><span class="mrow-amt ">$250</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
-      <button class="mrow ml-row" type="button" data-go="toast:Booking lands next in the mobile build"><span class="mrow-txt"><span class="mrow-t">Advisor checkup</span><span class="mrow-s" style="display:block">Real advice from a CFP&#174;</span></span><span class="mrow-amt ">$3,200</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
+      <button class="mrow ml-row" type="button" data-go="hm:community"><span class="mrow-txt"><span class="mrow-t">Community &amp; classes</span><span class="mrow-s" style="display:block">Live events and free classes</span></span><span class="mrow-amt ">Free</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
+      <button class="mrow ml-row" type="button" data-go="hm:coach"><span class="mrow-txt"><span class="mrow-t">1:1 coaching</span><span class="mrow-s" style="display:block">An hour with a Boldin expert</span></span><span class="mrow-amt ">$250</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
+      <button class="mrow ml-row" type="button" data-go="hm:advisor"><span class="mrow-txt"><span class="mrow-t">Advisor checkup</span><span class="mrow-s" style="display:block">Real advice from a CFP&#174;</span></span><span class="mrow-amt ">$3,200</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
     </div>
-    <a class="mh-link ml-quiz" data-toast="Match quiz lands next in the mobile build">Not sure? Take the 1-minute match quiz <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M9 5.5l6.5 6.5L9 18.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <a class="mh-link ml-quiz" data-go="hm:quiz">Not sure? Take the 1-minute match quiz <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M9 5.5l6.5 6.5L9 18.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   </section>
 
   <!-- 05 Your questions -->
   <section class="mh-sec ml-sec">
     <div class="mh-sec-head"><span class="ml-eye"><b>05</b>Your questions</span><a class="ml-more" data-go="tab:ai">Ask <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M9 5.5l6.5 6.5L9 18.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
     <div class="mlist ml-list">
-      <button class="mrow ml-row" type="button" data-go="tab:plan"><span class="mrow-txt"><span class="mrow-t">Can I retire?</span></span><span class="ml-badge yes">Yes</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
-      <button class="mrow ml-row" type="button" data-go="tab:plan"><span class="mrow-txt"><span class="mrow-t">Am I on track to retire at 65?</span></span><span class="ml-badge yes">On track</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
-      <button class="mrow ml-row" type="button" data-go="tab:today"><span class="mrow-txt"><span class="mrow-t">How much can I spend?</span></span><span class="ml-badge dark">$8,200 / mo</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
-      <button class="mrow ml-row" type="button" data-go="opt-tax"><span class="mrow-txt"><span class="mrow-t">Am I paying too much lifetime tax?</span></span><span class="ml-badge maybe">Maybe</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
+      <button class="mrow ml-row" type="button" data-go="hm:last"><span class="mrow-txt"><span class="mrow-t">Can I retire?</span></span><span class="ml-badge yes">Yes</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
+      <button class="mrow ml-row" type="button" data-go="hm:worth"><span class="mrow-txt"><span class="mrow-t">Am I on track to retire at 65?</span></span><span class="ml-badge yes">On track</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
+      <button class="mrow ml-row" type="button" data-go="hm:safe"><span class="mrow-txt"><span class="mrow-t">How much can I spend?</span></span><span class="ml-badge dark">$8,200 / mo</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
+      <button class="mrow ml-row" type="button" data-go="hm:taxes"><span class="mrow-txt"><span class="mrow-t">Am I paying too much lifetime tax?</span></span><span class="ml-badge maybe">Maybe</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
       <button class="mrow ml-row" type="button" data-go="opt-ss"><span class="mrow-txt"><span class="mrow-t">Am I taking Social Security at the right time?</span></span><span class="ml-badge maybe">Maybe</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
       <button class="mrow ml-row" type="button" data-go="opt-tax"><span class="mrow-txt"><span class="mrow-t">Should I do Roth conversions?</span></span><span class="ml-badge maybe">Maybe</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
     </div>
@@ -1426,6 +1503,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
       var el=e.target.closest('[data-go]');
       if(el){
         var go=el.dataset.go;
+        if(go.indexOf('hm:')===0 || go.indexOf('ask:')===0){ return; } /* handled by the home-destinations router */
         if(go.indexOf('tab:')===0){ activateTab(go.slice(4)); }
         else if(go.indexOf('toast:')===0){ toast(go.slice(6)); }
         else if(go==='opt-ss'){ push(OPT.ss, false); }
@@ -1830,12 +1908,222 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     document.getElementById('mplanChart').addEventListener('click', openSummary);
     document.getElementById('mplanChart').addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openSummary(); } });
     document.getElementById('msubBody').addEventListener('click', function(e){
-      var chip=e.target.closest('.msum-chip'); if(chip){ setSpan(chip.dataset.span); chip.scrollIntoView({behavior: reduce?'auto':'smooth', inline:'center', block:'nearest'}); return; }
+      var chip=e.target.closest('.msum-chip[data-span]'); if(chip){ setSpan(chip.dataset.span); chip.scrollIntoView({behavior: reduce?'auto':'smooth', inline:'center', block:'nearest'}); return; }
       var ask=e.target.closest('.mrt-ask'); if(ask){ toast('Boldin AI answers this next in the mobile build'); return; }
       var dot=e.target.closest('.msum-dot'); if(dot){
         var row=document.querySelector('#msumRoute .mrt[data-mi="'+dot.dataset.mi+'"]'); if(!row) return;
         document.querySelectorAll('#msumRoute .mrt').forEach(function(r){ r.classList.toggle('lit', r===row); });
         row.scrollIntoView({behavior: reduce?'auto':'smooth', block:'center'}); return; }
+    });
+  })();
+
+  /* ===== Home destinations: real pages behind every link under the graph ===== */
+  (function(){
+    var CHK='<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    var SPK='<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6z"/></svg>';
+    var IC={ good:CHK, warn:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 7v6M12 16.5v.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>', crit:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 7l10 10M17 7L7 17" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>' };
+    function title(t,s){ return '<div class="msub-title">'+t+'</div>'+(s?'<div class="msub-sub">'+s+'</div>':''); }
+    function hero(hl,sub){ return '<div class="mhp-hero"><h2 class="mhp-hl">'+hl+'</h2>'+(sub?'<p class="mhp-sub">'+sub+'</p>':'')+'</div>'; }
+    function cmp(a,b,k1,k2){ return '<div class="mhp-cmp"><div><div class="k">'+k1+'</div><div class="v">'+a+'</div></div><span class="arrow"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><div class="k">'+k2+'</div><div class="v g">'+b+'</div></div></div>'; }
+    function cta(t,toastMsg,ghost){ return '<button class="mhp-cta'+(ghost?' ghost':'')+'" type="button" data-toast="'+toastMsg+'">'+t+'</button>'; }
+    function h(t){ return '<div class="mxp-h">'+t+'</div>'; }
+    function insight(t){ return '<div class="mxp-insight">'+SPK.replace('width="12" height="12"','width="18" height="18" fill="#C08A00"')+'<p>'+t+'</p></div>'; }
+    function stats(a){ return '<div class="mxp-stats">'+a.map(function(x){ return '<div class="mxp-stat"><div class="k">'+x[0]+'</div><div class="v">'+x[1]+'</div>'+(x[2]?'<div class="d">'+x[2]+'</div>':'')+'</div>'; }).join('')+'</div>'; }
+    function rows(a){ return '<div class="mins-rows">'+a.map(function(r){ return '<div class="mins-row">'+(r.c?'<span class="dot" style="background:'+r.c+'"></span>':'')+'<span class="n">'+r.n+'</span><span class="v">'+r.v+'</span>'+(r.chip?'<span class="c '+(r.ok?'ok':'')+'">'+r.chip+'</span>':'')+'</div>'; }).join('')+'</div>'; }
+    function cap(t){ return '<p class="mins-cap">'+t+'</p>'; }
+    function asks(a){ return h('Ask Boldin AI')+'<div class="mins-asks">'+a.map(function(q){ return '<button class="mrt-ask" type="button" data-go="ask:'+q+'">'+SPK+q+'</button>'; }).join('')+'</div>'; }
+    function bars(a){ return '<div class="mhp-bars">'+a.map(function(b){ return '<div class="mhp-bar'+(b[2]?' base':'')+'"><div class="top"><span>'+b[0]+'</span><b>'+b[1]+'%</b></div><div class="tr"><i style="width:'+b[1]+'%"></i></div></div>'; }).join('')+'</div>'; }
+    var C={teal:'#0D3F4A', green:'#0E794E', mint:'#9BD9C1', gold:'#FBBD04', grey:'#9AA0AE', deep:'#1B6B5C'};
+
+    var PAGES={};
+    /* --- Strengthen: the two scenario moves not already covered by Optimize --- */
+    PAGES.trim = title('Trim spending','$400 a month less, for the first five years.')
+      +hero('Four points of confidence, for <em>$13 a day</em>.','The cut only lasts through the bridge years, 2029 to 2033, when savings carries the most weight. Spending goes back to $6,300 in 2034.')
+      +cmp('87%','91%','Today','With this move')
+      +stats([['Monthly spending','$5,900','was $6,300'],['For','5 years','2029 to 2033'],['Kept invested','$24,000','compounds 25 more years'],['Ending balance','$3.71M','was $3.44M']])
+      +h('How the three moves compare')+bars([['Baseline',87,true],['Delay Social Security to 70',93],['Trim spending $400/mo',91],['Work through age 64',90]])
+      +cta('Save this scenario to my plan','Saved as a scenario in My Plans')+cta('Compare all three in My Plans','',true).replace('data-toast=""','data-go="tab:plan"')
+      +asks(['What else could I trim for five years?','What if I only trim $200?']);
+    PAGES.work = title('Work two more years','Retire at 64 instead of 62.')
+      +hero('Three more points, and <em>two fewer years</em> of drawdown.','Two more paychecks before the portfolio has to pay you. Consulting still starts the year you stop.')
+      +cmp('87%','90%','Today','With this move')
+      +stats([['Retirement','Dec 2030','was Dec 2028'],['Extra saved','$72,000','two years of 401(k)'],['Fewer draw years','2','portfolio untouched'],['Ending balance','$3.62M','was $3.44M']])
+      +h('How the three moves compare')+bars([['Baseline',87,true],['Delay Social Security to 70',93],['Trim spending $400/mo',91],['Work through age 64',90]])
+      +cta('Save this scenario to my plan','Saved as a scenario in My Plans')+cta('Compare all three in My Plans','',true).replace('data-toast=""','data-go="tab:plan"')
+      +asks(['What if I go part-time instead?','Does working longer change my Social Security?']);
+    /* --- Retirement checkup --- */
+    PAGES.checkup = title('Retirement checkup','Four things worth a second look.')
+      +hero('Nothing is broken. <em>Four things</em> are drifting.','Each one is a short fix, and each one moves your score or protects it.')
+      +'<div style="margin-top:8px">'
+      +'<div class="mck"><span class="ic warn">'+IC.warn+'</span><div><div class="t">Savings rate slipped to 11%</div><div class="s">You were at 14% a year ago. The difference is about $370 a month that is not compounding.</div><button class="fix" type="button" data-go="hm:trim">Put the surplus to work &rsaquo;</button></div></div>'
+      +'<div class="mck"><span class="ic warn">'+IC.warn+'</span><div><div class="t">Cash is running high</div><div class="s">$107,000 is 14 months of spending. Six months covers you; the rest is losing ground to inflation.</div><button class="fix" type="button" data-toast="Transfer setup lands next in the mobile build">Move $50K to the brokerage &rsaquo;</button></div></div>'
+      +'<div class="mck"><span class="ic crit">'+IC.crit+'</span><div><div class="t">No long-term care coverage</div><div class="s">A three-year care event is the biggest hole in the plan. Modeling it is free; deciding how to cover it is the work.</div><button class="fix" type="button" data-go="hm:stress:care">Model a care event &rsaquo;</button></div></div>'
+      +'<div class="mck"><span class="ic crit">'+IC.crit+'</span><div><div class="t">Two stale beneficiaries</div><div class="s">The rollover IRA and the brokerage still name a prior contact. This decides who inherits, and it takes ten minutes.</div><button class="fix" type="button" data-toast="Beneficiary update opens your custodian next">Update beneficiaries &rsaquo;</button></div></div>'
+      +'</div>'
+      +cta('See every opportunity in Optimize','').replace('data-toast=""','data-go="tab:optimize"');
+    /* --- Advisory --- */
+    function tier(nm,price,s,items,hi){ return '<div class="madv-tier'+(hi?' hi':'')+'"><div class="nm"><b>'+nm+'</b><span>'+price+'</span></div><div class="s">'+s+'</div><ul>'+items.map(function(i){ return '<li>'+CHK+i+'</li>'; }).join('')+'</ul>'+cta('Choose '+nm,'Checkout lands next in the mobile build')+'</div>'; }
+    var PEOPLE='<div class="madv-people">'+[['DK','t','Dana Kim, CFP&#174;','Roth ladders, early retirees'],['PS','g','Priya Shah, CFP&#174;','Equity comp, tax planning'],['MR','t','Marcus Reed, CFP&#174;','Pensions, Social Security'],['TB','g','Tom Bauer, CFP&#174;','Real estate, estate plans']].map(function(p){ return '<button class="madv-p" type="button" data-toast="Advisor profiles land next in the mobile build"><span class="mh-ava '+p[1]+'">'+p[0]+'</span><b>'+p[2]+'</b><i>'+p[3]+'</i></button>'; }).join('')+'</div>';
+    PAGES.advisory = title('My Advisory','You built the plan. Now be sure of it.')
+      +hero('Two ways to <em>work together</em>.','A CFP&#174; professional reviews the plan you built, inside the plan you built.')
+      +tier('Advisor Checkup','$3,200 flat fee','A full review of your plan, delivered as notes inside it, plus a scenario your advisor builds for you.',['90-minute video review, with your plan on screen','Written checkup, delivered as comments on your plan','One advisor-built scenario saved to your plan','Advisor chat for 60 days after (5 conversations)'])
+      +tier('Ongoing Advice','$2,400 / year','Everything in the Checkup, then a standing relationship: your advisor keeps the plan current all year.',['Yearly check-in plus a mid-year 30-minute touchpoint','Annual plan update: assumptions, accounts, goals','Rebalancing review against your target','Roth conversion and bracket review each fall','Advisor chat all year, replies within 1 business day','Priority scheduling when life changes'],true)
+      +h('Meet the advisors')+PEOPLE
+      +'<a class="mh-link" data-go="hm:quiz">Not sure which is right? Take the 1-minute match quiz &rsaquo;</a>';
+    PAGES.advisor = PAGES.advisory;
+    PAGES.coach = title('1:1 coaching','$250 &middot; one hour')
+      +hero('An hour to make sure the plan is <em>set up right</em>.','A Boldin expert walks through your inputs with you, catches what is missing, and shows you the levers that matter most.')
+      +h('What you get')+'<ul style="list-style:none;display:flex;flex-direction:column;gap:9px;margin-top:8px;font-size:15.5px;line-height:1.45">'+['60 minutes on video, your plan on screen','A review of every input, with fixes made live','Your top three opportunities, ranked','A recording and written recap the same day'].map(function(i){ return '<li style="display:flex;gap:9px"><span style="color:var(--green-cta);margin-top:3px">'+CHK+'</span>'+i+'</li>'; }).join('')+'</ul>'
+      +h('Your coach')+'<div class="mh-comm" style="margin-top:8px"><span class="mh-ava g" style="width:44px;height:44px;font-size:16px">DP</span><div><div style="font-size:17px;font-weight:600">Dev Patel</div><div class="mrow-s">Boldin coach &middot; 1,100 sessions &middot; 4.9 rating</div></div></div>'
+      +h('Next openings')+'<div class="mss-rows" style="margin-top:8px">'+[['Thu Oct 2','10:00 AM','on'],['Fri Oct 3','1:30 PM',''],['Mon Oct 6','9:00 AM','']].map(function(t){ return '<button class="mss-row'+(t[2]?' on':'')+'" type="button" data-slot><span class="mss-age" style="width:auto;font-size:16px">'+t[0]+'</span><span class="mss-note">'+t[1]+'</span><span class="mss-tag">Selected</span></button>'; }).join('')+'</div>'
+      +cta('Book this hour &middot; $250','Booking confirmation lands next in the mobile build');
+    PAGES.community = title('Community &amp; classes','Free, for every member.')
+      +hero('Live events, free classes, and <em>8,200 planners</em> on the same road.','Learn from Boldin experts and from people a few years ahead of you.')
+      +h('This week')+'<div class="mss-rows" style="margin-top:8px">'+[['Thu 10am','Social Security Masterclass','Live &middot; 60 min'],['Sat 9am','Roth conversions, step by step','Live &middot; 45 min'],['Anytime','Budgeting for the last mile','Class &middot; 4 parts']].map(function(c){ return '<button class="mss-row" type="button" data-toast="Class player lands next in the mobile build"><span class="mss-age" style="width:72px;font-size:14px">'+c[0]+'</span><span class="mss-note" style="font-size:16px;color:var(--ink);font-weight:600">'+c[1]+'<span style="display:block;font-size:13.5px;color:var(--text-tertiary);font-weight:500">'+c[2]+'</span></span></button>'; }).join('')+'</div>'
+      +h('Popular in the community')+'<div class="mins-rows">'+[['When did you actually claim Social Security?','214 replies'],['Our first year retired: what surprised us','168 replies'],['Roth ladder tracking spreadsheets','97 replies']].map(function(t){ return '<div class="mins-row"><span class="n">'+t[0]+'</span><span class="c">'+t[1]+'</span></div>'; }).join('')+'</div>'
+      +cta('Join the community','Community opens next in the mobile build')+cta('Save Thursday\u2019s class to my calendar','Added to your calendar',true);
+    /* --- Quiz --- */
+    var QZ=[['How confident are you in the inputs behind your plan?',['Very, I check them often','Mostly, a few are guesses','Not very, I set it up once']],
+            ['What do you want most right now?',['A second set of eyes','Someone to handle it with me all year','To learn and compare notes']],
+            ['How much would you spend to be sure?',['Nothing yet','A few hundred dollars','A few thousand, if it is right']]];
+    PAGES.quiz = title('Match quiz','One minute, three questions.')
+      +QZ.map(function(q,i){ return '<div class="mqz-step">Question '+(i+1)+' of 3</div><div class="mqz-q">'+q[0]+'</div><div class="mqz-opts" data-q="'+i+'">'+q[1].map(function(o,j){ return '<button class="mqz-o" type="button" data-o="'+j+'">'+o+'</button>'; }).join('')+'</div>'; }).join('')
+      +'<div id="mqzResult"></div>';
+    /* --- Insights --- */
+    PAGES.last = title('Will my money last?','Chance of success')
+      +hero('<em>87 of 100</em> futures still have money.','A thousand runs of your plan, through good markets and bad.')
+      +insight('Of 1,000 runs, <b>870</b> reached age 92 with money left; the <b>130</b> that did not hit bad markets in the bridge years.')
+      +h('Through a bad run')+rows([{n:'Bad markets 2029 to 2034',v:'71%',chip:'The real risk',c:C.gold},{n:'Bad markets after 2040',v:'84%',chip:'Absorbed',ok:1,c:C.mint},{n:'Living to 96 instead of 92',v:'81%',chip:'Absorbed',ok:1,c:C.mint}])
+      +cap('Sequence matters more than average returns. Holding consulting through 2033 does more for confidence than any change to your investment mix.')
+      +h('Your goals')+rows([{n:'Retire in 2028 on $7,200 a month',v:'Funded to 92',chip:'On track',ok:1,c:C.green},{n:'Leave $250,000 behind',v:'$3.44M',chip:'On track',ok:1,c:C.green}])
+      +cap('You could retire two years earlier and stay above 80% confidence.')
+      +cta('Stress test the bridge years','').replace('data-toast=""','data-go="hm:stress:crash"')
+      +asks(['What breaks this plan?','How would a bear market affect my retirement date?']);
+    PAGES.worth = title('Am I on track?','Net worth')
+      +hero('<em>$1.14M</em> today, and climbing.','Everything you own, minus everything you owe, now and ahead.')
+      +insight('The house is <b>$905,000</b> of it and the mortgage takes <b>$333,000</b> back, peaking around 2059 at <b>$6.46M</b>.')
+      +h('What you own')+rows([{n:'Home',v:'$905,000',chip:'72% of assets',c:'#FB5004'},{n:'Retirement accounts',v:'$310,000',chip:'Tax deferred',c:'#0E8FA8'},{n:'Brokerage',v:'$150,000',chip:'Taxable',c:'#0FA36F'},{n:'Cash',v:'$107,000',chip:'14 months',c:C.mint},{n:'Mortgage',v:'&minus;$333,000',chip:'Clear by 2044',c:C.grey}])
+      +cap('Most of it is a house you live in, and a house does not pay the bills. The <b>$1.09M</b> in savings is what retirement spends.')
+      +h('How it is taxed')+rows([{n:'Taxable',v:'$150,000',chip:'27%',c:'#0FA36F'},{n:'Tax deferred',v:'$310,000',chip:'56%',c:'#0E8FA8'},{n:'Tax free',v:'$95,000',chip:'17%',c:'#BC0278'}])
+      +cap('More than half your savings has never been taxed. The low-bracket years between 2029 and RMDs at 75 are the cheapest chance to fix that.')
+      +cta('See your accounts in My Money','').replace('data-toast=""','data-go="tab:today"')
+      +asks(['Should I convert some of the pre-tax money?']);
+    PAGES.safe = title('How much can I spend?','Guardrails')
+      +hero('You can spend <em>$8,400</em> a month.','The most you can spend and still reach 92 with money left.')
+      +insight('That is <b>$2,077 a month</b>, about $24,900 a year, you could spend and still finish the plan with money left.')
+      +stats([['Planned','$6,323','a month'],['Safe ceiling','$8,400','a month'],['Lower guardrail','$5,650','if savings drop 15%'],['Upper guardrail','$9,100','if savings rise 20%']])
+      +h('When you adjust')+cap('Guardrails sit on your savings balance, not the market. A 2% move shifts safe spending by about <b>$140 a month</b>. A bad month is not a trigger.')
+      +h('What raises it')+rows([{n:'Hold Social Security to 70',v:'+$760 / mo',chip:'Set',ok:1,c:C.green},{n:'The December Roth ladder',v:'+$310 / mo',chip:'Six Decembers',c:C.deep},{n:'Maximum spending strategy',v:'+$1,180 / mo',chip:'Ends near zero',c:C.gold}])
+      +cap('The first two move the ceiling and leave the plan intact. The third spends your ending balance down from $3.44M to about $583K.')
+      +cta('Try a spending level in the stress test','').replace('data-toast=""','data-go="hm:stress"')
+      +asks(['What would $2,077 a month buy us?','Tell me more about how guardrails work']);
+    PAGES.taxes = title('Am I paying too much tax?','Lifetime taxes')
+      +hero('<em>$325K</em> in tax, across the plan.','What you will pay, when you will pay it, and where the room is.')
+      +insight('It is front-loaded: <b>$36K</b> lands in the three years you are still working.')
+      +h('Where it goes')+rows([{n:'Federal income tax',v:'$169K',chip:'52%',c:C.teal},{n:'FICA, while working',v:'$114K',chip:'Ends 2028',c:C.deep},{n:'State income tax',v:'$42K',chip:'13%',c:C.mint}])
+      +cap('Your exposure is the 12% and 22% bands. You never reach the top brackets, which is exactly when conversions are cheap.')
+      +h('The window')+rows([{n:'Low-bracket room per year',v:'about $40,000',chip:'Expires yearly',c:C.gold},{n:'Years before RMDs start',v:'7',chip:'2029 to 2035',c:C.green},{n:'Convert the room each year saves',v:'$61,000',chip:'Lifetime',ok:1,c:C.green}])
+      +cap('Between retiring and RMDs at 75 the 22% bracket sits half empty. Every unused dollar expires each December 31.')
+      +cta('Plan the December Roth window','').replace('data-toast=""','data-go="opt-tax"')
+      +asks(['How much should I convert this year?','How can I minimize taxes in retirement?']);
+    PAGES.savings = title('Am I saving enough?','Savings')
+      +hero('You need <em>$156K</em>. You will have more.','What the plan asks of your savings, and what your savings can do.')
+      +insight('You cross your number before you retire and stay above it, peaking around 2059 at <b>$4.41M</b>.')
+      +h('Where growth comes from')+rows([{n:'Investment returns',v:'$355K',chip:'4.2% real',c:C.green},{n:'Surplus you add',v:'$154K',chip:'2035 to 2045',c:C.deep},{n:'Drawn back out',v:'&minus;$255K',chip:'The bridge and the tail',c:C.gold}])
+      +cap('Returns do most of the work. A dollar left in during the bridge years compounds for another twenty five.')
+      +h('By account')+rows([{n:'Cash and default account',v:'$107,000',chip:'Runway',c:C.mint},{n:'Pre-tax accounts',v:'$310,000',chip:'RMDs from 2036',c:'#0E8FA8'},{n:'Brokerage',v:'$150,000',chip:'Taxable',c:'#0FA36F'},{n:'Roth and HSA',v:'$95,000',chip:'Tax free',c:'#BC0278'}])
+      +asks(['What is my safe withdrawal rate?']);
+
+    /* --- Stress test: the desktop model, on sliders --- */
+    var ST=(function(){
+      var YR0=2026, YRN=2059;
+      var LIFE=['Frugal','Comfortable','Generous'], LIFEM=[0.90,1.00,1.13];
+      var RET_R=['Conservative','Balanced','Aggressive'], RET_RV=[0.030,0.042,0.054];
+      var BASE={ret:67, ss:70, spend:6300, life:1, ret_r:1};
+      function run(v, shock){
+        var retY=YR0+(v.ret-65), ssY=YR0+(v.ss-65);
+        var ssFactor = v.ss>=70 ? 1 : (v.ss>=67 ? 1-0.065*(70-v.ss) : 1-0.065*3-0.075*(67-v.ss));
+        var r=RET_RV[v.ret_r], bal=1090000, out=null, spendAtRet=null, infl=shock==='infl';
+        for(var y=YR0;y<=YRN;y++){
+          var work=y<retY?147600:0, consult=(y>=retY&&y<retY+5)?36000:0, pension=y>=retY?21600*Math.pow(0.98,y-retY):0, house=y>=retY?4800:0, ss=y>=ssY?60000*ssFactor:0;
+          var spend=y<retY?106200*Math.pow(1.005,y-YR0):v.spend*12*LIFEM[v.life]*Math.pow(infl?1.03:1.004,y-retY);
+          if(y>=2050) spend*=1+0.012*(y-2049);
+          if(shock==='care' && y>=2045 && y<2048) spend+=78000;
+          var gr=(shock==='crash' && y>=retY && y<retY+6)?-0.06:r;
+          bal=bal*(1+gr)+(work+consult+pension+house+ss-spend);
+          if(bal<=0 && !out){ out=y; bal=0; }
+          if(y===retY) spendAtRet=spend;
+        }
+        var ratio=bal/(20*(spendAtRet||v.spend*12));
+        var raw=72+22*Math.tanh((ratio-1)/1.2);
+        if(out) raw=Math.min(58, 58*(out-retY)/(YRN-retY));
+        return {end:bal, raw:raw, out:out};
+      }
+      var OFFSET=87-run(BASE,null).raw;
+      function conf(r){ return Math.max(5, Math.min(99, Math.round(r.raw+OFFSET))); }
+      function big(n){ return Math.abs(n)>=1e6?('$'+(n/1e6).toFixed(2)+'M'):('$'+Math.round(n/1e3)+'K'); }
+      return {BASE:BASE, LIFE:LIFE, RET_R:RET_R, run:run, conf:conf, big:big, baseConf:conf(run(BASE,null)), baseEnd:run(BASE,null).end};
+    })();
+    var stS=null, stShock=null;
+    function stHtml(shock){
+      stS={ret:67, ss:70, spend:6300, life:1, ret_r:1}; stShock=shock||null;
+      var slider=function(k,lab,min,max,step){ return '<div class="mst-row"><label for="mst_'+k+'">'+lab+'<b data-stv="'+k+'"></b></label><input type="range" id="mst_'+k+'" data-st="'+k+'" min="'+min+'" max="'+max+'" step="'+step+'" value="'+stS[k]+'"></div>'; };
+      return title('Stress test','Pull one. See the cost.')
+        +'<h2 class="mhp-hl" id="mstHead" style="margin-top:16px"></h2><p class="mhp-sub">Every slider moves the whole plan. Nothing here is saved until you say so.</p>'
+        +'<div class="mst-presets">'+[['','As planned'],['crash','Market crash'],['infl','High inflation'],['care','Care event']].map(function(p){ return '<button class="msum-chip'+((p[0]||null)===stShock?' on':'')+'" type="button" data-shock="'+p[0]+'">'+p[1]+'</button>'; }).join('')+'</div>'
+        +'<div class="mst">'+slider('ret','Retirement age',62,72,1)+slider('ss','Social Security age',62,70,1)+slider('spend','Monthly spending',4500,9000,100)+slider('life','Lifestyle',0,2,1)+slider('ret_r','Investment return',0,2,1)+'</div>'
+        +'<div class="mst-card" id="mstCard"></div>'
+        +cta('Save this to my plan','Saved as a scenario in My Plans')+'<a class="mh-link" data-go="ask:What should I stress test next?">Want a sharper picture? Ask Boldin AI &rsaquo;</a>';
+    }
+    function stPaint(){
+      var body=document.getElementById('msubBody'); if(!body.querySelector('#mstHead')) return;
+      var r=ST.run(stS, stShock), c=ST.conf(r), dc=c-ST.baseConf, de=r.end-ST.baseEnd;
+      body.querySelector('#mstHead').innerHTML = r.out ? 'Money runs out in <em class="gold">'+r.out+'</em>, at <em class="gold">'+c+'%</em>.' : 'Still funded to <em>92</em>, at <em>'+c+'%</em>.';
+      var labels={ret:stS.ret, ss:stS.ss, spend:'$'+Number(stS.spend).toLocaleString('en-US'), life:ST.LIFE[stS.life], ret_r:ST.RET_R[stS.ret_r]};
+      Object.keys(labels).forEach(function(k){ var el=body.querySelector('[data-stv="'+k+'"]'); if(el) el.textContent=labels[k]; });
+      var shockT={crash:'A 2008-style drop in your first six retirement years',infl:'3% inflation on spending every year of retirement',care:'Three years of long-term care from 2045, $78,000 a year'}[stShock];
+      var card=body.querySelector('#mstCard'); card.className='mst-card'+(dc<0?' dn':'');
+      card.innerHTML='<div class="t">'+(dc>0?'This is a stronger plan':(dc<0?'This costs you confidence':'Your plan, as it stands'))+'</div><div class="s">'+(shockT?shockT+'. ':'')+'Confidence moves <b>'+(dc>0?'+':'')+dc+' points</b> to <b>'+c+'%</b>, and the ending balance '+(de>=0?'rises':'falls')+' to <b>'+ST.big(r.end)+'</b>'+(dc<0&&!r.out?', recoverable with a few lean years.':'.')+'</div>';
+    }
+    document.getElementById('msubBody').addEventListener('input', function(e){
+      var i=e.target.closest('[data-st]'); if(!i) return; stS[i.dataset.st]=+i.value; stPaint();
+    });
+
+    /* --- quiz logic --- */
+    var qzA=[null,null,null];
+    function qzResult(){
+      var body=document.getElementById('msubBody'), out=body.querySelector('#mqzResult'); if(!out) return;
+      if(qzA.some(function(a){ return a===null; })) return;
+      var score=qzA[0]+qzA[1]+qzA[2];
+      var pick = score<=2 ? ['Community &amp; classes','Free','You are close to the plan already. Learn alongside people a few years ahead, and come back for a coach when a question gets specific.','hm:community']
+               : score<=4 ? ['1:1 coaching','$250 &middot; one hour','One focused hour to check every input and rank your opportunities. The fastest way to be sure the plan is set up right.','hm:coach']
+               : ['Advisor Checkup','$3,200 flat fee','You want a professional\u2019s eyes on the whole plan, with notes inside it and a scenario built for you.','hm:advisor'];
+      out.innerHTML='<div class="mxp-insight" style="margin-top:24px">'+SPK.replace('width="12" height="12"','width="18" height="18" fill="#C08A00"')+'<p><b>Your match: '+pick[0]+'</b> &middot; '+pick[1]+'<br>'+pick[2]+'</p></div>'+cta('See '+pick[0],'').replace('data-toast=""','data-go="'+pick[3]+'"');
+      out.scrollIntoView({behavior: reduce?'auto':'smooth', block:'nearest'});
+    }
+
+    /* --- router --- */
+    function openHome(key){
+      var parts=key.split(':'), k=parts[0], arg=parts[1];
+      if(k==='stress'){ push(stHtml(arg), false); stPaint(); return true; }
+      if(k==='quiz'){ qzA=[null,null,null]; push(PAGES.quiz, false); return true; }
+      if(PAGES[k]){ push(PAGES[k], false); return true; }
+      return false;
+    }
+    window.__openHome=openHome;
+    document.addEventListener('click', function(e){
+      var el=e.target.closest('[data-go]'); if(!el) return;
+      var go=el.dataset.go;
+      if(go.indexOf('hm:')===0){ e.stopPropagation(); openHome(go.slice(3)); return; }
+      if(go.indexOf('ask:')===0){ e.stopPropagation(); activateTab('ai'); setTimeout(function(){ var inp=document.querySelector('#tabAI input, #tabAI textarea'); if(inp){ inp.value=go.slice(4); inp.focus(); } }, 350); return; }
+      if(go==='opt-ss' && !el.closest('#tabHome')){ e.stopPropagation(); push(OPT.ss,false); return; }
+      if(go==='opt-tax' && !el.closest('#tabHome')){ e.stopPropagation(); push(OPT.tax,false); return; }
+      if(go.indexOf('tab:')===0 && !el.closest('#tabHome')){ e.stopPropagation(); activateTab(go.slice(4)); return; }
+    }, true);
+    document.getElementById('msubBody').addEventListener('click', function(e){
+      var sh=e.target.closest('[data-shock]'); if(sh){ stShock=sh.dataset.shock||null; document.querySelectorAll('#msubBody [data-shock]').forEach(function(c){ c.classList.toggle('on', c===sh); }); stPaint(); return; }
+      var slot=e.target.closest('[data-slot]'); if(slot){ document.querySelectorAll('#msubBody [data-slot]').forEach(function(x){ x.classList.toggle('on', x===slot); }); return; }
+      var o=e.target.closest('.mqz-o'); if(o){ var grp=o.parentNode; grp.querySelectorAll('.mqz-o').forEach(function(x){ x.classList.toggle('on', x===o); }); qzA[+grp.dataset.q]=+o.dataset.o; qzResult(); return; }
     });
   })();
 
