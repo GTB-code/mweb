@@ -160,12 +160,12 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .mh-faces .f4{ background:#FBBD04; color:#10182C; }
 /* ===== Home, ultra-lite: text only, no charts, no images, no motion ===== */
 .ml-intro{ max-width:none; }
-.ml-sec{ margin-top:28px; padding-top:22px; border-top:1px solid var(--hairline); }
+.ml-sec{ margin-top:56px; padding-top:0; border-top:0; }
 .ml-sec:first-of-type{ border-top:0; padding-top:0; margin-top:24px; }
-.ml-eye{ display:inline-flex; align-items:baseline; gap:8px; font-size:17px; font-weight:600; letter-spacing:-0.1px; }
+.ml-eye{ display:inline-flex; align-items:baseline; gap:8px; font-size:22px; font-weight:600; letter-spacing:-0.3px; }
 .ml-eye b{ font:700 12px 'DM Sans',sans-serif; color:var(--text-tertiary); letter-spacing:1px; }
 .ml-more{ display:inline-flex; align-items:center; gap:4px; font-size:15px; font-weight:600; color:var(--green-cta); cursor:pointer; white-space:nowrap; }
-.ml-fig-row{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-top:12px; }
+.ml-fig-row{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-top:2px; }
 .ml-home .mfig{ font-size:32px; letter-spacing:-1.1px; }
 .ml-chip{ font:600 13px 'DM Sans',sans-serif; color:var(--green-cta); background:var(--mint); border-radius:999px; padding:4px 10px; }
 .ml-p{ font-size:16.5px; line-height:1.5; color:var(--text-secondary); margin-top:10px; }
@@ -176,7 +176,9 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .ml-stat3 b{ display:block; font:700 18px 'DM Sans',sans-serif; letter-spacing:-0.4px; margin-top:2px; font-variant-numeric:tabular-nums; }
 .ml-stat3 b.g{ color:var(--green-cta); font-family:var(--font); letter-spacing:-0.2px; }
 .ml-stat3 i{ display:block; font-style:normal; font-size:12.5px; color:var(--text-tertiary); margin-top:1px; }
-.ml-list{ margin-top:12px; border-top:0; }
+.ml-home .mlist.ml-list{ margin-top:8px; border-top:0; }
+.ml-list .mrow{ border-bottom:0; }
+.ml-home .mh-sec-head{ padding-bottom:0; }
 .ml-row{ padding:13px 2px; }
 .ml-row .mrow-t{ font-size:17px; }
 .ml-row .mrow-s{ font-size:14.5px; }
@@ -293,7 +295,7 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
   border-radius:999px; padding:6px 11px; font-family:inherit; font-size:13.5px; font-weight:600; cursor:pointer; }
 .mrt-ask svg{ color:#C08A00; }
 /* Explore your plan: six chapters, each a lite page */
-.mxp-label{ margin-top:30px; }
+.mxp-label{ margin-top:44px; }
 .mxp-list{ margin-top:0; border-top:0; }
 .mxp-list .mrow-s{ display:block; }
 .ml-badge.crit{ background:#FBE9E7; color:#B3261E; }
@@ -420,7 +422,7 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .mchip4 .lab{ font-size:11px; color:var(--text-tertiary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .mchip4 .val{ font:600 15px 'DM Sans',sans-serif; letter-spacing:-0.3px; margin-top:3px; font-variant-numeric:tabular-nums; }
 /* boost your confidence card */
-.mplan-seclabel{ font-size:15px; font-weight:600; color:var(--text-secondary); margin:24px 2px 8px; }
+.mplan-seclabel{ font-size:21px; font-weight:600; letter-spacing:-0.2px; color:var(--ink); margin:44px 2px 6px; }
 .mplan-boost{ margin-top:0; }
 .mboost-hd{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
 .mboost-t{ font-size:17px; font-weight:600; letter-spacing:-0.2px; line-height:1.3; }
@@ -438,6 +440,7 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .mps-l{ font-size:14px; color:var(--text-tertiary); }
 /* the section list: rows push detail pages */
 .mlist{ margin-top:26px; border-top:1px solid var(--hairline); }
+#mlistPlan{ margin-top:0; border-top:0; }
 .mrow{ display:flex; align-items:center; gap:12px; width:100%; text-align:left; background:none; border:0;
   border-bottom:1px solid var(--hairline); padding:17px 2px; font-family:inherit; cursor:pointer; }
 .mrow:active{ background:#FAFBFC; }
@@ -756,66 +759,62 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
 <main class="mroot" id="mroot">
 <div class="mtab ml-home" id="tabHome">
   <div class="mgreet meye" id="mhGreet">Good afternoon, Marshall</div>
-  <h1 class="mhl">On track for <em class="mhl-em">2045,</em> and getting <em class="mhl-gold">steadier</em> every quarter.</h1>
+  <h1 class="mhl">Your plan is <em class="mhl-em">working.</em> <em class="mhl-gold">Three moves</em> make it stronger.</h1>
 
   <!-- 01 My Money -->
   <section class="mh-sec ml-sec">
-    <div class="mh-sec-head"><span class="ml-eye"><b>01</b>My Money</span><a class="ml-more" data-go="tab:today">Accounts <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M9 5.5l6.5 6.5L9 18.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+    <div class="mh-sec-head"><span class="ml-eye">My Money</span><a class="ml-more" data-go="tab:today">Accounts <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M9 5.5l6.5 6.5L9 18.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
     <div class="ml-fig-row"><span class="mfig">$620,000</span><span class="mdelta">&#9650; $18.4k this quarter</span></div>
     <button class="ml-viz" type="button" data-go="tab:today" aria-label="See your accounts">
-      <svg class="ml-tmap" viewBox="0 0 344 150" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-hidden="true">
-      <rect x="1.5" y="1.5" width="166.6" height="102.0" rx="6" fill="#0E8FA8"/>
-      <text x="9.5" y="18.5" font-size="11.5" font-weight="600" fill="#FFFFFF">401(k)</text>
-      <text x="9.5" y="34.5" font-size="12.5" font-weight="700" fill="#FFFFFF" opacity=".92">$214K</text>
-      <rect x="171.1" y="1.5" width="54.1" height="102.0" rx="6" fill="#43A8BB"/>
-      <text x="178.1" y="56.5" font-size="11.5" font-weight="700" fill="#10182C">$72K</text>
-      <rect x="228.2" y="1.5" width="114.3" height="102.0" rx="6" fill="#FB5004"/>
-      <text x="236.2" y="18.5" font-size="11.5" font-weight="600" fill="#FFFFFF">Home equity</text>
-      <text x="236.2" y="34.5" font-size="12.5" font-weight="700" fill="#FFFFFF" opacity=".92">$148K</text>
-      <rect x="1.5" y="106.5" width="128.3" height="42.0" rx="6" fill="#0FA36F"/>
-      <text x="9.5" y="123.5" font-size="11.5" font-weight="600" fill="#FFFFFF">Brokerage</text>
-      <text x="9.5" y="139.5" font-size="12.5" font-weight="700" fill="#FFFFFF" opacity=".92">$71K</text>
-      <rect x="132.8" y="106.5" width="87.6" height="42.0" rx="6" fill="#44B78F"/>
-      <text x="140.8" y="123.5" font-size="11.5" font-weight="600" fill="#10182C">Cash</text>
-      <text x="140.8" y="139.5" font-size="12.5" font-weight="700" fill="#10182C" opacity=".92">$49K</text>
-      <rect x="223.4" y="106.5" width="93.2" height="42.0" rx="6" fill="#BC0278"/>
-      <text x="231.4" y="123.5" font-size="11.5" font-weight="600" fill="#FFFFFF">Roth IRA</text>
-      <text x="231.4" y="139.5" font-size="12.5" font-weight="700" fill="#FFFFFF" opacity=".92">$52K</text>
-      <rect x="319.6" y="106.5" width="22.9" height="42.0" rx="6" fill="#CB3A96"/>
-      <text x="331.1" y="131.0" font-size="10" font-weight="700" fill="#10182C" text-anchor="middle">HSA</text>
+      <svg class="ml-tmap" viewBox="0 0 344 104" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-hidden="true">
+      <rect x="1.5" y="1.5" width="166.6" height="69.8" rx="6" fill="#1B6B5C"/>
+      <text x="9.5" y="17.5" font-size="11.5" font-weight="600" fill="#FFFFFF">401(k)</text>
+      <text x="9.5" y="32.5" font-size="12.5" font-weight="700" fill="#FFFFFF" opacity=".92">$214K</text>
+      <rect x="171.1" y="1.5" width="54.1" height="69.8" rx="6" fill="#49897D"/>
+      <text x="178.1" y="40.4" font-size="11.5" font-weight="700" fill="#FFFFFF">$72K</text>
+      <rect x="228.2" y="1.5" width="114.3" height="69.8" rx="6" fill="#0D3F4A"/>
+      <text x="236.2" y="17.5" font-size="11.5" font-weight="600" fill="#FFFFFF">Home equity</text>
+      <text x="236.2" y="32.5" font-size="12.5" font-weight="700" fill="#FFFFFF" opacity=".92">$148K</text>
+      <rect x="1.5" y="74.3" width="128.3" height="28.2" rx="6" fill="#04B477"/>
+      <text x="8.5" y="92.4" font-size="11.5" font-weight="700" fill="#FFFFFF">$71K</text>
+      <rect x="132.8" y="74.3" width="87.6" height="28.2" rx="6" fill="#36C392"/>
+      <text x="139.8" y="92.4" font-size="11.5" font-weight="700" fill="#FFFFFF">$49K</text>
+      <rect x="223.4" y="74.3" width="93.2" height="28.2" rx="6" fill="#9BD9C1"/>
+      <text x="230.4" y="92.4" font-size="11.5" font-weight="700" fill="#10182C">$52K</text>
+      <rect x="319.6" y="74.3" width="22.9" height="28.2" rx="6" fill="#AFE1CD"/>
+      <text x="331.1" y="91.9" font-size="10" font-weight="700" fill="#10182C" text-anchor="middle">HSA</text>
       </svg>
     </button>
     <div class="ml-stat3">
-      <div><span class="lab">Income</span><b>$11,300</b><i>a month, after tax</i></div>
-      <div><span class="lab">Spending</span><b>$6,450</b><i>12-mo avg $6,180</i></div>
-      <div><span class="lab">Wellness</span><b class="g">Excelling</b><i>88 of 100</i></div>
+      <div><span class="lab">Income</span><b>$11,300</b></div>
+      <div><span class="lab">Spending</span><b>$6,450</b></div>
+      <div><span class="lab">Wellness</span><b class="g">Excelling</b></div>
     </div>
   </section>
 
   <!-- 02 My Plans -->
   <section class="mh-sec ml-sec">
-    <div class="mh-sec-head"><span class="ml-eye"><b>02</b>My Plans</span><a class="ml-more" data-go="tab:plan">Compare <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M9 5.5l6.5 6.5L9 18.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+    <div class="mh-sec-head"><span class="ml-eye">My Plans</span><a class="ml-more" data-go="tab:plan">Compare <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M9 5.5l6.5 6.5L9 18.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
     <div class="ml-fig-row"><span class="mfig">Retiring 2045</span><span class="ml-chip">Baseline &#183; On track</span></div>
     <button class="ml-viz" type="button" data-go="tab:plan" aria-label="See the plan">
-      <svg class="ml-graph" viewBox="0 0 344 120" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-hidden="true">
+      <svg class="ml-graph" viewBox="0 0 344 88" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-hidden="true">
         <defs><linearGradient id="mlArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#04B477" stop-opacity=".28"/><stop offset="100%" stop-color="#04B477" stop-opacity="0"/></linearGradient></defs>
-        <path d="M4.0,88.9 L18.9,86.8 L33.9,84.3 L48.8,81.3 L63.7,77.9 L78.7,74.0 L93.6,69.6 L108.5,64.6 L123.5,58.9 L138.4,52.6 L145.9,49.3 L153.3,46.9 L168.3,42.2 L183.2,38.0 L205.6,32.4 L228.0,27.7 L257.9,21.7 L287.7,16.7 L317.6,15.4 L340.0,14.0 L340.0,96.0 L4.0,96.0 Z" fill="url(#mlArea)"/>
-        <path d="M4.0,88.9 L18.9,86.8 L33.9,84.3 L48.8,81.3 L63.7,77.9 L78.7,74.0 L93.6,69.6 L108.5,64.6 L123.5,58.9 L138.4,52.6 L145.9,49.3 L153.3,46.9 L168.3,42.2 L183.2,38.0 L205.6,32.4 L228.0,27.7 L257.9,21.7 L287.7,16.7 L317.6,15.4 L340.0,14.0" fill="none" stroke="#0E794E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <line x1="145.9" y1="14" x2="145.9" y2="96" stroke="#C4C8CF" stroke-width="1.2" stroke-dasharray="3 4"/>
-        <circle cx="145.9" cy="49.3" r="5" fill="#FBBD04" stroke="#FFFFFF" stroke-width="2"/>
-        <line x1="4" y1="96" x2="340.0" y2="96" stroke="#E7E9EC" stroke-width="1.2"/>
-        <text x="4" y="114" font-size="11" fill="#9AA0AE">Today &#183; $620K</text>
-        <text x="145.9" y="114" font-size="11" font-weight="600" fill="#0E794E" text-anchor="middle">Retire 2045</text>
-        <text x="340.0" y="114" font-size="11" fill="#9AA0AE" text-anchor="end">Age 91 &#183; $7.2M</text>
+        <path d="M4.0,59.5 L18.9,58.1 L33.9,56.6 L48.8,54.7 L63.7,52.5 L78.7,50.1 L93.6,47.2 L108.5,44.1 L123.5,40.5 L138.4,36.5 L145.9,34.4 L153.3,32.9 L168.3,29.9 L183.2,27.2 L205.6,23.7 L228.0,20.7 L257.9,16.9 L287.7,13.7 L317.6,12.9 L340.0,12.0 L340.0,64.0 L4.0,64.0 Z" fill="url(#mlArea)"/>
+        <path d="M4.0,59.5 L18.9,58.1 L33.9,56.6 L48.8,54.7 L63.7,52.5 L78.7,50.1 L93.6,47.2 L108.5,44.1 L123.5,40.5 L138.4,36.5 L145.9,34.4 L153.3,32.9 L168.3,29.9 L183.2,27.2 L205.6,23.7 L228.0,20.7 L257.9,16.9 L287.7,13.7 L317.6,12.9 L340.0,12.0" fill="none" stroke="#0E794E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="145.9" y1="12" x2="145.9" y2="64" stroke="#C4C8CF" stroke-width="1.2" stroke-dasharray="3 4"/>
+        <circle cx="145.9" cy="34.4" r="5" fill="#FBBD04" stroke="#FFFFFF" stroke-width="2"/>
+        <line x1="4" y1="64" x2="340.0" y2="64" stroke="#E7E9EC" stroke-width="1.2"/>
+        <text x="4" y="82" font-size="11" fill="#9AA0AE">Today &#183; $620K</text>
+        <text x="145.9" y="82" font-size="11" font-weight="600" fill="#0E794E" text-anchor="middle">Retire 2045</text>
+        <text x="340.0" y="82" font-size="11" fill="#9AA0AE" text-anchor="end">Age 91 &#183; $7.2M</text>
       </svg>
     </button>
-    <p class="ml-p">Your plan holds up in <b>87 of 100</b> simulated market histories and leaves <b>$7.2M</b> at age 91.</p>
+    <p class="ml-p">Holds up in <b>87 of 100</b> markets. <b>$7.2M</b> left at 91.</p>
   </section>
 
   <!-- 03 Strengthen my plan -->
   <section class="mh-sec ml-sec">
-    <div class="mh-sec-head"><span class="ml-eye"><b>03</b>Strengthen my plan</span><a class="ml-more" data-go="tab:optimize">All <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M9 5.5l6.5 6.5L9 18.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
-    <p class="ml-p">Three moves lift your <b>87%</b> chance of success the most.</p>
+    <div class="mh-sec-head"><span class="ml-eye">Strengthen my plan</span><a class="ml-more" data-go="tab:optimize">All <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M9 5.5l6.5 6.5L9 18.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
     <div class="mlist ml-list">
       <button class="mrow ml-row" type="button" data-go="opt-ss"><span class="mrow-txt"><span class="mrow-t">Delay Social Security to 70</span></span><span class="mrow-amt g">+6 &rarr; 93%</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
       <button class="mrow ml-row" type="button" data-go="hm:trim"><span class="mrow-txt"><span class="mrow-t">Trim spending $400/mo for 5 years</span></span><span class="mrow-amt g">+4 &rarr; 91%</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
@@ -827,7 +826,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
 
   <!-- 04 Get support -->
   <section class="mh-sec ml-sec">
-    <div class="mh-sec-head"><span class="ml-eye"><b>04</b>Get support</span><a class="ml-more" data-go="hm:advisory">Compare <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M9 5.5l6.5 6.5L9 18.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+    <div class="mh-sec-head"><span class="ml-eye">Get support</span><a class="ml-more" data-go="hm:advisory">Compare <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M9 5.5l6.5 6.5L9 18.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
     <div class="mlist ml-list">
       <button class="mrow ml-row" type="button" data-go="hm:community"><span class="mrow-txt"><span class="mrow-t">Community &amp; classes</span><span class="mrow-s" style="display:block">Live events and free classes</span></span><span class="mrow-amt ">Free</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
       <button class="mrow ml-row" type="button" data-go="hm:coach"><span class="mrow-txt"><span class="mrow-t">1:1 coaching</span><span class="mrow-s" style="display:block">An hour with a Boldin expert</span></span><span class="mrow-amt ">$250</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
@@ -838,7 +837,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
 
   <!-- 05 Your questions -->
   <section class="mh-sec ml-sec">
-    <div class="mh-sec-head"><span class="ml-eye"><b>05</b>Your questions</span><a class="ml-more" data-go="tab:ai">Ask <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M9 5.5l6.5 6.5L9 18.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+    <div class="mh-sec-head"><span class="ml-eye">Your questions</span><a class="ml-more" data-go="tab:ai">Ask <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M9 5.5l6.5 6.5L9 18.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
     <div class="mlist ml-list">
       <button class="mrow ml-row" type="button" data-go="hm:last"><span class="mrow-txt"><span class="mrow-t">Can I retire?</span></span><span class="ml-badge yes">Yes</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
       <button class="mrow ml-row" type="button" data-go="hm:worth"><span class="mrow-txt"><span class="mrow-t">Am I on track to retire at 65?</span></span><span class="ml-badge yes">On track</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
@@ -947,14 +946,14 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     <div class="mplan-chips" id="mplanChips"></div>
   </section>
 
-  <!-- Boost your confidence: the desktop levers card -->
-  <div class="mplan-seclabel" id="mplanBoostLabel">Boost your confidence</div>
-  <section class="mcard mplan-boost" id="mplanBoost"></section>
-
   <div class="mlist" id="mlistPlan"></div>
 
   <div class="mplan-seclabel mxp-label">Explore your plan</div>
   <div class="mlist mxp-list" id="mxpList"></div>
+
+  <!-- Boost your confidence: the desktop levers card -->
+  <div class="mplan-seclabel" id="mplanBoostLabel">Boost your confidence</div>
+  <section class="mcard mplan-boost" id="mplanBoost"></section>
 </div>
 
 <div class="mtab" id="tabOptimize" hidden>
