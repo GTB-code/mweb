@@ -415,7 +415,11 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .mplan-chart{ margin-top:4px; }
 .mplan-chart svg{ display:block; width:100%; height:auto; }
 .pcgrid{ stroke:#F1F2F4; stroke-width:1; }
-.pcax{ font-size:9px; fill:#9AA0AE; font-family:'DM Sans',sans-serif; }
+.pcax{ font-size:10px; fill:var(--text-secondary); font-family:'DM Sans',sans-serif; }
+.pc-mile-dot{ fill:var(--green); stroke:#FFFFFF; stroke-width:2; }
+.pc-mile-halo{ fill:rgba(4,180,119,0.18); transform-box:fill-box; transform-origin:center; animation:pcPulse 2.2s ease-in-out infinite; }
+@keyframes pcPulse{ 0%,100%{ transform:scale(1); opacity:1; } 50%{ transform:scale(1.35); opacity:.55; } }
+@media (prefers-reduced-motion: reduce){ .pc-mile-halo{ animation:none; } }
 /* chips row */
 .mplan-chips{ display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:8px; margin-top:16px; padding-top:16px; border-top:1px solid #F1F2F4; }
 .mchip4{ min-width:0; }
@@ -696,12 +700,18 @@ body.kb-open .mai-bar2{ transform:translateX(-50%) translateY(-138px); border-co
 .mnav{ position:fixed; left:50%; transform:translateX(-50%); bottom:calc(16px + env(safe-area-inset-bottom));
   width:calc(100% - 48px); max-width:400px; z-index:70;
   background:#F4F5F2; border:1px solid #ECEDEA; border-radius:999px;
-  display:flex; align-items:center; justify-content:space-around; padding:7px 10px;
-  transform-origin:50% 100%; transition:transform .32s var(--push-ease); }
-body.nav-mini .mnav{ transform:translateX(-50%) scale(0.7); }
-.mnav button{ background:none; border:0; padding:6px 12px; cursor:pointer; color:#6E7268; display:flex; }
+  display:flex; align-items:center; justify-content:space-around; padding:8px 6px 7px;
+  transform-origin:50% 100%; transition:transform .32s var(--push-ease), padding .32s var(--push-ease); }
+.mnav button{ background:none; border:0; padding:2px 4px; cursor:pointer; color:#6E7268; display:flex; flex-direction:column; align-items:center; gap:3px; min-width:56px; }
 .mnav button.on{ color:var(--green-cta); }
-.mnav svg{ display:block; width:31px; height:31px; }
+.mnav button.on .mnav-l{ font-weight:600; }
+.mnav svg{ display:block; width:26px; height:26px; transition:width .28s var(--push-ease), height .28s var(--push-ease); }
+.mnav-l{ font-size:11px; font-weight:500; letter-spacing:-0.1px; line-height:1; white-space:nowrap; max-height:14px; opacity:1;
+  transition:opacity .2s ease, max-height .28s var(--push-ease), margin .28s var(--push-ease); }
+/* scrolled: the bar shrinks, the icons shrink, the labels fold away */
+body.nav-mini .mnav{ transform:translateX(-50%) scale(0.86); padding:6px 6px; }
+body.nav-mini .mnav svg{ width:22px; height:22px; }
+body.nav-mini .mnav-l{ opacity:0; max-height:0; margin-top:-3px; }
 /* the AI sparkle: a living green aura swells continuously (never a hard pulse),
    and the small accent star twinkles, matching the desktop ask-bar sparkle. */
 .mnav button[data-tab="ai"]{ color:#6E7268; }
@@ -759,7 +769,8 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
 <main class="mroot" id="mroot">
 <div class="mtab ml-home" id="tabHome">
   <div class="mgreet meye" id="mhGreet">Good afternoon, Marshall</div>
-  <h1 class="mhl">Your plan is <em class="mhl-em">working.</em> <em class="mhl-gold">Three moves</em> make it stronger.</h1>
+  <!-- parked: remove `hidden` to bring the headline back -->
+  <h1 class="mhl" hidden>Your plan is <em class="mhl-em">working.</em> <em class="mhl-gold">Three moves</em> make it stronger.</h1>
 
   <!-- 01 My Money -->
   <section class="mh-sec ml-sec">
@@ -810,18 +821,6 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
       </svg>
     </button>
     <p class="ml-p">Holds up in <b>87 of 100</b> markets. <b>$7.2M</b> left at 91.</p>
-  </section>
-
-  <!-- 03 Strengthen my plan -->
-  <section class="mh-sec ml-sec">
-    <div class="mh-sec-head"><span class="ml-eye">Strengthen my plan</span><a class="ml-more" data-go="tab:optimize">All <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M9 5.5l6.5 6.5L9 18.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
-    <div class="mlist ml-list">
-      <button class="mrow ml-row" type="button" data-go="opt-ss"><span class="mrow-txt"><span class="mrow-t">Delay Social Security to 70</span></span><span class="mrow-amt g">+6 &rarr; 93%</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
-      <button class="mrow ml-row" type="button" data-go="hm:trim"><span class="mrow-txt"><span class="mrow-t">Trim spending $400/mo for 5 years</span></span><span class="mrow-amt g">+4 &rarr; 91%</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
-      <button class="mrow ml-row" type="button" data-go="hm:work"><span class="mrow-txt"><span class="mrow-t">Work through age 64, not 62</span></span><span class="mrow-amt g">+3 &rarr; 90%</span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
-      <button class="mrow ml-row" type="button" data-go="hm:checkup"><span class="mrow-txt"><span class="mrow-t">Retirement checkup</span><span class="mrow-s" style="display:block">Four things worth a second look</span></span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
-      <button class="mrow ml-row" type="button" data-go="hm:stress"><span class="mrow-txt"><span class="mrow-t">Stress test your plan</span><span class="mrow-s" style="display:block">A 2008-style drop takes you to 71%</span></span><span class="mrow-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg></span></button>
-    </div>
   </section>
 
   <!-- 04 Get support -->
@@ -925,21 +924,20 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
       <button class="mplan-filter" type="button" aria-label="Filters" data-toast="Filters land next in the mobile build"><svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M4 6h16M7 12h10M10 18h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
     <div class="mplan-chart" id="mplanChart" role="button" tabindex="0" aria-label="Open your plan, up to the peak">
-      <svg viewBox="0 0 356 176" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-label="Projected portfolio value">
+      <svg viewBox="0 0 356 196" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-label="Projected portfolio value 2026 to 2057">
         <defs>
           <linearGradient id="pcg" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#04B477" stop-opacity="0.20"/>
-            <stop offset="100%" stop-color="#04B477" stop-opacity="0"/>
+            <stop offset="0%" stop-color="#04B477" stop-opacity="0.22"/>
+            <stop offset="100%" stop-color="#04B477" stop-opacity="0.02"/>
           </linearGradient>
         </defs>
-        <line class="pcgrid" x1="34" y1="14" x2="352" y2="14"/><line class="pcgrid" x1="34" y1="46" x2="352" y2="46"/><line class="pcgrid" x1="34" y1="78" x2="352" y2="78"/><line class="pcgrid" x1="34" y1="110" x2="352" y2="110"/><line class="pcgrid" x1="34" y1="142" x2="352" y2="142"/>
-        <text class="pcax" x="30" y="17" text-anchor="end">$2.5M</text><text class="pcax" x="30" y="49" text-anchor="end">$2M</text><text class="pcax" x="30" y="81" text-anchor="end">$1.5M</text><text class="pcax" x="30" y="113" text-anchor="end">$1M</text><text class="pcax" x="30" y="145" text-anchor="end">$0</text>
-        <path id="pcArea" d="M40,132 C 80,124 120,108 170,86 C 220,64 270,40 300,32 C 320,27 340,26 352,26 L352,142 L40,142 Z" fill="url(#pcg)" opacity="0"/>
-        <path id="pcLine" d="M40,132 C 80,124 120,108 170,86 C 220,64 270,40 300,32 C 320,27 340,26 352,26" fill="none" stroke="#0E794E" stroke-width="2.4" stroke-linecap="round" pathLength="1"/>
+        <line class="pcgrid" x1="44" y1="160.0" x2="350" y2="160.0"/><line class="pcgrid" x1="44" y1="130.0" x2="350" y2="130.0"/><line class="pcgrid" x1="44" y1="100.0" x2="350" y2="100.0"/><line class="pcgrid" x1="44" y1="70.0" x2="350" y2="70.0"/><line class="pcgrid" x1="44" y1="40.0" x2="350" y2="40.0"/><line class="pcgrid" x1="44" y1="10.0" x2="350" y2="10.0"/>
+        <text class="pcax" x="37" y="163.5" text-anchor="end">$0</text><text class="pcax" x="37" y="133.5" text-anchor="end">$500k</text><text class="pcax" x="37" y="103.5" text-anchor="end">$1M</text><text class="pcax" x="37" y="73.5" text-anchor="end">$1.5M</text><text class="pcax" x="37" y="43.5" text-anchor="end">$2M</text><text class="pcax" x="37" y="13.5" text-anchor="end">$2.5M</text>
+        <path id="pcArea" d="M 44.0,126.0 C 45.7,125.2 50.6,122.9 53.9,121.4 C 57.2,119.9 60.5,118.2 63.7,116.8 C 67.0,115.4 70.3,114.0 73.6,112.6 C 76.9,111.2 80.2,109.9 83.5,108.4 C 86.8,106.9 90.0,105.3 93.3,103.7 C 96.7,102.2 100.0,100.6 103.2,99.0 C 106.5,97.5 109.8,95.9 113.1,94.4 C 116.4,92.8 119.7,91.2 123.0,89.7 C 126.3,88.1 129.5,86.4 132.8,85.0 C 136.1,83.6 139.4,82.6 142.7,81.4 C 146.0,80.2 149.3,79.0 152.6,77.8 C 155.9,76.6 159.2,75.4 162.5,74.2 C 165.7,73.0 169.0,71.8 172.3,70.6 C 175.6,69.4 178.9,68.1 182.2,67.0 C 185.5,65.9 188.8,64.8 192.0,63.8 C 195.3,62.7 198.7,61.6 202.0,60.5 C 205.2,59.4 208.5,58.4 211.8,57.3 C 215.1,56.2 218.4,55.1 221.7,54.0 C 225.0,53.0 228.3,51.8 231.5,50.8 C 234.8,49.8 238.1,49.2 241.4,48.4 C 244.7,47.6 248.0,46.8 251.3,46.0 C 254.6,45.2 257.9,44.4 261.2,43.6 C 264.5,42.8 267.7,42.0 271.0,41.2 C 274.3,40.4 277.6,39.5 280.9,38.8 C 284.2,38.1 287.5,37.8 290.8,37.4 C 294.0,36.9 297.3,36.5 300.7,36.0 C 304.0,35.6 307.2,35.1 310.5,34.6 C 313.8,34.1 317.1,33.6 320.4,33.2 C 323.7,32.7 327.0,32.3 330.3,31.8 C 333.5,31.4 336.8,30.1 340.1,30.4 C 343.4,30.7 348.3,33.2 350.0,33.7 L350.0,160.0 L44.0,160.0 Z" fill="url(#pcg)" opacity="0"/>
+        <path id="pcLine" d="M 44.0,126.0 C 45.7,125.2 50.6,122.9 53.9,121.4 C 57.2,119.9 60.5,118.2 63.7,116.8 C 67.0,115.4 70.3,114.0 73.6,112.6 C 76.9,111.2 80.2,109.9 83.5,108.4 C 86.8,106.9 90.0,105.3 93.3,103.7 C 96.7,102.2 100.0,100.6 103.2,99.0 C 106.5,97.5 109.8,95.9 113.1,94.4 C 116.4,92.8 119.7,91.2 123.0,89.7 C 126.3,88.1 129.5,86.4 132.8,85.0 C 136.1,83.6 139.4,82.6 142.7,81.4 C 146.0,80.2 149.3,79.0 152.6,77.8 C 155.9,76.6 159.2,75.4 162.5,74.2 C 165.7,73.0 169.0,71.8 172.3,70.6 C 175.6,69.4 178.9,68.1 182.2,67.0 C 185.5,65.9 188.8,64.8 192.0,63.8 C 195.3,62.7 198.7,61.6 202.0,60.5 C 205.2,59.4 208.5,58.4 211.8,57.3 C 215.1,56.2 218.4,55.1 221.7,54.0 C 225.0,53.0 228.3,51.8 231.5,50.8 C 234.8,49.8 238.1,49.2 241.4,48.4 C 244.7,47.6 248.0,46.8 251.3,46.0 C 254.6,45.2 257.9,44.4 261.2,43.6 C 264.5,42.8 267.7,42.0 271.0,41.2 C 274.3,40.4 277.6,39.5 280.9,38.8 C 284.2,38.1 287.5,37.8 290.8,37.4 C 294.0,36.9 297.3,36.5 300.7,36.0 C 304.0,35.6 307.2,35.1 310.5,34.6 C 313.8,34.1 317.1,33.6 320.4,33.2 C 323.7,32.7 327.0,32.3 330.3,31.8 C 333.5,31.4 336.8,30.1 340.1,30.4 C 343.4,30.7 348.3,33.2 350.0,33.7" fill="none" stroke="#04B477" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
         <g id="pcMarks" opacity="0">
-          <text class="pcax" x="40" y="162" text-anchor="start">2026</text>
-          <text class="pcax" x="196" y="162" text-anchor="middle">2041</text>
-          <text class="pcax" x="352" y="162" text-anchor="end">2057</text>
+          <text class="pcax" x="44.0" y="180" text-anchor="start">2026</text><text class="pcax" x="142.7" y="180" text-anchor="middle">2036</text><text class="pcax" x="251.3" y="180" text-anchor="middle">2047</text><text class="pcax" x="350.0" y="180" text-anchor="end">2057</text>
+          <g class="pc-mile"><circle class="pc-mile-halo" cx="63.7" cy="116.8" r="8"/><circle class="pc-mile-dot" cx="63.7" cy="116.8" r="4"><title>Retire · 2028</title></circle></g><g class="pc-mile"><circle class="pc-mile-halo" cx="132.8" cy="85.0" r="8"/><circle class="pc-mile-dot" cx="132.8" cy="85.0" r="4"><title>Both checks on · 2035</title></circle></g><g class="pc-mile"><circle class="pc-mile-halo" cx="221.7" cy="54.0" r="8"/><circle class="pc-mile-dot" cx="221.7" cy="54.0" r="4"><title>Mortgage clear · 2044</title></circle></g><g class="pc-mile"><circle class="pc-mile-halo" cx="350.0" cy="33.7" r="8"/><circle class="pc-mile-dot" cx="350.0" cy="33.7" r="4"><title>Peak · 2057</title></circle></g>
         </g>
       </svg>
     </div>
@@ -1086,11 +1084,11 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
 
 <div class="mnav-fade" aria-hidden="true"></div>
 <nav class="mnav" id="mnav">
-  <button data-tab="home" class="on" aria-label="Home"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.2 3.6 10v10.3h5.9v-6.2h5v6.2h5.9V10z"/></svg></button>
-  <button data-tab="today" aria-label="My Money"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor"><path d="M3.5 3.5h17a1.5 1.5 0 0 1 1.5 1.5v14a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 19V5a1.5 1.5 0 0 1 1.5-1.5z" opacity=".95"/><path d="M12 6.4c.45 0 .8.35.8.8v.5c1 .25 1.7.9 1.85 1.9h-1.5c-.12-.5-.6-.8-1.25-.8-.75 0-1.25.38-1.25.9 0 .4.35.63 1.15.87l.9.26c1.35.38 2.1 1 2.1 2.12 0 1.1-.85 1.85-2 2.1v.55a.8.8 0 0 1-1.6 0v-.55c-1.1-.25-1.95-1-2.1-2.1h1.6c.13.6.6.9 1.35.9.75 0 1.25-.35 1.25-.87 0-.4-.35-.63-1.15-.87l-.95-.28c-1.25-.36-2-.98-2-2.08 0-1 .8-1.72 1.9-1.97v-.5c0-.45.35-.8.8-.8z" fill="#F4F5F2"/></svg></button>
-  <button data-tab="plan" aria-label="My Plans"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.2l1.2 1.2 2-2.2M4 12l1.2 1.2 2-2.2M4 17.8l1.2 1.2 2-2.2M11 6.4h9M11 12h9M11 17.6h9"/></svg></button>
-  <button data-tab="optimize" aria-label="Optimize"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor"><path d="M13.2 2.5 5.4 13.3h5l-1.6 8.2 7.8-10.8h-5z"/></svg></button>
-  <button data-tab="ai" aria-label="Boldin AI"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor" class="mai-spk"><path class="sp-body" d="M10 3.5l1.3 5.2L16.5 10l-5.2 1.3L10 16.5l-1.3-5.2L3.5 10l5.2-1.3z"/><path class="sp-tw" d="M18 13l.8 3.2L22 17l-3.2.8L18 21l-.8-3.2L14 17l3.2-.8z"/></svg></button>
+  <button data-tab="home" class="on" aria-label="Home"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.2 3.6 10v10.3h5.9v-6.2h5v6.2h5.9V10z"/></svg><span class="mnav-l">Home</span></button>
+  <button data-tab="today" aria-label="My Money"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor"><path d="M3.5 3.5h17a1.5 1.5 0 0 1 1.5 1.5v14a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 19V5a1.5 1.5 0 0 1 1.5-1.5z" opacity=".95"/><path d="M12 6.4c.45 0 .8.35.8.8v.5c1 .25 1.7.9 1.85 1.9h-1.5c-.12-.5-.6-.8-1.25-.8-.75 0-1.25.38-1.25.9 0 .4.35.63 1.15.87l.9.26c1.35.38 2.1 1 2.1 2.12 0 1.1-.85 1.85-2 2.1v.55a.8.8 0 0 1-1.6 0v-.55c-1.1-.25-1.95-1-2.1-2.1h1.6c.13.6.6.9 1.35.9.75 0 1.25-.35 1.25-.87 0-.4-.35-.63-1.15-.87l-.95-.28c-1.25-.36-2-.98-2-2.08 0-1 .8-1.72 1.9-1.97v-.5c0-.45.35-.8.8-.8z" fill="#F4F5F2"/></svg><span class="mnav-l">My Money</span></button>
+  <button data-tab="plan" aria-label="My Plans"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.2l1.2 1.2 2-2.2M4 12l1.2 1.2 2-2.2M4 17.8l1.2 1.2 2-2.2M11 6.4h9M11 12h9M11 17.6h9"/></svg><span class="mnav-l">My Plans</span></button>
+  <button data-tab="optimize" aria-label="Optimize"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor"><path d="M13.2 2.5 5.4 13.3h5l-1.6 8.2 7.8-10.8h-5z"/></svg><span class="mnav-l">Optimize</span></button>
+  <button data-tab="ai" aria-label="Ask AI"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor" class="mai-spk"><path class="sp-body" d="M10 3.5l1.3 5.2L16.5 10l-5.2 1.3L10 16.5l-1.3-5.2L3.5 10l5.2-1.3z"/><path class="sp-tw" d="M18 13l.8 3.2L22 17l-3.2.8L18 21l-.8-3.2L14 17l3.2-.8z"/></svg><span class="mnav-l">Ask AI</span></button>
 </nav>
 
 <div class="mtoast" id="mtoast"></div>
