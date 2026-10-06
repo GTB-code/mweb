@@ -93,6 +93,8 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 /* the What's-already-yours card */
 .mcard{ border:1px solid var(--hairline); border-radius:18px; padding:18px 16px 16px; margin-top:20px; background:var(--white); }
 .mcard-t{ font-size:21px; font-weight:600; letter-spacing:-0.2px; }
+.mwhats{ margin-top:22px; }
+.mwhats .mseg{ margin-top:0; }
 .mseg{ position:relative; display:grid; grid-template-columns:1fr 1fr 1fr; background:#F2F3F5; border-radius:11px; padding:3px; margin-top:14px; }
 .mseg-thumb{ position:absolute; top:3px; left:3px; width:calc((100% - 6px)/3); height:calc(100% - 6px);
   background:var(--white); border:1px solid var(--hairline); border-radius:9px;
@@ -265,6 +267,121 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .mins-cap{ font-size:15.5px; line-height:1.5; color:var(--text-secondary); margin-top:12px; }
 .mins-cap b{ color:var(--ink); font-weight:600; }
 .mins-asks{ display:flex; flex-direction:column; gap:8px; margin-top:12px; }
+/* Investments: Today */
+.minv-sec{ margin-top:30px; padding-top:22px; border-top:1.5px solid var(--ink); }
+.minv-eye{ font:600 12px 'DM Sans',sans-serif; color:var(--text-tertiary); letter-spacing:1px; }
+.minv-h{ font-size:21px; font-weight:600; letter-spacing:-0.2px; margin-top:4px; }
+.minv-s{ font-size:15px; color:var(--text-secondary); line-height:1.5; margin-top:6px; }
+.minv-card{ border:1px solid var(--hairline); border-radius:16px; padding:16px; margin-top:14px; }
+.minv-donutwrap{ display:flex; justify-content:center; }
+.minv-donut{ width:170px; height:170px; }
+.minv-leg{ margin-top:14px; }
+.minv-lrow{ display:flex; align-items:center; gap:9px; padding:7px 0; font-size:15px; font-weight:600; }
+.minv-lrow.sub{ padding:3px 0 3px 18px; font-weight:500; color:var(--text-secondary); font-size:14px; }
+.minv-lrow .dot{ width:9px; height:9px; border-radius:2.5px; flex:none; }
+.minv-lrow .n{ flex:1; }
+.minv-lrow b{ font:600 14.5px 'DM Sans',sans-serif; font-variant-numeric:tabular-nums; }
+.minv-lrow.sub b{ color:var(--text-secondary); }
+.minv-note{ margin-top:14px; background:#FFF7E6; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.5; color:#5B4A1E; }
+.minv-note b{ font-weight:600; }
+.minv-mix{ margin-top:10px; }
+.minv-mix:first-child{ margin-top:0; }
+.minv-mix .top{ display:flex; justify-content:space-between; font-size:15px; font-weight:600; margin-bottom:6px; }
+.minv-mix .top b{ font:600 15px 'DM Sans',sans-serif; color:var(--text-secondary); }
+.minv-mix .bar{ height:14px; border-radius:99px; background:var(--teal); overflow:hidden; }
+.minv-mix .bar i{ display:block; height:100%; background:#1D9E75; border-radius:99px 0 0 99px; }
+.minv-axis{ display:flex; justify-content:space-between; font-size:11.5px; color:var(--text-tertiary); margin-top:6px; }
+.minv-cap{ font-size:15px; line-height:1.5; margin-top:14px; }
+.minv-cap b{ font-weight:600; }
+.minv-fine{ font-size:12.5px; color:var(--text-tertiary); line-height:1.45; margin-top:8px; }
+.minv-acct{ border:1px solid var(--hairline); border-radius:16px; padding:14px 15px; margin-top:12px; }
+.minv-ahd{ display:flex; justify-content:space-between; gap:10px; align-items:flex-start; }
+.minv-ahd .nm{ font-size:17px; font-weight:600; }
+.minv-ahd .nm i{ font-style:normal; font-size:13.5px; font-weight:500; color:var(--text-tertiary); margin-left:4px; }
+.minv-ahd .amt{ font:700 17px 'DM Sans',sans-serif; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.minv-ahd .chips{ display:flex; flex-wrap:wrap; gap:6px; margin-top:7px; }
+.minv-chip{ font:500 12.5px 'DM Sans',sans-serif; border:1px solid var(--hairline); border-radius:999px; padding:3px 9px; color:var(--text-secondary); }
+.minv-chip.ok{ color:var(--green-cta); border-color:#BFE8D6; background:#F2FBF7; }
+.minv-chip.warn{ color:#8A6212; border-color:#F3E2B6; background:#FFF7E6; }
+.minv-chip.add{ color:var(--teal); border-color:#CFE0E4; background:#F2F7F8; }
+.minv-abar{ display:flex; gap:2px; height:8px; border-radius:99px; overflow:hidden; margin-top:12px; background:#EEF0F2; }
+.minv-abar i{ display:block; height:100%; }
+.minv-tgl{ display:flex; width:100%; justify-content:flex-end; align-items:center; gap:5px; background:none; border:0; font-family:inherit; font-size:14.5px; font-weight:600; color:var(--green-cta); padding:12px 0 0; cursor:pointer; }
+.minv-body{ margin-top:14px; }
+.minv-mixcard{ background:#F6F7F8; border-radius:12px; padding:13px 14px; }
+.minv-mixcard .t{ font-size:15px; font-weight:600; }
+.minv-mixcard .s{ font-size:13px; color:var(--text-tertiary); margin-top:2px; }
+.minv-mixcard .r{ display:flex; justify-content:space-between; font-size:14px; padding:6px 0; border-bottom:1px solid #E9EBEE; }
+.minv-mixcard .r:last-child{ border-bottom:0; }
+.minv-mixcard .r b{ font:600 14px 'DM Sans',sans-serif; }
+.minv-warn{ margin-top:10px; background:#FFF7E6; border-radius:12px; padding:12px 14px; font-size:14px; line-height:1.5; color:#5B4A1E; }
+.minv-warn > b{ display:block; font-weight:600; color:#10182C; }
+.minv-warn p b{ font-weight:600; color:#10182C; }
+.minv-warn p{ margin-top:4px; }
+.minv-setbal{ margin-top:8px; border:1px solid #E6D4A8; background:#fff; border-radius:8px; padding:6px 10px; font-family:inherit; font-size:13.5px; font-weight:600; color:#10182C; cursor:pointer; }
+.minv-prow{ display:flex; justify-content:space-between; gap:10px; padding:11px 0; border-bottom:1px solid var(--hairline); }
+.minv-prow .pn{ font-size:14.5px; font-weight:600; line-height:1.3; }
+.minv-prow .pc{ font-size:13px; color:var(--text-tertiary); margin-top:2px; }
+.minv-prow .pv{ font:600 14.5px 'DM Sans',sans-serif; white-space:nowrap; }
+.minv-addrow{ display:flex; align-items:center; gap:10px; margin-top:10px; font-size:14px; color:var(--text-secondary); }
+.minv-addrow .madd{ font-size:15px; }
+.minv-addrow a{ color:var(--green-cta); font-weight:600; cursor:pointer; }
+.minv-addt{ font-size:16.5px; font-weight:600; }
+.minv-adds{ font-size:13.5px; color:var(--text-tertiary); margin-top:2px; }
+.minv-opts{ margin-top:10px; border:1px solid var(--hairline); border-radius:12px; padding:0 12px; }
+.minv-opt{ display:flex; gap:11px; align-items:flex-start; width:100%; text-align:left; background:none; border:0; border-bottom:1px solid var(--hairline); padding:12px 0; font-family:inherit; cursor:pointer; }
+.minv-opt:last-child{ border-bottom:0; }
+.minv-opt .ic{ flex:none; width:30px; height:30px; border-radius:8px; background:var(--mint); color:var(--green-cta); display:flex; align-items:center; justify-content:center; }
+.minv-opt .tx b{ display:block; font-size:15px; font-weight:600; color:var(--ink); }
+.minv-opt .tx b em{ font-style:normal; font:700 10.5px 'DM Sans',sans-serif; letter-spacing:.6px; text-transform:uppercase; color:var(--green-cta); background:var(--mint); border-radius:999px; padding:2px 7px; margin-left:6px; vertical-align:middle; }
+.minv-opt .tx i{ display:block; font-style:normal; font-size:13.5px; color:var(--text-secondary); line-height:1.4; margin-top:2px; }
+.minv-soon{ border:1px solid var(--hairline); border-radius:14px; padding:14px 15px; margin-top:10px; }
+.minv-soon .tag{ display:inline-block; font:700 10.5px 'DM Sans',sans-serif; letter-spacing:.6px; text-transform:uppercase; color:var(--text-tertiary); border:1px solid var(--hairline); border-radius:999px; padding:2px 7px; }
+.minv-soon b{ display:block; font-size:16px; font-weight:600; margin-top:8px; }
+.minv-soon i{ display:block; font-style:normal; font-size:14px; color:var(--text-secondary); margin-top:2px; }
+/* Investments: Future */
+.mif-why{ color:var(--green-cta); font-weight:600; cursor:pointer; }
+.mif-h{ font-size:21px; font-weight:600; letter-spacing:-0.2px; margin-top:24px; }
+.mif-h2{ font-size:19px; font-weight:600; letter-spacing:-0.2px; margin-top:28px; }
+.mif-new{ font-style:normal; font:700 10px 'DM Sans',sans-serif; letter-spacing:.5px; text-transform:uppercase; background:var(--ink); color:#fff; border-radius:999px; padding:2px 6px; margin-left:5px; vertical-align:middle; }
+.mif-rp{ display:flex; align-items:center; gap:12px; margin-top:12px; }
+.mif-rp .lab{ font-size:15px; font-weight:600; flex:none; }
+.mif-dd{ flex:1; display:flex; justify-content:space-between; align-items:center; border:1px solid var(--hairline); border-radius:10px; background:var(--white); padding:10px 12px; font-family:inherit; font-size:15.5px; font-weight:500; color:var(--green-cta); cursor:pointer; }
+.mif-dd svg{ color:var(--text-secondary); transition:transform .2s ease; }
+.mif-dd.open svg{ transform:rotate(180deg); }
+.mif-menu{ border:1px solid var(--hairline); border-radius:14px; margin-top:8px; overflow:hidden; box-shadow:0 8px 24px rgba(16,24,44,.08); }
+.mif-mi{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; width:100%; text-align:left; background:var(--white); border:0; border-bottom:1px solid var(--hairline); padding:12px 14px; font-family:inherit; cursor:pointer; }
+.mif-mi:last-child{ border-bottom:0; }
+.mif-mi.on{ background:#F2FBF7; }
+.mif-mi .t b{ font-size:16px; font-weight:600; color:var(--ink); }
+.mif-mi .t em{ font-style:normal; font:700 10px 'DM Sans',sans-serif; letter-spacing:.5px; text-transform:uppercase; color:var(--green-cta); background:var(--mint); border-radius:999px; padding:2px 7px; margin-left:7px; vertical-align:middle; }
+.mif-mi .t i{ display:block; font-style:normal; font-size:13.5px; color:var(--text-secondary); line-height:1.45; margin-top:3px; }
+.mif-mi svg{ flex:none; margin-top:4px; }
+.mif-desc{ font-size:15px; color:var(--text-secondary); line-height:1.5; margin-top:16px; }
+.mif-ret{ display:flex; align-items:baseline; gap:10px; margin-top:16px; padding-top:16px; border-top:1px solid var(--hairline); }
+.mif-ret b{ font:600 34px 'DM Sans',sans-serif; letter-spacing:-1px; color:var(--green-cta); }
+.mif-ret span{ font-size:13px; font-weight:600; line-height:1.35; }
+.mif-line{ font-size:14.5px; color:var(--text-secondary); line-height:1.5; margin-top:8px; }
+.mif-acc{ display:flex; width:100%; justify-content:space-between; align-items:center; gap:10px; background:none; border:0; border-top:1px solid var(--hairline); margin-top:14px; padding:14px 0 2px; font-family:inherit; font-size:15px; font-weight:600; color:var(--ink); cursor:pointer; text-align:left; }
+.mif-acc svg{ flex:none; color:var(--text-secondary); transition:transform .2s ease; }
+.mif-acc.on svg{ transform:rotate(180deg); }
+.mif-accp{ font-size:14.5px; color:var(--text-secondary); line-height:1.55; margin-top:10px; }
+.mif-stages{ margin-top:14px; border-top:1px solid var(--hairline); }
+.mif-stage{ display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--hairline); }
+.mif-stage .n{ font-size:15px; font-weight:600; }
+.mif-stage .n em{ font-style:normal; font:700 10px 'DM Sans',sans-serif; letter-spacing:.5px; text-transform:uppercase; color:var(--green-cta); background:var(--mint); border-radius:999px; padding:2px 7px; margin-left:7px; vertical-align:middle; }
+.mif-stage b{ font:600 18px 'DM Sans',sans-serif; }
+.mif-stage.cur b{ color:var(--ink); } .mif-stage:not(.cur) b{ color:var(--text-secondary); }
+.mif-cmp{ padding:4px 0 12px; }
+.mif-cmp + .mif-cmp{ border-top:1px solid var(--hairline); padding-top:14px; }
+.mif-cmp .k{ font-size:15px; font-weight:600; }
+.mif-cmp .k i{ display:block; font-style:normal; font-size:12.5px; color:var(--text-tertiary); font-weight:500; }
+.mif-cmp .row{ display:flex; justify-content:space-between; font-size:14.5px; color:var(--text-secondary); padding:7px 0; }
+.mif-cmp .row b{ font:600 15px 'DM Sans',sans-serif; color:var(--ink); }
+.mif-cmp .row.chg b{ color:var(--green-cta); }
+.mif-retake{ font-size:15px; color:var(--text-secondary); margin-top:22px; }
+.mif-legal{ margin-top:14px; }
+.mif-legal p{ font-size:12px; color:var(--text-tertiary); line-height:1.5; margin-top:8px; }
 /* Prism summary: your plan, up to the peak */
 .mplan-chart{ cursor:pointer; }
 .msum-note{ font-size:16.5px; line-height:1.5; color:var(--text-secondary); margin-top:10px; min-height:1.5em; transition:opacity .18s ease; }
@@ -457,12 +574,12 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .mps-l{ font-size:14px; color:var(--text-tertiary); }
 /* the section list: rows push detail pages */
 .mlist{ margin-top:26px; border-top:1px solid var(--hairline); }
-#mlistPlan{ margin-top:0; border-top:0; }
+#mlistPlan, #mlist{ margin-top:0; border-top:0; }
 /* plan inputs: one line per row, title and amount only */
-#mlistPlan .mrow{ padding:14px 2px; }
-#mlistPlan .mrow-s{ display:none !important; }
-#mlistPlan .mrow-t{ font-size:17px; font-weight:500; }
-#mlistPlan .mrow-amt{ font-size:16px; }
+#mlistPlan .mrow, #mlist .mrow{ padding:14px 2px; }
+#mlistPlan .mrow-s, #mlist .mrow-s{ display:none !important; }
+#mlistPlan .mrow-t, #mlist .mrow-t{ font-size:17px; font-weight:500; }
+#mlistPlan .mrow-amt, #mlist .mrow-amt{ font-size:16px; }
 .mrow{ display:flex; align-items:center; gap:12px; width:100%; text-align:left; background:none; border:0;
   border-bottom:1px solid var(--hairline); padding:17px 2px; font-family:inherit; cursor:pointer; }
 .mrow:active{ background:#FAFBFC; }
@@ -899,12 +1016,11 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
   <div class="mgreet meye">My Money</div>
   <h1 class="mhl">You&rsquo;ve done <em class="mhl-em">better</em> than you <em class="mhl-gold">think</em>.</h1>
   <p class="msubhead msubhead-today" hidden>Fact, not forecast. Your real numbers, today.</p>
-  <section class="mcard" id="mwhats">
-    <div class="mcard-t">What&#8217;s already yours</div>
-    <div class="mseg" role="tablist" aria-label="What&#8217;s already yours">
+  <section class="mwhats" id="mwhats">
+    <div class="mseg" role="tablist" aria-label="My Money views">
       <span class="mseg-thumb" id="msegThumb" aria-hidden="true"></span>
       <button class="mseg-b on" type="button" data-p="worth" role="tab" aria-selected="true">Net worth</button>
-      <button class="mseg-b" type="button" data-p="alloc" role="tab" aria-selected="false">Allocation</button>
+      <button class="mseg-b" type="button" data-p="alloc" role="tab" aria-selected="false">Investments</button>
       <button class="mseg-b" type="button" data-p="flow" role="tab" aria-selected="false">Cash flow</button>
     </div>
 
@@ -926,13 +1042,14 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
       <div class="mfig-row"><span class="mfig">$744.6K</span></div>
       <div class="mfig-sub">Invested today</div>
       <div class="mstack-bar">
-        <i style="flex:58" class="c1"></i><i style="flex:25" class="c2"></i><i style="flex:17" class="c4"></i>
+        <i style="flex:62" class="c1"></i><i style="flex:21" class="c2"></i><i style="flex:17" class="c4"></i>
       </div>
       <div class="mleg">
-        <div class="mleg-row"><span class="mdot c1"></span><span class="mleg-t">Stocks<span class="mleg-s">58%</span></span><span class="mleg-v">$432K</span></div>
-        <div class="mleg-row"><span class="mdot c2"></span><span class="mleg-t">Bonds<span class="mleg-s">25%</span></span><span class="mleg-v">$186K</span></div>
+        <div class="mleg-row"><span class="mdot c1"></span><span class="mleg-t">Stocks<span class="mleg-s">62%</span></span><span class="mleg-v">$462K</span></div>
+        <div class="mleg-row"><span class="mdot c2"></span><span class="mleg-t">Bonds<span class="mleg-s">21%</span></span><span class="mleg-v">$156K</span></div>
         <div class="mleg-row"><span class="mdot c4"></span><span class="mleg-t">Cash<span class="mleg-s">17%</span></span><span class="mleg-v">$126.6K</span></div>
       </div>
+      <a class="mh-link" data-go="hm:investToday" style="margin-top:12px">See your investments today <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M9 5.5l6.5 6.5L9 18.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
 
     <div class="mpanel" data-p="flow">
@@ -946,7 +1063,11 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     </div>
   </section>
 
+  <div class="mplan-seclabel">My money inputs</div>
   <div class="mlist" id="mlist"></div>
+
+  <div class="mplan-seclabel mxp-label">Explore your money</div>
+  <div class="mlist mxp-list" id="mxpMoney"></div>
 </div>
 
 <div class="mtab" id="tabPlan" hidden>
@@ -1634,13 +1755,13 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
         secKeys:['tax','withdrawal','assets','income'], secHeading:'What the strategy works on'
       },
       invest:{
-        hl:'<em class="mhl-gold">7 points</em> more stock than your <em class="mhl-em">target.</em>',
+        hl:'<em class="mhl-gold">2 points</em> more stock than your <em class="mhl-em">target.</em>',
         dd:'Allocation',
-        stats:[['Stocks today','62%','Target 55%'],['Invested','$755K','14 accounts'],['Pre-tax share','74%','Never taxed']],
-        chips:[['Above target','$53K'],['Linked','11 of 14'],['Taxable lasts to','2044'],['Rebalanced','2 yrs ago']],
-        boostT:'Bring the mix back to target', badge:'7 pts over',
+        stats:[['Stocks today','62%','Target 60%'],['Invested','$755K','14 accounts'],['Pre-tax share','74%','Never taxed']],
+        chips:[['Above target','$15K'],['Linked','11 of 14'],['Taxable lasts to','2044'],['Rebalanced','2 yrs ago']],
+        boostT:'Bring the mix back to target', badge:'2 pts over',
         boostSub:'Extra stock mattered less while you were saving. It matters most in the years around retiring, when a drop has no time to recover.',
-        levers:[['Rebalance the brokerage to 55/45','&minus;7 pts risk',100],['Set a bond glide-path to 2039','steadier drawdown',60],['Turn on auto-rebalance','once a year',35]],
+        levers:[['Rebalance the brokerage to 60/40','&minus;2 pts risk',100],['Set a bond glide-path to 2039','steadier drawdown',60],['Turn on auto-rebalance','once a year',35]],
         cta:'Review your allocation',
         secKeys:['assets','income'], secHeading:'What you are invested in'
       },
@@ -1708,7 +1829,8 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
         p.scrollIntoView({behavior: reduce?'auto':'smooth', inline:'center', block:'nearest'});
         apply(p.dataset.lens, false);
       }
-      /* the pill opens the matching Explore your plan page */
+      /* the pill opens the matching Explore your plan page; Investments opens Investments: Future */
+      if(p.dataset.lens==='invest' && window.__openInvestFuture){ window.__openInvestFuture(); return; }
       if(window.__openChapter) window.__openChapter(TO_CHAPTER[p.dataset.lens]);
     });
     apply('snapshot', false);
@@ -1842,7 +1964,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
       'What would raise my odds?':'Three things, in order. Holding Social Security to 70 adds six points. Trimming $400 a month for the first five years adds four. Working through 64 adds three. All three together take you from 87% to about 96%.',
       'When should we claim Social Security?':'At 70 for the larger earner. Each year of waiting past 67 adds about 8%, and the survivor keeps the bigger check for life. Claiming at 62 would lock in about 30% less and cost roughly six points of confidence.',
       'How am I invested today?':'$755K across 14 accounts, 11 of them linked. 62% stocks, 38% bonds and cash. 74% of it is pre-tax, 20% taxable, and 6% in Roth and HSA.',
-      'Does my mix match my target?':'Not quite. Your risk survey calls for 55% stocks with 11 years to go, and you are at 62%. That is about $53K more in stocks than the target. Rebalancing the brokerage alone closes most of it.',
+      'Does my mix match my target?':'Close. Your Moderate risk profile calls for 60% stocks, and you are at 62%. That is about $15K more in stocks than the target. Rebalancing the brokerage alone closes it.',
       'Where does my money sit, by tax treatment?':'74% is pre-tax and has never been taxed. 20% is taxable brokerage. 6% is Roth and HSA, which comes out tax-free. The pre-tax share is what makes the 12% bracket years so valuable.',
       'Which accounts will I draw from, and when?':'Taxable first, from 2037. It runs out around 2044. Pre-tax carries the load after that, and required distributions start in 2047 whether you need them or not. Roth stays untouched as the last reserve.',
       'What if the market drops the year I retire?':'A 2008-style drop in 2037 takes confidence from 87% to about 71%. The plan still reaches 92, but with three lean years. The fix is the mix, not the date: at 55% stocks the same drop costs five fewer points.',
@@ -1911,7 +2033,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     };
     /* Investments: today versus target, as two stacked bars */
     CHART.invest=function(){
-      var rows=[['Today',62,38],['Target',55,45]], out='', x0=PL+30, w=CW-PR-x0, bh=34, gap=22, y=PT+16;
+      var rows=[['Today',62,38],['Target',60,40]], out='', x0=PL+30, w=CW-PR-x0, bh=34, gap=22, y=PT+16;
       rows.forEach(function(r){
         var sw=w*r[1]/100;
         out+='<text x="'+(x0-8)+'" y="'+(y+bh/2+4)+'" font-size="12" font-weight="600" fill="#10182C" text-anchor="end">'+r[0]+'</text>'
@@ -1919,10 +2041,10 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
           +'<text x="'+(x0+10)+'" y="'+(y+bh/2+4.5)+'" font-size="12.5" font-weight="700" fill="#fff">'+r[1]+'% stocks</text><text x="'+(x0+w-10)+'" y="'+(y+bh/2+4.5)+'" font-size="12.5" font-weight="700" fill="#10182C" text-anchor="end">'+r[2]+'% bonds</text>';
         y+=bh+gap;
       });
-      var tx=x0+w*0.55;
+      var tx=x0+w*0.60;
       out+='<line x1="'+tx.toFixed(1)+'" y1="'+(PT+8)+'" x2="'+tx.toFixed(1)+'" y2="'+(PT+16+bh*2+gap+6)+'" stroke="'+GOLD+'" stroke-width="2" stroke-dasharray="4 3"/>'
-        +'<rect x="'+(x0+w*0.55).toFixed(1)+'" y="'+(PT+16)+'" width="'+(w*0.07).toFixed(1)+'" height="'+bh+'" fill="'+GOLD+'" opacity=".55"/>'
-        +'<text x="'+x0+'" y="'+(PT+16+bh*2+gap+24)+'" font-size="11" font-weight="600" fill="#9A6B00">Gold strip: 7 pts over target, about $53K</text>';
+        +'<rect x="'+(x0+w*0.60).toFixed(1)+'" y="'+(PT+16)+'" width="'+(w*0.02).toFixed(1)+'" height="'+bh+'" fill="'+GOLD+'" opacity=".55"/>'
+        +'<text x="'+x0+'" y="'+(PT+16+bh*2+gap+24)+'" font-size="11" font-weight="600" fill="#9A6B00">Gold strip: 2 pts over target, about $15K</text>';
       return cwrap(out,'Extra stock mattered less while saving. It matters most in the years around retiring, when a drop has no time to recover.');
     };
     /* Taxes: the marginal bracket you sit in each year, the low window shaded */
@@ -1967,10 +2089,10 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
           +insight('The plan fails in the same place every time it fails: early. <b>Timing beats sacrifice.</b> Waiting to claim Social Security does more for your odds than cutting $958 a month of spending.')
           +stats([['Chance of success','87%','of 1,000 market histories'],['Bridge years','2037\u201341','before Social Security starts'],['Peak withdrawal','$92k','in 2039'],['Taxable runs out','2044','then pre-tax carries the load']])
           +qs(['What is the range of outcomes for my savings?','How will my income pay for retirement?','What would raise my odds?','When should we claim Social Security?']) },
-      { id:'invest', t:'Investments', q:'Am I invested for what\u2019s ahead?', chip:['maybe','7 pts above target'],
+      { id:'invest', t:'Investments', q:'Am I invested for what\u2019s ahead?', chip:['yes','2 pts above target'],
         body: head('Investments','Are you invested the right way for what\u2019s ahead?','Your mix against your target, and how a bad market at the wrong time lands.')+CHART.invest()
-          +insight('You are <b>7 points above your stock target</b>. That mattered less while you were saving; it matters most in the four years around retiring, when a drop has no time to recover.')
-          +stats([['Stocks today','62%','your target is 55%'],['Above target by','7 pts','about $53k more in stocks'],['Invested today','$755k','14 accounts, 11 linked'],['Pre-tax share','74%','401(k)s and traditional IRA']])
+          +insight('You are <b>2 points above your stock target</b>. Close, and worth keeping close: the years around retiring are when a drop has no time to recover.')
+          +stats([['Stocks today','62%','your target is 60%'],['Above target by','2 pts','about $15k more in stocks'],['Invested today','$755k','14 accounts, 11 linked'],['Pre-tax share','74%','401(k)s and traditional IRA']])
           +qs(['How am I invested today?','Does my mix match my target?','Where does my money sit, by tax treatment?','Which accounts will I draw from, and when?','What if the market drops the year I retire?']) },
       { id:'tax', t:'Taxes', q:'Am I paying more tax than I need to?', chip:['yes','$171k opportunity'],
         body: head('Taxes','Are you paying more tax than you need to?','The brackets you sit in year by year, and what converting early would change.')+CHART.tax()
@@ -1984,6 +2106,13 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
           +qs(['Are my documents and beneficiaries in place?','How much am I likely to leave?','What kind of money will my heirs inherit?']) }
     ];
     var list=document.getElementById('mxpList');
+    /* My Money gets two of the chapters: how you are invested, and where the money comes from and goes */
+    var money=document.getElementById('mxpMoney');
+    money.innerHTML=CH.filter(function(c){ return c.id==='invest'||c.id==='budget'; }).map(function(c){
+      return '<button class="mrow" type="button" data-xp="'+c.id+'"><span class="mrow-txt"><span class="mrow-t">'+c.t+'</span><span class="mrow-s">'+c.q+'</span></span><span class="ml-badge '+c.chip[0]+'">'+c.chip[1]+'</span>'+CHEV+'</button>';
+    }).join('');
+    money.addEventListener('click', function(e){ var b=e.target.closest('[data-xp]'); if(!b) return; if(b.dataset.xp==='invest' && window.__openHome){ window.__openHome('investToday'); return; } openChapter(b.dataset.xp); });
+    var invRow=money.querySelector('[data-xp="invest"]'); if(invRow){ invRow.querySelector('.mrow-t').textContent='Investments: Today'; invRow.querySelector('.mrow-s').textContent='How am I invested across my accounts?'; }
     list.innerHTML=CH.map(function(c){
       return '<button class="mrow" type="button" data-xp="'+c.id+'"><span class="mrow-txt"><span class="mrow-t">'+c.t+'</span><span class="mrow-s">'+c.q+'</span></span><span class="ml-badge '+c.chip[0]+'">'+c.chip[1]+'</span>'+CHEV+'</button>';
     }).join('');
@@ -2011,8 +2140,10 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     window.__openChapter=openChapter;
     list.addEventListener('click', function(e){
       var b=e.target.closest('[data-xp]'); if(!b) return;
+      if(b.dataset.xp==='invest' && window.__openInvestFuture){ window.__openInvestFuture(); return; }
       openChapter(b.dataset.xp);
     });
+    var planInv=list.querySelector('[data-xp="invest"]'); if(planInv){ planInv.querySelector('.mrow-t').textContent='Investments: Future'; planInv.querySelector('.mrow-s').textContent='How should my mix change over time?'; planInv.querySelector('.ml-badge').textContent='Moderate profile'; }
   })();
 
   /* ===== Prism summary: the desktop's "Your plan, up to the peak." as a pushed page ===== */
@@ -2229,6 +2360,153 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
       +cap('Returns do most of the work. A dollar left in during the bridge years compounds for another twenty five.')
       +h('By account')+rows([{n:'Cash and default account',v:'$107,000',chip:'Runway',c:C.mint},{n:'Pre-tax accounts',v:'$310,000',chip:'RMDs from 2036',c:'#0E8FA8'},{n:'Brokerage',v:'$150,000',chip:'Taxable',c:'#0FA36F'},{n:'Roth and HSA',v:'$95,000',chip:'Tax free',c:'#BC0278'}])
       +asks(['What is my safe withdrawal rate?']);
+
+    /* --- Investments: Today (planner/investments-today), mobile --- */
+    (function(){
+      var AC=[['Equities','#0E3A44',62,[['US large cap','#0E3A44',48],['Intl developed','#469DB2',14]]],['Fixed Income','#1D9E75',21],['Alternative Investment','#8A6FBF',0],['Cash & Cash Equivalents','#E3A14A',13],['Unclassified','#78716C',4]];
+      function donut(){
+        var R=58, r=40, cx=70, cy=70, tot=100, a0=-Math.PI/2, out='';
+        AC.forEach(function(c){ var v=c[2]; if(!v) return; var a1=a0+v/tot*2*Math.PI; var x0=cx+R*Math.cos(a0), y0=cy+R*Math.sin(a0), x1=cx+R*Math.cos(a1), y1=cy+R*Math.sin(a1), xi0=cx+r*Math.cos(a1), yi0=cy+r*Math.sin(a1), xi1=cx+r*Math.cos(a0), yi1=cy+r*Math.sin(a0), lg=(a1-a0)>Math.PI?1:0;
+          out+='<path d="M'+x0.toFixed(1)+','+y0.toFixed(1)+' A'+R+','+R+' 0 '+lg+',1 '+x1.toFixed(1)+','+y1.toFixed(1)+' L'+xi0.toFixed(1)+','+yi0.toFixed(1)+' A'+r+','+r+' 0 '+lg+',0 '+xi1.toFixed(1)+','+yi1.toFixed(1)+' Z" fill="'+c[1]+'" stroke="#fff" stroke-width="1.5"/>'; a0=a1; });
+        return '<svg class="minv-donut" viewBox="0 0 140 140" aria-hidden="true">'+out+'<text x="70" y="64" font-size="10" fill="#5B6472" text-anchor="middle" font-family="DM Sans, sans-serif">Total portfolio</text><text x="70" y="84" font-size="16" font-weight="700" fill="#10182C" text-anchor="middle" font-family="DM Sans, sans-serif">$744.6K</text></svg>';
+      }
+      function legend(){ return '<div class="minv-leg">'+AC.map(function(c){ return '<div class="minv-lrow"><span class="dot" style="background:'+c[1]+'"></span><span class="n">'+c[0]+'</span><b>'+c[2]+'%</b></div>'+(c[3]?c[3].map(function(sub){ return '<div class="minv-lrow sub"><span class="dot" style="background:'+sub[1]+'"></span><span class="n">'+sub[0]+'</span><b>'+sub[2]+'%</b></div>'; }).join(''):''); }).join('')+'</div>'; }
+      function mixbar(label,eq,val){ return '<div class="minv-mix"><div class="top"><span>'+label+'</span><b>'+val+'</b></div><div class="bar"><i style="width:'+eq+'%"></i></div></div>'; }
+      function chip(t,kind){ return '<span class="minv-chip '+(kind||'')+'">'+t+'</span>'; }
+      var ACCTS=[
+        {n:'Fidelity Investments',ty:'401(k)',amt:'$296,000',st:'conn',upd:'Updated Sep 26',pos:12,mix:[['#0E3A44',52],['#469DB2',14],['#1D9E75',24],['#E3A14A',10]],
+          rows:[['Equities &middot; US large cap','$153,900'],['Fixed Income','$71,000'],['Equities &middot; Intl developed','$41,400'],['Cash & Cash Equivalents','$29,700']],
+          positions:[['FXAIX: Fidelity 500 Index','Equities &middot; US large cap','$112,400'],['FXNAX: Fidelity US Bond Index','Fixed Income','$71,000'],['FSPSX: Fidelity International Index','Equities &middot; Intl developed','$41,400'],['FSKAX: Fidelity Total Market Index','Equities &middot; US large cap','$41,500'],['SPAXX: Fidelity Government Money Market','Cash & Cash Equivalents','$29,700']]},
+        {n:'Vanguard',ty:'Rollover IRA',amt:'$142,000',st:'conn',upd:'Updated Sep 26',pos:3,match:true,mix:[['#0E3A44',60],['#1D9E75',40]],
+          rows:[['Equities &middot; US large cap','$85,200'],['Fixed Income','$56,800']],
+          positions:[['VTI: Vanguard Total Stock Market ETF','Equities &middot; US large cap','$85,200'],['BND: Vanguard Total Bond Market ETF','Fixed Income','$42,600'],['VTIP: Vanguard Short-Term TIPS ETF','Fixed Income','$14,200']]},
+        {n:'Schwab',ty:'Brokerage',amt:'$150,000',st:'mismatch',pos:6,mix:[['#0E3A44',58],['#469DB2',12],['#78716C',20],['#E3A14A',10]],
+          rows:[['Equities &middot; US large cap','$89,900'],['Unclassified','$31,000'],['Equities &middot; Intl developed','$18,600'],['Cash & Cash Equivalents','$15,500']],
+          warn:'Positions total <b>$155,000</b>. The balance in your plan is <b>$150,000</b>. Your forecast uses the balance, so the difference isn\u2019t classified in the mix above.',
+          positions:[['SCHB: Schwab US Broad Market ETF','Equities &middot; US large cap','$62,300'],['AAPL: Apple Inc.','Equities &middot; US large cap','$27,600'],['SBSI: Southside Bancshares Inc.','Unclassified','$19,400'],['SCHF: Schwab International Equity ETF','Equities &middot; Intl developed','$18,600'],['SWVXX: Schwab Value Advantage Money','Cash & Cash Equivalents','$15,500'],['Trp Equity Income','Unclassified','$11,600']]},
+        {n:'Roth IRA',ty:'Roth IRA',amt:'$95,000',st:'add'},
+        {n:'Ally Bank',ty:'Savings',amt:'$61,600',st:'cash'}
+      ];
+      function acctCard(a,i){
+        var head='<div class="minv-ahd"><div><div class="nm">'+a.n+' <i>'+a.ty+'</i></div><div class="chips">'+(a.st==='conn'?chip('Connected','ok')+chip(a.upd):a.st==='mismatch'?chip('Positions don\u2019t match balance','warn'):a.st==='add'?chip('Add positions','add'):chip('Cash & Cash Equivalents'))+'</div></div><div class="amt">'+a.amt+'</div></div>';
+        var bar=a.mix?'<div class="minv-abar">'+a.mix.map(function(m){ return '<i style="flex:'+m[1]+';background:'+m[0]+'"></i>'; }).join('')+'</div>':(a.st==='cash'?'<div class="minv-abar"><i style="flex:1;background:#E3A14A"></i></div>':'<div class="minv-abar empty"></div>');
+        var body='';
+        if(a.positions){
+          body='<div class="minv-body" hidden><div class="minv-mixcard"><div class="t">Asset mix</div>'+(a.warn?'<div class="s">Holdings total $155,000 of $150,000 account balance</div>':'')+a.rows.map(function(r){ return '<div class="r"><span>'+r[0]+'</span><b>'+r[1]+'</b></div>'; }).join('')+'</div>'
+            +(a.warn?'<div class="minv-warn"><b>Your positions add up to more than this account\u2019s balance</b><p>'+a.warn+'</p><button class="minv-setbal" type="button" data-toast="Balance set to $155,000">Set balance to $155,000</button></div>':'')
+            +'<div class="minv-pos">'+a.positions.map(function(q){ return '<div class="minv-prow"><div><div class="pn">'+q[0]+'</div><div class="pc">'+q[1]+'</div></div><div class="pv">'+q[2]+'</div></div>'; }).join('')+'</div>'
+            +'<div class="minv-addrow"><button class="madd" type="button" data-toast="Add position lands next in the mobile build"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Add position</button><span>or <a data-toast="Import lands next in the mobile build">import instead</a></span></div></div>';
+          body+='<button class="minv-tgl" type="button" data-inv-toggle>View '+a.pos+' positions <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>';
+        } else if(a.st==='add'){
+          body='<div class="minv-body"><div class="minv-addt">Add positions</div><div class="minv-adds">Not included in the mix above until you add positions.</div><div class="minv-opts">'
+            +[['Connect this account','Positions and balances update automatically every day, no upkeep',true,'Account connection lands next in the mobile build'],['Upload a statement','We\u2019ll read it and ask you to confirm before anything changes',false,'Statement upload lands next in the mobile build'],['Enter positions manually','Best for one or two holdings. You\u2019ll keep it current yourself',false,'Manual entry lands next in the mobile build']]
+              .map(function(o){ return '<button class="minv-opt" type="button" data-toast="'+o[3]+'"><span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 13.5a4.6 4.6 0 0 0 6.5 0l2-2a4.6 4.6 0 0 0-6.5-6.5L11.2 6.3"/><path d="M13.5 10.5a4.6 4.6 0 0 0-6.5 0l-2 2a4.6 4.6 0 0 0 6.5 6.5l1.3-1.3"/></svg></span><span class="tx"><b>'+o[0]+(o[2]?' <em>Recommended</em>':'')+'</b><i>'+o[1]+'</i></span></button>'; }).join('')+'</div></div>';
+        }
+        return '<div class="minv-acct">'+head+bar+body+'</div>';
+      }
+      PAGES.investToday = title('Investments: Today','See how you\u2019re invested across your accounts, check it against your target, and keep your holdings up to date.')
+        +'<div class="minv-sec"><div class="minv-eye">01</div><h3 class="minv-h">How are you invested today?</h3><p class="minv-s">Holdings across your accounts, combined and grouped by asset class.</p>'
+        +'<div class="minv-card"><div class="minv-donutwrap">'+donut()+'</div>'+legend()+'<div class="minv-note">Holdings information is available for <b>$683,000</b> of your <b>$744,600</b> across 5 accounts. Add positions to complete your picture.</div></div></div>'
+        +'<div class="minv-sec"><div class="minv-eye">02</div><h3 class="minv-h">Does your allocation match your target?</h3>'
+        +'<div class="minv-card">'+mixbar('Your mix',62,'62 / 38')+mixbar('Moderate target',60,'60 / 40')+'<div class="minv-axis"><span>More fixed income</span><span>More equities</span></div>'
+        +'<p class="minv-cap">Of the <b>$654,000</b> in holdings we can classify, your mix is <b>62% equities / 38% fixed income and cash</b>, 2 points above your Moderate target of 60 / 40.</p><p class="minv-fine">Alternatives, unclassified holdings, and balances without positions aren\u2019t included in this comparison.</p>'
+        +'<button class="mhp-cta ghost" type="button" data-go="deep:Does my mix match my target?" style="margin-top:14px">View details</button></div></div>'
+        +'<div class="minv-sec"><div class="minv-eye">03</div><h3 class="minv-h">Enter, review, or update your positions</h3><p class="minv-s">Review the investments in each account, or add missing holdings to make the picture above more accurate.</p>'
+        +ACCTS.map(acctCard).join('')
+        +'<a class="mh-link" data-toast="CSV export lands next in the mobile build">Download all positions (CSV)</a></div>'
+        +'<div class="minv-sec"><div class="minv-eye">04</div><h3 class="minv-h">Insights</h3><p class="minv-s">More ways to read your portfolio, coming as we build them out.</p>'
+        +[['What you pay in fund fees','Total annual cost and which holdings drive it'],['Cash drag','What idle cash may be costing you in expected growth'],['Concentration risk','A flag when a lot rides on a single position']].map(function(x){ return '<div class="minv-soon"><span class="tag">Coming soon</span><b>'+x[0]+'</b><i>'+x[1]+'</i></div>'; }).join('')+'</div>';
+      document.getElementById('msubBody').addEventListener('click', function(e){
+        var t=e.target.closest('[data-inv-toggle]'); if(!t) return;
+        var body=t.previousElementSibling; var open=!body.hidden; body.hidden=open;
+        t.innerHTML=(open?t.textContent.replace('Hide','View'):t.textContent.replace('View','Hide'))+' <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="'+(open?'M6 9l6 6 6-6':'M6 15l6-6 6 6')+'" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      });
+    })();
+
+    /* --- Investments: Future (planner/investments/future), mobile --- */
+    (function(){
+      var C={lc:'#0E3A44',sc:'#1E6A7C',id:'#469DB2',em:'#8FCBDB',fi:'#1D9E75',cash:'#E3A14A'};
+      var PROF=[
+        {k:'aggressive',n:'Aggressive',eq:90,ret:'10.25%',desc:'You\u2019re playing the long game. Maximum growth, full commitment to the plan through the ups and downs.',line:'Almost entirely in equities with only a small fixed income cushion, designed for investors with a long time horizon and high tolerance for year-to-year swings.',glide:[95,70,65],gret:['8.9%','7.8%','7.5%']},
+        {k:'modagg',n:'Moderately aggressive',short:'Mod. Aggressive',eq:70,ret:'8.8%',desc:'You\u2019re building for the long term and willing to absorb some turbulence to get there.',line:'Equity-heavy with a meaningful fixed income allocation to soften the roughest swings, built for growth-oriented investors who still want some ballast.',glide:[90,60,55],gret:['8.5%','7.2%','7.0%']},
+        {k:'moderate',n:'Moderate',eq:60,ret:'8.08%',desc:'You\u2019re comfortable with the give-and-take of markets. Growth matters, and you have the patience to let it compound.',line:'A balanced split between equities and fixed income, Boldin\u2019s default allocation, designed to balance long-term growth with meaningful downside protection.',glide:[80,50,45],gret:['7.9%','6.6%','6.4%']},
+        {k:'modcons',n:'Moderately conservative',short:'Mod. Conservative',eq:40,ret:'6.64%',desc:'You want your money working for you, just not at the cost of too many sleepless nights.',line:'More fixed income than equities, providing ballast against volatility while still allowing your portfolio to participate in market growth.',glide:[70,40,35],gret:['7.3%','6.0%','5.8%']},
+        {k:'conservative',n:'Conservative',eq:30,ret:'5.92%',desc:'Stability and capital preservation come first. Your plan is built to protect what you\u2019ve built while still keeping pace with inflation.',line:'Heavily weighted toward fixed income, with a smaller equity position to provide modest growth.',glide:[60,30,30],gret:['6.6%','5.3%','5.2%']}
+      ];
+      var OWN='moderate', ST={model:'hist', profile:OWN, menu:false, why:false, acc:false};
+      var STAGES=['Pre-Retirement','Retirement Risk Zone','Retirement Income'];
+      /* the persona retires December 2028, so the risk zone is already underway */
+      var Y0=2026, Y1=2059, RET=2028.95, ZONE_END=2034, CUR=1;
+      function prof(){ return PROF.find(function(x){ return x.k===ST.profile; }); }
+      function split(eq,stage){ var cash=[5,10,16][stage]; var fi=100-eq-cash; return {lc:eq*0.56,sc:eq*0.14,id:eq*0.21,em:eq*0.09,fi:fi,cash:cash}; }
+      function f1(v){ return (Math.round(v*10)/10).toString().replace(/\.0$/,''); }
+      function donut(segs,center,sub){
+        var R=58,r=42,cx=70,cy=70,a0=-Math.PI/2,out='';
+        segs.forEach(function(sg){ if(!sg[1]) return; var a1=a0+sg[1]/100*2*Math.PI; var lg=(a1-a0)>Math.PI?1:0;
+          out+='<path d="M'+(cx+R*Math.cos(a0)).toFixed(1)+','+(cy+R*Math.sin(a0)).toFixed(1)+' A'+R+','+R+' 0 '+lg+',1 '+(cx+R*Math.cos(a1)).toFixed(1)+','+(cy+R*Math.sin(a1)).toFixed(1)+' L'+(cx+r*Math.cos(a1)).toFixed(1)+','+(cy+r*Math.sin(a1)).toFixed(1)+' A'+r+','+r+' 0 '+lg+',0 '+(cx+r*Math.cos(a0)).toFixed(1)+','+(cy+r*Math.sin(a0)).toFixed(1)+' Z" fill="'+sg[0]+'" stroke="#fff" stroke-width="1.5"/>'; a0=a1; });
+        var lines=sub?[center]:center.split(' ').reduce(function(acc,w){ var l=acc[acc.length-1]; if(l && (l+' '+w).length<=13) acc[acc.length-1]=l+' '+w; else acc.push(w); return acc; },[]);
+        var fs=sub?12.5:11, lh=fs+3, y0=70-((lines.length-1)*lh)/2+(sub?-4:4);
+        var txt=lines.map(function(l,i){ return '<text x="70" y="'+(y0+i*lh).toFixed(1)+'" font-size="'+fs+'" font-weight="'+(sub?'600':'500')+'" fill="#10182C" text-anchor="middle" font-family="ES Klarheit Grotesk, DM Sans, sans-serif">'+l+'</text>'; }).join('');
+        return '<svg class="minv-donut" viewBox="0 0 140 140" aria-hidden="true">'+out+txt+(sub?'<text x="70" y="82" font-size="9" fill="#5B6472" text-anchor="middle" font-family="DM Sans, sans-serif">'+sub+'</text>':'')+'</svg>';
+      }
+      function lrow(c,n,v,sub){ return '<div class="minv-lrow'+(sub?' sub':'')+'"><span class="dot" style="background:'+c+'"></span><span class="n">'+n+'</span><b>'+v+'</b></div>'; }
+      function expander(){ return '<button class="mif-acc'+(ST.acc?' on':'')+'" type="button" data-if="acc">Which return assumption is more accurate? <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'+(ST.acc?'<p class="mif-accp">This isn\u2019t a choice about your rate of return. It\u2019s a choice about how we forecast you. A linear forecast holds one blended return steady for life and rates an investment account differently from a savings account. A glide path forecast models six asset classes moving independently and takes risk down as retirement approaches. Both are defensible. Neither is a recommendation.</p>':''); }
+      function glideChart(P){
+        var W=344,H=180,PL=34,PR=6,PT=22,PB=26, X=function(y){ return PL+(y-Y0)/(Y1-Y0)*(W-PL-PR); }, Y=function(v){ return (H-PB)-(v/100)*(H-PB-PT); };
+        var bounds=[[Y0,Y0+0.0001],[Y0,ZONE_END],[ZONE_END,Y1]]; /* pre-retirement already behind this persona */
+        var out='';
+        [25,50,75,100].forEach(function(v){ out+='<line x1="'+PL+'" y1="'+Y(v).toFixed(1)+'" x2="'+(W-PR)+'" y2="'+Y(v).toFixed(1)+'" stroke="#EEF0F2"/><text x="'+(PL-5)+'" y="'+(Y(v)+3.5).toFixed(1)+'" font-size="9.5" fill="#6E7687" text-anchor="end">'+v+'%</text>'; });
+        out+='<text x="'+(PL-5)+'" y="'+(Y(0)+3.5).toFixed(1)+'" font-size="9.5" fill="#6E7687" text-anchor="end">0%</text>';
+        var order=['lc','sc','id','em','fi','cash'];
+        [1,2].forEach(function(si){ var sp=split(P.glide[si],si), x0=X(bounds[si][0]), x1=X(bounds[si][1]), cum=0;
+          order.forEach(function(k){ var v=sp[k]; var y1=Y(cum), y0=Y(cum+v); out+='<rect x="'+x0.toFixed(1)+'" y="'+y0.toFixed(1)+'" width="'+(x1-x0).toFixed(1)+'" height="'+(y1-y0).toFixed(1)+'" fill="'+C[k]+'" stroke="#fff" stroke-width="0.6"/>'; cum+=v; }); });
+        var rx=X(RET); out+='<line x1="'+rx.toFixed(1)+'" y1="'+(PT-4)+'" x2="'+rx.toFixed(1)+'" y2="'+(H-PB)+'" stroke="#fff" stroke-width="1.4" stroke-dasharray="3 3" opacity=".9"/><text x="'+rx.toFixed(1)+'" y="'+(PT-8)+'" font-size="9.5" fill="#6E7687" text-anchor="middle">Retirement</text>';
+        [2026,2037,2048,2059].forEach(function(y,i){ out+='<text x="'+X(y).toFixed(1)+'" y="'+(H-8)+'" font-size="9.5" fill="#6E7687" text-anchor="'+(i===0?'start':i===3?'end':'middle')+'">'+y+'</text>'; });
+        return '<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" style="display:block;width:100%;height:auto" aria-hidden="true">'+out+'</svg>';
+      }
+      function render(){
+        var P=prof(), own=P.k===OWN;
+        var h='<div class="msub-title">Investments: Future</div><div class="msub-sub">Explore different ways to forecast how your investments, asset allocation, and expected returns could change over your lifetime. <a class="mif-why" data-if="why">Why does this matter?</a></div>'
+          +(ST.why?'<div class="mxp-insight" style="margin-top:12px"><p>Your return assumption drives every projection in the plan. A point of return over thirty years is the difference between a plan that ends with a cushion and one that ends tight. Picking the model that fits how you actually invest keeps the forecast honest.</p></div>':'')
+          +'<div class="mif-h">Projection Models</div>'
+          +'<div class="mra-set" style="margin-top:10px"><button class="mra-opt'+(ST.model==='hist'?' on':'')+'" type="button" data-if="model:hist">Historical Rates</button><button class="mra-opt'+(ST.model==='path'?' on':'')+'" type="button" data-if="model:path">Allocation Path <em class="mif-new">New</em></button></div>'
+          +'<div class="mif-rp"><span class="lab">Risk Profiles</span><button class="mif-dd'+(ST.menu?' open':'')+'" type="button" data-if="menu">'+(own?'':'Preview: ')+(own?P.n:(P.short||P.n))+' <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>'
+          +(ST.menu?'<div class="mif-menu">'+PROF.map(function(q){ return '<button class="mif-mi'+(q.k===ST.profile?' on':'')+'" type="button" data-if="profile:'+q.k+'"><span class="t"><b>'+q.n+'</b>'+(q.k===OWN?'<em>Your profile</em>':'')+'<i>'+q.desc+'</i></span>'+(q.k===ST.profile?'<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#0E794E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>':'')+'</button>'; }).join('')+'</div>':'');
+        if(ST.model==='hist'){
+          h+='<p class="mif-desc">A single fixed rate of return, held constant for the life of the plan, based on ~30 years of historical market data (1994\u20132024).</p>'
+            +'<div class="minv-card"><div class="minv-donutwrap">'+donut([[C.lc,P.eq],[C.fi,100-P.eq]],'Sample Asset Allocation')+'</div><div class="minv-leg">'+lrow(C.lc,'Equities',P.eq+'%')+lrow(C.fi,'Fixed Income',(100-P.eq)+'%')+'</div>'
+            +'<div class="mif-ret"><b>'+P.ret+'</b><span>Nominal Return Assumption based on Boldin\u2019s historical rates of return</span></div><p class="mif-line">'+P.line+'</p>'+expander()+'</div>';
+        } else {
+          var sp=split(P.glide[CUR],CUR);
+          h+='<p class="mif-desc">A glide-path forecast across six asset classes that shifts as you approach and move through retirement.</p>'
+            +'<div class="minv-card"><div class="minv-donutwrap">'+donut([[C.lc,sp.lc],[C.sc,sp.sc],[C.id,sp.id],[C.em,sp.em],[C.fi,sp.fi],[C.cash,sp.cash]],P.n,STAGES[CUR])+'</div>'
+            +'<div class="minv-leg">'+lrow(C.lc,'Equities',f1(P.glide[CUR])+'%')+lrow(C.lc,'US large cap',f1(sp.lc)+'%',1)+lrow(C.sc,'US small cap',f1(sp.sc)+'%',1)+lrow(C.id,'Intl developed',f1(sp.id)+'%',1)+lrow(C.em,'Intl emerging',f1(sp.em)+'%',1)+lrow(C.fi,'Fixed Income',f1(sp.fi)+'%')+lrow(C.cash,'Cash & Cash Equivalents',f1(sp.cash)+'%')+'</div>'+expander()+'</div>'
+            +'<div class="mif-h2">How does your target change by life stage?</div><p class="mif-desc" style="margin-top:4px">Equity steps down ahead of the years when a downturn hurts most, not after one.</p>'
+            +'<div class="minv-card">'+glideChart(P)+'<div class="mxp-leg" style="margin-top:10px">'+[['US large cap',C.lc],['US small cap',C.sc],['Intl developed',C.id],['Intl emerging',C.em],['Fixed Income',C.fi],['Cash & Cash Equivalents',C.cash]].map(function(l){ return '<span><i style="background:'+l[1]+'"></i>'+l[0]+'</span>'; }).join('')+'</div>'
+            +'<div class="mif-stages">'+STAGES.map(function(st,i){ return '<div class="mif-stage'+(i===CUR?' cur':'')+'"><span class="n">'+st+(i===CUR?' <em>Current stage</em>':'')+'</span><b>'+P.gret[i]+'</b></div>'; }).join('')+'</div>'
+            +'<p class="mif-line" style="margin-top:14px"><b style="color:#10182C">You are in the '+STAGES[CUR]+' stage.</b> Two years from retirement, December 2028. '+(own?'Your target steps down through the stages ahead.':'If you elected this model, your target would step down through the stages ahead.')+'</p>'
+            +'<p class="mif-line">Return comes down as the mix shifts to fixed income and cash. That trade is deliberate. <a class="mif-why" data-go="deep:Does my mix match my target?">Learn more</a></p></div>'
+            +'<div class="mif-h2">What would this mean for your plan?</div><p class="mif-desc" style="margin-top:4px">Nothing here changes your plan. It\u2019s a projection run alongside it.</p>'
+            +'<div class="minv-card"><div class="mif-cmp"><div class="k">Chance of success</div><div class="row"><span>Your plan today</span><b>87%</b></div><div class="row"><span>With Allocation Path</span><b>'+[89,88,86,84,82][PROF.indexOf(P)]+'%</b></div><div class="row chg"><span>Change</span><b>'+(function(d){ return (d>0?'+':'')+d+' pt'; })([89,88,86,84,82][PROF.indexOf(P)]-87)+'</b></div></div>'
+            +'<div class="mif-cmp"><div class="k">Safe spending target <i>In today\u2019s dollars</i></div><div class="row"><span>Your plan today</span><b>$8,400</b></div><div class="row"><span>With Allocation Path</span><b>$'+[8650,8550,8300,8100,7900][PROF.indexOf(P)].toLocaleString('en-US')+'</b></div><div class="row chg"><span>Change</span><b>'+(function(d){ return (d>0?'+':'\u2212')+'$'+Math.abs(d); })([8650,8550,8300,8100,7900][PROF.indexOf(P)]-8400)+'</b></div></div></div>';
+        }
+        h+='<p class="mif-retake">Not sure this fits? <a class="mif-why" data-toast="Risk survey lands next in the mobile build">Retake the survey</a></p>'
+          +'<div class="mif-legal"><p>This survey is designed to help you think about your comfort with investment risk and to provide general educational information. It is not investment advice, a recommendation to buy or sell any security, or a guarantee of future results.</p><p>Your responses reflect your stated preferences and circumstances at the time you complete the survey. Investment risk tolerance is only one factor to consider when making financial decisions. Your actual investment strategy should also take into account your financial goals, time horizon, income needs, tax situation, liquidity needs, and overall financial circumstances.</p><p>All investments involve risk, including the possible loss of principal. Market conditions and personal circumstances can change over time, and you should periodically review your investment approach to ensure it remains appropriate for your situation. Past performance is not indicative of future results.</p></div>';
+        return h;
+      }
+      function rerender(){ var body=document.getElementById('msubBody'); var top=body.scrollTop; body.innerHTML=render(); body.scrollTop=top; }
+      window.__openInvestFuture=function(){ ST={model:'hist', profile:OWN, menu:false, why:false, acc:false}; push(render(), false); };
+      document.getElementById('msubBody').addEventListener('click', function(e){
+        var el=e.target.closest('[data-if]'); if(!el) return;
+        var v=el.dataset['if'];
+        if(v==='why') ST.why=!ST.why;
+        else if(v==='acc') ST.acc=!ST.acc;
+        else if(v==='menu') ST.menu=!ST.menu;
+        else if(v.indexOf('model:')===0){ ST.model=v.slice(6); ST.menu=false; }
+        else if(v.indexOf('profile:')===0){ ST.profile=v.slice(8); ST.menu=false; }
+        rerender();
+      });
+    })();
 
     /* --- Stress test: the desktop model, on sliders --- */
     var ST=(function(){
