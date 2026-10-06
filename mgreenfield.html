@@ -420,6 +420,8 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .mplan-dd{ display:inline-flex; align-items:center; gap:5px; background:none; border:0; font-family:inherit;
   font-size:18px; font-weight:700; letter-spacing:-0.3px; color:var(--ink); cursor:pointer; padding:0; }
 .mplan-dd svg{ color:var(--text-secondary); }
+.mplan-route{ display:inline-flex; align-items:center; gap:5px; margin-top:12px; padding:0; background:none; border:0; font-family:inherit;
+  font-size:16px; font-weight:600; color:var(--green-cta); cursor:pointer; }
 .mplan-filter{ width:34px; height:34px; border-radius:10px; border:1px solid var(--hairline); background:var(--white);
   color:var(--text-secondary); display:flex; align-items:center; justify-content:center; cursor:pointer; }
 .mplan-chart{ margin-top:4px; }
@@ -432,6 +434,7 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 @media (prefers-reduced-motion: reduce){ .pc-mile-halo{ animation:none; } }
 /* chips row */
 .mplan-chips{ display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:8px; margin-top:16px; padding-top:16px; border-top:1px solid #F1F2F4; }
+.mplan-chips[hidden]{ display:none; }
 .mchip4{ min-width:0; }
 .mchip4 .lab{ font-size:11px; color:var(--text-tertiary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .mchip4 .val{ font:600 15px 'DM Sans',sans-serif; letter-spacing:-0.3px; margin-top:3px; font-variant-numeric:tabular-nums; }
@@ -455,6 +458,11 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 /* the section list: rows push detail pages */
 .mlist{ margin-top:26px; border-top:1px solid var(--hairline); }
 #mlistPlan{ margin-top:0; border-top:0; }
+/* plan inputs: one line per row, title and amount only */
+#mlistPlan .mrow{ padding:14px 2px; }
+#mlistPlan .mrow-s{ display:none !important; }
+#mlistPlan .mrow-t{ font-size:17px; font-weight:500; }
+#mlistPlan .mrow-amt{ font-size:16px; }
 .mrow{ display:flex; align-items:center; gap:12px; width:100%; text-align:left; background:none; border:0;
   border-bottom:1px solid var(--hairline); padding:17px 2px; font-family:inherit; cursor:pointer; }
 .mrow:active{ background:#FAFBFC; }
@@ -890,7 +898,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
 <div class="mtab" id="tabToday" hidden>
   <div class="mgreet meye">My Money</div>
   <h1 class="mhl">You&rsquo;ve done <em class="mhl-em">better</em> than you <em class="mhl-gold">think</em>.</h1>
-  <p class="msubhead msubhead-today">Fact, not forecast. Your real numbers, today.</p>
+  <p class="msubhead msubhead-today" hidden>Fact, not forecast. Your real numbers, today.</p>
   <section class="mcard" id="mwhats">
     <div class="mcard-t">What&#8217;s already yours</div>
     <div class="mseg" role="tablist" aria-label="What&#8217;s already yours">
@@ -944,7 +952,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
 <div class="mtab" id="tabPlan" hidden>
   <div class="mgreet meye">My Plans</div>
   <h1 class="mhl mhl-plan" id="planHl">Retire in <em class="mhl-em">8 years</em> on <em class="mhl-gold">$7,200</em> a month.</h1>
-  <p class="msubhead msubhead-plan">Monte Carlo, run on your real numbers.</p>
+  <p class="msubhead msubhead-plan" hidden>Monte Carlo, run on your real numbers.</p>
   <div class="mlens-row" role="tablist" aria-label="My Plans lenses">
     <button class="mlens on" type="button" data-lens="snapshot" role="tab" aria-selected="true">Summary</button>
     <button class="mlens" type="button" data-lens="fl" role="tab" aria-selected="false">Budgeting</button>
@@ -959,8 +967,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
 
   <section class="mcard mplan-card">
     <div class="mplan-chead">
-      <button class="mplan-dd" type="button" id="mplanDD"><span id="mplanDDl">Portfolio</span><svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <button class="mplan-filter" type="button" aria-label="Filters" data-toast="Filters land next in the mobile build"><svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M4 6h16M7 12h10M10 18h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+      <div class="mplan-dd" id="mplanDD"><span id="mplanDDl">My financial journey</span></div>
     </div>
     <div class="mplan-chart" id="mplanChart" role="button" tabindex="0" aria-label="Open your plan, up to the peak">
       <svg viewBox="0 0 356 196" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-label="Projected portfolio value 2026 to 2057">
@@ -980,7 +987,8 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
         </g>
       </svg>
     </div>
-    <div class="mplan-chips" id="mplanChips"></div>
+    <button class="mplan-route" type="button" id="mplanRoute">See the route <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M9 5.5l6.5 6.5L9 18.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <div class="mplan-chips" id="mplanChips" hidden></div>
   </section>
 
   <div class="mlist" id="mlistPlan"></div>
@@ -989,7 +997,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
   <div class="mlist mxp-list" id="mxpList"></div>
 
   <!-- Boost your confidence: the desktop levers card -->
-  <div class="mplan-seclabel" id="mplanBoostLabel">Boost your confidence</div>
+  <div class="mplan-seclabel" id="mplanBoostLabel">Optimize</div>
   <section class="mcard mplan-boost" id="mplanBoost"></section>
 </div>
 
@@ -1207,7 +1215,9 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
       '<span class="mrow-amt">'+s.amt+'</span>'+CHEV+'</button>';
   }
   var ROWS_HTML=SECTIONS.map(rowFor).join('');
-  document.getElementById('mlist').innerHTML=ROWS_HTML;
+  /* My Money is today's picture: the five money sections only. Flows, strategy, estate and rates belong to the plan. */
+  var TODAY_KEYS=['assets','debts','income','home','expenses'];
+  document.getElementById('mlist').innerHTML=SECTIONS.filter(function(x){ return TODAY_KEYS.indexOf(x.key)>=0; }).map(rowFor).join('');
   document.getElementById('mlistPlan').innerHTML=ROWS_HTML;
   /* build the Plan section list for a given lens: a heading + the relevant sections */
   window.__planSections=function(keys, heading){
@@ -1584,11 +1594,11 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
         dd:'Portfolio',
         stats:[['Confidence','87%','Monte Carlo +','conf'],['Fire number','$2.16M','50% funded','fire'],['Funds depleted','2099','Age 82 &middot; 12 yrs','depleted']],
         chips:[['Surplus/mo','$3,450'],['Portfolio','$1.09M'],['Savings rate','28%'],['Cash runway','14 mo']],
-        boostT:'Three moves that lift your score the most', badge:'87% today',
-        boostSub:'Your plan already survives most markets. These close the gap in the toughest 1-in-10 outcomes.',
+        boostT:'The move that lifts your score the most', badge:'87% today',
+        boostSub:'Your plan already survives most markets. This closes the gap in the toughest 1-in-10 outcomes.',
         levers:[['Delay Social Security to 70','+6 pts &rarr; 93%',100],['Trim spending $400/mo for the first 5 years','+4 pts &rarr; 91%',67],['Work through age 64 instead of 62','+3 pts &rarr; 90%',50]],
         cta:'Compare these scenarios',
-        secKeys:['assets','debts','income','home','expenses','flows','withdrawal','tax','estate','rates'], secHeading:'Your full picture'
+        secKeys:['assets','debts','income','home','expenses','flows','withdrawal','tax','estate','rates'], secHeading:'My plan inputs'
       },
       fl:{
         hl:'Saving <em class="mhl-gold">28%</em>, growing into <em class="mhl-em">freedom.</em>',
@@ -1670,7 +1680,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     function renderBoost(L){
       boostEl.innerHTML='<div class="mboost-hd"><div class="mboost-t">'+L.boostT+'</div><span class="mboost-badge">'+L.badge+'</span></div>'+
         '<div class="mboost-sub">'+L.boostSub+'</div>'+
-        L.levers.map(function(lv){ return '<div class="mlever"><div class="mlever-top"><span class="mlever-name">'+lv[0]+'</span><span class="mlever-pts">'+lv[1]+'</span></div><div class="mlever-bar"><i style="width:'+lv[2]+'%"></i></div></div>'; }).join('')+
+        L.levers.slice(0,1).map(function(lv){ return '<div class="mlever"><div class="mlever-top"><span class="mlever-name">'+lv[0]+'</span><span class="mlever-pts">'+lv[1]+'</span></div><div class="mlever-bar"><i style="width:'+lv[2]+'%"></i></div></div>'; }).join('')+
         '<span class="mboost-cta" data-toast="Scenario comparison lands next in the mobile build">'+L.cta+' <svg viewBox="0 0 24 24" fill="none" width="13" height="13"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
       if(!reduce){
         boostEl.querySelectorAll('.mlever-bar i').forEach(function(bar,i){
@@ -1684,7 +1694,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     }
     function apply(lens, animate){
       var L=LENS[lens]; if(!L) return;
-      ddl.textContent=L.dd;
+      /* the chart keeps the desktop's name across lenses */
       renderStats(L); renderChips(L); renderBoost(L); renderSections(L);
       if(reduce || !animate){ hl.innerHTML=L.hl; return; }
       hl.classList.add('hl-sw');
@@ -1701,7 +1711,6 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
       /* the pill opens the matching Explore your plan page */
       if(window.__openChapter) window.__openChapter(TO_CHAPTER[p.dataset.lens]);
     });
-    document.getElementById('mplanDD').addEventListener('click', function(){ toast('Portfolio views land next in the mobile build'); });
     apply('snapshot', false);
     window.__applyLens=apply;
   })();
@@ -1820,7 +1829,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
       crit:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 7l10 10M17 7L7 17" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>'
     };
     function insight(t){ return '<div class="mxp-insight">'+SPARK+'<p>'+t+'</p></div>'; }
-    function stats(a){ return '<div class="mxp-stats">'+a.map(function(x){ return '<div class="mxp-stat"><div class="k">'+x[0]+'</div><div class="v">'+x[1]+'</div>'+(x[2]?'<div class="d">'+x[2]+'</div>':'')+'</div>'; }).join('')+'</div>'; }
+    function stats(a){ a=a.slice(0,2); return '<div class="mxp-stats">'+a.map(function(x){ return '<div class="mxp-stat"><div class="k">'+x[0]+'</div><div class="v">'+x[1]+'</div>'+(x[2]?'<div class="d">'+x[2]+'</div>':'')+'</div>'; }).join('')+'</div>'; }
     function items(h,a){ return '<div class="mxp-h">'+h+'</div>'+a.map(function(x){ return '<div class="mxp-item"><span class="ic '+x[0]+'">'+IC[x[0]]+'</span><span><span class="t" style="display:block">'+x[1]+'</span><span class="s" style="display:block">'+x[2]+'</span>'+(x[3]?'<span class="tag">'+x[3]+'</span>':'')+'</span></div>'; }).join(''); }
     var DEEP={
       'How will my net worth change over time?':'It climbs from $1.17M today to about $2.01M at 92, with one dip: 2037 to 2041, when work has stopped and neither Social Security check has started. Savings carry those four years, then the checks turn on and the line climbs again.',
@@ -1846,12 +1855,12 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
       'What kind of money will my heirs inherit?':'Mostly pre-tax. About $700K of the estate has never been taxed, and your heirs would owe roughly $168K on it at 24%. Converting early moves more of it into the Roth, which they inherit tax-free.'
     };
     window.__deep=DEEP;
-    function qs(a){ return '<div class="mxp-h">Go deeper</div><div class="mlist mxp-qs" style="margin-top:0;border-top:0">'+a.map(function(q){ return '<button class="mrow" type="button" data-go="deep:'+q.replace(/"/g,'&quot;')+'"><span class="mrow-txt"><span class="mrow-t">'+q+'</span></span>'+CHEV+'</button>'; }).join('')+'</div>'; }
+    function qs(a){ a=a.slice(0,3); return '<div class="mxp-h">Go deeper</div><div class="mlist mxp-qs" style="margin-top:0;border-top:0">'+a.map(function(q){ return '<button class="mrow" type="button" data-go="deep:'+q.replace(/"/g,'&quot;')+'"><span class="mrow-txt"><span class="mrow-t">'+q+'</span></span>'+CHEV+'</button>'; }).join('')+'</div>'; }
     function head(eye,hl,sub){ return '<div class="mxp-eye">'+eye+'</div><h2 class="mxp-hl">'+hl+'</h2>'; }
     /* ---- one chart per chapter: the picture that carries the story ---- */
     var GREEN='#04B477', DEEP='#0E794E', TEAL='#0D3F4A', GOLD='#FBBD04', MINT='#9BD9C1', GRID='#EEF0F2', AX='#6E7687';
     var CW=344, CH_H=180, PL=40, PR=8, PT=14, PB=30;
-    function cwrap(inner,caption,legend){ return '<div class="mxp-chart"><svg viewBox="0 0 '+CW+' '+CH_H+'" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-hidden="true">'+inner+'</svg>'+(legend?'<div class="mxp-leg">'+legend.map(function(l){ return '<span><i style="background:'+l[0]+'"></i>'+l[1]+'</span>'; }).join('')+'</div>':'')+(caption?'<div class="mxp-ccap">'+caption+'</div>':'')+'</div>'; }
+    function cwrap(inner,caption,legend){ return '<div class="mxp-chart"><svg viewBox="0 0 '+CW+' '+CH_H+'" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif" aria-hidden="true">'+inner+'</svg>'+(legend?'<div class="mxp-leg">'+legend.map(function(l){ return '<span><i style="background:'+l[0]+'"></i>'+l[1]+'</span>'; }).join('')+'</div>':'')+'</div>'; }
     function scaleX(y0,y1){ return function(y){ return PL+(y-y0)/(y1-y0)*(CW-PL-PR); }; }
     function scaleY(v0,v1){ return function(v){ return (CH_H-PB)-(v-v0)/(v1-v0)*(CH_H-PB-PT); }; }
     function grid(ticks,fmt,Y){ return ticks.map(function(t){ return '<line x1="'+PL+'" y1="'+Y(t).toFixed(1)+'" x2="'+(CW-PR)+'" y2="'+Y(t).toFixed(1)+'" stroke="'+GRID+'"/><text x="'+(PL-6)+'" y="'+(Y(t)+3.5).toFixed(1)+'" font-size="10" fill="'+AX+'" text-anchor="end">'+fmt(t)+'</text>'; }).join(''); }
@@ -2092,6 +2101,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     }
     function openSummary(){ push(html(), false); lo=Y0; hi=Y1; active='all'; }
     document.getElementById('mplanChart').addEventListener('click', openSummary);
+    document.getElementById('mplanRoute').addEventListener('click', openSummary);
     document.getElementById('mplanChart').addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openSummary(); } });
     document.getElementById('msubBody').addEventListener('click', function(e){
       var chip=e.target.closest('.msum-chip[data-span]'); if(chip){ setSpan(chip.dataset.span); chip.scrollIntoView({behavior: reduce?'auto':'smooth', inline:'center', block:'nearest'}); return; }
