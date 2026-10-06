@@ -268,7 +268,7 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .mins-cap b{ color:var(--ink); font-weight:600; }
 .mins-asks{ display:flex; flex-direction:column; gap:8px; margin-top:12px; }
 /* Investments: Today */
-.minv-sec{ margin-top:30px; padding-top:22px; border-top:1.5px solid var(--ink); }
+.minv-sec{ margin-top:30px; padding-top:22px; border-top:1px solid var(--hairline); }
 .minv-eye{ font:600 12px 'DM Sans',sans-serif; color:var(--text-tertiary); letter-spacing:1px; }
 .minv-h{ font-size:21px; font-weight:600; letter-spacing:-0.2px; margin-top:4px; }
 .minv-s{ font-size:15px; color:var(--text-secondary); line-height:1.5; margin-top:6px; }
@@ -341,6 +341,11 @@ body.vault-open .msub-body{ padding-bottom:calc(180px + env(safe-area-inset-bott
 .minv-soon i{ display:block; font-style:normal; font-size:14px; color:var(--text-secondary); margin-top:2px; }
 /* Investments: Future */
 .mif-why{ color:var(--green-cta); font-weight:600; cursor:pointer; }
+.minv-tog{ position:absolute; top:12px; right:18px; display:inline-flex; background:#F2F3F5; border-radius:999px; padding:2px; }
+.minv-tog button{ background:none; border:0; border-radius:999px; font-family:inherit; font-size:12px; font-weight:500; color:var(--text-secondary); padding:4px 9px; cursor:pointer; }
+.minv-tog button.on{ background:var(--white); color:var(--ink); font-weight:600; box-shadow:0 1px 2px rgba(16,24,44,.08); }
+.msub-body{ position:relative; }
+.msub-body:has(.minv-tog) .msub-title{ padding-right:120px; }
 .mif-h{ font-size:21px; font-weight:600; letter-spacing:-0.2px; margin-top:24px; }
 .mif-h2{ font-size:19px; font-weight:600; letter-spacing:-0.2px; margin-top:28px; }
 .mif-new{ font-style:normal; font:700 10px 'DM Sans',sans-serif; letter-spacing:.5px; text-transform:uppercase; background:var(--ink); color:#fff; border-radius:999px; padding:2px 6px; margin-left:5px; vertical-align:middle; }
@@ -2443,6 +2448,8 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
       +asks(['What is my safe withdrawal rate?']);
 
     /* --- Investments: Today (planner/investments-today), mobile --- */
+    function invTog(cur){ return '<div class="minv-tog" role="tablist" aria-label="Today or future"><button class="'+(cur==='today'?'on':'')+'" type="button" data-go="hm:investToday">Today</button><button class="'+(cur==='future'?'on':'')+'" type="button" data-go="hm:investFuture">Future</button></div>'; }
+    window.__invTog=invTog;
     (function(){
       var AC=[['Equities','#0E3A44',62,[['US large cap','#0E3A44',48],['Intl developed','#469DB2',14]]],['Fixed Income','#1D9E75',21],['Alternative Investment','#8A6FBF',0],['Cash & Cash Equivalents','#E3A14A',13],['Unclassified','#78716C',4]];
       function donut(){
@@ -2485,7 +2492,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
         }
         return '<div class="minv-acct">'+head+bar+body+'</div>';
       }
-      PAGES.investToday = title('Investments: Today','See how you\u2019re invested across your accounts, check it against your target, and keep your holdings up to date.')
+      PAGES.investToday = title('Investments','See how you\u2019re invested across your accounts, check it against your target, and keep your holdings up to date.')+invTog('today')
         +'<div class="minv-sec"><div class="minv-eye">01</div><h3 class="minv-h">How are you invested today?</h3><p class="minv-s">Holdings across your accounts, combined and grouped by asset class.</p>'
         +'<div class="minv-card"><div class="minv-donutwrap">'+donut()+'</div>'+legend()+'<div class="minv-note">Holdings information is available for <b>$683,000</b> of your <b>$744,600</b> across 5 accounts. Add positions to complete your picture.</div></div></div>'
         +'<div class="minv-sec"><div class="minv-eye">02</div><h3 class="minv-h">Does your allocation match your target?</h3>'
@@ -2547,7 +2554,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
       }
       function render(){
         var P=prof(), own=P.k===OWN;
-        var h='<div class="msub-title">Investments: Future</div><div class="msub-sub">Explore different ways to forecast how your investments, asset allocation, and expected returns could change over your lifetime. <a class="mif-why" data-if="why">Why does this matter?</a></div>'
+        var h='<div class="msub-title">Investments</div><div class="msub-sub">Explore different ways to forecast how your investments, asset allocation, and expected returns could change over your lifetime. <a class="mif-why" data-if="why">Why does this matter?</a></div>'+window.__invTog('future')
           +(ST.why?'<div class="mxp-insight" style="margin-top:12px"><p>Your return assumption drives every projection in the plan. A point of return over thirty years is the difference between a plan that ends with a cushion and one that ends tight. Picking the model that fits how you actually invest keeps the forecast honest.</p></div>':'')
           +'<div class="mif-h">Projection Models</div>'
           +'<div class="mra-set" style="margin-top:10px"><button class="mra-opt'+(ST.model==='hist'?' on':'')+'" type="button" data-if="model:hist">Historical Rates</button><button class="mra-opt'+(ST.model==='path'?' on':'')+'" type="button" data-if="model:path">Allocation Path <em class="mif-new">New</em></button></div>'
@@ -2709,6 +2716,7 @@ body.ai-tab .mnav .mai-spk .sp-body, body.ai-tab .mnav .mai-spk .sp-tw{ animatio
     function openHome(key){
       var parts=key.split(':'), k=parts[0], arg=parts[1];
       if(k==='stress'){ push(stHtml(arg), false); stPaint(); return true; }
+      if(k==='investFuture'){ if(window.__openInvestFuture) window.__openInvestFuture(); return true; }
       if(k==='quiz'){ qzA=[null,null,null]; push(PAGES.quiz, false); return true; }
       if(PAGES[k]){ push(PAGES[k], false); return true; }
       return false;
